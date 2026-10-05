@@ -1,0 +1,218 @@
+{
+  "checked_at": "2026-10-08T09:48:38Z",
+  "environment": "MESH-showcase; Ruby 3.4.11; PostgreSQL 18.6",
+  "rows": 50000,
+  "page_limit": 20,
+  "cases": [
+    {
+      "name": "former_unbounded",
+      "median_read_ms": 3276.624,
+      "samples": [
+        {
+          "read_ms": 3581.699,
+          "allocations": 3751117,
+          "loaded_records": 50000,
+          "json_bytes": 31831753,
+          "sql_count": 3
+        },
+        {
+          "read_ms": 3276.624,
+          "allocations": 3750982,
+          "loaded_records": 50000,
+          "json_bytes": 31831753,
+          "sql_count": 3
+        },
+        {
+          "read_ms": 3038.841,
+          "allocations": 3750982,
+          "loaded_records": 50000,
+          "json_bytes": 31831753,
+          "sql_count": 3
+        },
+        {
+          "read_ms": 2841.631,
+          "allocations": 3750982,
+          "loaded_records": 50000,
+          "json_bytes": 31831753,
+          "sql_count": 3
+        },
+        {
+          "read_ms": 3359.93,
+          "allocations": 3750982,
+          "loaded_records": 50000,
+          "json_bytes": 31831753,
+          "sql_count": 3
+        }
+      ],
+      "plan": [
+        {
+          "Plan": {
+            "Node Type": "Index Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Scan Direction": "Forward",
+            "Index Name": "proposals_recent_page",
+            "Relation Name": "marketplace_proposals",
+            "Alias": "marketplace_proposals",
+            "Startup Cost": 0.41,
+            "Total Cost": 10240.46,
+            "Plan Rows": 49999,
+            "Plan Width": 431,
+            "Actual Startup Time": 0.06,
+            "Actual Total Time": 11.92,
+            "Actual Rows": 50000.0,
+            "Actual Loops": 1,
+            "Disabled": false,
+            "Index Cond": "(project_id = '61d84df3-561c-4806-8895-1fe06bea811f'::uuid)",
+            "Rows Removed by Index Recheck": 0,
+            "Index Searches": 1,
+            "Shared Hit Blocks": 3577,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning": {
+            "Shared Hit Blocks": 0,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.145,
+          "Triggers": [],
+          "Execution Time": 14.002
+        }
+      ]
+    },
+    {
+      "name": "bounded_page",
+      "median_read_ms": 27.338,
+      "samples": [
+        {
+          "read_ms": 27.338,
+          "allocations": 3137,
+          "loaded_records": 20,
+          "json_bytes": 12739,
+          "sql_count": 5
+        },
+        {
+          "read_ms": 25.088,
+          "allocations": 3135,
+          "loaded_records": 20,
+          "json_bytes": 12739,
+          "sql_count": 5
+        },
+        {
+          "read_ms": 26.751,
+          "allocations": 3135,
+          "loaded_records": 20,
+          "json_bytes": 12739,
+          "sql_count": 5
+        },
+        {
+          "read_ms": 27.872,
+          "allocations": 3135,
+          "loaded_records": 20,
+          "json_bytes": 12739,
+          "sql_count": 5
+        },
+        {
+          "read_ms": 33.027,
+          "allocations": 3135,
+          "loaded_records": 20,
+          "json_bytes": 12739,
+          "sql_count": 5
+        }
+      ],
+      "plan": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0.41,
+            "Total Cost": 4.72,
+            "Plan Rows": 21,
+            "Plan Width": 431,
+            "Actual Startup Time": 0.03,
+            "Actual Total Time": 0.036,
+            "Actual Rows": 21.0,
+            "Actual Loops": 1,
+            "Disabled": false,
+            "Shared Hit Blocks": 6,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Index Scan",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Scan Direction": "Forward",
+                "Index Name": "proposals_recent_page",
+                "Relation Name": "marketplace_proposals",
+                "Alias": "marketplace_proposals",
+                "Startup Cost": 0.41,
+                "Total Cost": 10240.46,
+                "Plan Rows": 49999,
+                "Plan Width": 431,
+                "Actual Startup Time": 0.029,
+                "Actual Total Time": 0.034,
+                "Actual Rows": 21.0,
+                "Actual Loops": 1,
+                "Disabled": false,
+                "Index Cond": "(project_id = '61d84df3-561c-4806-8895-1fe06bea811f'::uuid)",
+                "Rows Removed by Index Recheck": 0,
+                "Index Searches": 1,
+                "Shared Hit Blocks": 6,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 0,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.125,
+          "Triggers": [],
+          "Execution Time": 0.077
+        }
+      ]
+    }
+  ],
+  "scope": "Same synthetic single-project data, warm process/cache, 5 diagnostic samples. Read timing excludes JSON serialization; payload bytes measured separately. Allocations are objects, not RSS. No network, TLS or production latency claim. Transaction rolls all fixture writes back."
+}

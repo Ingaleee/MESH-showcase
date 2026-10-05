@@ -1,0 +1,109 @@
+{
+  "checked_at": "2026-10-08T15:21:36.888Z",
+  "operation": "deploy",
+  "environment": "mesh-showcase-release",
+  "success": false,
+  "migration_reverted": false,
+  "release": {
+    "schema_version": 2,
+    "project": "mesh-showcase-release",
+    "created_at": "2026-10-08T15:01:03.904Z",
+    "revision": null,
+    "source_tree_sha256": null,
+    "working_tree_dirty": true,
+    "images": {
+      "api": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+      "web": "sha256:aa7729b6e7b44d02c95b0b84b0b1c01a364485fb7e9b541d8748322a71d524c1",
+      "postgres": "sha256:ee4e2ab9c74459fc1285070e0e01b71aed6a90de12f133bb73735b8be6079efe",
+      "clamav": "sha256:b5b79eb8d19cd5e2fe3a08d7eff91e165b4c876856ce43d5ef49d044ded87532",
+      "caddy": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+    },
+    "schema_rollback": "Never automatic; use backward-compatible migrations.",
+    "synthetic_fault": "local frontend exit 42"
+  },
+  "failure": "docker compose failed (1).",
+  "rollback_smoke": {
+    "origin": "https://localhost:3243",
+    "ca_trusted_by_smoke_only": true,
+    "session": true,
+    "frontend": true,
+    "csp": true,
+    "internal_metrics_blocked": true,
+    "database_runtime_role_restricted": true,
+    "containers": [
+      {
+        "service": "api",
+        "image_id": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "image_reference": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      },
+      {
+        "service": "db",
+        "image_id": "sha256:ee4e2ab9c74459fc1285070e0e01b71aed6a90de12f133bb73735b8be6079efe",
+        "image_reference": "sha256:ee4e2ab9c74459fc1285070e0e01b71aed6a90de12f133bb73735b8be6079efe",
+        "user": "postgres",
+        "readonly": false,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 1
+      },
+      {
+        "service": "dispatcher",
+        "image_id": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "image_reference": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 35
+      },
+      {
+        "service": "edge",
+        "image_id": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+        "image_reference": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 1
+      },
+      {
+        "service": "gateway",
+        "image_id": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "image_reference": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 35
+      },
+      {
+        "service": "scanner",
+        "image_id": "sha256:b5b79eb8d19cd5e2fe3a08d7eff91e165b4c876856ce43d5ef49d044ded87532",
+        "image_reference": "sha256:b5b79eb8d19cd5e2fe3a08d7eff91e165b4c876856ce43d5ef49d044ded87532",
+        "user": "",
+        "readonly": false,
+        "memory_limit_bytes": 1610612736,
+        "stop_timeout": 1
+      },
+      {
+        "service": "web",
+        "image_id": "sha256:5a45c655ce0bced270b8879b71c88f5243bc0871034dd4e519cc783df1af164f",
+        "image_reference": "sha256:5a45c655ce0bced270b8879b71c88f5243bc0871034dd4e519cc783df1af164f",
+        "user": "1000:1000",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 1
+      },
+      {
+        "service": "worker",
+        "image_id": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "image_reference": "sha256:d93678bb6876191c6f24e5ce24284b6dba8ff4200802e6102d19c5bf13c053cd",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      }
+    ]
+  },
+  "previous_release_restored": true
+}

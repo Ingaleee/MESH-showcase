@@ -1,0 +1,6 @@
+enforce_dependencies: true
+dependencies:
+  - packs/platform
+  - packs/identity
+  - packs/talent
+  - packs/engagements

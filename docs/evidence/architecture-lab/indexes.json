@@ -1,0 +1,14 @@
+{
+  "indexes": [
+    {
+      "name": "project_title_trigram",
+      "bytes": 4620288
+    },
+    {
+      "name": "project_description_trigram",
+      "bytes": 9322496
+    }
+  ],
+  "scope": "Two GIN indexes preserve the existing title OR description substring semantics; extra disk and write maintenance are the cost.",
+  "checked_at": "2026-10-08T00:28:19Z"
+}

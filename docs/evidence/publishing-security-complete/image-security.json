@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-08T16:01:19.729Z",
+  "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+  "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+  "images": {
+    "api": {
+      "image": "sha256:e66914f5a350c0fc3b037683c668fd6013f147be113370a0bd828a734ff2c269",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "web": {
+      "image": "sha256:81ac4d2eabb970dfd1740d0745e28bbed3bbf2077b2f6e98458d42d7ab1c7644",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "postgres": {
+      "image": "sha256:be32b8a3bae05389064c92f2f6df39cf054259122ab83cd71fdff626332eb146",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "clamav": {
+      "image": "sha256:16de746bf0ab58451aa2eb4e5719408eaf521d15ff0a632c97cb943c059fe8cc",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "caddy": {
+      "image": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "partner": {
+      "image": "sha256:91820bc7072600909504d0289db9f59805ed4391efa9fd521c82821b4b2244a5",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "prometheus": {
+      "image": "sha256:efd719c99d83b060d9daefdcf00360461adf279f45ef5391f8d111892118753e",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "grafana": {
+      "image": "sha256:d7843e2b2d357515a2aab0d572c03b4936e3d8d5b6ba08fae4bfa495c7fbe25a",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "alertmanager": {
+      "image": "sha256:1796f1f04cd6d7893f78199544442ebfb9a269d341dba5d591a151f6982c51ac",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    }
+  },
+  "success": true,
+  "scope": "Known OS/library vulnerabilities in each explicitly listed immutable runtime image; applicability decisions and signed provenance are separate."
+}

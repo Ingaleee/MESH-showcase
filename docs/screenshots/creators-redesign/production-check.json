@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-07T10:29:44.575Z",
+  "production": true,
+  "route": "/creators",
+  "scriptsWithMatchingNonce": 13,
+  "portraitPngStatus": 200,
+  "optimizedPortrait": {
+    "status": 200,
+    "contentType": "image/webp",
+    "bytes": 6412
+  },
+  "searchByName": true,
+  "keyboardSearch": true,
+  "detailedProfile": true,
+  "cardEntryAndHover": {
+    "opacity": "1",
+    "hoverTransform": "matrix(1, 0, 0, 1, 0, -3)"
+  },
+  "cspViolations": [],
+  "javascriptErrors": [],
+  "scope": "Production standalone web image; browser API calls forwarded to the running local Rails API."
+}

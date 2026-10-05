@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-08T11:41:17.867Z",
+  "run": "8fda95b0308a",
+  "scope": "One local web-image BuildKit cache experiment. Cold means --no-cache instructions with the base already present; no registry cold-start, repeat-sample distribution or API-image cache claim. Lockfile edit changes metadata only, not dependency versions.",
+  "runs": [
+    {
+      "name": "cold",
+      "elapsed_seconds": 84.203,
+      "npm_ci_cached": false,
+      "app_build_cached": false,
+      "runtime_packages_cached": false,
+      "image": "sha256:2cc86c85a05d7244ce7c31f68b1e39baf4ec14ee17aafa9c972f6ee9388901a0",
+      "image_size_bytes": 138743779
+    },
+    {
+      "name": "repeat",
+      "elapsed_seconds": 3.945,
+      "npm_ci_cached": true,
+      "app_build_cached": true,
+      "runtime_packages_cached": true,
+      "image": "sha256:be7fd7a3da62b233942c46a62f1391ee9f8639c1832ff2d3a56e79a620bf28f4",
+      "image_size_bytes": 138743779
+    },
+    {
+      "name": "source",
+      "elapsed_seconds": 53.868,
+      "npm_ci_cached": true,
+      "app_build_cached": false,
+      "runtime_packages_cached": true,
+      "image": "sha256:6aafc1060da0b744b5b3ec433c5770c1774a312123a262b5c8995cf1b7887d65",
+      "image_size_bytes": 138743755
+    },
+    {
+      "name": "lockfile",
+      "elapsed_seconds": 83.756,
+      "npm_ci_cached": false,
+      "app_build_cached": false,
+      "runtime_packages_cached": true,
+      "image": "sha256:c4978e9b27bc8c4f438cf6d4f2bc666be7be14cb6b87fda1eb6f201a22cc6559",
+      "image_size_bytes": 138743511
+    }
+  ],
+  "success": true
+}

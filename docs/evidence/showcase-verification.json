@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-10-08T08:36:57.1514357+00:00",
+  "environment": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase",
+  "composeProject": "mesh-showcase",
+  "sourceApplicationFilesUnchanged": true,
+  "sourceChanges": [
+    "README.md",
+    "docs/interview-roadmap.md",
+    "docs/interview-focus.md",
+    "docs/devops-skills-map.md"
+  ],
+  "copiedPublicAssetsHashVerified": true,
+  "publicAssetFiles": 16,
+  "ownContainerLabelsAndVolumesVerified": true,
+  "sourceBindMountsAbsent": true,
+  "services": [
+    {
+      "service": "api",
+      "running": true,
+      "health": "healthy"
+    },
+    {
+      "service": "db",
+      "running": true,
+      "health": "healthy"
+    },
+    {
+      "service": "dispatcher",
+      "running": true,
+      "health": null
+    },
+    {
+      "service": "edge",
+      "running": true,
+      "health": null
+    },
+    {
+      "service": "gateway",
+      "running": true,
+      "health": null
+    },
+    {
+      "service": "scanner",
+      "running": true,
+      "health": "healthy"
+    },
+    {
+      "service": "web",
+      "running": true,
+      "health": null
+    },
+    {
+      "service": "worker",
+      "running": true,
+      "health": null
+    }
+  ],
+  "httpChecks": [
+    {
+      "port": 3100,
+      "path": "/ready",
+      "status": 200,
+      "cookieNames": []
+    },
+    {
+      "port": 3100,
+      "path": "/api/v1/session",
+      "status": 200,
+      "cookieNames": [
+        "_mesh_session"
+      ]
+    },
+    {
+      "port": 3100,
+      "path": "/api/v1/projects",
+      "status": 200,
+      "cookieNames": []
+    },
+    {
+      "port": 3200,
+      "path": "/ready",
+      "status": 200,
+      "cookieNames": []
+    },
+    {
+      "port": 3200,
+      "path": "/api/v1/session",
+      "status": 200,
+      "cookieNames": [
+        "_mesh_showcase_session"
+      ]
+    },
+    {
+      "port": 3200,
+      "path": "/api/v1/projects",
+      "status": 200,
+      "cookieNames": []
+    }
+  ],
+  "frontend": {
+    "typecheck": "passed",
+    "openApiContractOperations": 43,
+    "formatCheck": "passed",
+    "browser": "Home rendered in Codex in-app browser at http://localhost:3200 with the copied images and fresh project data"
+  },
+  "backend": {
+    "specFiles": [
+      "spec/requests/session_reads_spec.rb",
+      "spec/requests/security_spec.rb",
+      "spec/requests/health_spec.rb"
+    ],
+    "result": {
+      "duration": 7.751359225,
+      "example_count": 9,
+      "failure_count": 0,
+      "pending_count": 0,
+      "errors_outside_of_examples_count": 0
+    }
+  },
+  "boundaries": "passed",
+  "powershellParsing": "passed",
+  "fullRspecSuiteRerun": false,
+  "fullPlaywrightSuiteRerun": false,
+  "historicalEvidenceIsNewExecution": false
+}

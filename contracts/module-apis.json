@@ -1,0 +1,10 @@
+{
+  "platform": ["*"],
+  "identity": ["Account"],
+  "talent": ["Directory"],
+  "marketplace": [],
+  "engagements": ["Create", "ReadModel"],
+  "finance": [],
+  "notifications": [],
+  "publishing": []
+}
