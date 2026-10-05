@@ -1,0 +1,41 @@
+{
+  "sticky": [
+    {
+      "scrollY": 0,
+      "top": 718,
+      "bottom": 1107.1875
+    },
+    {
+      "scrollY": 800,
+      "top": 18,
+      "bottom": 407.1875
+    },
+    {
+      "scrollY": 1200,
+      "top": 18,
+      "bottom": 407.1875
+    },
+    {
+      "scrollY": 1700,
+      "top": 18,
+      "bottom": 407.1875
+    },
+    {
+      "scrollY": 1813,
+      "top": 18,
+      "bottom": 407.1875
+    }
+  ],
+  "checks": [
+    {
+      "width": 390,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "customerAnchorClear": true,
+  "tallFormAccessible": true
+}

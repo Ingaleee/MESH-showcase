@@ -1,0 +1,6 @@
+{
+  "mode": "built-in image_gen",
+  "generated_asset": "apps/web/public/images/creators/portrait-duo.png",
+  "prompt": "Use case: photorealistic-natural. Asset type: two portrait contact sheet for MESH creator marketplace demo avatars. Create a single wide landscape photo sheet composed of EXACTLY TWO equally sized square portrait panels side by side, no gap, no frames. Left panel: fictional adult female creative strategist age 29, long chestnut hair tucked behind one ear, relaxed confident expression, subtle dark brown knit top, looking slightly toward camera. Right panel: fictional adult male illustrator age 31, short tousled dark hair, light stubble, black t-shirt, thoughtful relaxed expression. Both head and upper shoulder portraits, face centered within each panel, full top of head visible, each occupies identical scale. Warm pale ivory plaster studio backgrounds, subtle shadows, soft natural side light, realistic pores and hair texture, editorial magazine photography, restrained warm white black palette. No labels, no text, no watermark, no accessories, no UI. These are fictional demo people, not any actual real person's likeness. Image aspect ratio 2:1.",
+  "usage": "Two fictional demo portraits. Existing home images supply the first four portraits and decorative direction previews; these are not uploaded works by the authors."
+}

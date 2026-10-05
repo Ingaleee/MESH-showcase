@@ -1,0 +1,31 @@
+kubernetes_namespace_v1.mesh: Refreshing state... [id=mesh-showcase]
+kubernetes_resource_quota_v1.mesh: Refreshing state... [id=mesh-showcase/mesh-budget]
+kubernetes_limit_range_v1.mesh: Refreshing state... [id=mesh-showcase/mesh-defaults]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # kubernetes_resource_quota_v1.mesh will be updated in-place
+  ~ resource "kubernetes_resource_quota_v1" "mesh" {
+        id = "mesh-showcase/mesh-budget"
+
+      ~ spec {
+          ~ hard   = {
+              ~ "requests.cpu"           = "3" -> "4"
+                # (6 unchanged elements hidden)
+            }
+            # (1 unchanged attribute hidden)
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

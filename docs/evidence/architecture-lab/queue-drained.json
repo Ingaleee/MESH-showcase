@@ -1,0 +1,11 @@
+{
+  "available": true,
+  "workers": 3,
+  "rows": [],
+  "processed": 50,
+  "effects_per_event": [
+    1
+  ],
+  "drain_wait_seconds": 24.588,
+  "checked_at": "2026-10-08T00:32:08Z"
+}

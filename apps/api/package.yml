@@ -1,0 +1,10 @@
+enforce_dependencies: true
+dependencies:
+  - packs/platform
+  - packs/identity
+  - packs/talent
+  - packs/marketplace
+  - packs/engagements
+  - packs/finance
+  - packs/notifications
+  - packs/publishing

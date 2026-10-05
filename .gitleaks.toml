@@ -1,0 +1,36 @@
+title = "MESH showcase publishable source"
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Synthetic Active Storage blob keys are identifiers; private download still requires participant authorization."
+condition = "AND"
+paths = ['''(^|/)docs/evidence/(showcase-)?architecture-lab/backup\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"key": "[a-z0-9]{28}",?\s*$''']
+
+[[rules.allowlists]]
+description = "SHA-256 source-file fingerprints in verification reports are not API credentials."
+condition = "AND"
+paths = ['''(^|/)docs/(evidence/backend-hardening|screenshots/(owner|proposal|workspace)-redesign)/verification\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"(apps/web/src/lib/api(-schema\.d)?\.ts|contracts/(openapi|module-apis)\.json|scripts/check-api-(readiness\.mjs|runtime\.ps1))": "[a-f0-9]{64}",?\s*$''']
+
+[[rules.allowlists]]
+description = "Diagnostic command keys are non-credential UUID idempotency identifiers in these exact synthetic reports."
+condition = "AND"
+paths = ['''(^|/)docs/evidence/(publishing-demo|publishing-repeatable-demo/publishing-demo|publishing-repeatable-demo-final/publishing-demo|publishing-callback-live/publishing-demo)/(cli\.log|summary\.json)$''']
+regexTarget = "match"
+regexes = ['''^command_key":\s*"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"$''']
+
+[[rules]]
+id = "sourcegraph-access-token"
+[[rules.allowlists]]
+description = "Trivy package SHA-1 file digests match the legacy Sourcegraph token rule; only Digest fields in these exact inventories."
+condition = "AND"
+paths = ['''(^|/)docs/evidence/(publishing-security|publishing-security-grafana|publishing-security-final|publishing-security-complete)/trivy-grafana\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"Digest": "sha1:[a-f0-9]{40}",?\s*$''']

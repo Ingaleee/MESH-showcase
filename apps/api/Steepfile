@@ -1,0 +1,4 @@
+target :money do
+  signature "sig"
+  check "packs/platform/app/domain/platform/money.rb"
+end

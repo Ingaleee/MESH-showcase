@@ -1,0 +1,234 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "publishing.spec.ts"
+    ],
+    "configFile": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\playwright.config.ts",
+    "rootDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/publishing-browser-first/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "publishing.spec.ts",
+      "file": "publishing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "operator uploads, validates and publishes real private artifacts on responsive screens",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20197,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 94\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-heading > div:nth-child(1) > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(1) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"section:nth-child(1) > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-upload > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"div > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(1) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(2) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(3) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(4) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(5) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(6) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(7) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-detail > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-release > div > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-diagnostic > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-footer > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 94\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-heading > div:nth-child(1) > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(1) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"section:nth-child(1) > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-upload > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"div > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(1) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(2) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(3) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(4) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(5) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(6) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(7) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-detail > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-release > div > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-diagnostic > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-footer > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts:69:7",
+                    "location": {
+                      "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                      "column": 7,
+                      "line": 69
+                    },
+                    "snippet": "  67 |     expect(\n  68 |       result.violations.map((row) => ({ id: row.id, nodes: row.nodes.map((node) => node.target) })),\n> 69 |     ).toEqual([]);\n     |       ^\n  70 |     await page.screenshot({ path: directory + \"/\" + width + \".png\", fullPage: true });\n  71 |   }\n  72 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                        "column": 7,
+                        "line": 69
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 94\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"id\": \"color-contrast\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-heading > div:nth-child(1) > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(1) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stats > article:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-stat-violet > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"section:nth-child(1) > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".selected > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(2) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(3) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(4) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > span\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-candidate:nth-child(5) > div:nth-child(2) > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-upload > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"div > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(1) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(2) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(3) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(4) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(5) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(6) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \"article:nth-child(7) > div > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-detail > .pub-muted\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-release > div > code\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-diagnostic > small\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+       Array [\u001b[39m\n\u001b[31m+         \".pub-footer > p\",\u001b[39m\n\u001b[31m+       ],\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  67 |     expect(\n  68 |       result.violations.map((row) => ({ id: row.id, nodes: row.nodes.map((node) => node.target) })),\n> 69 |     ).toEqual([]);\n     |       ^\n  70 |     await page.screenshot({ path: directory + \"/\" + width + \".png\", fullPage: true });\n  71 |   }\n  72 | });\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts:69:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:06:55.328Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-operator-upload-09660-facts-on-responsive-screens\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-operator-upload-09660-facts-on-responsive-screens\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-operator-upload-09660-facts-on-responsive-screens\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                    "column": 7,
+                    "line": 69
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7670597a110c90863cfc-91f95dc3cd3b2584261f",
+          "file": "publishing.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "the provisioned dashboard opens with a healthy real Prometheus target",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 366,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts:93:50",
+                    "location": {
+                      "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                      "column": 50,
+                      "line": 93
+                    },
+                    "snippet": "  91 |     ).json();\n  92 |     expect(data.status).toBe(\"success\");\n> 93 |     expect(Number(data.data.result[0].value[1])).toBeGreaterThan(0);\n     |                                                  ^\n  94 |   }\n  95 |   await page.goto(\"http://localhost:32092/d/mesh-reliability\");\n  96 |   await expect(page.getByText(\"HTTP p95 · по маршрутам\", { exact: true })).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                        "column": 50,
+                        "line": 93
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  91 |     ).json();\n  92 |     expect(data.status).toBe(\"success\");\n> 93 |     expect(Number(data.data.result[0].value[1])).toBeGreaterThan(0);\n     |                                                  ^\n  94 |   }\n  95 |   await page.goto(\"http://localhost:32092/d/mesh-reliability\");\n  96 |   await expect(page.getByText(\"HTTP p95 · по маршрутам\", { exact: true })).toBeVisible();\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts:93:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:07:17.284Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-the-provisioned-4b2c0-lthy-real-Prometheus-target\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-the-provisioned-4b2c0-lthy-real-Prometheus-target\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\publishing-the-provisioned-4b2c0-lthy-real-Prometheus-target\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\publishing.spec.ts",
+                    "column": 50,
+                    "line": 93
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7670597a110c90863cfc-aae6395dc084a29ecd3c",
+          "file": "publishing.spec.ts",
+          "line": 74,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T13:06:54.521Z",
+    "duration": 23770.811,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

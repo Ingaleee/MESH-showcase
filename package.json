@@ -1,0 +1,33 @@
+{
+  "name": "mesh-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/partner"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @mesh/web",
+    "build": "npm run build --workspace @mesh/web",
+    "typecheck": "npm run typecheck --workspaces",
+    "contract:generate": "openapi-typescript contracts/openapi.json -o apps/web/src/lib/api-schema.d.ts",
+    "contract:check": "node scripts/check-contract.mjs",
+    "test:e2e": "playwright test",
+    "test:architecture": "node scripts/check-boundaries.mjs",
+    "test:reliability": "pwsh -NoProfile -File scripts/architecture-lab.ps1",
+    "format": "prettier --write apps/web/src apps/partner/src scripts/*.mjs scripts/*.js tests playwright.config.ts contracts/module-apis.json compose.yaml package.json",
+    "format:check": "prettier --check apps/web/src apps/partner/src scripts/*.mjs scripts/*.js tests playwright.config.ts contracts/module-apis.json compose.yaml package.json",
+    "demo": "node scripts/demo.mjs",
+    "demo:incident": "node scripts/run-showcase-incident.mjs",
+    "demo:publishing": "node scripts/run-publishing-demo.mjs",
+    "test:evidence": "node scripts/check-publishing-evidence.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.63.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "openapi-typescript": "7.13.0",
+    "prettier": "3.6.2"
+  }
+}

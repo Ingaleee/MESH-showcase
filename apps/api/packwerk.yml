@@ -1,0 +1,6 @@
+package_paths:
+  - "."
+  - "packs/*"
+exclude:
+  - "{bin,db,log,tmp,vendor,storage}/**/*"
+  - "spec/**/*"

@@ -1,0 +1,9 @@
+node_modules
+.cache
+apps/api
+apps/gateway
+apps/web/.next
+apps/web/src/lib/api-schema.d.ts
+package-lock.json
+docs/evidence
+specs

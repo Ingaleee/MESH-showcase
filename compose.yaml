@@ -1,0 +1,187 @@
+name: mesh-showcase
+
+x-ruby: &ruby
+  image: mesh-showcase-ruby-dev:local
+  build:
+    context: .
+    dockerfile: infra/Dockerfile.ruby-dev
+  working_dir: /workspace/apps/api
+  volumes:
+    - .:/workspace
+    - gems:/usr/local/bundle
+  environment: &ruby-env
+    RAILS_ENV: development
+    MESH_INTERVIEW_DEMO: ${MESH_INTERVIEW_DEMO:-false}
+    SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set a local showcase SECRET_KEY_BASE}
+    MESH_SESSION_COOKIE: ${MESH_SESSION_COOKIE:-_mesh_showcase_session}
+    DATABASE_URL: postgres://mesh:mesh_development@db:5432/mesh_development
+    TEST_DATABASE_URL: postgres://mesh:mesh_development@db:5432/mesh_test
+    QUEUE_DATABASE_URL: postgres://mesh:mesh_development@db:5432/mesh_queue
+    TEST_QUEUE_DATABASE_URL: postgres://mesh:mesh_development@db:5432/mesh_queue_test
+    MESH_GATEWAY_URL: http://gateway:3102
+    MESH_GATEWAY_SECRET: ${MESH_GATEWAY_SECRET:-local-sandbox-only-change-for-deployment}
+    MESH_WEBHOOK_SECRET: ${MESH_WEBHOOK_SECRET:-local-webhook-only-change-for-deployment}
+    MESH_PUBLISHING_ENABLED: ${MESH_PUBLISHING_ENABLED:-false}
+    MESH_PARTNER_ORIGINS: ${MESH_PARTNER_ORIGINS:-}
+    MESH_PARTNER_HTTP_ORIGINS: ${MESH_PARTNER_HTTP_ORIGINS:-}
+    MESH_PARTNER_TOKEN_SHOWCASE: ${MESH_PARTNER_TOKEN_SHOWCASE:-}
+    MESH_PUBLISHING_FAILPOINTS: ${MESH_PUBLISHING_FAILPOINTS:-false}
+    MESH_PAYOUTS_ENABLED: ${MESH_PAYOUTS_ENABLED:-true}
+    RAILS_LOG_TO_STDOUT: "1"
+    MESH_PUBLIC_ORIGIN: http://localhost:${MESH_WEB_PORT:-3200}
+    MESH_SCAN_FILES: ${MESH_SCAN_FILES:-false}
+    MESH_CLAMAV_HOST: scanner
+    MESH_METRICS_TOKEN: ${MESH_METRICS_TOKEN:?Run prepare-publishing.mjs}
+    OTEL_TRACES_EXPORTER: ${OTEL_TRACES_EXPORTER:-none}
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://traces:4318
+  depends_on:
+    db:
+      condition: service_healthy
+
+services:
+  db:
+    image: mesh-showcase-postgres:patched
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.postgres
+    environment:
+      POSTGRES_USER: mesh
+      POSTGRES_PASSWORD: mesh_development
+      POSTGRES_DB: mesh_development
+    volumes:
+      - database:/var/lib/postgresql
+      - ./infra/postgres-init.sql:/docker-entrypoint-initdb.d/mesh.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mesh -d mesh_development"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  api:
+    <<: *ruby
+    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+    ports:
+      - "127.0.0.1:${MESH_API_PORT:-3201}:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "--max-time", "4", "http://localhost:3000/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  worker:
+    <<: *ruby
+    command: ["bundle", "exec", "ruby", "bin/jobs"]
+    stop_grace_period: 35s
+
+  dispatcher:
+    <<: *ruby
+    command: ["bundle", "exec", "ruby", "script/dispatcher.rb"]
+
+  gateway:
+    <<: *ruby
+    environment:
+      <<: *ruby-env
+      GATEWAY_DATABASE_URL: postgres://mesh:mesh_development@db:5432/mesh_gateway
+    command: ["bundle", "exec", "puma", "-b", "tcp://0.0.0.0:3102", "../gateway/config.ru"]
+    ports:
+      - "127.0.0.1:${MESH_GATEWAY_PORT:-3202}:3102"
+
+  web:
+    image: node:22-bookworm-slim
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+      - next_build:/workspace/apps/web/.next
+    environment:
+      NEXT_TELEMETRY_DISABLED: "1"
+      WATCHPACK_POLLING: "true"
+    command:
+      [
+        "npm",
+        "run",
+        "dev",
+        "--workspace",
+        "@mesh/web",
+        "--",
+        "--hostname",
+        "0.0.0.0",
+        "--port",
+        "3000",
+      ]
+
+  edge:
+    image: caddy:2.11.7-alpine
+    ports:
+      - "127.0.0.1:${MESH_WEB_PORT:-3200}:80"
+    volumes:
+      - ./infra/Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_started
+
+  partner:
+    profiles: ["publishing"]
+    image: mesh-showcase-partner:local
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.partner
+    init: true
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:uid=1000,gid=1000,mode=1777"]
+    volumes: ["partner_data:/data"]
+    environment:
+      MESH_PARTNER_TOKEN_SHOWCASE: ${MESH_PARTNER_TOKEN_SHOWCASE:?Run prepare-publishing.mjs}
+      MESH_PUBLISHING_FAILPOINTS: ${MESH_PUBLISHING_FAILPOINTS:-false}
+      MESH_PARTNER_CALLBACK_ORIGIN: http://api:3000
+    ports: ["127.0.0.1:${MESH_PARTNER_PORT:-3216}:3216"]
+    mem_limit: 128m
+    pids_limit: 64
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3216/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  scanner:
+    image: mesh-showcase-scanner:patched
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.scanner
+    profiles: ["files"]
+    volumes:
+      - scanner_signatures:/var/lib/clamav
+
+  traces:
+    image: jaegertracing/jaeger:2.22.0
+    profiles: ["observability"]
+    ports:
+      - "127.0.0.1:32686:16686"
+
+  prometheus:
+    image: prom/prometheus:v3.15.0
+    profiles: ["observability"]
+    volumes:
+      - ./infra/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra/alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports:
+      - "127.0.0.1:32090:9090"
+
+volumes:
+  database:
+  gems:
+  node_modules:
+  next_build:
+  scanner_signatures:
+  partner_data:

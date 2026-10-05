@@ -1,0 +1,146 @@
+{
+  "checkedAt": "2026-10-07T23:08:54.203Z",
+  "sourceHashes": {
+    "README.md": "41d3f5337778dc8d182b47189fd10b039c4cbc7cff9afde55a406483a4860caf",
+    "apps/api/Gemfile": "757be4b37f558e28095f083c0fc57a442be6d95fa6a685dc280ee969fe564e23",
+    "apps/api/Gemfile.lock": "adfe92d4f0ceb369f7f8cd0aaa3c540f76435e58b9ba2cd7840d4d08595708fe",
+    "apps/api/app/controllers/api/v1/engagements_controller.rb": "8ccce64c9100f22990590863303adadd0861ce8b328702b3631457f6ada28542",
+    "apps/api/app/controllers/api/v1/work_files_controller.rb": "4511260f3d3ccd38a738e056b36ea4324f49fd0f816d7ad05112e1eec9a6095e",
+    "apps/api/app/jobs/scan_work_file_job.rb": "010ede71456375f0bef15a2c030e66d46a4e5cb9d2c2f886e63fe6b7a6728377",
+    "apps/api/app/services/api/presenters.rb": "6fe08091904296fcc2600be720564c511ec928192de566eed280ffe7e9c63e95",
+    "apps/api/app/services/outbox_dispatcher.rb": "0b59a727c8a18e2de29ede49fc567eb6bcc97513146f18aa5f06f4c74b011f2f",
+    "apps/api/config/routes.rb": "9cc111c6aba615b36b3ff9c4992d00fd394686868fdce1314ae5a4534979e16b",
+    "apps/api/db/migrate/20261007180000_add_work_versions.rb": "2c52954abce6fcc76b2baf18316211abe63019031871afb949bf9d36b11c12fa",
+    "apps/api/db/migrate/20261008020000_version_manifest_format.rb": "50962ed2d265d0cf10468e4f16754ae10f02f04b0a06e534b718214eda788366",
+    "apps/api/db/seeds.rb": "0e3b995658971560a88ecd956cbca22bb8c3772389b883875a5e44ab9556fbb4",
+    "apps/api/db/seeds/workspace_preview.rb": "f50a25b8e06dbe82b18b25a5fac099ddd001a4da8449a341f6bb10da42b605fc",
+    "apps/api/packs/engagements/app/models/engagements/acceptance.rb": "28c9b685fcce72ab137c4ad2d1e92b5c636fb4b6c47b9461a1db99cd96aa3933",
+    "apps/api/packs/engagements/app/models/engagements/engagement.rb": "bb5dcaf1b1ea5f5a8e664f4510c2667d3d154e9d13bd7ce1fdb7d447eaf49671",
+    "apps/api/packs/engagements/app/models/engagements/feedback.rb": "22455c753265c8811b8d3545fa37421d1c29a534ecc7cee43a7fe486b23789df",
+    "apps/api/packs/engagements/app/models/engagements/submission.rb": "1f9784e51b633d272513d7c293b709680cb27814fb7bdda252cc620767ccc0c9",
+    "apps/api/packs/engagements/app/models/engagements/work_file.rb": "371290d343aa22aba8c82b61d4ee0c04a30ad396f8d4d5d10d98a1890806c9de",
+    "apps/api/packs/engagements/app/services/engagements/accept_submission.rb": "c48ffa80f9e2d781c7827d636e6383cad76479a847741adcbeb31fd06b0f3e3b",
+    "apps/api/packs/engagements/app/services/engagements/build_archive.rb": "496c7d88a1999446154ad56abb281d3d694aba4bfcef36da386c915f3c3ae49a",
+    "apps/api/packs/engagements/app/services/engagements/create.rb": "28f1471d5635a81306bf73c6b619528f313455931d57506f2e8236f1c5c8a1a7",
+    "apps/api/packs/engagements/app/services/engagements/read_model.rb": "b915a2494dda724e4392a0f8c9a2e3b767b2a4798d68ba990844f50a801693bc",
+    "apps/api/packs/engagements/app/services/engagements/record_feedback.rb": "c5b53d5dc33a929c880deb9c529336448c3c1b4dfe77ec141f0ac437921525ba",
+    "apps/api/packs/engagements/app/services/engagements/start_work.rb": "6db7ef4a14753f9c322cfcaddbba8256690e7317d0fa16b43eac1296167f7a7c",
+    "apps/api/packs/engagements/app/services/engagements/submit_work.rb": "bf3875143ddc9b3f091de450c595d08aeba50e9c78cf46a778125ff40fee884d",
+    "apps/api/packs/notifications/app/services/notifications/consume_event.rb": "99f0df6d2e1631c876d780441fa5d6c2d12902b6523629fce4ca2bac55e4243c",
+    "apps/api/spec/requests/workspace_spec.rb": "c85e13d7b68450c2180bcb5d0524da148bb73d502a8be3e93a41d5fb33f47d43",
+    "apps/web/src/app/projects/[id]/page.tsx": "ec41d4c9c882a70dd55524f7ddc202cf0dd4a2a0dd1137b8eb6a0af226241f66",
+    "apps/web/src/app/workspace/layout.tsx": "67d25f91d2b4e029f61972fbf8ed66f78815f3b2a71dd23ed4a4705d01454a6e",
+    "apps/web/src/app/workspace/page.tsx": "dde225ff8d6360d6dc65fe44fe52b45c1e4b604c4608e0646c4b244a1698f1e1",
+    "apps/web/src/app/workspace/workspace.css": "b6f56232cc5125ff69254cbba410b91ab91dc2c04a6921e99e97301ecd54680c",
+    "apps/web/src/components/shell.tsx": "6e6134fcbcd3a026f2b4f98cf7942692998568396226c2f2a66e32567aebb68c",
+    "apps/web/src/components/workspace/finance-panel.tsx": "68b6b898b865f986f073754af4aa55c228980da8f801a39ba3286cc4c2c5db22",
+    "apps/web/src/components/workspace/version-composer.tsx": "3be35574cf2d1c7ac56c6ecb50718b46719b5867673e0d44284a02dfa350b08d",
+    "apps/web/src/components/workspace/work-files.tsx": "3a6e9f750c470583c22b890019b890fd14b7861084ecd12bb6a69667412819a9",
+    "apps/web/src/components/workspace/workroom-parts.tsx": "07dff520ae33cd23a57f8b801512c56df495301644b3d552d3c952d98a561a3e",
+    "apps/web/src/components/workspace/workroom.tsx": "a8f12d3a82943083fb831e3607a47985cf46d320b6cee0ef6c798b6c1c747b96",
+    "apps/web/src/lib/api-schema.d.ts": "1ffcd763cbc241205ada85ca0a5b68a95866bd5163ff76c2f5ff3245bc675908",
+    "apps/web/src/lib/api.ts": "aebe64e6fe532bdce82a5bafb63493ededb131d9a90f76ddab6dacd11c7ada8d",
+    "contracts/module-apis.json": "7e1956fc3baa75ffe6a535dccc061a3b35da97927f4c40156ed1dd839c562d6b",
+    "contracts/openapi.json": "611497bd4681fdc49af091ee588fc2697c5e78205e19fdfce9244de4a0575a96",
+    "docs/adr.md": "1c991f6b7e43c48e5e39588abb1dcffc3703d67dba1363ec89a9e0fa6ea4f886",
+    "docs/verification.md": "e730c36ea3f94a6d888fded12a938a97ab6d38f6da7c120f101a9b7bc9b2040c",
+    "docs/workspace-design.md": "399e13d335afe44d11c32bf74a3ab5e501bcce11a3e3a0119184c2fb8ff1791f",
+    "scripts/build-contract.py": "72dd21193dcd86394bc94b9b4e4d3e5e67add74578587367b221a708b3d229d0",
+    "tests/e2e/support/login-budget.ts": "5e07028b039eb6d6a891bae7b916fb215f460ac2f2e61a4f24512434ef099b79",
+    "tests/e2e/workspace.spec.ts": "2a2a9886ae84d30529d79693f41f9c4ac64d7b05b95053e0ecc8c27b7620498a"
+  },
+  "completeSourceSnapshot": {
+    "sha256": "de04a7e448c2868e2e0ee79cda59722e4f44908a586201233146e4d549ee97d9",
+    "files": 321,
+    "manifest": "../../evidence/manifest.json"
+  },
+  "backend": {
+    "duration": 47.658687674,
+    "example_count": 64,
+    "failure_count": 0,
+    "pending_count": 0,
+    "errors_outside_of_examples_count": 0
+  },
+  "browser": {
+    "startTime": "2026-10-07T22:59:44.768Z",
+    "duration": 354497.103,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "responsiveWidths": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 390,
+      "state": "workspace",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "workspace",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "composer",
+      "violations": []
+    }
+  ],
+  "quality": {
+    "typecheck": "passed",
+    "prettier": "passed",
+    "openApiOperations": 43,
+    "generatedContractMatches": true,
+    "moduleApi": "passed",
+    "packwerkFiles": 111,
+    "changedRubyStyleFiles": 23,
+    "brakemanWarnings": 0,
+    "bundlerAuditFindings": 0
+  },
+  "production": {
+    "image": "sha256:cd91ecc7aec3fb9c0f79058eb03843cecb5134f5ad9eb1f7eb53606857bee952",
+    "check": "production-check.json",
+    "temporaryContainerRemoved": true
+  },
+  "artifactHashes": {
+    "README.md": "018f0b56d6794ad08a46904ebfa364fe1124f6bafb9459b92d2d7a65a5c1f7bb",
+    "brakeman.json": "9e80e540a6378da5edd2d6f80ff177fe8f3b46fbb143c72de2368ad81c6650d2",
+    "browser-check.json": "a302bea6f76eb6b2ea043036d4b886d185db741079b7b6534f99ee3a84bf7acf",
+    "bundler-audit.json": "919ad85996d78a864f2eb05106e1fe8f1a5259738a9e1ff4c74b5b55cd1a4368",
+    "event-recovery.json": "8dfc1aa3047ec6d93396162870a4c73d64ef3be1eb66d43292256935f16660c1",
+    "frozen-terms.png": "8ff982b9ab15fdc2f5896fa0b1ae19395f17b768904173bfff56bb75c01cdc24",
+    "new-version-desktop.png": "c6ae14f2df78563304aa03c3545e07f72f85c4ee21e53f19ed06a4accdc4ae84",
+    "new-version-mobile.png": "0d0d6cf66fa405d973ebd4059324dad94362923785e2ef6a64fca81f83961865",
+    "playwright-full.json": "bf8eba8354b3f503dcb61d80b546ac2420202af75095c813495bccf81f56627d",
+    "production-check.json": "cb457bf0d33db07504e068a6ee145715832888c219e309b03cffaf4d5d0588ac",
+    "production-desktop.png": "94ea4c364081529f9b8d9f03c47bcc2c587f720a0c3951721b5fc4f0afe83b2b",
+    "production-image.json": "6abdd29fd245ace12a7920d8608139b28300b6a192f83ef401ce23f0a8a6b94e",
+    "production-mobile.png": "afc573c12d892b1578877c2c55689a74407a48d6a42ddf3c011fc4b636fc9bad",
+    "rspec-full.json": "7bd922671ccccc0c03b20d0b19a82041d817d6a2f2cafa1cc74d3751e8a15512",
+    "workspace-desktop.png": "94ea4c364081529f9b8d9f03c47bcc2c587f720a0c3951721b5fc4f0afe83b2b",
+    "workspace-mobile.png": "38e2d6173aee5304fa437e9527166407f43a22bc7691fdd6e843f22561675bac"
+  },
+  "scope": "Local verification of screen 6 and full regression. Production frontend uses existing development Rails API. Older benchmark, TLC, mutations and restore drill in the global manifest were not repeated. Not a signed CI attestation or production SLA."
+}

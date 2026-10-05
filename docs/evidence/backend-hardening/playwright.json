@@ -1,0 +1,499 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH\\playwright.config.ts",
+    "rootDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accessibility.spec.ts",
+      "file": "accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public pages and login meet automated WCAG 2.1 AA checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 34222,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:35:57.712Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddd864604af8a6a0198f-05e0002a584c0cf3b6ec",
+          "file": "accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "creators.spec.ts",
+      "file": "creators.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "creator search, combined filters, saved authors and shared profile links work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9355,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:36:34.493Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "871221d37a1cdbec852a-6e56d601d038651bc50e",
+          "file": "creators.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "filtered catalog retains the current author's profile when opening the editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10037,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:36:43.862Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "871221d37a1cdbec852a-0656cc7102039c111905",
+          "file": "creators.spec.ts",
+          "line": 63,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "marketplace.spec.ts",
+      "file": "marketplace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client and creator complete a real agreement and recover a lost provider response",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 89810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:36:54.207Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-11863fcb4c73abbcc249",
+          "file": "marketplace.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "public directory, keyboard navigation and mobile layout work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16297,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:38:24.042Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-d77b33767baae2d0caa6",
+          "file": "marketplace.spec.ts",
+          "line": 135,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "owner.spec.ts",
+      "file": "owner.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "owner searches, sorts, saves, compares offers and uses the accessible drawer on five widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 30089,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:38:40.397Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6a1ca0e46405ca979136-0e7cc789cdf9e785ff74",
+          "file": "owner.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "owner cannot award an obsolete confirmation, can award while paused, and retains offers and fixed agreement terms",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24201,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:39:10.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6a1ca0e46405ca979136-c59ac9c7dab6c515d55d",
+          "file": "owner.spec.ts",
+          "line": 158,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "projects.spec.ts",
+      "file": "projects.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public brief has working materials navigation, persistent bookmarks and accessible layouts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20087,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:39:34.770Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-e3a4f3f4633217256bd8",
+          "file": "projects.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "author keeps the draft when the client changes the brief and submits against the reviewed version",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 48825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:39:54.874Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-fd9a611535ad5232683f",
+          "file": "projects.spec.ts",
+          "line": 67,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "workspace.spec.ts",
+      "file": "workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "workspace preserves uploaded versions, requests changes and accepts only the latest ready result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 69110,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:40:43.796Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-2c87bd801e87be5f463b",
+          "file": "workspace.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "workspace draft survives reload and accessible panels fit five widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25334,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:41:52.932Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-15c7170e1138d100eaa6",
+          "file": "workspace.spec.ts",
+          "line": 171,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T23:35:55.050Z",
+    "duration": 393360.808,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

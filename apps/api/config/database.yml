@@ -1,0 +1,33 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 8) %>
+  checkout_timeout: 2
+  connect_timeout: 3
+  variables:
+    statement_timeout: 10000
+    lock_timeout: 3000
+development:
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL", "postgres://mesh:mesh_development@localhost:55441/mesh_development") %>
+  queue:
+    <<: *default
+    url: <%= ENV.fetch("QUEUE_DATABASE_URL", "postgres://mesh:mesh_development@localhost:55441/mesh_queue") %>
+    migrations_paths: db/queue_migrate
+test:
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("TEST_DATABASE_URL", "postgres://mesh:mesh_development@localhost:55441/mesh_test") %>
+  queue:
+    <<: *default
+    url: <%= ENV.fetch("TEST_QUEUE_DATABASE_URL", "postgres://mesh:mesh_development@localhost:55441/mesh_queue_test") %>
+    migrations_paths: db/queue_migrate
+production:
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") %>
+  queue:
+    <<: *default
+    url: <%= ENV.fetch("QUEUE_DATABASE_URL") %>
+    migrations_paths: db/queue_migrate

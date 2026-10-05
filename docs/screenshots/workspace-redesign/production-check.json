@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-07T23:07:47.124Z",
+  "production": true,
+  "route": "/workspace?engagement=c3a1bdb8-8264-4164-b1d7-2d06dd70ea2f",
+  "scriptsWithMatchingNonce": 13,
+  "privateImagePreviews": 5,
+  "draftRestored": true,
+  "frozenTerms": true,
+  "mobileComposer": true,
+  "submitted": false,
+  "cspViolations": [],
+  "javascriptErrors": [],
+  "scope": "Standalone frontend on 3110. API requests forwarded to existing local Rails with target origin. All writes and financial workflow checked by same-origin E2E on 3100; demo not accepted or submitted."
+}

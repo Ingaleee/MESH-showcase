@@ -1,0 +1,1427 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "config-checksum": "d842219642aa270a6f383b6d4392075980fe7e30ba2e89a4d88d60e8023b9efc"
+                },
+                "creationTimestamp": "2026-10-08T13:47:01Z",
+                "generateName": "mesh-api-6d85759d85-",
+                "generation": 1,
+                "labels": {
+                    "app": "mesh",
+                    "component": "api",
+                    "pod-template-hash": "6d85759d85"
+                },
+                "name": "mesh-api-6d85759d85-jr9nd",
+                "namespace": "mesh-showcase",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "mesh-api-6d85759d85",
+                        "uid": "6d8a9366-20a9-46c3-a89f-0bc2559e75f3"
+                    }
+                ],
+                "resourceVersion": "1232",
+                "uid": "34e5d47e-8046-4216-a187-8e9a4da88182"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "args": [
+                            "rails",
+                            "server",
+                            "-b",
+                            "0.0.0.0",
+                            "-p",
+                            "3000"
+                        ],
+                        "command": [
+                            "bundle",
+                            "exec"
+                        ],
+                        "envFrom": [
+                            {
+                                "configMapRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            },
+                            {
+                                "secretRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            }
+                        ],
+                        "image": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "imagePullPolicy": "IfNotPresent",
+                        "lifecycle": {
+                            "preStop": {
+                                "exec": {
+                                    "command": [
+                                        "sh",
+                                        "-c",
+                                        "sleep 5"
+                                    ]
+                                }
+                            }
+                        },
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/up",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "name": "api",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/ready",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 5,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true
+                        },
+                        "startupProbe": {
+                            "failureThreshold": 40,
+                            "httpGet": {
+                                "path": "/up",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 3,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "k3d-mesh-showcase-server-0",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 10001,
+                    "runAsGroup": 10001,
+                    "runAsNonRoot": true,
+                    "runAsUser": 10001,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "serviceAccount": "mesh-runtime",
+                "serviceAccountName": "mesh-runtime",
+                "terminationGracePeriodSeconds": 45,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "tmp"
+                    },
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "64Mi"
+                        },
+                        "name": "rails-tmp"
+                    },
+                    {
+                        "name": "private-files",
+                        "persistentVolumeClaim": {
+                            "claimName": "mesh-files"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:01:08Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:01:08Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "192Mi"
+                        },
+                        "containerID": "containerd://63583adb900fbbc9741624bc8b3ebdc31db9f85546c962c2f9e0262f2e02b540",
+                        "image": "docker.io/library/mesh-showcase-api:publishing",
+                        "imageID": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "lastState": {},
+                        "name": "api",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T13:47:10Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 10001,
+                                "supplementalGroups": [
+                                    10001
+                                ],
+                                "uid": 10001
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "172.25.0.4",
+                "hostIPs": [
+                    {
+                        "ip": "172.25.0.4"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.42.0.8",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.8"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T13:47:10Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "config-checksum": "d842219642aa270a6f383b6d4392075980fe7e30ba2e89a4d88d60e8023b9efc"
+                },
+                "creationTimestamp": "2026-10-08T13:47:01Z",
+                "generateName": "mesh-api-6d85759d85-",
+                "generation": 1,
+                "labels": {
+                    "app": "mesh",
+                    "component": "api",
+                    "pod-template-hash": "6d85759d85"
+                },
+                "name": "mesh-api-6d85759d85-wzqbq",
+                "namespace": "mesh-showcase",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "mesh-api-6d85759d85",
+                        "uid": "6d8a9366-20a9-46c3-a89f-0bc2559e75f3"
+                    }
+                ],
+                "resourceVersion": "1226",
+                "uid": "f5918606-e518-440c-a7e3-2c4e65a33875"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "args": [
+                            "rails",
+                            "server",
+                            "-b",
+                            "0.0.0.0",
+                            "-p",
+                            "3000"
+                        ],
+                        "command": [
+                            "bundle",
+                            "exec"
+                        ],
+                        "envFrom": [
+                            {
+                                "configMapRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            },
+                            {
+                                "secretRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            }
+                        ],
+                        "image": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "imagePullPolicy": "IfNotPresent",
+                        "lifecycle": {
+                            "preStop": {
+                                "exec": {
+                                    "command": [
+                                        "sh",
+                                        "-c",
+                                        "sleep 5"
+                                    ]
+                                }
+                            }
+                        },
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/up",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "name": "api",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/ready",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 5,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true
+                        },
+                        "startupProbe": {
+                            "failureThreshold": 40,
+                            "httpGet": {
+                                "path": "/up",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 3,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "k3d-mesh-showcase-server-0",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 10001,
+                    "runAsGroup": 10001,
+                    "runAsNonRoot": true,
+                    "runAsUser": 10001,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "serviceAccount": "mesh-runtime",
+                "serviceAccountName": "mesh-runtime",
+                "terminationGracePeriodSeconds": 45,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "tmp"
+                    },
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "64Mi"
+                        },
+                        "name": "rails-tmp"
+                    },
+                    {
+                        "name": "private-files",
+                        "persistentVolumeClaim": {
+                            "claimName": "mesh-files"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:01:08Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:01:08Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "192Mi"
+                        },
+                        "containerID": "containerd://26ab0100c8b59ee666177f42876222dcf1b56027f1301276d0bc501115496d0d",
+                        "image": "docker.io/library/mesh-showcase-api:publishing",
+                        "imageID": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "lastState": {},
+                        "name": "api",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T13:47:10Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 10001,
+                                "supplementalGroups": [
+                                    10001
+                                ],
+                                "uid": 10001
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "172.25.0.4",
+                "hostIPs": [
+                    {
+                        "ip": "172.25.0.4"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.42.0.7",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.7"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T13:47:10Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "config-checksum": "d842219642aa270a6f383b6d4392075980fe7e30ba2e89a4d88d60e8023b9efc"
+                },
+                "creationTimestamp": "2026-10-08T13:47:01Z",
+                "generateName": "mesh-dispatcher-94865db9b-",
+                "generation": 1,
+                "labels": {
+                    "app": "mesh",
+                    "component": "dispatcher",
+                    "pod-template-hash": "94865db9b"
+                },
+                "name": "mesh-dispatcher-94865db9b-rx7ct",
+                "namespace": "mesh-showcase",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "mesh-dispatcher-94865db9b",
+                        "uid": "f30f8c81-b422-4707-8b7f-479645533699"
+                    }
+                ],
+                "resourceVersion": "698",
+                "uid": "b91b6d9d-53c0-4feb-b7b9-3787f3b23504"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "args": [
+                            "ruby",
+                            "script/dispatcher.rb"
+                        ],
+                        "command": [
+                            "bundle",
+                            "exec"
+                        ],
+                        "envFrom": [
+                            {
+                                "configMapRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            },
+                            {
+                                "secretRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            }
+                        ],
+                        "image": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "dispatcher",
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "256Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "k3d-mesh-showcase-server-0",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 10001,
+                    "runAsGroup": 10001,
+                    "runAsNonRoot": true,
+                    "runAsUser": 10001,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "serviceAccount": "mesh-runtime",
+                "serviceAccountName": "mesh-runtime",
+                "terminationGracePeriodSeconds": 45,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "tmp"
+                    },
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "64Mi"
+                        },
+                        "name": "rails-tmp"
+                    },
+                    {
+                        "name": "private-files",
+                        "persistentVolumeClaim": {
+                            "claimName": "mesh-files"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:09Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:10Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:09Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "128Mi"
+                        },
+                        "containerID": "containerd://c8d207fbfdea781d387697472055dbec99c0d3a4cf70e6762143acbd20cdb665",
+                        "image": "docker.io/library/mesh-showcase-api:publishing",
+                        "imageID": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "lastState": {},
+                        "name": "dispatcher",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "256Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T13:47:10Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 10001,
+                                "supplementalGroups": [
+                                    10001
+                                ],
+                                "uid": 10001
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "172.25.0.4",
+                "hostIPs": [
+                    {
+                        "ip": "172.25.0.4"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.42.0.6",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.6"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T13:47:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "config-checksum": "d842219642aa270a6f383b6d4392075980fe7e30ba2e89a4d88d60e8023b9efc"
+                },
+                "creationTimestamp": "2026-10-08T13:47:01Z",
+                "generateName": "mesh-web-545c4d7c65-",
+                "generation": 1,
+                "labels": {
+                    "app": "mesh",
+                    "component": "web",
+                    "pod-template-hash": "545c4d7c65"
+                },
+                "name": "mesh-web-545c4d7c65-bcgqv",
+                "namespace": "mesh-showcase",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "mesh-web-545c4d7c65",
+                        "uid": "964a7813-c0de-435a-97ac-504239b13078"
+                    }
+                ],
+                "resourceVersion": "652",
+                "uid": "5de33d55-7d7d-4107-b304-60e870551a1b"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "image": "docker.io/library/mesh-showcase-web@sha256:96f3592e7ab896943b2cd812e565faee61c19b42588bfd2aacdcbd7110123a53",
+                        "imagePullPolicy": "IfNotPresent",
+                        "lifecycle": {
+                            "preStop": {
+                                "exec": {
+                                    "command": [
+                                        "sh",
+                                        "-c",
+                                        "sleep 5"
+                                    ]
+                                }
+                            }
+                        },
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 5,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 4
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "384Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true
+                        },
+                        "startupProbe": {
+                            "failureThreshold": 40,
+                            "httpGet": {
+                                "path": "/",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 3,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/apps/web/.next/cache",
+                                "name": "cache"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "k3d-mesh-showcase-server-0",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 10001,
+                    "runAsGroup": 1000,
+                    "runAsNonRoot": true,
+                    "runAsUser": 1000,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "serviceAccount": "mesh-runtime",
+                "serviceAccountName": "mesh-runtime",
+                "terminationGracePeriodSeconds": 45,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "tmp"
+                    },
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "cache"
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:01Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:01Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:04Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:04Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T13:47:01Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "128Mi"
+                        },
+                        "containerID": "containerd://7f0272fbec85a379f75a34300318b57729a6770cfe2883b6f954fef0d1c8d754",
+                        "image": "docker.io/library/mesh-showcase-web:demo",
+                        "imageID": "docker.io/library/mesh-showcase-web@sha256:96f3592e7ab896943b2cd812e565faee61c19b42588bfd2aacdcbd7110123a53",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "384Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T13:47:01Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 1000,
+                                "supplementalGroups": [
+                                    1000,
+                                    10001
+                                ],
+                                "uid": 1000
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/apps/web/.next/cache",
+                                "name": "cache"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "172.25.0.4",
+                "hostIPs": [
+                    {
+                        "ip": "172.25.0.4"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.42.0.4",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.4"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T13:47:01Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "config-checksum": "d842219642aa270a6f383b6d4392075980fe7e30ba2e89a4d88d60e8023b9efc"
+                },
+                "creationTimestamp": "2026-10-08T14:00:20Z",
+                "generateName": "mesh-worker-7586b8b97b-",
+                "generation": 1,
+                "labels": {
+                    "app": "mesh",
+                    "component": "worker",
+                    "pod-template-hash": "7586b8b97b"
+                },
+                "name": "mesh-worker-7586b8b97b-xj48s",
+                "namespace": "mesh-showcase",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "mesh-worker-7586b8b97b",
+                        "uid": "353f0329-f78b-46df-a73d-82305d37cb74"
+                    }
+                ],
+                "resourceVersion": "1181",
+                "uid": "f912a111-aee0-4cc9-b802-f789b64f4371"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "args": [
+                            "ruby",
+                            "bin/jobs"
+                        ],
+                        "command": [
+                            "bundle",
+                            "exec"
+                        ],
+                        "envFrom": [
+                            {
+                                "configMapRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            },
+                            {
+                                "secretRef": {
+                                    "name": "mesh-runtime"
+                                }
+                            }
+                        ],
+                        "image": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "worker",
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "k3d-mesh-showcase-server-0",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 10001,
+                    "runAsGroup": 10001,
+                    "runAsNonRoot": true,
+                    "runAsUser": 10001,
+                    "seccompProfile": {
+                        "type": "RuntimeDefault"
+                    }
+                },
+                "serviceAccount": "mesh-runtime",
+                "serviceAccountName": "mesh-runtime",
+                "terminationGracePeriodSeconds": 45,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "128Mi"
+                        },
+                        "name": "tmp"
+                    },
+                    {
+                        "emptyDir": {
+                            "sizeLimit": "64Mi"
+                        },
+                        "name": "rails-tmp"
+                    },
+                    {
+                        "name": "private-files",
+                        "persistentVolumeClaim": {
+                            "claimName": "mesh-files"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:00:21Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:00:20Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:00:21Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:00:21Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-08T14:00:20Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "192Mi"
+                        },
+                        "containerID": "containerd://1581670c55fbc341afbb31886946903d4512922b462ecc2c09c41be8bceacf5b",
+                        "image": "docker.io/library/mesh-showcase-api:publishing",
+                        "imageID": "docker.io/library/mesh-showcase-api@sha256:7d949da7f21344d45b9fa0024a14c19119bef4b64c4373ba351ac92b06c1ea60",
+                        "lastState": {},
+                        "name": "worker",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "1",
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "192Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-08T14:00:20Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 10001,
+                                "supplementalGroups": [
+                                    10001
+                                ],
+                                "uid": 10001
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/tmp",
+                                "name": "tmp"
+                            },
+                            {
+                                "mountPath": "/app/tmp",
+                                "name": "rails-tmp"
+                            },
+                            {
+                                "mountPath": "/app/storage",
+                                "name": "private-files"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "172.25.0.4",
+                "hostIPs": [
+                    {
+                        "ip": "172.25.0.4"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.42.0.16",
+                "podIPs": [
+                    {
+                        "ip": "10.42.0.16"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-08T14:00:20Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
