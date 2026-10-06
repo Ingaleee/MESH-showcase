@@ -1,0 +1,5 @@
+{
+  "scope": "Includes backup, DB/file restore, authentication checks, worker boot and recovery of a lost queue claim. Single local run, not a production RTO/RPO promise.",
+  "localRecoverySeconds": 65.0210089,
+  "checkedAt": "2026-10-08T10:59:33.8489610+00:00"
+}

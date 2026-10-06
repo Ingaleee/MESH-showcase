@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-08T14:42:41.001Z",
+  "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+  "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+  "images": {
+    "web": {
+      "image": "sha256:5a45c655ce0bced270b8879b71c88f5243bc0871034dd4e519cc783df1af164f",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "grafana": {
+      "image": "sha256:e97e1c7759cdbd7e3a2f0d0049e033b2026786a5920790f080bf425654047f74",
+      "scan_exit_code": 1,
+      "findings": 10,
+      "fixable": 10
+    },
+    "api": {
+      "image": "sha256:d3c07d9c3414df7e7efe8ca866acc654f4b6ab31c52e584954f0666e18fc85fd",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    }
+  },
+  "success": false,
+  "scope": "Known OS/library vulnerabilities in each explicitly listed immutable runtime image; applicability decisions and signed provenance are separate."
+}

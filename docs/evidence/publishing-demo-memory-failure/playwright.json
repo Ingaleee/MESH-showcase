@@ -1,0 +1,276 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "marketplace.spec.ts",
+      "publishing.spec.ts"
+    ],
+    "configFile": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\playwright.config.ts",
+    "rootDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": ".cache/interview-demo/2026-10-08T15-24-03.886Z/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "marketplace.spec.ts",
+      "file": "marketplace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client and creator complete a real agreement and recover a lost provider response",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13575,
+                  "error": {
+                    "message": "SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+                    "stack": "SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\marketplace.spec.ts:61:11",
+                    "location": {
+                      "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\marketplace.spec.ts",
+                      "column": 11,
+                      "line": 61
+                    },
+                    "snippet": "  59 |   ).toBeVisible();\n  60 |   const revision = await client.request.get(`/api/v1/projects/${projectId}`);\n> 61 |   expect((await revision.json()).project.brief_version).toBe(2);\n     |           ^\n  62 |   await creator.goto(projectUrl);\n  63 |   await login(creator, \"creator@mesh.local\");\n  64 |   await creator.getByRole(\"button\", { name: \"Предложить цену и срок\", exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\marketplace.spec.ts",
+                        "column": 11,
+                        "line": 61
+                      },
+                      "message": "SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\n\n  59 |   ).toBeVisible();\n  60 |   const revision = await client.request.get(`/api/v1/projects/${projectId}`);\n> 61 |   expect((await revision.json()).project.brief_version).toBe(2);\n     |           ^\n  62 |   await creator.goto(projectUrl);\n  63 |   await login(creator, \"creator@mesh.local\");\n  64 |   await creator.getByRole(\"button\", { name: \"Предложить цену и срок\", exact: true }).click();\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\marketplace.spec.ts:61:11"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T15:27:04.501Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\marketplace-client-and-cre-33aa5-er-a-lost-provider-response\\test-failed-2.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\marketplace-client-and-cre-33aa5-er-a-lost-provider-response\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\marketplace-client-and-cre-33aa5-er-a-lost-provider-response\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\marketplace-client-and-cre-33aa5-er-a-lost-provider-response\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\marketplace.spec.ts",
+                    "column": 11,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-11863fcb4c73abbcc249",
+          "file": "marketplace.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "public directory, keyboard navigation and mobile layout work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9827,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T15:27:23.692Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-d77b33767baae2d0caa6",
+          "file": "marketplace.spec.ts",
+          "line": 137,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "publishing.spec.ts",
+      "file": "publishing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "operator uploads, validates and publishes real private artifacts on responsive screens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19008,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T15:27:34.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7670597a110c90863cfc-91f95dc3cd3b2584261f",
+          "file": "publishing.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "the provisioned dashboard opens with a healthy real Prometheus target",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T15:27:53.143Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7670597a110c90863cfc-aae6395dc084a29ecd3c",
+          "file": "publishing.spec.ts",
+          "line": 74,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T15:27:00.865Z",
+    "duration": 57116.278,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

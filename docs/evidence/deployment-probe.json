@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-08T10:31:59Z",
+  "environment": "mesh-showcase-release production runtime role",
+  "business_workflow": "create -> propose -> award -> real file scan -> version -> accept",
+  "accepted": true,
+  "balanced_journal_posted": true,
+  "denied": {
+    "ddl": true,
+    "immutable_history": true,
+    "posted_journal": true
+  },
+  "private_file_sha256": "670decaa46f82b85394937054704a274a676d7fa35bf0154a7791a9d1f090714",
+  "storage_file_exists": true,
+  "scope": "Synthetic accounts/results in the isolated production-shaped local deployment. No external payout."
+}

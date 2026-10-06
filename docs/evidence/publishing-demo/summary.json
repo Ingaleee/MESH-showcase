@@ -1,0 +1,201 @@
+{
+  "checked_at": "2026-10-08T12:41:10Z",
+  "environment": "mesh-showcase",
+  "phases": {
+    "defective_candidate": {
+      "candidate_id": "fd1ae500-efb0-462c-93ce-8f2aaf5869e8",
+      "state": "rejected",
+      "publish_blocked": true,
+      "checks": [
+        {
+          "ok": true,
+          "fix": "Upload a new candidate; stored bytes must match its immutable digest.",
+          "code": "ARTIFACT_DIGEST",
+          "expected": "22d5d3961165800b9f129e61d50007f563171228b0d7765ef0d5c7a29f2407d4",
+          "observed": "22d5d3961165800b9f129e61d50007f563171228b0d7765ef0d5c7a29f2407d4"
+        },
+        {
+          "ok": true,
+          "fix": "Use the documented manifest-v1 fields and contract version.",
+          "code": "MANIFEST_SCHEMA",
+          "expected": "manifest-v1 / index.html / 1..16 files",
+          "observed": "valid"
+        },
+        {
+          "ok": true,
+          "fix": "Remove duplicates, unsafe paths and unsupported metadata.",
+          "code": "MANIFEST_FILES",
+          "expected": "unique relative files with size and SHA-256",
+          "observed": "valid"
+        },
+        {
+          "ok": false,
+          "fix": "Regenerate the manifest from the actual file bytes.",
+          "code": "FILE_DIGEST",
+          "expected": "0000000000000000000000000000000000000000000000000000000000000000",
+          "observed": "mismatch"
+        },
+        {
+          "ok": true,
+          "fix": "Include index.html and remove undeclared or duplicate entries.",
+          "code": "ZIP_INVENTORY",
+          "expected": "exactly the declared files including index.html",
+          "observed": "matched"
+        }
+      ]
+    },
+    "normal_release": {
+      "id": "2a9168b9-956a-46a8-b93f-c440335c1bc9",
+      "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+      "candidate_id": "b4c9979b-dfd9-4077-9c11-5c093b5f894f",
+      "validation_id": "6816afdc-7618-4242-a304-5f4fbf32d343",
+      "kind": "publish",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 1,
+      "confirmed_at": "2026-10-08T12:41:27.400Z",
+      "created_at": "2026-10-08T12:41:25.585Z",
+      "correlation_id": "7de7af4f-818d-4e04-b5ff-bd696843916d",
+      "rollback_of_id": null,
+      "artifact_sha256": "b1ea82c050da5e76c937394a1bd4231f94909c5ecd8188ec5911e54c7a366be7"
+    },
+    "lost_response": {
+      "unknown": {
+        "id": "54a0af27-0869-44c4-bee9-62ae58436b00",
+        "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+        "candidate_id": "80bec53e-c7ea-4011-a781-69c1d86de666",
+        "validation_id": "6aa11d53-3a2e-47ea-8718-67634bb8962f",
+        "kind": "publish",
+        "state": "unknown",
+        "last_error": "HTTP_TIMEOUT",
+        "attempts": 1,
+        "remote_sequence": null,
+        "confirmed_at": null,
+        "created_at": "2026-10-08T12:41:31.512Z",
+        "correlation_id": "24b0fb8e-0905-4fb7-a417-459e498de774",
+        "rollback_of_id": null
+      },
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "54a0af27-0869-44c4-bee9-62ae58436b00",
+        "state": "unknown",
+        "artifact_sha256": "8c124c862a72ee2d315c91ebed1cfd06dfe386cde4593fbe4fbdd78283b77564",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "477a76ac394707c9f1ec00bbb47124b1034c2359b52b0d616ad1ab7ec22963f3",
+        "current_inputs_match": true,
+        "correlation_id": "24b0fb8e-0905-4fb7-a417-459e498de774",
+        "attempts": 1,
+        "last_error": "HTTP_TIMEOUT",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "next_action": "Lookup remote state by the same operation ID; do not create another POST.",
+        "reproduce": "mesh-publish diagnose 54a0af27-0869-44c4-bee9-62ae58436b00",
+        "command_key": "8a6707c1-e94d-49e9-9f73-83c2ec4816d6"
+      },
+      "recovered": {
+        "id": "54a0af27-0869-44c4-bee9-62ae58436b00",
+        "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+        "candidate_id": "80bec53e-c7ea-4011-a781-69c1d86de666",
+        "validation_id": "6aa11d53-3a2e-47ea-8718-67634bb8962f",
+        "kind": "publish",
+        "state": "confirmed",
+        "last_error": null,
+        "attempts": 2,
+        "remote_sequence": 2,
+        "confirmed_at": "2026-10-08T12:41:38.728Z",
+        "created_at": "2026-10-08T12:41:31.512Z",
+        "correlation_id": "24b0fb8e-0905-4fb7-a417-459e498de774",
+        "rollback_of_id": null
+      },
+      "artifact_sha256": "8c124c862a72ee2d315c91ebed1cfd06dfe386cde4593fbe4fbdd78283b77564"
+    },
+    "rollback": {
+      "id": "2c91cb7f-b106-40bc-980c-fb40b7c1772d",
+      "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+      "candidate_id": "b4c9979b-dfd9-4077-9c11-5c093b5f894f",
+      "validation_id": "6816afdc-7618-4242-a304-5f4fbf32d343",
+      "kind": "rollback",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 3,
+      "confirmed_at": "2026-10-08T12:41:42.871Z",
+      "created_at": "2026-10-08T12:41:41.068Z",
+      "correlation_id": "a1980e28-a0bb-4c8e-bd33-43a288a45499",
+      "rollback_of_id": "2a9168b9-956a-46a8-b93f-c440335c1bc9",
+      "artifact_sha256": "b1ea82c050da5e76c937394a1bd4231f94909c5ecd8188ec5911e54c7a366be7"
+    }
+  },
+  "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+  "success": true,
+  "scope": "Real authenticated API + ordinary dispatcher/worker + ClamAV + independent SQLite partner; no external studio or uploaded code execution.",
+  "remote_publish_requests": 3,
+  "downloads": [
+    {
+      "phase": "normal_release",
+      "bytes": 234,
+      "sha256": "b1ea82c050da5e76c937394a1bd4231f94909c5ecd8188ec5911e54c7a366be7",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "lost_response",
+      "bytes": 234,
+      "sha256": "8c124c862a72ee2d315c91ebed1cfd06dfe386cde4593fbe4fbdd78283b77564",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "rollback",
+      "bytes": 234,
+      "sha256": "b1ea82c050da5e76c937394a1bd4231f94909c5ecd8188ec5911e54c7a366be7",
+      "private_authenticated_download": true
+    }
+  ],
+  "partner_state_after": {
+    "deployments": {
+      "count": 3
+    },
+    "active": {
+      "operation_id": "2c91cb7f-b106-40bc-980c-fb40b7c1772d",
+      "artifact_sha256": "b1ea82c050da5e76c937394a1bd4231f94909c5ecd8188ec5911e54c7a366be7",
+      "sequence": 3
+    },
+    "requests": [
+      {
+        "route": "contract",
+        "count": 2
+      },
+      {
+        "route": "lookup",
+        "count": 1
+      },
+      {
+        "route": "publish",
+        "count": 3
+      }
+    ],
+    "callbacks": [
+      {
+        "event_id": "6505e9c4-dd3b-420f-b5dc-ba3294d081d9",
+        "operation_id": "54a0af27-0869-44c4-bee9-62ae58436b00",
+        "attempts": 0,
+        "last_status": null,
+        "delivered_at": null
+      },
+      {
+        "event_id": "316b355c-6e5d-4d1f-8f13-e71be9e1c2a5",
+        "operation_id": "2a9168b9-956a-46a8-b93f-c440335c1bc9",
+        "attempts": 3,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "cc425a53-401c-42a7-b7bc-f798cff102ef",
+        "operation_id": "2c91cb7f-b106-40bc-980c-fb40b7c1772d",
+        "attempts": 0,
+        "last_status": null,
+        "delivered_at": null
+      }
+    ]
+  }
+}

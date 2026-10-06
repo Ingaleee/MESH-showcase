@@ -1,0 +1,12 @@
+{
+  "deployment_report": "deployment-1791457744239.json",
+  "rows_before": "1|1|1",
+  "scope": "Failed image recovery on the final release code. Manifest image identity, TLS smoke and retained versions/blobs/journals verified.",
+  "checked_at": "2026-10-08T11:09:04.8872475+00:00",
+  "deliberate_failure": "Frontend process exits with status 42",
+  "migration_reverted": false,
+  "rows_after": "1|1|1",
+  "automatic_image_rollback": true,
+  "environment": "mesh-showcase-release",
+  "release_rejected": true
+}
