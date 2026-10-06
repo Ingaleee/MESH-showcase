@@ -1,0 +1,16 @@
+module Platform
+  class Money
+    CURRENCIES: Hash[String, Integer]
+    @minor: Integer
+    @currency: String
+
+    attr_reader minor: Integer
+    attr_reader currency: String
+    def initialize: (minor: Integer, currency: String) -> void
+    def +: (Money other) -> Money
+    def -: (Money other) -> Money
+    def commission: (basis_points: Integer) -> Money
+    private
+    def check_currency!: (Money other) -> void
+  end
+end
