@@ -1,0 +1,18 @@
+{
+  "available": true,
+  "workers": 3,
+  "rows": [
+    {
+      "queue_name": "events",
+      "state": "failed",
+      "count": 5,
+      "oldest_seconds": "0.0"
+    }
+  ],
+  "state": "failed",
+  "failures": 5,
+  "attempts": 5,
+  "notifications": 0,
+  "last_error": "Platform::Error",
+  "checked_at": "2026-10-08T00:33:35Z"
+}

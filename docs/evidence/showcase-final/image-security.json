@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-08T11:29:48.444Z",
+  "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+  "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+  "images": {
+    "api": {
+      "image": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+      "scan_exit_code": 1,
+      "findings": 54,
+      "fixable": 0
+    },
+    "web": {
+      "image": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a",
+      "scan_exit_code": 1,
+      "findings": 49,
+      "fixable": 0
+    }
+  },
+  "success": false,
+  "scope": "Known OS/library vulnerabilities in two application release images; dependency services, runtime exploitability and signed provenance are separate."
+}

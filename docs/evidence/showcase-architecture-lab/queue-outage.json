@@ -1,0 +1,10 @@
+{
+  "unavailable_snapshot": {
+    "available": false
+  },
+  "durable_intent_preserved": true,
+  "state_after": "processed",
+  "notifications": 1,
+  "failure": "The lab dispatcher is stopped while an isolated producer connects to a closed queue PostgreSQL port; after the failed enqueue, the healthy dispatcher resumes. The shared PostgreSQL server stays running.",
+  "checked_at": "2026-10-08T10:57:17Z"
+}

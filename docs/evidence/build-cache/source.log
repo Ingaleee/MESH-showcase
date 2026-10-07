@@ -1,0 +1,106 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.web
+#1 transferring dockerfile:
+#1 transferring dockerfile: 1.38kB done
+#1 DONE 0.8s
+
+#2 [internal] load metadata for docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9
+#2 DONE 0.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 284B 0.1s done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [build 1/8] FROM docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9
+#5 resolve docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9 0.1s done
+#5 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 24.47kB 0.1s done
+#4 DONE 0.1s
+
+#6 [build 2/8] WORKDIR /app
+#6 CACHED
+
+#7 [build 3/8] COPY package.json package-lock.json ./
+#7 CACHED
+
+#8 [build 4/8] COPY apps/web/package.json apps/web/package.json
+#8 CACHED
+
+#9 [build 5/8] RUN npm ci --ignore-scripts
+#9 CACHED
+
+#10 [build 6/8] COPY apps/web/ apps/web/
+#10 DONE 0.6s
+
+#11 [build 7/8] COPY contracts/ contracts/
+#11 DONE 0.1s
+
+#12 [build 8/8] RUN npm run build --workspace @mesh/web
+#12 0.625 
+#12 0.625 > @mesh/web@0.1.0 build
+#12 0.625 > next build --webpack
+#12 0.625 
+#12 1.213 ▲ Next.js 16.4.0 (webpack)
+#12 1.301 ✓ Running next.config.ts took 87ms
+#12 1.316 
+#12 1.341   Creating an optimized production build ...
+#12 20.31 ✓ Compiled successfully in 15.7s
+#12 20.31   Running TypeScript ...
+#12 24.44   Finished TypeScript in 4.1s ...
+#12 24.44   Collecting page data using 8 workers ...
+#12 25.27   Generating static pages using 8 workers (0/6) ...
+#12 26.25   Generating static pages using 8 workers (1/6) 
+#12 26.25   Generating static pages using 8 workers (2/6) 
+#12 26.25   Generating static pages using 8 workers (4/6) 
+#12 26.25 ✓ Generating static pages using 8 workers (6/6) in 981ms
+#12 26.61   Finalizing page optimization ...
+#12 26.61   Collecting build traces ...
+#12 44.62 
+#12 44.63 Route (app)
+#12 44.63 ┌ ƒ /
+#12 44.63 ├ ƒ /_not-found
+#12 44.63 ├ ƒ /creators
+#12 44.63 ├ ƒ /operations
+#12 44.63 ├ ƒ /projects/[id]
+#12 44.63 └ ƒ /workspace
+#12 44.63 
+#12 44.63 
+#12 44.63 ƒ Proxy (Middleware)
+#12 44.63 
+#12 44.63 ƒ  (Dynamic)  server-rendered on demand
+#12 44.63 
+#12 DONE 45.0s
+
+#13 [stage-1 2/6] RUN apt-get update -qq     && apt-get upgrade --no-install-recommends -y     && rm -rf /var/lib/apt/lists/* /usr/local/lib/node_modules     && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack /usr/local/bin/yarn /usr/local/bin/yarnpkg /usr/local/bin/pnpm /usr/local/bin/pnpx
+#13 CACHED
+
+#14 [stage-1 3/6] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1 4/6] COPY --from=build --chown=node:node /app/apps/web/.next/standalone ./
+#15 DONE 0.8s
+
+#16 [stage-1 5/6] COPY --from=build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static
+#16 DONE 0.1s
+
+#17 [stage-1 6/6] COPY --from=build --chown=node:node /app/apps/web/public ./apps/web/public
+#17 DONE 0.2s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 2.4s done
+#18 exporting manifest sha256:a0a880d9c000e58dadb47c2efee8bede46d68e26095bc63aea04d7cabc1f2163 0.1s done
+#18 exporting config sha256:d88d8a33e22b04c1eb548e612820301cafedab72c75a0a9d0e099ca7fd346ab5 0.1s done
+#18 exporting attestation manifest sha256:b2c9daedf23432162a5ff22dc5043fa5882528e163784fd1c646e925ec569cd8 0.1s done
+#18 exporting manifest list sha256:6aafc1060da0b744b5b3ec433c5770c1774a312123a262b5c8995cf1b7887d65
+#18 exporting manifest list sha256:6aafc1060da0b744b5b3ec433c5770c1774a312123a262b5c8995cf1b7887d65 0.0s done
+#18 naming to docker.io/library/mesh-showcase-cache:8fda95b0308a-source done
+#18 unpacking to docker.io/library/mesh-showcase-cache:8fda95b0308a-source
+#18 unpacking to docker.io/library/mesh-showcase-cache:8fda95b0308a-source 0.7s done
+#18 DONE 3.4s

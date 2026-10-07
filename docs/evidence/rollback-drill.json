@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-10-08T10:38:31.0131797+00:00",
+  "environment": "mesh-showcase-release",
+  "deliberate_failure": "Frontend process exits with status 42",
+  "release_rejected": true,
+  "automatic_image_rollback": true,
+  "rows_before": "1|1|1",
+  "rows_after": "1|1|1",
+  "migration_reverted": false,
+  "deployment_report": "deployment-1791455910324.json",
+  "scope": "Single local failed frontend image; accepted versions, private blob metadata and posted journals survive rollback."
+}

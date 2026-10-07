@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-08T16:06:15.938Z",
+  "environment": "Isolated MESH-showcase / Windows Docker Desktop Linux",
+  "git_revision": null,
+  "working_tree_dirty": true,
+  "current_source_snapshot_sha256": "1cd0fa2ee08f1c89bb44d0e033e0b908176341d7b3500af64ea9984f7bd5e8ac",
+  "results": {
+    "ruby": {
+      "duration": 59.855755741,
+      "example_count": 118,
+      "failure_count": 0,
+      "pending_count": 0,
+      "errors_outside_of_examples_count": 0
+    },
+    "native_ruby": {
+      "duration": 72.426756345,
+      "example_count": 118,
+      "failure_count": 0,
+      "pending_count": 0,
+      "errors_outside_of_examples_count": 0
+    },
+    "browser": {
+      "startTime": "2026-10-08T15:59:26.037Z",
+      "duration": 261998.00999999998,
+      "expected": 13,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "demo": true,
+    "publishing_posts": 3,
+    "actual_signed_callbacks_delivered": 3,
+    "strict_nine_image_gate": true,
+    "strict_release_inventory_gate": true,
+    "incident_detection_seconds": 49.517,
+    "runtime_rollback_data_preserved": true,
+    "live_kubernetes_exercises": true,
+    "live_terraform_drift_repaired": true,
+    "remote_github_runs": false,
+    "ansible_convergence": false
+  },
+  "artifacts": {
+    "docs/evidence/publishing-rspec-final.json": "50c0fd8a52fb937f61e6937456a6956a62d722d382efa647d2ad7154a7ab06cf",
+    "docs/evidence/publishing-rspec-alpine.json": "a4a986de81009760f629641d65d656b3c923185db72fe21028048855e77f39d4",
+    "docs/evidence/publishing-current-browser/playwright.json": "feabf15e6d22364487e1b4054cdecf96b61b5eaff949230124980e7d448f045d",
+    "docs/evidence/publishing-repeatable-demo-final/summary.json": "80549370b84fbbf54de886e7db231ef83758e4cd64aeb13dde20d79663121a7d",
+    "docs/evidence/publishing-repeatable-demo-final/publishing-demo/summary.json": "1e8244b13651f2ca6d5c91987f47171b23b110f91f6124739bb0a91838d25b48",
+    "docs/evidence/publishing-incident-patched/summary.json": "be26f1bda6a94ecc55ce7580a3fed75eafadf9b2c6092e60220f88c68ce52555",
+    "docs/evidence/publishing-security-complete/image-security.json": "c82c9fef9ff2339fcb50c4fa3d2ec431f62201f3ff118a43ee62f285ee6d3359",
+    "docs/evidence/publishing-release-security-current/image-security.json": "6bb807824ae8c79b79831e5b809700ba0032cbc7495c936d84f1d455ff5ca9b7",
+    "docs/evidence/publishing-release-current/runtime-and-rollback.json": "f9ce0a505a6ec9cc0f4ff4a84422c0fe8239db4b78ea5e75ed5cf1cdf8e9d4b8",
+    "docs/evidence/publishing-quality/rubocop.json": "c05a5573a04b36b578589201e454aeed1ad572c2cac25ef301261076dcb70c45",
+    "docs/evidence/publishing-quality/brakeman.json": "46ab507f3747c815d987ab8d2c5013bbfce35395b2c64f5a0ad700097db77c31",
+    "docs/evidence/publishing-quality/npm-audit.json": "46b21e3b45b996fd24aeabed38cc88fd03cf88768f73f076047a7924c2e79eef",
+    "docs/evidence/publishing-quality/gitleaks.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "docs/evidence/publishing-quality/gitleaks-canary.json": "d39fccb45c64c75e1a7ea3450e9b60a3db0400bf2ff10c88442a591375ea40e1",
+    "docs/evidence/publishing-kubernetes/helm-summary.json": "76d60c75e4e1b158209f0b70b64cf65e7de9e7b2390165801372aea1ecf60037",
+    "docs/evidence/publishing-kubernetes/terraform-summary.json": "0396204f6d89cde632394cb5ba4a38366a2984b1024830022519f33d54a423df",
+    "docs/evidence/publishing-kubernetes/networkpolicy.json": "eba74428683860320dc99266ca70a06ee2f3536147190f7ac77686895a81fb4a",
+    "docs/evidence/publishing-kubernetes/recovery.json": "a63eaafed4f57ad65a841700cbbf7672dfa514229ab79776f7e007eea6a470df"
+  },
+  "scope": "Recorded local runs at their actual times/digests; current source fingerprint is separate from the tested historical snapshots. Not a signed CI attestation, production SLO or physical HA. Kubernetes used earlier Debian application images."
+}

@@ -1,0 +1,113 @@
+{
+  "checkedAt": "2026-10-07T12:52:11.466Z",
+  "sourceHashes": {
+    "apps/web/src/app/projects/[id]/page.tsx": "94034e4fb5a6b1ef0d30d787c4828e8114c1083480f939c6b7de95c64dd65037",
+    "apps/web/src/app/projects/[id]/layout.tsx": "e9adb59edd65a7bbb98acf706260330470e18f973a03c34f98038ea94a5b0688",
+    "apps/web/src/app/projects/[id]/project.css": "38b622b1b9b694e2b4578659cc962244e68f8a7eb156b868aff4201d05e34b56",
+    "apps/web/src/app/projects/[id]/proposal.css": "edce50b57e21f97ce1ed89e281868ca0ff5a6807d4e771156639f7f246dde1ea",
+    "apps/web/src/components/projects/proposal-box.tsx": "9f0d0a509cf1424c048fbc3ccb9afc5ca19ac9b1939c529bb76d8c3f69bec636",
+    "apps/web/src/components/projects/proposal-composer.tsx": "9aecdac4fccc76abb7784d637489a4da8eda2da7ca46772106ada479665b6416",
+    "apps/web/src/components/projects/proposal-example-input.tsx": "928f369c1d7c47437446b2d921f7638cc6e55685c0b8f1d17155d7f6cc9c5f59",
+    "apps/web/src/components/projects/use-proposal-draft.ts": "b3c7a3b81ad4dc0055d84bf0fef8e38c557258dda17e2dbf2b77a600d15a34b0",
+    "apps/web/src/lib/api.ts": "537ee970fe3ee29c94bd80fcba3ef6581b0336b5a8bc954a61819a9391891f5e",
+    "apps/web/src/lib/api-schema.d.ts": "79e92d338e48434224b934607d7ac891b3c21960ff76ebd64798cee1e085d383",
+    "apps/api/config/routes.rb": "e6207f9a491d06352b92c43795be4cf4ab519c2f3e984fb07d2492e6241cd105",
+    "apps/api/app/controllers/api/v1/projects_controller.rb": "15e0c93252962ef4d8d3b2f89cf77fa9e2ab48f9f91f04606d731e3b5ca2bc13",
+    "apps/api/app/controllers/api/v1/creators_controller.rb": "ea7b08ef6bc146579fb3ad0e0aade25c50d830560034d91d9eaaf9a719618730",
+    "apps/api/app/controllers/api/v1/proposal_examples_controller.rb": "e58b149741fce3783bd2893cc5f2c1814160d183b533044d406dea37e0f5d80e",
+    "apps/api/app/services/api/presenters.rb": "c84a376e43c8493dc6f0ef14133609c5434f55b66f04e9a3ac5d164cd8a15dee",
+    "apps/api/packs/marketplace/app/models/marketplace/proposal.rb": "37820b3445cf98b9739bc34fd650b6b43693e385c2df072bc407372897df9578",
+    "apps/api/packs/marketplace/app/models/marketplace/proposal_example.rb": "e6d3e003eb48c968ebeef69a3230b352369fc68261ead834431117ba9125e4b8",
+    "apps/api/packs/marketplace/app/services/marketplace/submit_proposal.rb": "e17e3b80f07dd6581ec4440c60bf33be6f96b7ca4739da462d641e57cbafe74f",
+    "apps/api/app/jobs/scan_proposal_example_job.rb": "cd45d1001f7569359c50f2697883c76b1aeb1ad04d35c8992d88bc4207c526ba",
+    "apps/api/script/dispatcher.rb": "629f7351734cee213b19fa442c2898af6090b9cdf3439318fb04d7fb67a8b9bc",
+    "apps/api/db/migrate/20261007140000_create_proposal_examples.rb": "395b26db7e947fb28679536c036544436394c7a34b04a3b48005fc79eddad946",
+    "apps/api/spec/requests/proposal_examples_spec.rb": "43f2a9a01f6e36b10ee2bd2bd5d995a918a4cf4bf982aa6d193a842295a983ae",
+    "apps/api/spec/requests/own_profile_spec.rb": "ebd7abb13aa730f1b79aa3f13e5f3d7576c9a4be3f95593e7bc3ac95fc680018",
+    "apps/api/spec/jobs/scan_proposal_example_job_spec.rb": "a1fe9961ec389522045e6b822b3efc3e19433032ef7b31a3ace3f603d492a6e3",
+    "tests/e2e/projects.spec.ts": "49b0f89fdb776051ac02ec70779f968a831a524d41fa5d9d1f3dfe6332025992",
+    "tests/e2e/marketplace.spec.ts": "ac5292c0b0394aea67f76bbd05bec6bb82c87b21a948cc8ae33ef7f4e551d767",
+    "scripts/build-contract.py": "d83e66d8f794c71ffd7ddf1c4aa4eb3ebecf3ae132e09966d43e533c7a712cb4",
+    "contracts/openapi.json": "1b98419b6b70bdc4634884db905a2ebfc8676070991596bc92feb82a54e2a174",
+    "docs/proposal-design.md": "76f7ecad473542ea679a5534038408d8fa9e0c29b200ae5dea8730e0333cc91b"
+  },
+  "backend": {
+    "command": "docker compose exec -T -e RAILS_ENV=test api bundle exec rspec",
+    "database": "mesh_test",
+    "examples": 52,
+    "failures": 0,
+    "scope": "Recorded from completed tool command; no reset of the development database."
+  },
+  "browser": {
+    "expected": 7,
+    "unexpected": 0,
+    "flaky": 0,
+    "report": "playwright-full.json"
+  },
+  "quality": {
+    "typescript": true,
+    "prettier": true,
+    "openapiOperations": 34,
+    "moduleBoundaries": true,
+    "packwerk": true,
+    "rubocopChangedFiles": true,
+    "brakemanWarnings": 0
+  },
+  "production": {
+    "image": "sha256:ae8f2d734361e6c6b747669e19ef9b1bced3f16d9da7873f525fa0e4ec786737",
+    "csp": true,
+    "draft": true,
+    "javascriptErrors": 0
+  },
+  "responsive": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "axe": [
+    {
+      "width": 390,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "filePipeline": {
+    "checkedAt": "2026-10-07T12:47:23.773Z",
+    "actualClamAV": true,
+    "projectId": "d614c01b-7ef3-49d9-84b8-7bde4d7ed86e",
+    "fileId": "a05da33c-890a-4699-ba28-61b6284d6756",
+    "state": "available",
+    "clientDownloadStatus": 200,
+    "byteSize": 68,
+    "sha256": "b313917648e5d3464379af335f137e00b8bc336e3c1e6a09b440aa464a43a11d",
+    "guestDownloadStatus": 401,
+    "publicProposals": 0,
+    "scope": "Real local scanner, Solid Queue dispatcher and worker, authenticated customer download. Existing isolated E2E fixture; no changes to the coffee demo."
+  },
+  "localServices": {
+    "scanFilesEnabled": true,
+    "scanner": "clamav/clamav:1.4",
+    "devFrontendRecoveredAfterDockerOOM": true
+  },
+  "scope": "Screenshot samples and public demo offers are not fabricated. Coffee project used for an unsent form only; offer submission and download verified on isolated E2E projects."
+}
