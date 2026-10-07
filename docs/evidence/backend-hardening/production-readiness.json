@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-07T23:42:47.923Z",
+  "environment": "production",
+  "databaseReady": 200,
+  "publicFeed": 200,
+  "unavailableDatabaseReady": 503,
+  "unavailableDatabaseLiveness": 200,
+  "outageCheckMs": 127,
+  "cacheControl": "no-store",
+  "databaseWrites": false,
+  "scope": "Two isolated production API containers. The outage container connects to a closed PostgreSQL port; the shared local database is not stopped. Authentication and background writes are verified separately by RSpec and E2E."
+}

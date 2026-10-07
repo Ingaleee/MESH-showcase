@@ -1,0 +1,10 @@
+{
+  "stopped_at": "queue outage",
+  "checked_at": "2026-10-08T10:51:46.6631483+00:00",
+  "run_id": "97703736e662",
+  "cleaned": true,
+  "scope": "Failed lab attempt preserved; no completed DB+files recovery claim.",
+  "assertion": "Enqueue failure lost durable intent",
+  "diagnosis": "Competing healthy lab dispatcher could claim the event before the failed producer; split outage and recovery with explicit dispatcher shutdown.",
+  "success": false
+}
