@@ -854,6 +854,28 @@ CREATE TABLE public.publishing_partners (
 
 
 --
+-- Name: publishing_upload_intents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.publishing_upload_intents (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    partner_id uuid NOT NULL,
+    request_key character varying(200) NOT NULL,
+    fingerprint character varying NOT NULL,
+    artifact_blob_id bigint,
+    state character varying DEFAULT 'reserved'::character varying NOT NULL,
+    claim_token uuid,
+    lease_until timestamp(6) without time zone,
+    response jsonb,
+    last_error character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    CONSTRAINT publishing_upload_completion CHECK (((((state)::text <> 'uploading'::text) OR ((claim_token IS NOT NULL) AND (lease_until IS NOT NULL) AND (artifact_blob_id IS NOT NULL))) AND (((state)::text <> 'finalized'::text) OR (response IS NOT NULL)))),
+    CONSTRAINT publishing_upload_state CHECK ((((state)::text = ANY ((ARRAY['reserved'::character varying, 'uploading'::character varying, 'ready'::character varying, 'finalized'::character varying, 'discarded'::character varying])::text[])) AND ((fingerprint)::text ~ '^[a-f0-9]{64}$'::text)))
+);
+
+
+--
 -- Name: publishing_validations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1239,6 +1261,14 @@ ALTER TABLE ONLY public.publishing_deployments
 
 ALTER TABLE ONLY public.publishing_partners
     ADD CONSTRAINT publishing_partners_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: publishing_upload_intents publishing_upload_intents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.publishing_upload_intents
+    ADD CONSTRAINT publishing_upload_intents_pkey PRIMARY KEY (id);
 
 
 --
@@ -1699,6 +1729,27 @@ CREATE INDEX index_publishing_deployments_on_state_and_next_enqueue_at ON public
 --
 
 CREATE UNIQUE INDEX index_publishing_partners_on_owner_id_and_name ON public.publishing_partners USING btree (owner_id, name);
+
+
+--
+-- Name: index_publishing_upload_intents_on_artifact_blob_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_publishing_upload_intents_on_artifact_blob_id ON public.publishing_upload_intents USING btree (artifact_blob_id) WHERE (artifact_blob_id IS NOT NULL);
+
+
+--
+-- Name: index_publishing_upload_intents_on_partner_id_and_request_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_publishing_upload_intents_on_partner_id_and_request_key ON public.publishing_upload_intents USING btree (partner_id, request_key);
+
+
+--
+-- Name: index_publishing_upload_intents_on_state_and_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_publishing_upload_intents_on_state_and_updated_at ON public.publishing_upload_intents USING btree (state, updated_at);
 
 
 --
@@ -2189,6 +2240,14 @@ ALTER TABLE ONLY public.publishing_deployments
 
 
 --
+-- Name: publishing_upload_intents fk_rails_859d573a1b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.publishing_upload_intents
+    ADD CONSTRAINT fk_rails_859d573a1b FOREIGN KEY (partner_id) REFERENCES public.publishing_partners(id);
+
+
+--
 -- Name: engagements_engagements fk_rails_8c8df55412; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2258,6 +2317,14 @@ ALTER TABLE ONLY public.publishing_deployments
 
 ALTER TABLE ONLY public.publishing_deployments
     ADD CONSTRAINT fk_rails_ae97ea1b73 FOREIGN KEY (candidate_id) REFERENCES public.publishing_candidates(id);
+
+
+--
+-- Name: publishing_upload_intents fk_rails_b78ac958e4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.publishing_upload_intents
+    ADD CONSTRAINT fk_rails_b78ac958e4 FOREIGN KEY (artifact_blob_id) REFERENCES public.active_storage_blobs(id);
 
 
 --
@@ -2403,6 +2470,7 @@ ALTER TABLE ONLY public.engagements_work_files
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261008170000'),
 ('20261008160000'),
 ('20261008150000'),
 ('20261008142000'),
