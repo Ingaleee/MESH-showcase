@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Session cookies on reads", type: :request do
+  let(:session_cookie) { "#{Rails.application.config.session_options.fetch(:key)}=" }
   it "keeps ordinary reads from overwriting a later login or logout cookie" do
     client = create(:account)
     sign_in(client)
@@ -15,22 +16,22 @@ RSpec.describe "Session cookies on reads", type: :request do
     expect(response.headers["Set-Cookie"]).to be_nil
     get "/api/v1/session"
     expect(response.parsed_body.fetch("account").fetch("id")).to eq(client.id)
-    expect(response.headers["Set-Cookie"]).to include("_mesh_showcase_session=")
+    expect(response.headers["Set-Cookie"]).to include(session_cookie)
   end
 
   it "still persists authentication cookies and issues a fresh CSRF token on logout" do
     get "/api/v1/session"
     expect(response).to have_http_status(:ok)
-    expect(response.headers["Set-Cookie"]).to include("_mesh_showcase_session=")
+    expect(response.headers["Set-Cookie"]).to include(session_cookie)
     expect(response.parsed_body.fetch("csrf_token")).to be_present
     client = create(:account)
     sign_in(client)
-    expect(response.headers["Set-Cookie"]).to include("_mesh_showcase_session=")
+    expect(response.headers["Set-Cookie"]).to include(session_cookie)
     delete "/api/v1/session"
     expect(response).to have_http_status(:ok)
     expect(response.parsed_body.fetch("account")).to be_nil
     expect(response.parsed_body.fetch("csrf_token")).to be_present
-    expect(response.headers["Set-Cookie"]).to include("_mesh_showcase_session=")
+    expect(response.headers["Set-Cookie"]).to include(session_cookie)
     get "/api/v1/notifications"
     expect(response).to have_http_status(:unauthorized)
     expect(response.headers["Set-Cookie"]).to be_nil

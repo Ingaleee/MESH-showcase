@@ -86,7 +86,7 @@ jobs:
         run: |
           docker compose run --rm --no-deps web npm ci --ignore-scripts
           docker compose --profile files --profile publishing up -d scanner api gateway worker dispatcher web edge partner
-          for attempt in $(seq 1 60); do
+          for _attempt in $(seq 1 60); do
             if curl -fsS http://localhost:3300/api/v1/session >/dev/null; then exit 0; fi
             sleep 2
           done
@@ -125,7 +125,8 @@ jobs:
           path: |
             .cache/ci-evidence
             test-results
-          retention-days: 7
+          retention-days: 30
+          include-hidden-files: true
       - name: Stop this job's containers
         if: always()
         run: docker compose down
