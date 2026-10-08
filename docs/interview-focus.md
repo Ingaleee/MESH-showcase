@@ -4,7 +4,7 @@
 
 | Требование присланной вакансии | Что можно показать сейчас                                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| Ruby / сложные задачи          | 118 RSpec examples, transactions/constraints, bounded reads, fenced claims, uncertain outcomes                 |
+| Ruby / сложные задачи          | 131 current hosted RSpec examples, transactions/constraints, bounded reads, fenced claims, uncertain outcomes  |
 | Автоматизация выпуска          | ZIP/manifest validation, exact digest/policy, operator API и Ruby CLI, immutable runtime inventory             |
 | Поддержка внешних студий       | Stable error codes + fix, independent simulator, diagnostic report и EN partner update                         |
 | Production investigation       | HTTP vs worker health, real delivered alerts, replay-safe recovery, clean DB+files restore                     |

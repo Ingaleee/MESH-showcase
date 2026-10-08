@@ -2,7 +2,9 @@
 
 Строгий HIGH/CRITICAL gate для перечисленных текущих runtime artifacts прошёл. Политика включает unfixed findings; CVE allowlist/ignore-unfixed не включены. Результат относится к exact digests и времени scan, не ко всем будущим образам или возможным уязвимостям.
 
-## Как закрыты находки
+[Текущий hosted release](https://github.com/Ingaleee/MESH-showcase/actions/runs/37834690626) и [deployment](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837289487) прошли: scan пяти exact registry digests, verified signature/source/workflow и negative wrong-revision control. [Актуальный каталог](evidence/acceptance-oct08/README.md) сохраняет отчёты; детали allowlists и trust boundaries — в [threat-model.md](threat-model.md).
+
+## Историческое устранение находок
 
 [Старый expanded report](evidence/publishing-security/image-security.json) сохранил application и инфраструктурные findings. Package applicability review для прежних Debian binaries с первичными источниками сохранена [отдельно](evidence/publishing-security/applicability.json). Она не использовалась для ослабления gate.
 
@@ -24,7 +26,7 @@ Development Ruby compiler image и builder stages не включены в appro
 
 ## Связь scan и deployment
 
-V2 manifest содержит API, web, PostgreSQL, ClamAV и Caddy. Compose использует эти references; smoke сверяет фактически запущенные images, private ports и runtime role. GitHub release подготовлен для build/scan этого inventory до публикации manifest; deploy job получает artifact только от успешного release workflow на main. Remote runs пока отсутствуют.
+V2 manifest содержит API, web, PostgreSQL, ClamAV и Caddy. Compose использует эти references; smoke сверяет фактически запущенные images, private ports и runtime role. GitHub release выполняет build/scan этого inventory до публикации manifest; deploy job получает artifact только от успешного release workflow на main, выбирает exact source commit и проверяет подписанное происхождение. Actual successful runs указаны выше.
 
 ```powershell
 node scripts/check-images.mjs .cache/deployment/publishing-current-v2.json
@@ -40,10 +42,10 @@ Partner/metrics/alert credentials генерируются отдельно и �
 node scripts/check-secrets.mjs
 ```
 
-Gitleaks проверил publishable source snapshot: clean report и найденный random api_key canary. Ignored local runtime files и commit history не входят в scope (commit history пока нет). Три narrow allowlists различают SHA verification hashes, synthetic blob keys и exact report command UUIDs; отдельное правило разрешает только SHA-1 Digest fields в перечисленных exact Trivy Grafana inventories, которые совпадали с legacy Sourcegraph-token pattern. Общие credential-shaped строки остаются запрещены; canary это проверил.
+Gitleaks проверил publishable source snapshot: clean report и найденный random api_key canary. Ignored local runtime files остаются вне publishable scope; текущий CI также сканирует всю fetched Git history. Архивные reports ниже относятся к более раннему source-only scan. Три narrow allowlists различают SHA verification hashes, synthetic blob keys и exact report command UUIDs; отдельное правило разрешает только SHA-1 Digest fields в перечисленных exact Trivy Grafana inventories, которые совпадали с legacy Sourcegraph-token pattern. Общие credential-shaped строки остаются запрещены; canary это проверил.
 
 [Reports](evidence/publishing-quality/gitleaks.json), [canary](evidence/publishing-quality/gitleaks-canary.json), [Brakeman](evidence/publishing-quality/brakeman.json), [npm](evidence/publishing-quality/npm-audit.json). Bundler-audit report содержит download context и JSON results=[].
 
 ## Оставшаяся эксплуатационная работа
 
-Реальные GHCR attestations/signature verification, secret rotation/manager, offsite/encrypted retention и hardened multi-host deployment требуют выбранной среды. Zero findings сегодня не заменяет повторный scan при security updates и release.
+GHCR attestations/signature verification выполнены. Credential rotation regression проверяет приложение через double, но independent secret manager/custody, offsite retention и hardened multi-host deployment ещё требуют отдельной приёмки. Zero findings сегодня не заменяет повторный scan при security updates и release.

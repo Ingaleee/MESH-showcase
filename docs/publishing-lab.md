@@ -83,6 +83,12 @@ unknown — честное состояние неопределённости. 
 
 Rollback — новая удалённая операция на ранее подтверждённые байты с новой sequence. Это не rollback SQL/schema. Use case проверяет confirmed matching basis; SQL не объявляется полноценным доказательством всех бизнес-правил rollback.
 
+## Дополнения текущей ревизии
+
+SubmitCandidate сохраняет durable upload intent и blob metadata до storage I/O. Claim fencing, одинаковый fingerprint/key и bounded lease позволяют повторить потерянный ответ; finalized response не создаёт второй candidate. ReclaimUploads по умолчанию dry-run, сохраняет candidate FK, обычные attachments и uploading lease. Перед delete I/O пишет tombstone; SQL запрещает ссылаться на reclaimed blob. Общая очистка legacy files без intent не заявляется.
+
+Partners/candidates/deployments имеют независимые signed owner/kind cursors и total order created_at/id; active_deployments читаются отдельно от страницы истории. Private artifact download требует owning operator и сверяет SHA. Current constraints исключают NULL sequence у confirmed, unconfirmed active pointer и unconfirmed rollback basis. Проверки и current 131-test native/runtime parity находятся в [acceptance evidence](evidence/acceptance-oct08/README.md).
+
 ## Код для разговора
 
 - packs/publishing: PackageValidator, ValidateCandidate, RequestDeployment, ProcessDeployment, ApplyObservation, ReceiveCallback.
@@ -90,7 +96,7 @@ Rollback — новая удалённая операция на ранее по
 - DB migrations: immutable history, provenance foreign keys и latest-validation index.
 - bin/mesh-publish: bounded, authenticated diagnostic CLI.
 - apps/partner/src: независимый контракт и durable uncertain-outcome simulator.
-- contracts/openapi.json: 51 operations; frontend получает generated types.
+- contracts/openapi.json: 52 operations; frontend получает generated types.
 
 Machine callback — stateless ActionController::API: raw-body HMAC и replay/sequence checks обязательны, browser session не является authority. Остальные browser mutations сохраняют session/CSRF protection; regression включает CSRF при проверке настоящей machine delivery.
 

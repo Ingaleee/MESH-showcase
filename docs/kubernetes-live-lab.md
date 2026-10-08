@@ -1,3 +1,5 @@
+Текущий hosted registry exercise: [run 37837294244](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) — success. Выполнены current Alpine digests, Terraform drift, migration ordering, CNI controls, worker/DB recovery и failed-upgrade rollback. [Summary](evidence/acceptance-oct08/hosted/kubernetes/summary.json). Ниже сохранён прежний local exercise со своим DB placement и image scope.
+
 # Живые Kubernetes и Terraform упражнения
 
 8 октября 2026 выполнены на отдельном k3d-mesh-showcase: k3d 5.9.0, K3s v1.35.5+k3s1, один server, containerd 2.2.3-k3s1. Cluster сейчас остановлен для экономии памяти, данные и state сохранены. Основной MESH продолжал отвечать на localhost:3100.
