@@ -58,8 +58,15 @@ const tool = (action) =>
 try {
   dc(["build", "partner"]);
   dc(["up", "-d", "--wait", "db"]);
-  dc(["up", "-d", "storage-init"]);
-  dc(["wait", "storage-init"]);
+  // Wait while attached: compose wait can miss an already-exited short init container.
+  dc([
+    "up",
+    "--no-deps",
+    "--abort-on-container-exit",
+    "--exit-code-from",
+    "storage-init",
+    "storage-init",
+  ]);
   if (mode === "source") {
     dc(["run", "--rm", "tools", "bundle", "exec", "rails", "db:prepare"]);
     dc(["run", "--rm", "grants"]);
