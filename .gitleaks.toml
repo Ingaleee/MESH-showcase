@@ -34,6 +34,13 @@ paths = ['''(^|/)docs/evidence/acceptance-oct08/hosted/ci/publishing-demo-summar
 regexTarget = "match"
 regexes = ['''^command_key":\s*"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"$''']
 
+[[rules.allowlists]]
+description = "Exact historical source-file checksum in the local Docker recovery report, not an API credential."
+condition = "AND"
+paths = ['''(^|/)docs/evidence/acceptance-oct08/local-docker-recovery\.json$''']
+regexTarget = "line"
+regexes = ['''^[+-]?\s*"scripts/check-api-restart\.mjs": "390588fbb414d22ba736d21b579e2fdcf1d72202ff789e66b874379b207ff800",?\s*$''']
+
 [[rules]]
 id = "sourcegraph-access-token"
 [[rules.allowlists]]

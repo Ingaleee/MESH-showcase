@@ -9,10 +9,6 @@
   "schema_version": 1,
   "source_revision": "5bcf8a0cff9d5a2d6949d3cf75b6e9838b611390",
   "working_tree_dirty": true,
-  "source_hashes": {
-    "compose.yaml": "28d300971fbb9a98c8f67b87dcaae3c95baf29807e3f68073e15b3c4eadfa140",
-    "scripts/check-api-restart.mjs": "390588fbb414d22ba736d21b579e2fdcf1d72202ff789e66b874379b207ff800"
-  },
   "http_verified": [
     {
       "url": "http://localhost:3100/",
@@ -37,5 +33,40 @@
   ],
   "main_product_action": "User-authorized start of existing containers; stale temporary API PID removed after confirming the container was stopped. No source, configuration, DB or user file changes.",
   "forced_wsl_termination": false,
-  "root_cause": "Stale Rails PID after the Docker outage was observed. The cause of the whole engine outage remains unconfirmed."
+  "root_cause": "Stale Rails PID after the Docker outage was observed. The cause of the whole engine outage remains unconfirmed.",
+  "source_files": [
+    {
+      "file": "compose.yaml",
+      "sha256": "28d300971fbb9a98c8f67b87dcaae3c95baf29807e3f68073e15b3c4eadfa140"
+    },
+    {
+      "file": "scripts/check-api-restart.mjs",
+      "sha256": "390588fbb414d22ba736d21b579e2fdcf1d72202ff789e66b874379b207ff800"
+    }
+  ],
+  "telemetry_restart": {
+    "checked_at": "2026-10-08T20:59:25.409Z",
+    "environment": "isolated Docker Desktop telemetry",
+    "historic_scrape_preserved": true,
+    "silence_preserved": true,
+    "active_alert_policy": "Alerts are resent by Prometheus, not persisted as an active-alert snapshot.",
+    "receipt_history_preserved": true,
+    "prometheus_retention": "7d / 512MB, whichever limit is reached first",
+    "alert_retention": "120h",
+    "receipt_budget_bytes": 16777216,
+    "sample": [
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "api:3000",
+          "job": "mesh-api"
+        },
+        "value": [
+          1791493156.562,
+          "1"
+        ]
+      }
+    ],
+    "scope": "Process restart on the same host; no offsite durability claim."
+  }
 }

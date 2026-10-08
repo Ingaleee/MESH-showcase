@@ -20,3 +20,5 @@ Published Trivy history produced 24 false positives: public GitHub commit SHA-1 
 After preserving hosted evidence, the same generic-key rule also flagged a diagnostic command_key UUID in the new Publishing summary. Its exception applies only to that exact file and a UUID-shaped command_key match; it does not allowlist other fields or authentication tokens. The canary still must be detected.
 
 References: [GitHub attestation action](https://github.com/actions/attest), [verification identity flags](https://cli.github.com/manual/gh_attestation_verify). Registry attestations bind builder identity and source digest; their predicate fields do not independently certify security, test completeness or SRE guarantees.
+
+A local recovery report placed a source SHA-256 next to an API-related filename, triggering generic-key detection. New metadata separates file and sha256 fields. Only the exact historical filename/checksum line in that exact report is excepted for history scanning; credentials in other fields remain detectable.

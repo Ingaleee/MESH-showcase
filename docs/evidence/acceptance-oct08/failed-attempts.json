@@ -42,6 +42,13 @@
       "conclusion": "failure",
       "failure": "BuildKit rejected an Alertmanager UI download with a digest different from the pinned upstream checksum. Browser/incident steps did not run.",
       "resolution": "Preserve checksum rejection. Official API metadata, upstream sha256sums and a separate download all match the pinned digest; a fresh workflow must validate the download again. Cause of the mismatching transfer is unconfirmed."
+    },
+    {
+      "run_id": 37843296523,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37843296523",
+      "conclusion": "failure",
+      "failure": "Generic API-key detection matched the source SHA-256 next to the check-api-restart filename in the new local recovery report.",
+      "resolution": "Use separate file and sha256 fields for new reports; allow only the exact historical filename/checksum line in this exact report during Git-history scan. Keep canary and all other secret detections."
     }
   ],
   "policy": "Failed workflow outcomes remain available. This summary records observed failures, not a passing report."
