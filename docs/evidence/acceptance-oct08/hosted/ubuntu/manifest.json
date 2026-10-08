@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "ubuntu",
+  "recorded_at": "2026-10-08T20:16:09.697Z",
+  "workflow_run": {
+    "id": 37837289487,
+    "name": "MESH isolated Ubuntu deployment",
+    "head_sha": "7f7a0e364983699cf95e83b04414fe3ef11c5f04",
+    "path": ".github/workflows/deploy.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T20:09:09Z",
+    "updated_at": "2026-10-08T20:15:41Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37837289487"
+  },
+  "reports": [
+    {
+      "file": "business-probe.json",
+      "sha256": "673ee62a67ec1850115f8a1c5c9b8c197b15027b3dc953cca3d53711eafa4f8f",
+      "original_sha256": "673ee62a67ec1850115f8a1c5c9b8c197b15027b3dc953cca3d53711eafa4f8f"
+    },
+    {
+      "file": "runtime-and-rollback.json",
+      "sha256": "89df6589c2eccc3ab2ea8c33e41ab68e4f49904ed4da39daf34da04eae81b250",
+      "original_sha256": "89df6589c2eccc3ab2ea8c33e41ab68e4f49904ed4da39daf34da04eae81b250"
+    },
+    {
+      "file": "schema-compatibility.json",
+      "sha256": "42e64c462e1ae436ba696f5bd42a46c3b96678d8cb79cfdc759a6293abb33fc8",
+      "original_sha256": "42e64c462e1ae436ba696f5bd42a46c3b96678d8cb79cfdc759a6293abb33fc8"
+    },
+    {
+      "file": "crash-recovery.json",
+      "sha256": "7d0241f20cf3da26ba1438f8190b30973deb7074bca2f1450f24f68abd30d49d",
+      "original_sha256": "7d0241f20cf3da26ba1438f8190b30973deb7074bca2f1450f24f68abd30d49d"
+    },
+    {
+      "file": "tls-read-profile.json",
+      "sha256": "68cf1d7fd75caf974366c6c7092b189a3c1c078f02f038d8bd2756bdbe24cbad",
+      "original_sha256": "68cf1d7fd75caf974366c6c7092b189a3c1c078f02f038d8bd2756bdbe24cbad"
+    },
+    {
+      "file": "ansible-first.log",
+      "sha256": "17c8ee8368b48695e7297e923a9fd6f4efdcfc2fe34017b1e966c5f5bf740b1a",
+      "original_sha256": "17c8ee8368b48695e7297e923a9fd6f4efdcfc2fe34017b1e966c5f5bf740b1a"
+    },
+    {
+      "file": "ansible-second.log",
+      "sha256": "2185b0492f83bc98d01043d906337dea5bd7503d5d3c13d5b16e0d0099e4b9c0",
+      "original_sha256": "2185b0492f83bc98d01043d906337dea5bd7503d5d3c13d5b16e0d0099e4b9c0"
+    },
+    {
+      "file": "attestation-api.json",
+      "sha256": "36d95e320af697a4017977287a084d42157b210f392ed2ab4ab9cf01b7bba448",
+      "original_sha256": "b8fc566184d0d344ffa4da4fbc256364bec8ce8391ee6c2406ff66e10a66d7e4"
+    },
+    {
+      "file": "attestation-web.json",
+      "sha256": "343ee397bdad77d380fe3e3e57c2204ed5aa822a72b18a39d713540c4ae91e95",
+      "original_sha256": "5bfdf22c2e90c09762860b3a02981ac3017cd6e379bcda32ef4a3e892387c783"
+    },
+    {
+      "file": "attestation-postgres.json",
+      "sha256": "13607d20054c4dd5259f70cdeaeb7f57d6d1717c0a2b5c2cc66dfa172555ad98",
+      "original_sha256": "559bc38496d3804371559856ac9d6d19d908306437a6eec8a68ccc2bd39c42df"
+    },
+    {
+      "file": "attestation-clamav.json",
+      "sha256": "d8062c751b1d392d39d3c380011d876969ce616fd98aac7fcdbf5d31841e4ac1",
+      "original_sha256": "b1f3d61e015e469d021b654403d3adf2c88581e16caa5e3202e2ab6be2e89e1c"
+    }
+  ],
+  "policy": "Successful workflow plus report assertions; hashes preserve downloaded reports, not an independent signature."
+}

@@ -1,0 +1,290 @@
+{
+  "checked_at": "2026-10-08T18:12:50Z",
+  "environment": "shared Docker Desktop / mesh_test",
+  "historical_rows": 50000,
+  "warm_samples": [
+    {
+      "elapsed_ms": 62.924,
+      "allocations": 1969,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 29.162,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 29.329,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 31.788,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 40.058,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 37.447,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 48.18,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 47.099,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 45.668,
+      "allocations": 965,
+      "records": 30
+    },
+    {
+      "elapsed_ms": 38.028,
+      "allocations": 965,
+      "records": 30
+    }
+  ],
+  "active_older_than_window_visible": true,
+  "query_plan": [
+    {
+      "Plan": {
+        "Node Type": "Limit",
+        "Parallel Aware": false,
+        "Async Capable": false,
+        "Startup Cost": 2151.83,
+        "Total Cost": 2151.91,
+        "Plan Rows": 31,
+        "Plan Width": 254,
+        "Actual Startup Time": 28.478,
+        "Actual Total Time": 28.484,
+        "Actual Rows": 31,
+        "Actual Loops": 1,
+        "Disabled": false,
+        "Shared Hit Blocks": 1253,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0,
+        "Plans": [
+          {
+            "Node Type": "Sort",
+            "Parent Relationship": "Outer",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 2151.83,
+            "Total Cost": 2152.54,
+            "Plan Rows": 286,
+            "Plan Width": 254,
+            "Actual Startup Time": 28.476,
+            "Actual Total Time": 28.48,
+            "Actual Rows": 31,
+            "Actual Loops": 1,
+            "Disabled": false,
+            "Sort Key": [
+              "publishing_deployments.created_at DESC",
+              "publishing_deployments.id DESC"
+            ],
+            "Sort Method": "top-N heapsort",
+            "Sort Space Used": 41,
+            "Sort Space Type": "Memory",
+            "Shared Hit Blocks": 1253,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Hash Join",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Join Type": "Inner",
+                "Startup Cost": 9.53,
+                "Total Cost": 2143.31,
+                "Plan Rows": 286,
+                "Plan Width": 254,
+                "Actual Startup Time": 0.084,
+                "Actual Total Time": 12.207,
+                "Actual Rows": 49971,
+                "Actual Loops": 1,
+                "Disabled": false,
+                "Inner Unique": true,
+                "Hash Cond": "(publishing_deployments.partner_id = publishing_partners.id)",
+                "Shared Hit Blocks": 1253,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Seq Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Relation Name": "publishing_deployments",
+                    "Alias": "publishing_deployments",
+                    "Startup Cost": 0,
+                    "Total Cost": 2001.01,
+                    "Plan Rows": 49973,
+                    "Plan Width": 254,
+                    "Actual Startup Time": 0.057,
+                    "Actual Total Time": 6.018,
+                    "Actual Rows": 49971,
+                    "Actual Loops": 1,
+                    "Disabled": false,
+                    "Filter": "(ROW(created_at, id) < ROW('2026-06-01 13:52:51'::timestamp without time zone, '9d7ea80b-fa92-4d10-b14c-431aab796054'::uuid))",
+                    "Rows Removed by Filter": 30,
+                    "Shared Hit Blocks": 1251,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  },
+                  {
+                    "Node Type": "Hash",
+                    "Parent Relationship": "Inner",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Startup Cost": 9.5,
+                    "Total Cost": 9.5,
+                    "Plan Rows": 2,
+                    "Plan Width": 16,
+                    "Actual Startup Time": 0.018,
+                    "Actual Total Time": 0.02,
+                    "Actual Rows": 1,
+                    "Actual Loops": 1,
+                    "Disabled": false,
+                    "Hash Buckets": 1024,
+                    "Original Hash Buckets": 1024,
+                    "Hash Batches": 1,
+                    "Original Hash Batches": 1,
+                    "Peak Memory Usage": 9,
+                    "Shared Hit Blocks": 2,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0,
+                    "Plans": [
+                      {
+                        "Node Type": "Bitmap Heap Scan",
+                        "Parent Relationship": "Outer",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Relation Name": "publishing_partners",
+                        "Alias": "publishing_partners",
+                        "Startup Cost": 4.16,
+                        "Total Cost": 9.5,
+                        "Plan Rows": 2,
+                        "Plan Width": 16,
+                        "Actual Startup Time": 0.01,
+                        "Actual Total Time": 0.011,
+                        "Actual Rows": 1,
+                        "Actual Loops": 1,
+                        "Disabled": false,
+                        "Recheck Cond": "(owner_id = '0e5313b6-ad28-40fc-9017-14e13b3bde09'::uuid)",
+                        "Rows Removed by Index Recheck": 0,
+                        "Exact Heap Blocks": 1,
+                        "Lossy Heap Blocks": 0,
+                        "Shared Hit Blocks": 2,
+                        "Shared Read Blocks": 0,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 0,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0,
+                        "Plans": [
+                          {
+                            "Node Type": "Bitmap Index Scan",
+                            "Parent Relationship": "Outer",
+                            "Parallel Aware": false,
+                            "Async Capable": false,
+                            "Index Name": "index_publishing_partners_on_owner_id_and_name",
+                            "Startup Cost": 0,
+                            "Total Cost": 4.16,
+                            "Plan Rows": 2,
+                            "Plan Width": 0,
+                            "Actual Startup Time": 0.006,
+                            "Actual Total Time": 0.006,
+                            "Actual Rows": 1,
+                            "Actual Loops": 1,
+                            "Disabled": false,
+                            "Index Cond": "(owner_id = '0e5313b6-ad28-40fc-9017-14e13b3bde09'::uuid)",
+                            "Index Searches": 1,
+                            "Shared Hit Blocks": 1,
+                            "Shared Read Blocks": 0,
+                            "Shared Dirtied Blocks": 0,
+                            "Shared Written Blocks": 0,
+                            "Local Hit Blocks": 0,
+                            "Local Read Blocks": 0,
+                            "Local Dirtied Blocks": 0,
+                            "Local Written Blocks": 0,
+                            "Temp Read Blocks": 0,
+                            "Temp Written Blocks": 0
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Planning": {
+        "Shared Hit Blocks": 0,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0
+      },
+      "Planning Time": 0.244,
+      "Triggers": [],
+      "Execution Time": 28.581
+    }
+  ],
+  "scope": "Single-owner single-partner SQL/Ruby read profile; no HTTP throughput or multi-tenant SLA claim."
+}

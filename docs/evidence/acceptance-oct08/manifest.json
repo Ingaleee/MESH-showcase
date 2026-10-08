@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-08T19:29:45.963Z",
+  "recorded_revision": "1216e2512e1f11c3f06beb830f3073270862d0eb",
+  "working_tree_dirty": true,
+  "records": [
+    {
+      "file": "publishing-history-before.json",
+      "claim": "Historical page before order index",
+      "scope": "sql_ruby_read",
+      "checked_at": "2026-10-08T18:12:50Z",
+      "sha256": "9e8c8d9da3ae47dcc6ad26594d16f7cc4f1132d7267c65fe0445e1d1628871e1"
+    },
+    {
+      "file": "publishing-history-benchmark.json",
+      "claim": "50k page after order index",
+      "scope": "sql_ruby_read",
+      "checked_at": "2026-10-08T18:15:59Z",
+      "sha256": "d235f24fd99703fd42f45a88e6e69ccab7267906544da3e6b2e0f6a041fd2cb9"
+    },
+    {
+      "file": "telemetry-retention.json",
+      "claim": "Historical sample, silences and receipt restart",
+      "scope": "same_host_restart",
+      "checked_at": "2026-10-08T19:22:51.914Z",
+      "sha256": "68d631894b927d824e14a8b08033916d3d0a6ed6124a60c08d042cfcc72869a2"
+    },
+    {
+      "file": "publishing-continuity.json",
+      "claim": "Primary, queue and private bytes restore",
+      "scope": "same_host_quiescent_restore",
+      "checked_at": "2026-10-08T18:49:52Z",
+      "sha256": "578070fb7fdf2808a966f082cdc923685421b26a353f17a10d299b8179e82611"
+    },
+    {
+      "file": "worker-incident-summary.json",
+      "claim": "Worker outage, delivered firing/resolved and replay",
+      "scope": "same_host_incident",
+      "checked_at": "2026-10-08T19:22:51.993Z",
+      "sha256": "665efc5f2bf5729234c2eef927b83d183191f3a980ee3ed1f9686dede3692c17"
+    }
+  ],
+  "limitations": [
+    "Local exercises share the physical host.",
+    "SQL read measurements do not define HTTP capacity.",
+    "Encrypted backup key custody and whole-VM/offsite restoration require separate acceptance.",
+    "The manifest hashes detect report changes; they are not a signature or independent review."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "release",
+  "recorded_at": "2026-10-08T20:10:08.363Z",
+  "workflow_run": {
+    "id": 37834690626,
+    "name": "MESH image release",
+    "head_sha": "7f7a0e364983699cf95e83b04414fe3ef11c5f04",
+    "path": ".github/workflows/release.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T19:48:21Z",
+    "updated_at": "2026-10-08T20:08:31Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37834690626"
+  },
+  "reports": [
+    {
+      "file": "image-security.json",
+      "sha256": "f67c24effafc2b749319c4cd31e1c5b6b352b861639d21c5a6f3caf227c43bc2",
+      "original_sha256": "f67c24effafc2b749319c4cd31e1c5b6b352b861639d21c5a6f3caf227c43bc2"
+    },
+    {
+      "file": "release.json",
+      "sha256": "d4fa983218e3df370ad040855c6f9c763ffa4b1b4fd0ec08f0dde432f511e4d0",
+      "original_sha256": "d4fa983218e3df370ad040855c6f9c763ffa4b1b4fd0ec08f0dde432f511e4d0"
+    }
+  ],
+  "policy": "Successful workflow plus report assertions; hashes preserve downloaded reports, not an independent signature."
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "run_id": 37811605035,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37811605035",
+      "conclusion": "failure",
+      "failure": "Shellcheck unused variable; two session tests fixed an environment-specific cookie name.",
+      "resolution": "Use configured cookie name; preserve Shellcheck."
+    },
+    {
+      "run_id": 37823686542,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37823686542",
+      "conclusion": "failure",
+      "failure": "Docker repository changed while the previous apt index cache was considered fresh; buildx package unavailable.",
+      "resolution": "Explicit apt refresh on repository changes; fail the pipeline immediately."
+    },
+    {
+      "run_id": 37832766068,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37832766068",
+      "conclusion": "failure",
+      "failure": "Fresh telemetry had no scrape at the queried historical instant; retention assertion returned zero series.",
+      "resolution": "Wait for ready services and a healthy scrape before selecting the fixed instant."
+    },
+    {
+      "run_id": 37833393873,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37833393873",
+      "conclusion": "failure",
+      "failure": "Untrusted CNI connection was rejected with ECONNREFUSED, which the negative probe did not handle.",
+      "resolution": "Handle explicit reject as well as drop; repeat the positive control against the same endpoint."
+    }
+  ],
+  "policy": "Failed workflow outcomes remain available. This summary records observed failures, not a passing report."
+}

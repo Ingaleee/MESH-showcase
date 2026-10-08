@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-08T20:07:25.488Z",
+  "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+  "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+  "images": {
+    "api": {
+      "image": "ghcr.io/ingaleee/mesh-showcase-api@sha256:b1a359e892a0999d2f6404076c8503a4e2d6da8da81f2fd53fb2c45e80af8bce",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "web": {
+      "image": "ghcr.io/ingaleee/mesh-showcase-web@sha256:59fa542ac8d2cc29f3fc16e107d396bc288a51595ee75d817c4e7523cc814f45",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "postgres": {
+      "image": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:7151886158816b2190a2f61b3569bd20cfa7420dee344bcc8f71765dbed733e5",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "clamav": {
+      "image": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:c3f4439d4f37601b90e5b1dd70b4a89e1f380cf1f5743896c447b2b869087fb6",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "caddy": {
+      "image": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    }
+  },
+  "success": true,
+  "scope": "Known OS/library vulnerabilities in each explicitly listed immutable runtime image; applicability decisions and signed provenance are separate."
+}

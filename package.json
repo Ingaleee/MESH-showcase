@@ -20,7 +20,8 @@
     "demo": "node scripts/demo.mjs",
     "demo:incident": "node scripts/run-showcase-incident.mjs",
     "demo:publishing": "node scripts/run-publishing-demo.mjs",
-    "test:evidence": "node scripts/check-publishing-evidence.mjs"
+    "test:evidence": "node scripts/check-publishing-evidence.mjs",
+    "test:acceptance": "node scripts/check-hosted-acceptance.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "ci",
+  "recorded_at": "2026-10-08T20:07:18.995Z",
+  "workflow_run": {
+    "id": 37834689919,
+    "name": "MESH verification",
+    "head_sha": "7f7a0e364983699cf95e83b04414fe3ef11c5f04",
+    "path": ".github/workflows/verify.yml",
+    "event": "push",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T19:48:20Z",
+    "updated_at": "2026-10-08T20:05:07Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37834689919"
+  },
+  "reports": [
+    {
+      "file": "context.json",
+      "sha256": "1f5771a467d093e9233bf9c28c847d867169c276860a4753b04a198fd814290d",
+      "original_sha256": "2a113df33fc7ff0d459e0272375acb9c4a661c2a90df66d65ed237aad29c7d1f"
+    },
+    {
+      "file": "rspec.json",
+      "sha256": "132c63e4fdc31fb8e3a712560f8e87946315cf4f5027c5abc9283a21d41fab33",
+      "original_sha256": "0784e71e617ae07f59e4cfa936983c7a5e6998c6ce36b7e7ecfbc9b7c8ee51f7"
+    },
+    {
+      "file": "rspec-native.json",
+      "sha256": "a7a83c5a66a3249b72b67b141baa1c7d926103b96a6e1dba09f7651716cabfc1",
+      "original_sha256": "86525cffff2ef610ac61a133bf8c1b6d3877e46b7711705531b291cec03384ec"
+    },
+    {
+      "file": "playwright.json",
+      "sha256": "7a7a5b02302b70ab119fa0379d95a1b6b97178f7f452291e7adf4fa7f0fa8af1",
+      "original_sha256": "a199c0bd19ac21a179e3532e7ada71591704222bd4c2fbdd39c7cb6aefe4b8cb"
+    },
+    {
+      "file": "publishing-demo-summary.json",
+      "sha256": "3e739f21614a0177df6efed3e6528ddb793fbef62e9e10237f61f3f06f8c245f",
+      "original_sha256": "3e739f21614a0177df6efed3e6528ddb793fbef62e9e10237f61f3f06f8c245f"
+    },
+    {
+      "file": "publishing-continuity.json",
+      "sha256": "c1c0d2ac71606a5237c3989e341c51dfd051c466ff442d2cc7f9dc714df68f1f",
+      "original_sha256": "6609c617fa6ba2535306ce5bf1e4f734d778442c11a73d423658656c5e2faeca"
+    },
+    {
+      "file": "telemetry-retention.json",
+      "sha256": "d37086445af3cf87d9b65b20f5cd35d3e1a9f2b0e1e457b7f0bee3d6b0b23a16",
+      "original_sha256": "d37086445af3cf87d9b65b20f5cd35d3e1a9f2b0e1e457b7f0bee3d6b0b23a16"
+    },
+    {
+      "file": "worker-incident-summary.json",
+      "sha256": "95e9ce2105a6a3de00b9fcffa309384c38a4da0b87d1cd40877ea00b4052e439",
+      "original_sha256": "95e9ce2105a6a3de00b9fcffa309384c38a4da0b87d1cd40877ea00b4052e439"
+    },
+    {
+      "file": "gitleaks.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "original_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "gitleaks-history.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "original_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "policy": "Successful workflow plus report assertions; hashes preserve downloaded reports, not an independent signature."
+}

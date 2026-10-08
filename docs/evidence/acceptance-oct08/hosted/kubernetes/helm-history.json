@@ -1,0 +1,27 @@
+[
+  {
+    "revision": 1,
+    "updated": "2026-10-08T20:10:49.417336389Z",
+    "status": "superseded",
+    "chart": "mesh-0.1.0",
+    "app_version": "showcase",
+    "description": "Install complete"
+  },
+  {
+    "revision": 2,
+    "updated": "2026-10-08T20:12:18.153056017Z",
+    "status": "failed",
+    "chart": "mesh-0.1.0",
+    "app_version": "showcase",
+    "description": "Upgrade \"mesh\" failed: resource Deployment/mesh-showcase/mesh-api not ready. status: InProgress, message: Updated: 1/2\nresource Deployment/mesh-showcase/mesh-worker not ready. status: InProgress, message: Pending termination: 1\nresource Deployment/mesh-showcase/mesh-dispatcher not ready. status: InProgress, message: Pending termination: 1\ncontext deadline exceeded"
+  },
+  {
+    "revision": 3,
+    "updated": "2026-10-08T20:13:03.550803649Z",
+    "status": "deployed",
+    "chart": "mesh-0.1.0",
+    "app_version": "showcase",
+    "rollback_revision": 1,
+    "description": "Rollback to 1"
+  }
+]

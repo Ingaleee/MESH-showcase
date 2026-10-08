@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-10-08T20:15:33.970Z",
+  "phases": [
+    {
+      "phase": "runtime",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "elapsed_ms": 9215
+    },
+    {
+      "phase": "verified",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "elapsed_ms": 16330
+    },
+    {
+      "phase": "current",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "elapsed_ms": 17379
+    }
+  ],
+  "schema_downgraded": false
+}
