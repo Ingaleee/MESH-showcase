@@ -16,6 +16,8 @@ jobs:
           actionlint
           bash -n scripts/runner/register.sh scripts/ci-tools.sh
           sh -n infra/deploy/init-databases.sh infra/deploy/grant-runtime.sh
+      - name: Validate user outcome alerts and missing-data controls
+        run: docker run --rm --entrypoint promtool --mount "type=bind,source=$PWD/infra/telemetry,target=/rules,readonly" -w /rules prom/prometheus:v3.15.0 test rules alerts.test.yml
       - name: Validate Helm
         run: |
           digest=$(printf 'a%.0s' {1..64})

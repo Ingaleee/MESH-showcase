@@ -78,6 +78,8 @@ jobs:
       - name: Ruby architecture, types and security
         run: |
           docker compose run --rm api bundle exec rubocop --format simple
+          docker compose run --rm api bundle exec ruby script/check_clean_layers.rb
+          docker compose run --rm api bundle exec rspec spec/unit
           docker compose run --rm api bundle exec packwerk validate
           docker compose run --rm api bundle exec packwerk check
           docker compose run --rm api bundle exec steep check

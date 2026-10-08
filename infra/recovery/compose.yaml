@@ -1,0 +1,122 @@
+name: ${MESH_DR_PROJECT:?Set an isolated recovery project}
+x-ruby: &ruby
+  image: ${API_IMAGE:?Verified release required}
+  user: "10001:10001"
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  tmpfs: [/tmp, /app/tmp]
+  volumes:
+    - private_files:/app/storage
+    - ${MESH_DR_ROOT:?Set recovery directory}:/recovery
+  environment: &ruby-env
+    RAILS_ENV: production
+    HOME: /tmp
+    SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_production
+    QUEUE_DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_queue
+    MESH_SESSION_COOKIE: _mesh_showcase_dr_session
+    MESH_PUBLIC_ORIGIN: https://localhost
+    MESH_METRICS_TOKEN: ${MESH_METRICS_TOKEN}
+    MESH_PARTNER_TOKEN_SHOWCASE: ${MESH_PARTNER_TOKEN_SHOWCASE}
+    MESH_PARTNER_ORIGINS: http://partner:3216
+    MESH_PARTNER_HTTP_ORIGINS: http://partner:3216
+    MESH_PUBLISHING_ENABLED: "true"
+    MESH_PUBLISHING_FAILPOINTS: "true"
+    MESH_SCAN_FILES: "true"
+    MESH_CLAMAV_HOST: scanner
+    GITHUB_ACTIONS: "true"
+    GITHUB_JOB: ${GITHUB_JOB}
+    GITHUB_RUN_ID: ${GITHUB_RUN_ID}
+    MESH_RELEASE_REVISION: ${MESH_RELEASE_REVISION}
+    OTEL_TRACES_EXPORTER: none
+  mem_limit: 640m
+  pids_limit: 128
+
+services:
+  db:
+    image: ${POSTGRES_IMAGE:?Verified release required}
+    environment:
+      POSTGRES_USER: mesh_owner
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: mesh_production
+      RUNTIME_DATABASE_PASSWORD: ${RUNTIME_DATABASE_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+      - ../deploy/init-databases.sh:/docker-entrypoint-initdb.d/mesh.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U mesh_owner -d mesh_production"]
+      interval: 2s
+      timeout: 3s
+      retries: 40
+    mem_limit: 384m
+  storage-init:
+    image: ${API_IMAGE}
+    user: "0:0"
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE]
+    entrypoint: [sh, -c]
+    command: ["chown 10001:10001 /files"]
+    volumes: [private_files:/files]
+  api:
+    <<: *ruby
+    command: [bundle, exec, rails, server, -b, 0.0.0.0, -p, "3000"]
+    ports: ["127.0.0.1:3251:3000"]
+    depends_on:
+      db: {condition: service_healthy}
+      storage-init: {condition: service_completed_successfully}
+  tools:
+    <<: *ruby
+    profiles: [tools]
+    environment:
+      <<: *ruby-env
+      DATABASE_URL: postgres://mesh_owner:${POSTGRES_PASSWORD}@db:5432/mesh_production
+      QUEUE_DATABASE_URL: postgres://mesh_owner:${POSTGRES_PASSWORD}@db:5432/mesh_queue
+      MESH_DR_KEY: ${MESH_DR_KEY:?Recovery key required}
+      MESH_RECOVERY_QUIESCED: "true"
+    volumes:
+      - private_files:/app/storage
+      - ${MESH_DR_ROOT}:/recovery
+      - ${MESH_DR_ROOT}/partner-data:/partner-data
+    depends_on:
+      db: {condition: service_healthy}
+      storage-init: {condition: service_completed_successfully}
+  grants:
+    image: ${POSTGRES_IMAGE}
+    profiles: [tools]
+    environment:
+      PGHOST: db
+      PGUSER: mesh_owner
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    entrypoint: [sh, /scripts/grant-runtime.sh]
+    volumes: [../deploy/grant-runtime.sh:/scripts/grant-runtime.sh:ro]
+  scanner:
+    image: ${SCANNER_IMAGE:?Verified release required}
+    volumes: [scanner_signatures:/var/lib/clamav]
+    mem_limit: 1536m
+  partner:
+    image: mesh-showcase-partner:local
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.partner
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      MESH_PARTNER_TOKEN_SHOWCASE: ${MESH_PARTNER_TOKEN_SHOWCASE}
+      MESH_PUBLISHING_FAILPOINTS: "true"
+      MESH_PARTNER_CALLBACK_ORIGIN: http://callback-disabled:3000
+    volumes: ["${MESH_DR_ROOT}/partner-data:/data"]
+    tmpfs: [/tmp]
+    mem_limit: 128m
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:3216/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  database:
+  private_files:
+  scanner_signatures:

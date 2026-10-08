@@ -1,0 +1,56 @@
+rule_files: [alerts.yml]
+evaluation_interval: 5s
+tests:
+  - interval: 5s
+    input_series:
+      - series: mesh_user_sli_up
+        values: '1+0x36'
+      - series: up{job="mesh-api"}
+        values: '1+0x36'
+      - series: mesh_user_sli_oldest_seconds{operation="notification"}
+        values: '0+5x36'
+      - series: mesh_user_sli_deadline_seconds{operation="notification"}
+        values: '30+0x36'
+      - series: mesh_user_sli_total{operation="notification"}
+        values: '100+0x36'
+      - series: mesh_user_sli_good{operation="notification"}
+        values: '90+0x36'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: ShowcaseUserOutcomeLate
+        exp_alerts:
+          - exp_labels: {operation: notification, severity: warning}
+            exp_annotations:
+              summary: Accepted work remains unfinished beyond its user deadline
+              runbook: docs/user-reliability-objectives.md
+      - eval_time: 3m
+        alertname: ShowcaseUserBudgetExhausted
+        exp_alerts:
+          - exp_labels: {operation: notification, severity: warning}
+            exp_annotations:
+              summary: The mature 24h cohort has consumed its provisional lab error budget
+              runbook: docs/user-reliability-objectives.md
+  - interval: 5s
+    input_series:
+      - series: mesh_user_sli_up
+        values: '1+0x36'
+      - series: up{job="mesh-api"}
+        values: '1+0x36'
+      - series: mesh_user_sli_total{operation="notification"}
+        values: '0+0x36'
+      - series: mesh_user_sli_good{operation="notification"}
+        values: '0+0x36'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: ShowcaseUserBudgetExhausted
+        exp_alerts: []
+  - interval: 5s
+    input_series: []
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: ShowcaseApiScrapeMissing
+        exp_alerts:
+          - exp_labels: {severity: warning}
+            exp_annotations:
+              summary: User outcome scrape is missing
+              runbook: docs/user-reliability-objectives.md

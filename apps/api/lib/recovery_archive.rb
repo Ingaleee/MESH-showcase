@@ -27,6 +27,7 @@ module RecoveryArchive
 
   def self.decrypt(source, target, key:)
     raise ArgumentError, "Use a 32-byte recovery key" unless key.bytesize == 32
+    created = false
     target = target.to_s
     temporary = target + ".partial"
     raise "Refuse an existing recovery target" if File.exist?(target) || File.exist?(temporary)
@@ -41,7 +42,8 @@ module RecoveryArchive
       input.seek(20)
       remaining = input.size - 36
       File.open(temporary, File::WRONLY | File::CREAT | File::EXCL, 0o600) do |output|
-      output.binmode
+        created = true
+        output.binmode
         while remaining.positive?
           chunk = input.read([ remaining, 65536 ].min)
           remaining -= chunk.bytesize
@@ -54,6 +56,6 @@ module RecoveryArchive
     end
     File.rename(temporary, target)
   ensure
-    File.delete(temporary) if temporary && File.exist?(temporary)
+    File.delete(temporary) if created && temporary && File.exist?(temporary)
   end
 end

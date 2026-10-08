@@ -23,7 +23,7 @@ class MetricsController < ActionController::Base
       mesh_reconciliation_exceptions: Finance::ReconciliationException.where(resolved_at: nil).count,
       mesh_ledger_posted: Finance::LedgerTransaction.where(status: "posted").count
     }
-    text = values.map { |name, value| "# TYPE #{name} gauge\n#{name} #{value}\n" }.join + QueueMetrics.prometheus + HttpMetrics.prometheus + Platform::Metrics.prometheus
+    text = values.map { |name, value| "# TYPE #{name} gauge\n#{name} #{value}\n" }.join + QueueMetrics.prometheus + HttpMetrics.prometheus + Platform::Metrics.prometheus + UserOutcomeMetrics.prometheus + RequestAdmission.prometheus
     render plain: text, content_type: "text/plain; version=0.0.4"
   end
 end

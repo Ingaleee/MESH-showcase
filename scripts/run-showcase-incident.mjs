@@ -70,11 +70,11 @@ const report = {
   lab_threshold: "queue age >10s for 5s; 5s scrapes",
   success: false,
 };
-const receiptMatches = (status) =>
+const receiptMatches = (status, name = "ShowcaseQueueStalled") =>
   receipts().find(
     (row) =>
       Date.parse(row.received_at) >= Date.parse(report.stopped_at) &&
-      row.alerts.some((alert) => alert.name === "ShowcaseQueueStalled" && alert.status === status),
+      row.alerts.some((alert) => alert.name === name && alert.status === status),
   );
 try {
   await waitFor(async () => {
@@ -94,12 +94,26 @@ try {
     await response.body?.cancel();
   }
   report.firing_receipt = await waitFor(() => receiptMatches("firing"));
+  report.user_outcome_firing = await waitFor(() =>
+    receiptMatches("firing", "ShowcaseUserOutcomeLate"),
+  );
+  report.user_outcomes_stalled = probe("outcomes");
+  assert.ok(
+    report.user_outcomes_stalled.total >= 50,
+    "Mature unfinished work must remain in the SLI denominator",
+  );
+  assert.ok(report.user_outcomes_stalled.overdue >= 50);
   docker(["compose", "start", "worker"]);
   report.drained = probe("drain");
   assert.equal(report.drained.events, 50);
   assert.deepEqual(report.drained.effects_per_event, [1]);
   assert.equal(report.drained.replay_observations_added, 0);
   report.resolved_receipt = await waitFor(() => receiptMatches("resolved"));
+  report.user_outcome_resolved = await waitFor(() =>
+    receiptMatches("resolved", "ShowcaseUserOutcomeLate"),
+  );
+  report.user_outcomes_after_recovery = probe("outcomes");
+  assert.equal(report.user_outcomes_after_recovery.unfinished, 0);
   report.detection_seconds =
     (Date.parse(report.firing_receipt.received_at) - Date.parse(report.stopped_at)) / 1000;
   const expressions = [

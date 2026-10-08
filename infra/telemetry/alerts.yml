@@ -1,4 +1,34 @@
 groups:
+  - name: user-outcomes
+    rules:
+      - alert: ShowcaseUserOutcomeLate
+        expr: mesh_user_sli_oldest_seconds > on(operation) mesh_user_sli_deadline_seconds
+        for: 15s
+        labels: {severity: warning}
+        annotations:
+          summary: Accepted work remains unfinished beyond its user deadline
+          runbook: docs/user-reliability-objectives.md
+      - alert: ShowcaseUserBudgetExhausted
+        expr: (mesh_user_sli_good / clamp_min(mesh_user_sli_total, 1) < 0.99) and mesh_user_sli_total >= 20
+        for: 2m
+        labels: {severity: warning}
+        annotations:
+          summary: The mature 24h cohort has consumed its provisional lab error budget
+          runbook: docs/user-reliability-objectives.md
+      - alert: ShowcaseUserMetricsUnavailable
+        expr: mesh_user_sli_up == 0
+        for: 15s
+        labels: {severity: warning}
+        annotations:
+          summary: User outcomes cannot be measured against the database
+          runbook: docs/user-reliability-objectives.md
+      - alert: ShowcaseApiScrapeMissing
+        expr: absent(mesh_user_sli_up) or up{job="mesh-api"} == 0
+        for: 30s
+        labels: {severity: warning}
+        annotations:
+          summary: User outcome scrape is missing
+          runbook: docs/user-reliability-objectives.md
   - name: controlled-showcase
     rules:
       - alert: ShowcaseQueueStalled

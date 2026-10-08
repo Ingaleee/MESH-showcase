@@ -236,6 +236,142 @@
           "mode": "single"
         }
       }
+    },
+    {
+      "id": 20,
+      "title": "Completed on time / mature accepted cohort",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mesh-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "max by(operation)(mesh_user_sli_good) / clamp_min(max by(operation)(mesh_user_sli_total),1)",
+          "refId": "A",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "title": "Unfinished beyond deadline",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mesh-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "max by(operation)(mesh_user_sli_overdue)",
+          "refId": "A",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 22,
+      "title": "Oldest unfinished work",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mesh-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "max by(operation)(mesh_user_sli_oldest_seconds)",
+          "refId": "A",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 23,
+      "title": "API admission rejections",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mesh-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(mesh_api_admission_rejected_total[1m])",
+          "refId": "A",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
     }
   ]
 }

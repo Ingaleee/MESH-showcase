@@ -228,13 +228,14 @@ async function smoke(manifest) {
     })),
   };
 }
-async function apply(manifest, migrate) {
+async function apply(manifest, migrate, recovery = false) {
   await runtime(manifest);
-  checkpoint("runtime");
+  checkpoint(recovery ? "recovery-runtime" : "runtime");
   dc(["up", "-d", "db", "storage-init"]);
   if (migrate) {
     dc(["run", "--rm", "migrate"]);
     dc(["run", "--rm", "grants"]);
+    checkpoint(recovery ? "recovery-migrated" : "migrated");
   }
   dc([
     "up",
@@ -250,7 +251,10 @@ async function apply(manifest, migrate) {
     "dispatcher",
     "edge",
   ]);
-  return smoke(manifest);
+  checkpoint(recovery ? "recovery-services" : "services");
+  const result = await smoke(manifest);
+  checkpoint(recovery ? "recovery-smoke" : "smoke");
+  return result;
 }
 async function sourceHash() {
   const files = execute("git", ["ls-files", "--cached", "--others", "--exclude-standard"], {
@@ -309,7 +313,11 @@ if (operation === "manifest") {
   };
   let previous;
   try {
-    report.interrupted_recovery = await recoverRelease(state, apply, validate);
+    report.interrupted_recovery = await recoverRelease(
+      state,
+      (release, migrate) => apply(release, migrate, true),
+      validate,
+    );
     previous = await optionalJSON(current);
     if (previous) validate(previous);
     const target = validate(
@@ -326,11 +334,13 @@ if (operation === "manifest") {
       started_at: new Date().toISOString(),
     };
     await atomicJSON(journal, intent);
+    checkpoint("intent");
     try {
       report.smoke = await apply(target, operation === "deploy");
       await atomicJSON(journal, { ...intent, phase: "verified" });
       checkpoint("verified");
       if (previous) await atomicJSON(path.join(state, "previous.json"), previous);
+      checkpoint("previous");
       await atomicJSON(current, target);
       checkpoint("current");
       await atomicJSON(journal, { ...intent, phase: "committed" });

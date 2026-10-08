@@ -21,6 +21,8 @@ when "burst"
   OutboxDispatcher.call
   File.write(state, JSON.generate(ids: ids, observations_before: before))
   puts "MESH_INCIDENT_REPORT=" + JSON.generate(events: ids.size, queue: QueueMetrics.snapshot, observations_before: before)
+when "outcomes"
+  puts "MESH_INCIDENT_REPORT=" + JSON.generate(UserOutcomeMetrics.snapshot.fetch("notification"))
 when "drain"
   data = JSON.parse(File.read(state))
   ids = data.fetch("ids")

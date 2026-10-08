@@ -21,7 +21,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 60
     env:
       MESH_DEPLOYMENT_STATE: ${{ github.workspace }}/.cache/deployment
       MESH_EVIDENCE_DIR: .cache/deployment-evidence
@@ -121,6 +121,8 @@ jobs:
         run: node scripts/check-release-compatibility.mjs
       - name: TLS reads with a declared load and latency threshold
         run: node scripts/check-tls-read-profile.mjs
+      - name: Mixed authenticated load, explicit overload and backlog recovery
+        run: node scripts/check-mixed-load.mjs
       - name: Business, private files and deliberately broken release
         run: node scripts/check-release-runtime.mjs
       - name: Verify deployment crash recovery and lock ownership

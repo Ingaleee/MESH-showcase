@@ -1,0 +1,155 @@
+name: MESH fresh VM disaster recovery
+on:
+  workflow_dispatch:
+    inputs:
+      release_run_id:
+        description: Successful signed release on main
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  packages: read
+concurrency:
+  group: mesh-fresh-vm-recovery
+  cancel-in-progress: false
+jobs:
+  source:
+    if: github.ref == 'refs/heads/main' && github.repository == 'Ingaleee/MESH-showcase'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MESH_DR_KEY: ${{ secrets.MESH_DR_RECOVERY_KEY }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Select the exact successful signed release
+        run: |
+          [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RELEASE_RUN_ID")
+          [[ $(jq -r .conclusion <<< "$run") == success ]]
+          [[ $(jq -r .event <<< "$run") == workflow_dispatch ]]
+          [[ $(jq -r .head_branch <<< "$run") == main ]]
+          [[ $(jq -r .path <<< "$run") == .github/workflows/release.yml ]]
+          revision=$(jq -r .head_sha <<< "$run")
+          [[ "$revision" =~ ^[a-f0-9]{40}$ ]]
+          git fetch --no-tags --depth=1 origin "$revision"
+          git checkout --detach FETCH_HEAD
+          [[ $(git rev-parse HEAD) == "$revision" ]]
+          echo "MESH_RELEASE_REVISION=$revision" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.release_run_id }}
+          name: mesh-release-${{ env.MESH_RELEASE_REVISION }}
+          path: .cache/downloaded-release
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Authenticate images before starting recovery tooling
+        run: |
+          set -euo pipefail
+          jq -e --arg revision "$MESH_RELEASE_REVISION" '.revision == $revision and .working_tree_dirty == false and .schema_version == 2' .cache/downloaded-release/release.json
+          mkdir -p .cache/disaster/evidence
+          for name in api postgres clamav; do
+            image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-release/release.json)
+            [[ "$image" =~ ^ghcr\.io/[a-z0-9_.\/-]+@sha256:[a-f0-9]{64}$ ]]
+            gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/image.yml" --source-digest "$MESH_RELEASE_REVISION" --source-ref refs/heads/main --deny-self-hosted-runners --format json > ".cache/disaster/evidence/attestation-$name.json"
+            docker pull "$image"
+          done
+
+      - name: Create quiescent encrypted backup and independently preserved simulator state
+        run: |
+          node scripts/disaster-recovery.mjs source
+          python3 - <<'PY'
+          import json, socket
+          from pathlib import Path
+          data = {"hostname": socket.gethostname(), "vm_uuid": Path("/sys/class/dmi/id/product_uuid").read_text().strip(), "job": "source"}
+          Path(".cache/disaster/transfer/source-vm.json").write_text(json.dumps(data))
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: encrypted-recovery-${{ github.run_id }}
+          path: .cache/disaster/transfer/
+          retention-days: 30
+          include-hidden-files: true
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: recovery-source-evidence-${{ github.run_id }}
+          path: .cache/disaster/evidence/
+          retention-days: 30
+  target:
+    needs: source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MESH_DR_KEY: ${{ secrets.MESH_DR_RECOVERY_KEY }}
+    steps:
+      - name: Start recovery clock before checkout and image download
+        run: echo "MESH_DR_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Select the exact successful signed release
+        run: |
+          [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RELEASE_RUN_ID")
+          [[ $(jq -r .conclusion <<< "$run") == success ]]
+          [[ $(jq -r .event <<< "$run") == workflow_dispatch ]]
+          [[ $(jq -r .head_branch <<< "$run") == main ]]
+          [[ $(jq -r .path <<< "$run") == .github/workflows/release.yml ]]
+          revision=$(jq -r .head_sha <<< "$run")
+          [[ "$revision" =~ ^[a-f0-9]{40}$ ]]
+          git fetch --no-tags --depth=1 origin "$revision"
+          git checkout --detach FETCH_HEAD
+          [[ $(git rev-parse HEAD) == "$revision" ]]
+          echo "MESH_RELEASE_REVISION=$revision" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.release_run_id }}
+          name: mesh-release-${{ env.MESH_RELEASE_REVISION }}
+          path: .cache/downloaded-release
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Authenticate images before starting recovery tooling
+        run: |
+          set -euo pipefail
+          jq -e --arg revision "$MESH_RELEASE_REVISION" '.revision == $revision and .working_tree_dirty == false and .schema_version == 2' .cache/downloaded-release/release.json
+          mkdir -p .cache/disaster/evidence
+          for name in api postgres clamav; do
+            image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-release/release.json)
+            [[ "$image" =~ ^ghcr\.io/[a-z0-9_.\/-]+@sha256:[a-f0-9]{64}$ ]]
+            gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/image.yml" --source-digest "$MESH_RELEASE_REVISION" --source-ref refs/heads/main --deny-self-hosted-runners --format json > ".cache/disaster/evidence/attestation-$name.json"
+            docker pull "$image"
+          done
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: encrypted-recovery-${{ github.run_id }}
+          path: .cache/disaster/transfer
+
+      - name: Prove another VM and restore without the source filesystem
+        run: |
+          python3 - <<'PY'
+          import json, socket
+          from pathlib import Path
+          source = json.loads(Path(".cache/disaster/transfer/source-vm.json").read_text())
+          target = {"hostname": socket.gethostname(), "vm_uuid": Path("/sys/class/dmi/id/product_uuid").read_text().strip(), "job": "target"}
+          assert source["vm_uuid"] != target["vm_uuid"], "Recovery must run on another VM"
+          Path(".cache/disaster/evidence/vm-isolation.json").write_text(json.dumps({"source": source, "target": target, "source_job_completed": True}, indent=2))
+          PY
+          node scripts/disaster-recovery.mjs target
+      - name: Preserve proof, never decrypted state or recovery key
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: recovery-target-evidence-${{ github.run_id }}
+          path: .cache/disaster/evidence/
+          retention-days: 30

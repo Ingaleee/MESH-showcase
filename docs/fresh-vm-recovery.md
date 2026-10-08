@@ -1,0 +1,17 @@
+# Recovery after source VM loss
+
+Run the manual recovery.yml workflow with a successful signed release run ID. It checks out that release commit and verifies image provenance before executing it. Source and recovery are sequential ubuntu-24.04 jobs; the target compares VM identifiers and cannot read the source checkout, private disk or Docker volumes.
+
+Application and queue custom-format PostgreSQL dumps, all private blobs, an explicit file/hash inventory and fixture identities are sealed with AES-256-GCM. The simulator's SQLite state is separately sealed after its remote commit advances beyond the application backup. Both encrypted artifacts reside in GitHub Actions storage for 30 days. Decryption uses MESH_DR_RECOVERY_KEY from repository Actions secrets, not a file on the vanished VM. The demo derives its synthetic session and partner credentials from domain-separated HMACs of that root; production must separate credential and backup key custody and rotation.
+
+The target authenticates before extraction; archive member types, paths, duplicates, file count, byte budget and inventory are checked before any DB import. Wrong key, truncation, tampering and a missing private file are negative controls. Existing destination files are never replaced or deleted on refusal.
+
+Restore uses a fresh owner to import/grant SQL and a restricted runtime role for the resumed API. Workers remain disabled until pending/dispatching operations are changed to unknown. Reconcile by the original operation ID, compare remote identity and POST counts, replay a signed callback and download restored bytes through an authenticated API. Then /ready must return 200.
+
+Declared lab RPO: all committed state at the quiescent snapshot, zero seconds at that barrier. A post-snapshot local marker is deliberately lost. Writes are unavailable during backup; this is the cost of a consistent primary+queue+file snapshot. pg_dump alone does not coordinate separate databases and private storage. Declared lab RTO ≤15 minutes from the first target step, including image download and bootstrap. This metric excludes the time waiting for a runner.
+
+Failure domain: loss of one hosted VM. Artifact storage and key custody both depend on GitHub; this does not survive loss of the GitHub account/control plane and is not independent-provider offsite recovery. The simulator is restored from independently stored state ahead of the application snapshot; continuous remote partner availability is not claimed. No online WAL/PITR or multi-node HA claim.
+
+Key access is limited to manually dispatched trusted-main workflow jobs. Fork pull requests never receive it. Never attach plaintext dumps, decrypted fixture, runtime.env or the key as evidence. Durable public reports contain hashes/counts/environment only. This key is for synthetic showcase data; no product credentials/data are involved.
+
+References: [GitHub secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets), [SQL dump guarantees](https://www.postgresql.org/docs/current/backup-dump.html). Results belong in the evidence catalogue after execution.

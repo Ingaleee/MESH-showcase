@@ -2,24 +2,15 @@ module Publishing
   class ApplyObservation
     def self.call(deployment:, observation:, claim_token: nil)
       candidate = deployment.candidate
-      valid = observation.is_a?(Hash) && observation["operation_id"] == deployment.id &&
-        observation["candidate_id"] == candidate.id && observation["artifact_sha256"] == candidate.artifact_sha256 &&
-        observation["contract_version"] == deployment.partner.contract_version && observation["state"] == "active" &&
-        observation["sequence"].is_a?(Integer) && observation["sequence"].positive? &&
-        observation["deployment_id"].to_s.match?(/\A[a-zA-Z0-9\-]{1,100}\z/)
-      raise Platform::Error.new("PARTNER_OBSERVATION_INVALID", "Remote identity or outcome does not match the operation.", status: 409) unless valid
+      Domain::DeploymentRules.verify_observation!(operation_id: deployment.id, candidate_id: candidate.id,
+        artifact_sha256: candidate.artifact_sha256, contract_version: deployment.partner.contract_version, observation: observation)
       Platform::Record.transaction do
         partner = deployment.partner
         partner.lock!
         deployment.lock!
-        return deployment if claim_token && (deployment.state != "dispatching" || deployment.claim_token != claim_token)
-        if deployment.state == "confirmed"
-          unless deployment.remote_id == observation["deployment_id"] && deployment.remote_sequence == observation["sequence"]
-            raise Platform::Error.new("PARTNER_OBSERVATION_CONFLICT", "Remote identity changed after confirmation.", status: 409)
-          end
-          return deployment
-        end
-        raise Platform::Error.new("DEPLOYMENT_CLOSED", "This operation is closed.", status: 409) if deployment.state == "failed"
+        decision = Domain::DeploymentRules.confirmation(state: deployment.state, current_token: deployment.claim_token,
+          worker_token: claim_token, remote_id: deployment.remote_id, remote_sequence: deployment.remote_sequence, observation: observation)
+        return deployment unless decision == :confirm
         deployment.update!(
           state: "confirmed", claim_token: nil, lease_until: nil, confirmed_at: Time.current,
           remote_id: observation["deployment_id"], remote_sequence: observation["sequence"], last_error: nil
@@ -30,6 +21,8 @@ module Publishing
         Platform::Events.audit(action: "publishing.deployment.confirmed", resource: deployment, details: { sequence: observation["sequence"] })
       end
       deployment
+    rescue Domain::Failure => error
+      raise Platform::Error.new(error.code, error.message, status: 409)
     end
   end
 end

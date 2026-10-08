@@ -1,5 +1,6 @@
 require_relative "boot"
 require_relative "../lib/publishing_request_budget"
+require_relative "../lib/request_admission"
 
 require "rails"
 # Pick the frameworks you want:
@@ -39,8 +40,9 @@ module Api
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.paths.add "packs", glob: "*/app/{models,services,policies,domain}", eager_load: true
+    config.paths.add "packs", glob: "*/app/{models,services,policies,domain,application,infrastructure}", eager_load: true
     config.middleware.insert_before Rack::MethodOverride, PublishingRequestBudget
+    config.middleware.insert_before PublishingRequestBudget, RequestAdmission
     config.active_job.queue_adapter = :solid_queue
     config.solid_queue.connects_to = { database: { writing: :queue } }
     config.active_storage.draw_routes = false
