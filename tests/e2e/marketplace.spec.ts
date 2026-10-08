@@ -1,8 +1,14 @@
 import { test, expect, type Page } from "@playwright/test";
 import { reserveLogin } from "./support/login-budget";
+import { mkdir } from "node:fs/promises";
 import Ajv from "ajv/dist/2020";
 import addFormats from "ajv-formats";
 import contract from "../../contracts/openapi.json";
+
+const evidenceDirectory = process.env.MESH_EVIDENCE_DIR ?? ".cache/browser-evidence";
+test.beforeAll(async () => {
+  await mkdir(evidenceDirectory, { recursive: true });
+});
 
 const ajv = new Ajv({ strict: false, allErrors: true });
 addFormats(ajv);
@@ -129,7 +135,7 @@ test("client and creator complete a real agreement and recover a lost provider r
   expect(noCsrf.status()).toBe(403);
   const unauthorized = await creator.request.get("/api/v1/operations");
   expect(unauthorized.status()).toBe(403);
-  await client.screenshot({ path: "docs/evidence/workspace-desktop.png", fullPage: true });
+  await client.screenshot({ path: `${evidenceDirectory}/workspace-desktop.png`, fullPage: true });
   await clientContext.close();
   await creatorContext.close();
 });
@@ -137,7 +143,7 @@ test("client and creator complete a real agreement and recover a lost provider r
 test("public directory, keyboard navigation and mobile layout work", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".project-card").first()).toBeVisible();
-  await page.screenshot({ path: "docs/evidence/marketplace-desktop.png", fullPage: true });
+  await page.screenshot({ path: `${evidenceDirectory}/marketplace-desktop.png`, fullPage: true });
   await page.getByRole("button", { name: "Тексты", exact: true }).click();
   await expect(page.locator(".category-label").first()).toHaveText("Тексты");
   await page.getByRole("link", { name: "Авторы", exact: true }).click();
@@ -150,7 +156,7 @@ test("public directory, keyboard navigation and mobile layout work", async ({ pa
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
-  await page.screenshot({ path: "docs/evidence/marketplace-mobile.png", fullPage: true });
+  await page.screenshot({ path: `${evidenceDirectory}/marketplace-mobile.png`, fullPage: true });
   const session = await page.request.get("/api/v1/session");
   validate("Session", await session.json());
 });

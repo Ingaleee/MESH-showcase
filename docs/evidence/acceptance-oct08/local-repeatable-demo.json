@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "demo_revision": "251f5e468102b7dc4ee95ea6dee4ccf835175fc4",
+  "demo": {
+    "success": true,
+    "checked_at": "2026-10-08T21:11:58.733Z",
+    "environment": "mesh-showcase local preview",
+    "frontend_image": "sha256:82f7e69c7ae592fdd6999c79bf200979dcf53bc25a2009423f6b7b398475490e",
+    "stages": [
+      {
+        "name": "Docker readiness",
+        "exit_code": 0,
+        "elapsed_seconds": 0.73
+      },
+      {
+        "name": "Preserve and prepare partner credentials",
+        "exit_code": 0,
+        "elapsed_seconds": 0.101
+      },
+      {
+        "name": "Locked host dependencies",
+        "exit_code": 0,
+        "elapsed_seconds": 65.97
+      },
+      {
+        "name": "Build Ruby development environment",
+        "exit_code": 0,
+        "elapsed_seconds": 6.262
+      },
+      {
+        "name": "Start isolated PostgreSQL and real scanner",
+        "exit_code": 0,
+        "elapsed_seconds": 3.184
+      },
+      {
+        "name": "Install locked Ruby dependencies",
+        "exit_code": 0,
+        "elapsed_seconds": 6.48
+      },
+      {
+        "name": "Apply showcase migrations",
+        "exit_code": 0,
+        "elapsed_seconds": 20.629
+      },
+      {
+        "name": "Prepare repeatable synthetic accounts and projects",
+        "exit_code": 0,
+        "elapsed_seconds": 20.564
+      },
+      {
+        "name": "Build independent partner",
+        "exit_code": 0,
+        "elapsed_seconds": 4.227
+      },
+      {
+        "name": "Build production frontend",
+        "exit_code": 0,
+        "elapsed_seconds": 112.991
+      },
+      {
+        "name": "Record immutable preview image",
+        "exit_code": 0,
+        "elapsed_seconds": 0.268
+      },
+      {
+        "name": "Start bounded preview and ordinary workers",
+        "exit_code": 0,
+        "elapsed_seconds": 35.357
+      },
+      {
+        "name": "Real scanner readiness",
+        "exit_code": 0,
+        "elapsed_seconds": 34.132
+      },
+      {
+        "name": "Provision real telemetry",
+        "exit_code": 0,
+        "elapsed_seconds": 0.156
+      },
+      {
+        "name": "Start dashboard and authenticated internal alerts",
+        "exit_code": 0,
+        "elapsed_seconds": 12.686
+      },
+      {
+        "name": "Partner validation, uncertain outcome, lookup and rollback",
+        "exit_code": 0,
+        "elapsed_seconds": 77.803
+      },
+      {
+        "name": "Market workflow and Publishing browser checks",
+        "exit_code": 0,
+        "elapsed_seconds": 72.379
+      }
+    ],
+    "mutates_synthetic_data_only": true,
+    "resets_or_deletes_data": false,
+    "scope": "Repeatable local preparation and actual browser/partner flows. Image security release authorization, external GitHub runs and cluster exercises are separate."
+  },
+  "browser_stats": {
+    "startTime": "2026-10-08T21:10:48.459Z",
+    "duration": 70233.669,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "output_directory_fix_browser_stats": {
+    "startTime": "2026-10-08T21:16:06.388Z",
+    "duration": 60213.396,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "font_ready_publishing_browser_stats": {
+    "startTime": "2026-10-08T21:28:41.438Z",
+    "duration": 25154.006,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "publishing_layouts": [
+    {
+      "viewport": 1440,
+      "scroll_width": 1440,
+      "fonts": "loaded",
+      "overflowing_elements": []
+    },
+    {
+      "viewport": 1024,
+      "scroll_width": 1024,
+      "fonts": "loaded",
+      "overflowing_elements": []
+    },
+    {
+      "viewport": 390,
+      "scroll_width": 390,
+      "fonts": "loaded",
+      "overflowing_elements": []
+    }
+  ],
+  "source_files": [
+    {
+      "file": "scripts/demo.mjs",
+      "sha256": "00d958473bf63e14dbdebcb705a88f4353cb10a8df1d70d4c072745b1a7aae37"
+    },
+    {
+      "file": "playwright.config.ts",
+      "sha256": "8b1e981961af16d170ea775568bcb24f2ab63263eb62bf204a449f3bb09eecaa"
+    },
+    {
+      "file": "tests/e2e/marketplace.spec.ts",
+      "sha256": "bbb65d8c68770da4408cdaf78a2af422ca3f7cccbeb5517aaf469635a21f34af"
+    },
+    {
+      "file": "tests/e2e/publishing.spec.ts",
+      "sha256": "3276cae399e4f5369135f537de6d1e268bc2191cac14c52a13dc14135784ecad"
+    }
+  ],
+  "scope": "Full local preparation on Docker Desktop with existing isolated data; subsequent screenshot-output and font-ready checks are separate working-tree test revisions. No production SLA, capacity or whole-host recovery claim."
+}

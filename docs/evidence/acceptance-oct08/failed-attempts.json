@@ -49,6 +49,13 @@
       "conclusion": "failure",
       "failure": "Generic API-key detection matched the source SHA-256 next to the check-api-restart filename in the new local recovery report.",
       "resolution": "Use separate file and sha256 fields for new reports; allow only the exact historical filename/checksum line in this exact report during Git-history scan. Keep canary and all other secret detections."
+    },
+    {
+      "run_id": 37844053157,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37844053157",
+      "conclusion": "failure",
+      "failure": "Fresh upstream checksum build, Ruby/native, Publishing restore and telemetry passed. Browser had 12 passed/1 failed: immediate scrollWidth check after 390px resize. Incident/restore steps were skipped.",
+      "resolution": "Keep pixel threshold and zero retries. Wait for document fonts readiness, poll layout for a bounded five seconds, and record viewport plus overflowing-element geometry. Local resize measurements show async font loading; persistent Linux overflow cause is not yet confirmed."
     }
   ],
   "policy": "Failed workflow outcomes remain available. This summary records observed failures, not a passing report."

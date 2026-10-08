@@ -8,7 +8,12 @@ export default defineConfig({
   workers: 1,
   reporter: [
     ["list"],
-    ["json", { outputFile: `${process.env.MESH_EVIDENCE_DIR ?? "docs/evidence"}/playwright.json` }],
+    [
+      "json",
+      {
+        outputFile: `${process.env.MESH_EVIDENCE_DIR ?? ".cache/browser-evidence"}/playwright.json`,
+      },
+    ],
   ],
   use: {
     baseURL: process.env.MESH_BASE_URL ?? "http://localhost:3200",

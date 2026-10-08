@@ -8,7 +8,7 @@
 npm run demo
 ```
 
-Нужны Docker Desktop и Node.js 22/npm. Первая сборка требует registry access и памяти для ClamAV. Повторный запуск сохраняет secrets/data, применяет миграции, готовит synthetic accounts, проверяет реальный scanner, запускает partner/dashboard и выполняет CLI/browser сценарии.
+Нужны Docker Desktop и Node.js 22/npm. Первая сборка требует registry access и памяти для ClamAV. Повторный запуск сохраняет secrets/data, применяет миграции, готовит synthetic accounts, проверяет реальный scanner, запускает partner/dashboard и выполняет CLI/browser сценарии. Новые browser reports/screenshots пишутся в отдельный .cache каталог; исторический evidence в Git не перезаписывается.
 
 [Publishing Lab](http://localhost:3200/publishing) · [MESH](http://localhost:3200/) · [Grafana](http://localhost:32092/d/mesh-reliability)
 

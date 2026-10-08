@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { readFile, mkdir } from "node:fs/promises";
+import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { reserveLogin } from "./support/login-budget";
 
 test("operator uploads, validates and publishes real private artifacts on responsive screens", async ({
@@ -54,13 +54,37 @@ test("operator uploads, validates and publishes real private artifacts on respon
   await page.getByRole("button", { name: "Диагностика", exact: true }).first().click();
   await expect(page.locator(".pub-diagnostic")).toContainText("Входы проверки актуальны");
   await expect(page.locator(".pub-diagnostic")).toContainText("Да");
-  const directory = (process.env.MESH_EVIDENCE_DIR ?? "docs/evidence") + "/publishing-ui";
+  const directory = (process.env.MESH_EVIDENCE_DIR ?? ".cache/browser-evidence") + "/publishing-ui";
   await mkdir(directory, { recursive: true });
+  const layouts = [];
   for (const width of [1440, 1024, 390]) {
     await page.setViewportSize({ width, height: 1000 });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(
-      true,
-    );
+    await page.evaluate(() => document.fonts.ready.then(() => undefined));
+    try {
+      await expect
+        .poll(() => page.evaluate(() => document.documentElement.scrollWidth), {
+          timeout: 5000,
+          message: `Publishing must fit the ${width}px viewport after fonts load.`,
+        })
+        .toBeLessThanOrEqual(width + 1);
+    } finally {
+      layouts.push(
+        await page.evaluate(() => ({
+          viewport: innerWidth,
+          scroll_width: document.documentElement.scrollWidth,
+          fonts: document.fonts.status,
+          overflowing_elements: [...document.querySelectorAll(".publishing-page *")]
+            .map((element) => ({
+              tag: element.tagName,
+              class: element.getAttribute("class"),
+              right: element.getBoundingClientRect().right,
+              width: element.getBoundingClientRect().width,
+            }))
+            .filter((element) => element.width > 0 && element.right > innerWidth + 1),
+        })),
+      );
+      await writeFile(directory + "/layouts.json", JSON.stringify(layouts, null, 2) + "\n");
+    }
     const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();
@@ -109,7 +133,7 @@ test("the provisioned dashboard opens with a healthy real Prometheus target", as
   await page.goto("http://localhost:32092/d/mesh-reliability");
   await expect(page.getByText("HTTP p95 · по маршрутам", { exact: true })).toBeVisible();
   await expect(page.getByText("Доставка уведомлений p95", { exact: true })).toBeVisible();
-  const directory = (process.env.MESH_EVIDENCE_DIR ?? "docs/evidence") + "/publishing-ui";
+  const directory = (process.env.MESH_EVIDENCE_DIR ?? ".cache/browser-evidence") + "/publishing-ui";
   await mkdir(directory, { recursive: true });
   await page.setViewportSize({ width: 1600, height: 1200 });
   await expect(page.getByText("Loading plugin panel...", { exact: true })).toHaveCount(0, {
