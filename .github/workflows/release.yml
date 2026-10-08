@@ -4,6 +4,8 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
+  attestations: write
 concurrency:
   group: mesh-release-${{ github.ref }}
   cancel-in-progress: false
@@ -102,10 +104,10 @@ jobs:
         with:
           name: mesh-image-security-${{ github.sha }}
           path: .cache/image-security/
-          retention-days: 7
+          retention-days: 30
           if-no-files-found: warn
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: mesh-release-${{ github.sha }}
           path: release.json
-          retention-days: 7
+          retention-days: 30

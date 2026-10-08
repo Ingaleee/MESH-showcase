@@ -1,4 +1,4 @@
-name: MESH trusted VM deployment
+name: MESH isolated Ubuntu deployment
 on:
   workflow_dispatch:
     inputs:
@@ -15,17 +15,16 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deploy:
-    if: github.event.repository.private && github.ref == 'refs/heads/main'
-    runs-on: [self-hosted, linux, x64, mesh-demo]
-    environment: mesh-demo
-    timeout-minutes: 20
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
     env:
-      MESH_DEPLOYMENT_STATE: /var/lib/mesh-showcase/deployment
+      MESH_DEPLOYMENT_STATE: ${{ github.workspace }}/.cache/deployment
       MESH_EVIDENCE_DIR: .cache/deployment-evidence
       RELEASE_RUN_ID: ${{ inputs.release_run_id }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Check release provenance and select its commit
         run: |
           [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
@@ -40,34 +39,63 @@ jobs:
           git checkout --detach FETCH_HEAD
           [[ $(git rev-parse HEAD) == "$revision" ]]
           echo "RELEASE_REVISION=$revision" >> "$GITHUB_ENV"
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ inputs.release_run_id }}
           name: mesh-release-${{ env.RELEASE_REVISION }}
           path: .cache/downloaded-release
-      - name: Validate release identity
+      - name: Provision this Ubuntu host and prove convergence
         run: |
-          jq -e --arg revision "$RELEASE_REVISION" '.revision == $revision and .working_tree_dirty == false' .cache/downloaded-release/release.json
-          test -f "$MESH_DEPLOYMENT_STATE/secrets.env"
-      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+          python3 -m venv .cache/ansible
+          .cache/ansible/bin/pip install --quiet ansible-core==2.21.5
+          mkdir -p "$MESH_EVIDENCE_DIR"
+          export ANSIBLE_CONFIG="$PWD/infra/ansible/ansible.cfg"
+          .cache/ansible/bin/ansible-playbook infra/ansible/lab.yml -i localhost, -c local | tee "$MESH_EVIDENCE_DIR/ansible-first.log"
+          .cache/ansible/bin/ansible-playbook infra/ansible/lab.yml -i localhost, -c local | tee "$MESH_EVIDENCE_DIR/ansible-second.log"
+          grep -Eq 'changed=0 .*unreachable=0 .*failed=0' "$MESH_EVIDENCE_DIR/ansible-second.log"
+          docker version --format '{{json .}}' > "$MESH_EVIDENCE_DIR/docker-version.json"
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Pull the selected digests
+      - name: Verify signed origin and exact revision before executing images
         run: |
-          for name in api web postgres clamav caddy; do
+          jq -e --arg revision "$RELEASE_REVISION" '.revision == $revision and .working_tree_dirty == false and .schema_version == 2' .cache/downloaded-release/release.json
+          for name in api web postgres clamav; do
             image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-release/release.json)
-            [[ "$image" =~ ^(ghcr\.io/[a-z0-9_.\/-]+|docker\.io/library/caddy)@sha256:[a-f0-9]{64}$ ]]
+            [[ "$image" =~ ^ghcr\.io/[a-z0-9_.\/-]+@sha256:[a-f0-9]{64}$ ]]
+            gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/image.yml" --source-digest "$RELEASE_REVISION" --source-ref refs/heads/main --deny-self-hosted-runners --format json > "$MESH_EVIDENCE_DIR/attestation-$name.json"
             docker pull "$image"
           done
-      - name: Migrate, release, smoke and automatic image rollback
-        run: node scripts/release.mjs deploy .cache/downloaded-release/release.json
-      - name: Save this deployment's report
+          caddy=$(jq -r .images.caddy .cache/downloaded-release/release.json)
+          [[ "$caddy" == docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f ]]
+          docker pull "$caddy"
+          # Negative control: the correct image with an incorrect source revision must fail verification.
+          image=$(jq -r .images.api .cache/downloaded-release/release.json)
+          if gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --source-digest 0000000000000000000000000000000000000000 >/dev/null 2>&1; then exit 1; fi
+      - name: Prepare fresh ephemeral secrets
+        run: node scripts/prepare-environment.mjs deployment
+      - name: Migrate and deploy verified digests
+        run: bash scripts/release.sh deploy .cache/downloaded-release/release.json
+      - name: Business, private files and deliberately broken release
+        run: node scripts/check-release-runtime.mjs
+      - name: Verify deployment crash recovery and lock ownership
+        run: |
+          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs
+          node scripts/check-release-crash.mjs
+      - name: Save reports, never runtime secrets
         if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: mesh-deployment-${{ github.run_id }}
-          path: .cache/deployment-evidence/deployment-*.json
-          retention-days: 7
+          path: .cache/deployment-evidence/
+          retention-days: 30
+          include-hidden-files: true
+      - name: Stop this ephemeral stand
+        if: always()
+        run: |
+          if test -f "$MESH_DEPLOYMENT_STATE/runtime.env"; then
+            docker compose --env-file "$MESH_DEPLOYMENT_STATE/runtime.env" -f infra/deploy/compose.yaml -p mesh-showcase-release down
+          fi

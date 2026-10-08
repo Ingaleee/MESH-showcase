@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFile, writeFile, mkdir, rmdir, access } from "node:fs/promises";
 import path from "node:path";
+import { atomicJSON, optionalJSON, recoverRelease } from "./release-state.mjs";
 
 const root = process.cwd();
 await access(path.join(root, "SHOWCASE.md"));
@@ -23,13 +24,27 @@ const compose = [
 function execute(command, args, { capture = false, allowFailure = false } = {}) {
   const result = spawnSync(command, args, {
     encoding: "utf8",
-    stdio: capture ? "pipe" : "inherit",
+    stdio:
+      process.env.MESH_RELEASE_LOCK_FD === "9"
+        ? [
+            capture ? "pipe" : "inherit",
+            capture ? "pipe" : "inherit",
+            capture ? "pipe" : "inherit",
+            ...Array(6).fill("ignore"),
+            9,
+          ]
+        : capture
+          ? "pipe"
+          : "inherit",
     maxBuffer: 2 ** 24,
   });
   if (result.error) throw result.error;
   if (result.status !== 0 && !allowFailure)
     throw new Error(`${command} ${args[0]} failed (${result.status}).`);
   return capture ? result.stdout.trim() : result.status;
+}
+function checkpoint(phase) {
+  if (process.env.MESH_RELEASE_FAILPOINT === phase) process.kill(process.pid, "SIGKILL");
 }
 const docker = (args, options) => execute("docker", args, options);
 const dc = (args, options) => docker([...compose, ...args], options);
@@ -215,6 +230,7 @@ async function smoke(manifest) {
 }
 async function apply(manifest, migrate) {
   await runtime(manifest);
+  checkpoint("runtime");
   dc(["up", "-d", "db", "storage-init"]);
   if (migrate) {
     dc(["run", "--rm", "migrate"]);
@@ -277,18 +293,13 @@ if (operation === "manifest") {
   await writeFile(file, JSON.stringify(manifest, null, 2) + "\n");
   console.log(`Release manifest written: ${file}`);
 } else if (operation === "deploy" || operation === "rollback") {
+  // Linux deployments must enter through release.sh. Windows retains its conservative directory lock.
+  if (process.platform !== "win32" && process.env.MESH_RELEASE_LOCK_FD !== "9")
+    throw new Error("Use bash scripts/release.sh for Linux deployment locking.");
   const lock = path.join(state, "lock");
-  await mkdir(lock);
+  if (process.platform === "win32") await mkdir(lock);
   const current = path.join(state, "current.json");
-  let previous;
-  try {
-    previous = validate(await json(current));
-  } catch (error) {
-    if (error.code !== "ENOENT") {
-      await rmdir(lock);
-      throw error;
-    }
-  }
+  const journal = path.join(state, "journal.json");
   const report = {
     checked_at: new Date().toISOString(),
     operation,
@@ -296,28 +307,42 @@ if (operation === "manifest") {
     success: false,
     migration_reverted: false,
   };
+  let previous;
   try {
+    report.interrupted_recovery = await recoverRelease(state, apply, validate);
+    previous = await optionalJSON(current);
+    if (previous) validate(previous);
     const target = validate(
       await json(operation === "rollback" ? path.join(state, "previous.json") : file),
     );
     if (operation === "deploy" && target.schema_version !== 2)
       throw new Error("New deployments require the complete v2 runtime inventory.");
     report.release = target;
+    const intent = {
+      phase: "applying",
+      operation,
+      baseline: previous,
+      target,
+      started_at: new Date().toISOString(),
+    };
+    await atomicJSON(journal, intent);
     try {
       report.smoke = await apply(target, operation === "deploy");
+      await atomicJSON(journal, { ...intent, phase: "verified" });
+      checkpoint("verified");
+      if (previous) await atomicJSON(path.join(state, "previous.json"), previous);
+      await atomicJSON(current, target);
+      checkpoint("current");
+      await atomicJSON(journal, { ...intent, phase: "committed" });
       report.success = true;
-      if (previous)
-        await writeFile(
-          path.join(state, "previous.json"),
-          JSON.stringify(previous, null, 2) + "\n",
-        );
-      await writeFile(current, JSON.stringify(target, null, 2) + "\n");
     } catch (error) {
-      report.success = false;
       report.failure = error.message;
+      await atomicJSON(journal, { ...intent, phase: "rolling_back", failure: error.message });
       if (previous) {
         report.rollback_smoke = await apply(previous, false);
+        await atomicJSON(current, previous);
         report.previous_release_restored = true;
+        await atomicJSON(journal, { ...intent, phase: "recovered" });
       }
       throw error;
     }
@@ -328,12 +353,8 @@ if (operation === "manifest") {
     const evidence = path.resolve(
       process.env.MESH_EVIDENCE_DIR ?? path.join(root, "docs/evidence"),
     );
-    await mkdir(evidence, { recursive: true });
-    await writeFile(
-      path.join(evidence, `deployment-${Date.now()}.json`),
-      JSON.stringify(report, null, 2) + "\n",
-    );
-    await rmdir(lock);
+    await atomicJSON(path.join(evidence, `deployment-${Date.now()}.json`), report);
+    if (process.platform === "win32") await rmdir(lock);
   }
 } else if (operation === "smoke") {
   console.log(

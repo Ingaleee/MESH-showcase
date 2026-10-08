@@ -7,7 +7,7 @@ assert.ok(process.cwd().endsWith("MESH-showcase"));
 await access("SHOWCASE.md");
 const directory = process.env.MESH_EVIDENCE_DIR ?? "docs/evidence/publishing-release";
 await mkdir(directory, { recursive: true });
-const state = path.resolve(".cache/deployment");
+const state = path.resolve(process.env.MESH_DEPLOYMENT_STATE ?? ".cache/deployment");
 const manifest = JSON.parse(await readFile(path.join(state, "current.json"), "utf8"));
 assert.equal(manifest.schema_version, 2);
 assert.equal(manifest.project, "mesh-showcase-release");
@@ -86,7 +86,7 @@ const baseTag = "mesh-showcase-rollback-base:" + manifest.images.web.slice(-16);
 run("docker", ["tag", manifest.images.web, baseTag]);
 assert.equal(
   run("docker", ["image", "inspect", baseTag, "--format", "{{.Id}}"]).stdout.trim(),
-  manifest.images.web,
+  run("docker", ["image", "inspect", manifest.images.web, "--format", "{{.Id}}"]).stdout.trim(),
 );
 run(
   "docker",
@@ -111,7 +111,10 @@ const bad = {
 };
 const file = path.join(state, "publishing-exit42.json");
 await writeFile(file, JSON.stringify(bad, null, 2) + "\n");
-const rejected = run(process.execPath, ["scripts/release.mjs", "deploy", file], undefined, true);
+const rejected =
+  process.platform === "linux"
+    ? run("bash", ["scripts/release.sh", "deploy", file], undefined, true)
+    : run(process.execPath, ["scripts/release.mjs", "deploy", file], undefined, true);
 assert.notEqual(rejected.status, 0, "Fault injection unexpectedly succeeded.");
 const afterSmoke = extract(
   run(process.execPath, ["scripts/release.mjs", "smoke"]).stdout,
@@ -135,7 +138,7 @@ const report = {
   migration_reverted: false,
   restored_smoke: afterSmoke,
   scope:
-    "Actual loopback HTTPS v2 inventory, restricted runtime, real private file scan and local exit-42 rollback. No remote CI or external deployment.",
+    "Actual loopback HTTPS v2 inventory, restricted runtime, real private file scan and local exit-42 rollback. Host/run context is recorded separately; this loopback stand does not prove physical high availability.",
 };
 await writeFile(
   path.join(directory, "runtime-and-rollback.json"),

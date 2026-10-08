@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: mesh-${{ github.ref }}
+  group: mesh-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -43,6 +43,7 @@ jobs:
         run: node scripts/check-secrets.mjs
       - name: Contracts, boundaries, formatting and frontend build
         run: |
+          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs
           npm run contract:check
           npm run test:architecture
           npm run format:check

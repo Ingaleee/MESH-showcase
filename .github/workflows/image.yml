@@ -17,6 +17,8 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
+  attestations: write
 jobs:
   image:
     runs-on: ubuntu-latest
@@ -44,3 +46,9 @@ jobs:
           cache-to: type=gha,mode=max,scope=${{ inputs.cache_scope }}
           provenance: mode=max
           sbom: true
+      - uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-name: ${{ inputs.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+          create-storage-record: false
