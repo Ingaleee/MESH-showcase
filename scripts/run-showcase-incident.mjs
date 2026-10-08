@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 await readFile("SHOWCASE.md");
+const baseURL = process.env.MESH_BASE_URL ?? "http://localhost:3200";
 const directory = process.env.MESH_EVIDENCE_DIR ?? "docs/evidence/publishing-incident";
 await mkdir(directory, { recursive: true });
 function docker(args) {
@@ -82,7 +83,7 @@ try {
   report.backlog = probe("burst");
   report.http_while_worker_stopped = [];
   for (const route of ["/", "/ready", "/api/v1/session", "/api/v1/projects"]) {
-    const response = await fetch("http://localhost:3200" + route, {
+    const response = await fetch(baseURL + route, {
       signal: AbortSignal.timeout(10000),
     });
     report.http_while_worker_stopped.push({ route, status: response.status });

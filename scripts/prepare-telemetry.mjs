@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir, appendFile } from "node:fs/promises";
 import { randomBytes } from "node:crypto";
 import path from "node:path";
 await readFile("SHOWCASE.md");
-const env = await readFile(".env", "utf8");
+const env = await readFile(process.env.COMPOSE_ENV_FILES ?? ".env", "utf8");
 const token =
   /^MESH_METRICS_TOKEN=(.+)$/m.exec(env)?.[1] ??
   (() => {

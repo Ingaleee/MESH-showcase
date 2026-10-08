@@ -73,7 +73,7 @@ test("operator uploads, validates and publishes real private artifacts on respon
 
 test("the provisioned dashboard opens with a healthy real Prometheus target", async ({ page }) => {
   test.skip(
-    !!process.env.CI,
+    !!process.env.CI && process.env.MESH_TELEMETRY_ENABLED !== "true",
     "Local telemetry is a separate opt-in runtime, not a mocked CI datasource.",
   );
   const targets = await (await page.request.get("http://localhost:32091/api/v1/targets")).json();

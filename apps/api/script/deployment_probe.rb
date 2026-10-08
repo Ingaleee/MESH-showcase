@@ -50,6 +50,30 @@ denied = {}
   end
 end
 raise "Runtime privilege or immutable guard failed." unless denied.values.all?
+# Direct SQL fixtures exercise database guards under the actual restricted production role.
+connection.transaction do
+  studio = Publishing::Partner.create!(owner: client, name: "SQL probe #{key}", origin: "https://probe.invalid", credential_ref: "SHOWCASE")
+  candidate = Publishing::Candidate.create!(partner: studio, artifact_blob: file.file.blob, manifest: {},
+    artifact_sha256: file.sha256, manifest_sha256: "b" * 64, correlation_id: key)
+  validation = Publishing::Validation.create!(candidate: candidate, policy_version: "sql-probe", input_fingerprint: "c" * 64,
+    state: "passed", completed_at: Time.current, report: { checks: [] })
+  pending = Publishing::Deployment.create!(partner: studio, candidate: candidate, validation: validation, correlation_id: key)
+  sql_cases = {
+    publishing_null_confirmation: "UPDATE publishing_deployments SET state='confirmed',remote_id='probe',confirmed_at=CURRENT_TIMESTAMP,remote_sequence=NULL WHERE id=#{connection.quote(pending.id)}",
+    publishing_unconfirmed_active: "UPDATE publishing_partners SET active_deployment_id=#{connection.quote(pending.id)},active_sequence=1 WHERE id=#{connection.quote(studio.id)}",
+    publishing_unconfirmed_rollback: "INSERT INTO publishing_deployments (partner_id,candidate_id,validation_id,rollback_of_id,kind,correlation_id,created_at,updated_at) VALUES (#{connection.quote(studio.id)},#{connection.quote(candidate.id)},#{connection.quote(validation.id)},#{connection.quote(pending.id)},'rollback',#{connection.quote(key)},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)"
+  }
+  sql_cases.each do |name, sql|
+    denied[name] = begin
+      connection.transaction(requires_new: true) { connection.execute(sql) }
+      false
+    rescue ActiveRecord::StatementInvalid => error
+      error.cause.is_a?(PG::CheckViolation) || error.cause.is_a?(PG::RaiseException)
+    end
+  end
+  raise "Production Publishing SQL guard failed" unless sql_cases.keys.all? { |name| denied[name] }
+  raise ActiveRecord::Rollback
+end
 report = {
   checked_at: Time.current.iso8601, environment: "mesh-showcase-release production runtime role",
   business_workflow: "create -> propose -> award -> real file scan -> version -> accept",

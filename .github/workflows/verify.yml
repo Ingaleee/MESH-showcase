@@ -45,7 +45,7 @@ jobs:
         run: node scripts/check-secrets.mjs
       - name: Contracts, boundaries, formatting and frontend build
         run: |
-          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs
+          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs infra/sre/receiver.test.mjs
           python3 scripts/build-contract.py --check
           npm run contract:check
           npm run test:architecture
@@ -114,10 +114,23 @@ jobs:
         run: node scripts/run-publishing-demo.mjs
       - name: Publishing DB, queue, private bytes and authenticated recovery
         run: node scripts/check-publishing-continuity.mjs
+      - name: Prepare live telemetry for this isolated CI network
+        run: |
+          node scripts/prepare-telemetry.mjs
+          project=$(docker compose config --format json | jq -r .name)
+          export MESH_TELEMETRY_NETWORK="${project}_default"
+          echo "MESH_TELEMETRY_NETWORK=$MESH_TELEMETRY_NETWORK" >> "$GITHUB_ENV"
+          echo "MESH_TELEMETRY_ENABLED=true" >> "$GITHUB_ENV"
+          docker compose --env-file .cache/telemetry/runtime.env -f infra/telemetry/compose.yaml up -d --build prometheus grafana alertmanager receiver
+          node scripts/check-telemetry-retention.mjs
       - name: Real browser and accessibility
         run: |
           npx playwright install --with-deps chromium
           npm run test:e2e
+      - name: Live worker outage and delivered firing/resolved
+        env:
+          MESH_EVIDENCE_DIR: .cache/ci-evidence/worker-incident
+        run: node scripts/run-showcase-incident.mjs
       - name: Restore drill
         run: |
           docker compose stop dispatcher
@@ -135,4 +148,8 @@ jobs:
           include-hidden-files: true
       - name: Stop this job's containers
         if: always()
-        run: docker compose down
+        run: |
+          if test -f .cache/telemetry/runtime.env; then
+            docker compose --env-file .cache/telemetry/runtime.env -f infra/telemetry/compose.yaml down
+          fi
+          docker compose down

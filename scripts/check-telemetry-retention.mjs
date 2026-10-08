@@ -41,11 +41,33 @@ let receipts;
 for (let i = 0; i < 35; i++) {
   try {
     receipts = dc(["exec", "-T", "receiver", "cat", "/data/receipts.jsonl"]);
-    if (receipts.includes(name)) break;
+    if (
+      receipts
+        .trim()
+        .split("\n")
+        .map(JSON.parse)
+        .some(
+          (row) =>
+            Date.parse(row.received_at) >= started.getTime() &&
+            row.alerts.some((alert) => alert.name === name),
+        )
+    )
+      break;
   } catch {}
   await sleep(1000);
 }
-assert.ok(receipts?.includes(name));
+assert.ok(
+  receipts
+    ?.trim()
+    .split("\n")
+    .map(JSON.parse)
+    .some(
+      (row) =>
+        Date.parse(row.received_at) >= started.getTime() &&
+        row.alerts.some((alert) => alert.name === name),
+    ),
+  "This run must receive a new webhook.",
+);
 const at = Math.floor(Date.now() / 1000) - 2;
 const route = "/api/v1/query?query=" + encodeURIComponent('up{job="mesh-api"}') + "&time=" + at;
 const before = (await api(32091, route)).data.result;
@@ -77,6 +99,7 @@ const after = (await api(32091, route)).data.result;
 assert.deepEqual(after, before, "Historic scrape at a fixed instant was lost.");
 const restoredSilence = await api(32093, "/api/v2/silence/" + silence.silenceID);
 assert.equal(restoredSilence.status.state, "active");
+await api(32093, "/api/v2/silence/" + silence.silenceID, { method: "DELETE" });
 const afterReceipts = dc(["exec", "-T", "receiver", "cat", "/data/receipts.jsonl"]);
 assert.ok(afterReceipts.startsWith(receipts), "Delivered receiver history was lost.");
 await mkdir(".cache/acceptance-evidence", { recursive: true });

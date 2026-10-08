@@ -102,7 +102,7 @@ services:
 networks:
   showcase:
     external: true
-    name: mesh-showcase_default
+    name: ${MESH_TELEMETRY_NETWORK:-mesh-showcase_default}
 
 volumes:
   prometheus_data:
