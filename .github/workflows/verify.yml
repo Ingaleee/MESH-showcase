@@ -97,6 +97,8 @@ jobs:
           done
           docker compose logs
           exit 1
+      - name: Development API recovery after SIGKILL
+        run: node scripts/check-api-restart.mjs
       - name: Wait for the real file scanner
         run: |
           docker compose exec -T api bundle exec rails runner '

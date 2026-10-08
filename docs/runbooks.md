@@ -42,6 +42,10 @@
 
 У scanner свой процесс Solid Queue. `scan_token` защищает запись результата, `scan_lease_until` восстанавливает смерть worker через 60 секунд, `scan_retry_at` задаёт durable backoff до 300 секунд. При `integrity_mismatch` сравните storage bytes с исходной загрузкой и SHA-256; новый файл передаётся новой версией. Непроверенные или rejected вложения не допускают приёмку результата. `mesh_files_oldest_seconds`, `mesh_files_quarantined` и `mesh_files_scan_errors` показывают задержки и сбои.
 
+## Development API после аварии Docker
+
+Showcase Compose запускает Rails с --pid /dev/null: жизненным циклом процесса управляет контейнер. Сохраняемый в bind mount server.pid после аварии может содержать 1 и блокировать следующий запуск. Проверка node scripts/check-api-restart.mjs ограничена showcase API: SIGKILL, start и ожидание реального session HTTP 200; она также включена в hosted CI. Это проверка одного процесса, не восстановление целого Docker host или пользовательских файлов. Production Rails имеет отдельную конфигурацию и этим изменением не меняется.
+
 ## Готовность API и ограничения входа
 
 `/up` — liveness процесса, `/ready` — доступность primary PostgreSQL. При 503 на `/ready` проверьте DB, connection pool и сеть; ответ намеренно не раскрывает адрес или текст исключения. Отказ queue/scanner отслеживается отдельно. Не перезапускайте живой API только потому, что недоступна его БД.

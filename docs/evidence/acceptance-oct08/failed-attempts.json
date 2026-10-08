@@ -28,9 +28,21 @@
       "conclusion": "failure",
       "failure": "Untrusted CNI connection was rejected with ECONNREFUSED, which the negative probe did not handle.",
       "resolution": "Handle explicit reject as well as drop; repeat the positive control against the same endpoint."
+    },
+    {
+      "run_id": 37838689441,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37838689441",
+      "conclusion": "failure",
+      "failure": "Generic-key scanner matched the diagnostic command_key UUID in the newly preserved hosted Publishing summary.",
+      "resolution": "Exact file plus UUID-shaped command_key match only; keep canary and full history scan."
+    },
+    {
+      "run_id": 37839685069,
+      "url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37839685069",
+      "conclusion": "failure",
+      "failure": "BuildKit rejected an Alertmanager UI download with a digest different from the pinned upstream checksum. Browser/incident steps did not run.",
+      "resolution": "Preserve checksum rejection. Official API metadata, upstream sha256sums and a separate download all match the pinned digest; a fresh workflow must validate the download again. Cause of the mismatching transfer is unconfirmed."
     }
-    ,
-    {"run_id":37838689441,"url":"https://github.com/Ingaleee/MESH-showcase/actions/runs/37838689441","conclusion":"failure","failure":"Generic-key scanner matched the diagnostic command_key UUID in the newly preserved hosted Publishing summary.","resolution":"Exact file plus UUID-shaped command_key match only; keep canary and full history scan."}
   ],
   "policy": "Failed workflow outcomes remain available. This summary records observed failures, not a passing report."
 }

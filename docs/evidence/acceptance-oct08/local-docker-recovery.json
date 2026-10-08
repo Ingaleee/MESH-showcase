@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-08T20:54:52.265Z",
+  "container": "/mesh-showcase-api-1",
+  "abrupt_signal": "SIGKILL",
+  "pidfile": "/dev/null",
+  "recovered": true,
+  "elapsed_seconds": 30.622,
+  "scope": "One development API container; databases, files and other services stay running.",
+  "schema_version": 1,
+  "source_revision": "5bcf8a0cff9d5a2d6949d3cf75b6e9838b611390",
+  "working_tree_dirty": true,
+  "source_hashes": {
+    "compose.yaml": "28d300971fbb9a98c8f67b87dcaae3c95baf29807e3f68073e15b3c4eadfa140",
+    "scripts/check-api-restart.mjs": "390588fbb414d22ba736d21b579e2fdcf1d72202ff789e66b874379b207ff800"
+  },
+  "http_verified": [
+    {
+      "url": "http://localhost:3100/",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:3100/api/v1/session",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:3200/",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:3200/api/v1/session",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:32092/api/health",
+      "status": 200
+    }
+  ],
+  "main_product_action": "User-authorized start of existing containers; stale temporary API PID removed after confirming the container was stopped. No source, configuration, DB or user file changes.",
+  "forced_wsl_termination": false,
+  "root_cause": "Stale Rails PID after the Docker outage was observed. The cause of the whole engine outage remains unconfirmed."
+}

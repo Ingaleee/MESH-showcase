@@ -59,7 +59,8 @@ services:
 
   api:
     <<: *ruby
-    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+    command:
+      ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000", "--pid", "/dev/null"]
     ports:
       - "127.0.0.1:${MESH_API_PORT:-3201}:3000"
     healthcheck:

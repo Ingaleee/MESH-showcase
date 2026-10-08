@@ -9,7 +9,7 @@
 | Поддержка внешних студий       | Stable error codes + fix, independent simulator, diagnostic report и EN partner update                         |
 | Production investigation       | HTTP vs worker health, real delivered alerts, replay-safe recovery, clean DB+files restore                     |
 | Docker / Kubernetes            | Native production parity, strict image scan, live Helm rollback, real NetworkPolicy denies, readiness/liveness |
-| IaC                            | Actual Terraform apply/drift/repair; Ansible syntax prepared, Ubuntu convergence ещё впереди                   |
+| IaC                            | Actual Terraform apply/drift/repair; Ubuntu Ansible second apply changed=0; signed rollout/rollback                   |
 | Frontend / разные языки        | TypeScript Next.js UI, отдельный Node partner, 13 full browser scenarios                                       |
 | AI tools / коммуникация        | Проверяемые гипотезы, сохранённые failures, postmortem; кандидат объясняет свои решения сам                    |
 
