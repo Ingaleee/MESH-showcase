@@ -353,6 +353,10 @@ if (operation === "manifest") {
         await atomicJSON(current, previous);
         report.previous_release_restored = true;
         await atomicJSON(journal, { ...intent, phase: "recovered" });
+      } else {
+        // There is no verified release to roll back to. Reject this intent so a corrected release can bootstrap.
+        await atomicJSON(journal, { ...intent, phase: "rejected", failure: error.message });
+        report.no_verified_baseline = true;
       }
       throw error;
     }

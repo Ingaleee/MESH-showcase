@@ -45,7 +45,7 @@ jobs:
         run: node scripts/check-secrets.mjs
       - name: Contracts, boundaries, formatting and frontend build
         run: |
-          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs infra/sre/receiver.test.mjs
+          node --test scripts/release-state.test.mjs scripts/release-rejection.test.mjs scripts/release-lock.test.mjs infra/sre/receiver.test.mjs
           python3 scripts/build-contract.py --check
           npm run contract:check
           npm run test:architecture

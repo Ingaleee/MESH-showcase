@@ -36,7 +36,14 @@ export async function optionalJSON(file) {
 export async function recoverRelease(state, apply, validate) {
   const journalFile = path.join(state, "journal.json");
   const journal = await optionalJSON(journalFile);
-  if (!journal || ["committed", "recovered", "rejected"].includes(journal.phase)) return null;
+  if (!journal) return null;
+  if (
+    !["applying", "verified", "rolling_back", "committed", "recovered", "rejected"].includes(
+      journal.phase,
+    )
+  )
+    throw new Error("Unknown release journal phase; refuse automatic recovery.");
+  if (["committed", "recovered", "rejected"].includes(journal.phase)) return null;
   const target = validate(journal.baseline ?? journal.target);
   const smoke = await apply(target, !journal.baseline);
   await atomicJSON(path.join(state, "current.json"), target);

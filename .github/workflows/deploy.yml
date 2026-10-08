@@ -127,7 +127,7 @@ jobs:
         run: node scripts/check-release-runtime.mjs
       - name: Verify deployment crash recovery and lock ownership
         run: |
-          node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs
+          node --test scripts/release-state.test.mjs scripts/release-rejection.test.mjs scripts/release-lock.test.mjs
           node scripts/check-release-crash.mjs
       - name: Save reports, never runtime secrets
         if: always()
