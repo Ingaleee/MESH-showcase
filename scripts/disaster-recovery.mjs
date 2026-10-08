@@ -27,6 +27,8 @@ const variables = {
   SCANNER_IMAGE: release.images.clamav,
   SECRET_KEY_BASE: derive("session"),
   MESH_METRICS_TOKEN: derive("metrics"),
+  MESH_GATEWAY_SECRET: derive("gateway"),
+  MESH_WEBHOOK_SECRET: derive("webhook"),
   MESH_PARTNER_TOKEN_SHOWCASE: derive("partner"),
   POSTGRES_PASSWORD: randomBytes(32).toString("hex"),
   RUNTIME_DATABASE_PASSWORD: randomBytes(32).toString("hex"),
