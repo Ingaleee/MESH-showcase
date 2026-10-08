@@ -18,6 +18,8 @@ apps/api/vendor/bundle/
 *.pid
 *.gem
 Thumbs.db
+**/__pycache__/
+*.pyc
 
 
 .env.*

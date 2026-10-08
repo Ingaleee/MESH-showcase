@@ -2,7 +2,7 @@
 
 Scope: MESH-showcase only. This is the specification for the next execution, not evidence that it passed.
 
-The backend is a modular Rails monolith. Existing ActiveRecord services are not framework-independent application code. We introduce a strict Domain → Application → Infrastructure boundary for the external publication execution path, retaining the existing public facade and SQL guarantees. Domain owns decisions; Application orchestrates ports; adapters own locks, transactions, storage and HTTP. The composition root connects them. Other Rails use cases retain their documented coupling rather than being misleadingly relabelled.
+The backend is a modular Rails monolith. Existing ActiveRecord services are not framework-independent application code. We introduce a strict Infrastructure → Application → Domain dependency direction for the external publication execution path, retaining the existing public facade and SQL guarantees. Domain owns decisions; Application orchestrates ports; adapters own locks, transactions, storage and HTTP. The composition root connects them. Other Rails use cases retain their documented coupling rather than being misleadingly relabelled.
 
 Acceptance before measurement:
 
