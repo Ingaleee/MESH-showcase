@@ -23,6 +23,39 @@ async function api(port, route, options) {
   const text = await r.text();
   return text ? JSON.parse(text) : null;
 }
+const evidence = process.env.MESH_EVIDENCE_DIR ?? ".cache/acceptance-evidence";
+for (const [port, route] of [
+  [32091, "/-/ready"],
+  [32093, "/-/ready"],
+]) {
+  let ready = false;
+  for (let attempt = 0; attempt < 60; attempt++) {
+    try {
+      const response = await fetch("http://127.0.0.1:" + port + route, {
+        signal: AbortSignal.timeout(2000),
+      });
+      if (response.ok) {
+        ready = true;
+        break;
+      }
+    } catch {}
+    await sleep(1000);
+  }
+  assert.ok(ready, "Telemetry service did not become ready: " + port);
+}
+let scraped = false;
+for (let attempt = 0; attempt < 30; attempt++) {
+  const result = await api(
+    32091,
+    "/api/v1/query?query=" + encodeURIComponent('up{job="mesh-api"}'),
+  );
+  if (result.data.result.some((row) => row.value[1] === "1")) {
+    scraped = true;
+    break;
+  }
+  await sleep(1000);
+}
+assert.ok(scraped, "A healthy API scrape is required before the retention exercise.");
 const name = "MeshRetentionProbe";
 const started = new Date();
 await api(32093, "/api/v2/alerts", {
@@ -68,7 +101,7 @@ assert.ok(
     ),
   "This run must receive a new webhook.",
 );
-const at = Math.floor(Date.now() / 1000) - 2;
+const at = Date.now() / 1000;
 const route = "/api/v1/query?query=" + encodeURIComponent('up{job="mesh-api"}') + "&time=" + at;
 const before = (await api(32091, route)).data.result;
 assert.equal(before.length, 1);
@@ -102,13 +135,16 @@ assert.equal(restoredSilence.status.state, "active");
 await api(32093, "/api/v2/silence/" + silence.silenceID, { method: "DELETE" });
 const afterReceipts = dc(["exec", "-T", "receiver", "cat", "/data/receipts.jsonl"]);
 assert.ok(afterReceipts.startsWith(receipts), "Delivered receiver history was lost.");
-await mkdir(".cache/acceptance-evidence", { recursive: true });
+await mkdir(evidence, { recursive: true });
 await writeFile(
-  ".cache/acceptance-evidence/telemetry-retention.json",
+  evidence + "/telemetry-retention.json",
   JSON.stringify(
     {
       checked_at: new Date().toISOString(),
-      environment: "isolated Docker Desktop telemetry",
+      environment:
+        process.env.GITHUB_ACTIONS === "true"
+          ? "GitHub hosted Ubuntu telemetry"
+          : "isolated Docker Desktop telemetry",
       historic_scrape_preserved: true,
       silence_preserved: true,
       active_alert_policy:

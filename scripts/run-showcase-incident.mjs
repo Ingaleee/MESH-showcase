@@ -63,7 +63,10 @@ async function waitFor(condition) {
 }
 const report = {
   checked_at: new Date().toISOString(),
-  environment: "mesh-showcase development",
+  environment:
+    process.env.GITHUB_ACTIONS === "true"
+      ? "GitHub hosted Ubuntu isolated development"
+      : "mesh-showcase Docker Desktop development",
   lab_threshold: "queue age >10s for 5s; 5s scrapes",
   success: false,
 };

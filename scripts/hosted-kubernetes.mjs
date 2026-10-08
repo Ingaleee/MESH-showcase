@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process";
+import { appendFileSync } from "node:fs";
 import { randomBytes, randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -15,6 +16,16 @@ function run(program, args, input, allowFailure = false) {
     timeout: 360000,
     maxBuffer: 2 ** 23,
   });
+  appendFileSync(
+    path.join(evidence, "commands.jsonl"),
+    JSON.stringify({
+      checked_at: new Date().toISOString(),
+      program,
+      args: args.map((value) => value.replace(/[a-f0-9]{96}/g, "[REDACTED]")),
+      exit_code: result.status,
+      spawn_error: result.error?.code ?? null,
+    }) + "\n",
+  );
   if (result.error || (result.status !== 0 && !allowFailure))
     throw (
       result.error ??
@@ -288,10 +299,13 @@ assert.equal(
     "untrusted",
     "begin; " +
       http +
-      "; puts 'LEAK'; rescue Timeout::Error,Errno::ETIMEDOUT,Errno::EHOSTUNREACH; puts 'denied'; end",
+      "; puts 'LEAK'; rescue Timeout::Error,Errno::ETIMEDOUT,Errno::EHOSTUNREACH,Errno::ECONNREFUSED; puts 'denied'; end",
   ),
   "denied",
 );
+// A CNI may reject rather than silently drop. Re-check the same healthy target
+// through the authorized path so an unavailable service cannot masquerade as policy.
+assert.equal(ruby("approved", "puts " + http), "200");
 apply({
   apiVersion: "v1",
   kind: "Pod",
@@ -323,10 +337,11 @@ assert.equal(
     "approved",
     "begin; " +
       sinkHTTP +
-      "; puts 'LEAK'; rescue Timeout::Error,Errno::ETIMEDOUT,Errno::EHOSTUNREACH; puts 'denied'; end",
+      "; puts 'LEAK'; rescue Timeout::Error,Errno::ETIMEDOUT,Errno::EHOSTUNREACH,Errno::ECONNREFUSED; puts 'denied'; end",
   ),
   "denied",
 );
+assert.equal(ruby("untrusted", "puts " + sinkHTTP), "200");
 const correlation = randomUUID();
 const probe = await readFile("apps/api/script/kubernetes_probe.rb", "utf8");
 const queueProbe = (phase) => {
