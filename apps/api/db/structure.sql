@@ -39,6 +39,38 @@ COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
 --
+-- Name: enforce_publishing_active_binding(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.enforce_publishing_active_binding() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  IF NEW.active_deployment_id IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM publishing_deployments d WHERE d.id = NEW.active_deployment_id
+      AND d.partner_id = NEW.id AND d.state = 'confirmed' AND d.remote_sequence = NEW.active_sequence
+  ) THEN RAISE EXCEPTION 'active deployment must belong to this partner and sequence'; END IF;
+  RETURN NEW;
+END $$;
+
+
+--
+-- Name: enforce_publishing_rollback_basis(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.enforce_publishing_rollback_basis() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  IF NEW.kind = 'rollback' AND NOT EXISTS (
+    SELECT 1 FROM publishing_deployments d WHERE d.id = NEW.rollback_of_id
+      AND d.partner_id = NEW.partner_id AND d.candidate_id = NEW.candidate_id AND d.state = 'confirmed'
+  ) THEN RAISE EXCEPTION 'rollback requires a confirmed deployment of the same partner and candidate'; END IF;
+  RETURN NEW;
+END $$;
+
+
+--
 -- Name: mesh_check_ledger_balance(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -795,7 +827,7 @@ CREATE TABLE public.publishing_deployments (
     confirmed_at timestamp(6) without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    CONSTRAINT publishing_confirmed_identity CHECK ((((state)::text <> 'confirmed'::text) OR ((remote_id IS NOT NULL) AND (remote_sequence > 0) AND (confirmed_at IS NOT NULL)))),
+    CONSTRAINT publishing_confirmed_identity CHECK ((((state)::text <> 'confirmed'::text) OR ((remote_id IS NOT NULL) AND ((remote_id)::text <> ''::text) AND (remote_sequence IS NOT NULL) AND (remote_sequence > 0) AND (confirmed_at IS NOT NULL)))),
     CONSTRAINT publishing_deployment_state CHECK ((((state)::text = ANY ((ARRAY['pending'::character varying, 'dispatching'::character varying, 'unknown'::character varying, 'confirmed'::character varying, 'failed'::character varying])::text[])) AND ((kind)::text = ANY ((ARRAY['publish'::character varying, 'rollback'::character varying])::text[])) AND (attempts >= 0) AND (consecutive_failures >= 0))),
     CONSTRAINT publishing_rollback_basis CHECK ((((kind)::text = 'rollback'::text) = (rollback_of_id IS NOT NULL)))
 );
@@ -816,6 +848,7 @@ CREATE TABLE public.publishing_partners (
     active_sequence bigint DEFAULT 0 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
+    CONSTRAINT publishing_active_presence CHECK ((((active_deployment_id IS NULL) AND (active_sequence = 0)) OR ((active_deployment_id IS NOT NULL) AND (active_sequence > 0)))),
     CONSTRAINT publishing_partner_sequence CHECK ((active_sequence >= 0))
 );
 
@@ -1886,6 +1919,13 @@ CREATE TRIGGER ledger_header_immutable BEFORE DELETE OR UPDATE ON public.finance
 
 
 --
+-- Name: publishing_partners publishing_active_binding; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER publishing_active_binding BEFORE INSERT OR UPDATE ON public.publishing_partners FOR EACH ROW EXECUTE FUNCTION public.enforce_publishing_active_binding();
+
+
+--
 -- Name: publishing_candidates publishing_candidate_immutable; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1918,6 +1958,13 @@ CREATE TRIGGER publishing_receipt_immutable BEFORE DELETE OR UPDATE ON public.pu
 --
 
 CREATE TRIGGER publishing_release_basis BEFORE INSERT ON public.publishing_deployments FOR EACH ROW EXECUTE FUNCTION public.validate_publishing_release_basis();
+
+
+--
+-- Name: publishing_deployments publishing_rollback_basis; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER publishing_rollback_basis BEFORE INSERT ON public.publishing_deployments FOR EACH ROW EXECUTE FUNCTION public.enforce_publishing_rollback_basis();
 
 
 --
@@ -2356,6 +2403,7 @@ ALTER TABLE ONLY public.engagements_work_files
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261008160000'),
 ('20261008150000'),
 ('20261008142000'),
 ('20261008140000'),
