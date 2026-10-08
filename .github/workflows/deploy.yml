@@ -6,6 +6,10 @@ on:
         description: Successful MESH image release run on main
         required: true
         type: string
+      baseline_run_id:
+        description: Optional earlier successful release for schema compatibility
+        required: false
+        type: string
 permissions:
   contents: read
   actions: read
@@ -22,6 +26,7 @@ jobs:
       MESH_DEPLOYMENT_STATE: ${{ github.workspace }}/.cache/deployment
       MESH_EVIDENCE_DIR: .cache/deployment-evidence
       RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+      BASELINE_RUN_ID: ${{ inputs.baseline_run_id }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -45,6 +50,25 @@ jobs:
           run-id: ${{ inputs.release_run_id }}
           name: mesh-release-${{ env.RELEASE_REVISION }}
           path: .cache/downloaded-release
+      - name: Validate the optional earlier release
+        if: inputs.baseline_run_id != ''
+        run: |
+          [[ "$BASELINE_RUN_ID" =~ ^[0-9]+$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$BASELINE_RUN_ID")
+          [[ $(jq -r .conclusion <<< "$run") == success ]]
+          [[ $(jq -r .event <<< "$run") == workflow_dispatch ]]
+          [[ $(jq -r .head_branch <<< "$run") == main ]]
+          [[ $(jq -r .path <<< "$run") == .github/workflows/release.yml ]]
+          revision=$(jq -r .head_sha <<< "$run")
+          [[ "$revision" =~ ^[a-f0-9]{40}$ ]]
+          echo "BASELINE_REVISION=$revision" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        if: inputs.baseline_run_id != ''
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.baseline_run_id }}
+          name: mesh-release-${{ env.BASELINE_REVISION }}
+          path: .cache/downloaded-baseline
       - name: Provision this Ubuntu host and prove convergence
         run: |
           set -euo pipefail
@@ -76,10 +100,27 @@ jobs:
           # Negative control: the correct image with an incorrect source revision must fail verification.
           image=$(jq -r .images.api .cache/downloaded-release/release.json)
           if gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --source-digest 0000000000000000000000000000000000000000 >/dev/null 2>&1; then exit 1; fi
+      - name: Verify the previous release through the same trust policy
+        if: inputs.baseline_run_id != ''
+        run: |
+          jq -e --arg revision "$BASELINE_REVISION" '.revision == $revision and .working_tree_dirty == false and .schema_version == 2' .cache/downloaded-baseline/release.json
+          for name in api web postgres clamav; do
+            image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-baseline/release.json)
+            [[ "$image" =~ ^ghcr\.io/[a-z0-9_.\/-]+@sha256:[a-f0-9]{64}$ ]]
+            gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/image.yml" --source-digest "$BASELINE_REVISION" --source-ref refs/heads/main --deny-self-hosted-runners --format json > "$MESH_EVIDENCE_DIR/baseline-attestation-$name.json"
+            docker pull "$image"
+          done
+          caddy=$(jq -r .images.caddy .cache/downloaded-baseline/release.json)
+          [[ "$caddy" == docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f ]]
       - name: Prepare fresh ephemeral secrets
         run: node scripts/prepare-environment.mjs deployment
       - name: Migrate and deploy verified digests
         run: bash scripts/release.sh deploy .cache/downloaded-release/release.json
+      - name: Previous runtime compatibility with expanded schema
+        if: inputs.baseline_run_id != ''
+        run: node scripts/check-release-compatibility.mjs
+      - name: TLS reads with a declared load and latency threshold
+        run: node scripts/check-tls-read-profile.mjs
       - name: Business, private files and deliberately broken release
         run: node scripts/check-release-runtime.mjs
       - name: Verify deployment crash recovery and lock ownership
