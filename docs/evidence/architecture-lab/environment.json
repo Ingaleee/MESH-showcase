@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-08T00:29:00.5170212+00:00",
+  "apiImage": "sha256:32e4decf2668bd86d5302edf573daf9ebc14ecabb327b2c7e1cada8e5d58818f",
+  "dockerCpus": 22,
+  "dockerMemoryBytes": 8015904768,
+  "api": "production Ruby/Rails, non-root, read-only root",
+  "database": "isolated logical PostgreSQL DB on shared local server",
+  "rate": 20,
+  "durationSeconds": 120,
+  "cache": "warm",
+  "scope": "Direct Docker HTTP; no TLS, frontend/SSR or capacity claim."
+}

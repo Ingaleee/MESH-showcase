@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-10-07T22:45:12.560Z",
+  "deliveryId": "875c9d87-353c-4e2b-9b9f-b78b1211cd24",
+  "scope": "Only the known NORA demo changes-request event created before the consumer was extended",
+  "operatorRetry": 200,
+  "processed": true,
+  "notifications": 1
+}

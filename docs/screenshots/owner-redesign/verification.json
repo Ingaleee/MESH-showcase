@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-10-07T16:49:56.559Z",
+  "sourceHashes": {
+    "apps/web/src/app/projects/[id]/page.tsx": "2e313411f251fb23d305d684d7ffda1e0bf7135a85e33e776b69db88a27f180d",
+    "apps/web/src/app/projects/[id]/layout.tsx": "0aac81c88a7fb0faefe8b79ca2a4c6f351b6f0bd5de4a2c8bc7b860eaa8d0e73",
+    "apps/web/src/app/projects/[id]/owner.css": "1914207ad1c71a3c9daeb9553f3247c67a16e924c6387aedefcc9b39402bdc84",
+    "apps/web/src/app/projects/[id]/project.css": "38b622b1b9b694e2b4578659cc962244e68f8a7eb156b868aff4201d05e34b56",
+    "apps/web/src/app/projects/[id]/proposal.css": "edce50b57e21f97ce1ed89e281868ca0ff5a6807d4e771156639f7f246dde1ea",
+    "apps/web/src/components/projects/owner-project.tsx": "63f8392c3bd9f95f2d66a5470a9ab90ad7c63bbb7f87c15131841f74ff39b8f9",
+    "apps/web/src/components/projects/owner-proposal-list.tsx": "ff99934e884e08bdb7fbfbb5f0f24eec5424eb8878fdee300f04aa96ceb41c1b",
+    "apps/web/src/components/projects/owner-proposal-drawer.tsx": "6acb9766abe84e8f822468c4011c5face81be6d184f79b4d8180ff8997500620",
+    "apps/web/src/components/projects/owner-proposal-parts.tsx": "df5aa982d451e1ac7b2cab149c1c5e6a6520f5d3ebdc0dcd5de220f58ecb5e97",
+    "apps/web/src/components/projects/project-hero.tsx": "efa3d71562e5be146a6ddf09fc109b4a02b96f08351897d5725eefba9ba05fdb",
+    "apps/web/src/components/projects/brief-content.tsx": "11a2bc62623f3cfcc835a660692c2bff0153505536778f0007b14611dc1c19ad",
+    "apps/web/src/components/projects/proposal-box.tsx": "f136fadb31a2e981fa1ad300c153a80fa8fa1423965fe5fda69c1bda5861544e",
+    "apps/web/src/components/projects/proposal-composer.tsx": "c74102f2c52d9a002aa9ad048cc19ff3988c3d11ae518b2640ce9728b5b1227d",
+    "apps/web/src/components/modal.tsx": "db8d40d97aa89263a4d93f34d663e8bd105aaafbe03911bc09cf52a275bf0973",
+    "apps/web/src/lib/api.ts": "1833e0c1b2266575652d32eafc862b3eb6a24b4da8eaa6cd4cc1f00808a8c233",
+    "apps/web/src/lib/api-schema.d.ts": "f7c676c37c880e3a0370c3954a99a8ead3ecadfcc1d3080cfb5e98103b97fd23",
+    "apps/api/config/routes.rb": "360dce8cea86d266e74aeefd344145a0c46b85e0ebf24cf7633c122703ffedba",
+    "apps/api/app/controllers/api/v1/projects_controller.rb": "91f360135e9b53273284f5a48cffcafab11c1c28784e491f531bd153f8b03b2d",
+    "apps/api/app/controllers/api/v1/proposal_examples_controller.rb": "c67e6912a34c4d96885d4443729c1e0fbe0b53e2af32e22cd67e533a95816c40",
+    "apps/api/app/services/api/presenters.rb": "c5685abff03b4f22815ccf1b93da583c69f555d3c8cc4ec4ae863a35ecde9bba",
+    "apps/api/packs/marketplace/app/services/marketplace/change_intake.rb": "594799db729f536fea3c71a04f678fa73e67a7f3b5fb11867d590581f0dcbc31",
+    "apps/api/packs/marketplace/app/services/marketplace/owner_overview.rb": "3a12f85c511a2a0f21e4638a8c0af196f73073664dd86e437bb312fa6a121313",
+    "apps/api/packs/marketplace/app/services/marketplace/submit_proposal.rb": "1badbbab1b541725f7c2b75fdbfc45ad514a3246d0fc7f14e018cc84af9bfbe2",
+    "apps/api/packs/marketplace/app/services/marketplace/award_proposal.rb": "61b29a7f0812a6d7465911de3a43f9dbc5e730823f56d3dc86bd26aac22abc20",
+    "apps/api/packs/engagements/app/services/engagements/read_model.rb": "b915a2494dda724e4392a0f8c9a2e3b767b2a4798d68ba990844f50a801693bc",
+    "apps/api/packs/talent/app/services/talent/directory.rb": "d6892507bbc9d0c6ba0e132e32d32da74a3a438916413b37a1dec1c5591a0785",
+    "apps/api/db/migrate/20261007160000_add_project_intake_control.rb": "de67cded9e9dc0eb1d9f3f4d517817d264eabe62d060a61222e99db33ee578c2",
+    "apps/api/db/seeds.rb": "2df5f9209a56f9aae8331c434f4c62ef514be70aec0bd3b987d6749ae954c5af",
+    "apps/api/db/seeds/owner_preview.rb": "1f5bde52f27048d621a129205d2b6c32d987391ab03d8ebc260bbd9cf5e5aef9",
+    "apps/api/spec/requests/project_owner_spec.rb": "ff9cc2c5d9f9ad235635ac1cf001f107f930f56ae9c4e13cdb9f524b95b5a6a5",
+    "scripts/build-contract.py": "831b8ee42ab2cbefcea77d68e7f3d7a463edf47cd3d84b8dae4392a6f975ff82",
+    "contracts/openapi.json": "8b08163f980b496949ab2765d172086b93270f9f2e673149ef74fcb1145483b1",
+    "contracts/module-apis.json": "7e1956fc3baa75ffe6a535dccc061a3b35da97927f4c40156ed1dd839c562d6b",
+    "tests/e2e/owner.spec.ts": "b6cf47afe3ae4cd41f0dfd1dacbdd55b429da2d6abf0d06c28ae6ff46e88683b",
+    "tests/e2e/projects.spec.ts": "70553f19384ce70f3158abe883fd4d1d6354152211320a9d4712fbd760008140",
+    "tests/e2e/marketplace.spec.ts": "8dc53f506c16cda001a5540169f7c0098d74c7b9e45d357a4ee3a7f75ad0f620",
+    "docs/owner-design.md": "1210ea4d9a1a6034289c756665f7f539fa639f3affd6d5b817f6d364f674e0b5"
+  },
+  "artifactHashes": {
+    "rspec-full.json": "d99fde80b87d3e93c2a6c288903347fd26237b7a86db364d11500e033aa2bf18",
+    "playwright-full.json": "2ccfdd662e426c14f85b7dc1cb4cb323483af15abc6b43c28a2271f77547c183",
+    "brakeman.json": "eb3f009aeb29ef2634677d9b65a0aa3964d2a3756f37d4fa519f06c2bca309ee",
+    "browser-check.json": "85d9b5a3c318133f30f0ac57750c579d900b020c2aa98f7167cfb76d31d77a54",
+    "production-check.json": "53a14f70323339dc64a32e978c37e8d2645b85fc8188da216dd1682f39e75450",
+    "production-image.json": "cbafa74b41da5e4c24017f2df8fba7af2dcf7629defd3c0d81bd1d2608714261",
+    "owner-desktop.png": "f4d2f9d28462f78715c30682a612aee72d91f04ecacc639aa95719a3cda12f8e",
+    "owner-mobile.png": "3ce07ae23f612a6453dd690bfaa6729a676d7b760268e7875696a077514450c9",
+    "owner-drawer.png": "3eacd47ec3c27720a318e4f6fcab9dc5c911f18f2f345531696644b5368783b6",
+    "owner-drawer-mobile.png": "3501fe080e697a26c2319a2d8526076ab2843a752d9668daef83c67df1002626",
+    "owner-confirmation.png": "3175668be8a8dfa8ba87dea772c13605a0e76289700eefa779b74ce69176129c",
+    "owner-comparison.png": "9bd07f070b3060d2dcf570822da4e18411c5ad3f5717408d5ad978f974fcdce7",
+    "production-desktop.png": "354b495cdbf89aaddbcd41d27e346feafa765edff180d5a4dfa58ea32055946b"
+  },
+  "backend": {
+    "database": "mesh_test",
+    "duration": 35.738063769,
+    "example_count": 56,
+    "failure_count": 0,
+    "pending_count": 0,
+    "errors_outside_of_examples_count": 0
+  },
+  "browser": {
+    "startTime": "2026-10-07T16:45:05.070Z",
+    "duration": 236825.258,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "responsive": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "axe": [
+    {
+      "width": 390,
+      "state": "list",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "list",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "drawer",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "state": "drawer",
+      "violations": []
+    }
+  ],
+  "quality": {
+    "typescript": true,
+    "prettier": true,
+    "openapiOperations": 35,
+    "moduleApiCheck": true,
+    "packwerkCheck": true,
+    "rubocopChangedFiles": 13,
+    "brakemanWarnings": 0
+  },
+  "production": {
+    "image": "sha256:d4435ff74fee7423ceeec7adbb785df581a05e37986beaca3eb9e3a023824e34",
+    "scriptsWithMatchingNonce": 14,
+    "privateImagePreviews": 4,
+    "cspViolations": [],
+    "javascriptErrors": []
+  },
+  "scope": "Owner screen with real proposal data. Seeded examples are declared MESH demonstrations and passed real ClamAV. Demo project kept open; actual selection and stale-brief handling verified on isolated E2E fixtures. Temporary production container removed after verification."
+}

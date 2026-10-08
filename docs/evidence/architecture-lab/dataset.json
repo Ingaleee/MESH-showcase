@@ -1,0 +1,10 @@
+{
+  "projects": 100001,
+  "profiles": 20000,
+  "proposals": 200001,
+  "accounts": 20001,
+  "blobs": 2,
+  "seed_seconds": 24.15,
+  "data": "Deterministic synthetic rows inserted in batches with SQL, plus one real business workflow and two files verified by the existing ClamAV. Synthetic rows do not pretend to be complete product history.",
+  "checked_at": "2026-10-08T00:27:23Z"
+}

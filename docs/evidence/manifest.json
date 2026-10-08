@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-10-08T00:39:53.670Z",
+  "source_snapshot_sha256": "edd9a5bf8efc3edd36c52060805aae0ac99692800145a26f1152ae585e3a4131",
+  "source_file_count": 354,
+  "backend_examples": 94,
+  "browser_tests": 11,
+  "benchmark_iterations": 601,
+  "benchmark_p95_ms": 25.008457600000018,
+  "architecture_lab_requests": 2406,
+  "architecture_lab_p95_ms": 81.170539,
+  "artifacts": {
+    "rspec.json": "c400023f893e7aa6827a4010b25afdc7eedc6c88422a3d3085e32b73a7521a9b",
+    "playwright.json": "e1f1135be6cbd70b753c1f1473ac9f790b34d392408abd766ec2baa3632d9175",
+    "brakeman.json": "47fd72d320c724520852b7dc41b4625f2bbb1d5a300733378781fd80a13f0262",
+    "bundler-audit.json": "942b4b3b7299b710263372153b23975bad331489044d4134269e125fc4f5eabb",
+    "npm-audit.json": "8e51b40798749e8f7530fe4d08b359273b70634cb873347084f074017de02596",
+    "money-mutations.json": "90fd61ce84e3a12734e3366df49a0d3c71aaec5b8b15b6dabf923c53cbbda194",
+    "production-csp.json": "1b95ca1d8b5699436fa77e9de027602502910cba471d5d1a3dd294addf27a162",
+    "restore-drill.json": "d8d582348948811a3160fff3be25cb11fbd57bbae4e7365e5c12d9cd243e8b38",
+    "observability.json": "8feaaf5784257cd6d794f51c1e1196909ef6b81fb154e157579146665d04e8fa",
+    "k6.json": "7fababcfb36b3d24fa98c876b68714508214605c5cfc8dd4aec3b6a5f72c9352",
+    "benchmark-environment.json": "5d8f7f310f2acf87eb1856818d760aa81279c50d41a5d56fee628e4bf0da1ab7",
+    "architecture-lab/summary.json": "eea87e9207368e99edf8159af519352132a2b0e1e060d3cc354398ad7e28ad1e",
+    "architecture-lab/verification.json": "266211e3c6d40d3bf1813d281eece0f59b8f0febbd5435db669d9c8d6dd3b1a5",
+    "architecture-lab/cleanup.json": "d0d0caf4e387eb9e2a5fd93ef27f08a39b4f0c160db6ac8b491d35279452b17e",
+    "tlc.txt": "002ec059cc857c08a7587f30b5304b8ce60fd266a9acc80e5f0961023b63794f"
+  },
+  "scope": "Local evidence snapshot with current Ruby reliability experiments. Earlier browser/frontend, financial drill and small-data benchmark have their own scopes/dates; not a signed CI attestation or a production SLA."
+}

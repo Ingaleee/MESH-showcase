@@ -1,0 +1,105 @@
+ Image mesh-ruby-dev:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 588B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.ruby-dev
+#2 transferring dockerfile: 771B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/ruby:3.4-slim@sha256:976f45719573889b0ef02fcff5fd7a486cb09a56ad11c472d51d49604c31d6ab
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 237B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/ruby:3.4-slim@sha256:976f45719573889b0ef02fcff5fd7a486cb09a56ad11c472d51d49604c31d6ab
+#5 resolve docker.io/library/ruby:3.4-slim@sha256:976f45719573889b0ef02fcff5fd7a486cb09a56ad11c472d51d49604c31d6ab 0.0s done
+#5 DONE 0.1s
+
+#6 [2/5] RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev libyaml-dev git curl ca-certificates && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [3/5] RUN gem install rails -v 8.1.4 --no-document
+#7 CACHED
+
+#8 [4/5] RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc -o /usr/share/keyrings/postgresql.asc && echo "deb [signed-by=/usr/share/keyrings/postgresql.asc] https://apt.postgresql.org/pub/repos/apt trixie-pgdg main" > /etc/apt/sources.list.d/pgdg.list && apt-get update && apt-get install -y --no-install-recommends postgresql-client-18 && rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [5/5] WORKDIR /workspace
+#9 CACHED
+
+#10 exporting to image
+#10 exporting layers 0.0s done
+#10 exporting manifest sha256:bc5f49ef81e07a2a2f076cc2781c41ea31ccd9fc4dc501cde31ab0d2d8b87ad8 0.0s done
+#10 exporting config sha256:1dc641555f0e30a637eaa59a16e1d1d632defe57ec72beaec1e42b5d113f701c 0.0s done
+#10 exporting attestation manifest sha256:7938e37219962d8eb8e306e35c63713f237bf0cb5cd559402db5e93af0a46772 0.0s done
+#10 exporting manifest list sha256:6f990a9e99e19c22dbca6ac07f565670cd25ae004e4360a50f55e1e303c36296 0.0s done
+#10 naming to docker.io/library/mesh-ruby-dev:local done
+#10 unpacking to docker.io/library/mesh-ruby-dev:local 0.0s done
+#10 DONE 0.2s
+
+#11 resolving provenance for metadata file
+#11 DONE 0.0s
+ Image mesh-ruby-dev:local Built 
+ Container mesh-db-1 Running 
+ Container mesh-db-1 Running 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Healthy 
+ Container mesh-api-run-753635916cab Creating 
+ Container mesh-api-run-753635916cab Created 
+Bundle complete! 20 Gemfile dependencies, 141 gems now installed.
+Bundled gems are installed into `/usr/local/bundle`
+ Container mesh-web-run-3c63ed6d5c67 Creating 
+ Container mesh-web-run-3c63ed6d5c67 Created 
+
+added 82 packages, and audited 84 packages in 34s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+ Container mesh-db-1 Running 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Healthy 
+ Container mesh-api-run-d1fddb112ed5 Creating 
+ Container mesh-api-run-d1fddb112ed5 Created 
+I, [2026-10-07T07:01:33.279274 #1]  INFO -- : Instrumentation: OpenTelemetry::Instrumentation::Rails was successfully installed with the following options {}
+I, [2026-10-07T07:01:33.288252 #1]  INFO -- : Instrumentation: OpenTelemetry::Instrumentation::Rack was successfully installed with the following options {allowed_request_headers: [], allowed_response_headers: [], application: nil, record_frontend_span: false, untraced_endpoints: [], url_quantization: nil, untraced_requests: nil, response_propagators: [], use_rack_events: true, allowed_rack_request_headers: {}, allowed_rack_response_headers: {}}
+I, [2026-10-07T07:01:33.295071 #1]  INFO -- : Instrumentation: OpenTelemetry::Instrumentation::ActionPack was successfully installed with the following options {span_naming: :semconv}
+I, [2026-10-07T07:01:33.309223 #1]  INFO -- : Instrumentation: OpenTelemetry::Instrumentation::ActiveJob was successfully installed with the following options {propagation_style: :link, force_flush: false, span_naming: :queue}
+I, [2026-10-07T07:01:33.346412 #1]  INFO -- : Instrumentation: OpenTelemetry::Instrumentation::PG was successfully installed with the following options {peer_service: nil, db_statement: :obfuscate, obfuscation_limit: 2000, propagator: "none", db_response_returned_rows: false, db_response_affected_rows: false}
+ Container mesh-web-1 Running 
+ Container mesh-db-1 Running 
+ Container mesh-worker-1 Recreate 
+ Container mesh-api-1 Recreate 
+ Container mesh-dispatcher-1 Recreate 
+ Container mesh-gateway-1 Recreate 
+ Container mesh-dispatcher-1 Recreated 
+ Container mesh-gateway-1 Recreated 
+ Container mesh-api-1 Recreated 
+ Container mesh-edge-1 Running 
+ Container mesh-worker-1 Recreated 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Waiting 
+ Container mesh-db-1 Healthy 
+ Container mesh-api-1 Starting 
+ Container mesh-db-1 Healthy 
+ Container mesh-worker-1 Starting 
+ Container mesh-db-1 Healthy 
+ Container mesh-dispatcher-1 Starting 
+ Container mesh-db-1 Healthy 
+ Container mesh-gateway-1 Starting 
+ Container mesh-worker-1 Started 
+ Container mesh-gateway-1 Started 
+ Container mesh-dispatcher-1 Started 
+ Container mesh-api-1 Started 
+MESH: http://localhost:3100
