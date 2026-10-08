@@ -101,6 +101,7 @@ services:
       context: ../..
       dockerfile: infra/Dockerfile.partner
     user: "1000:1000"
+    group_add: ["10001"]
     read_only: true
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]

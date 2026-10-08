@@ -68,7 +68,7 @@ when "source"
   end
   snapshot.join("fixture.json").write(JSON.generate(data))
   PortableSnapshot.seal(snapshot, root.join("transfer/application.meshbak"), key: key, kind: "application",
-    metadata: { primary_counts: counts(source), queue_counts: counts(queue), blobs: blobs, snapshot_at: Time.current.iso8601, revision: ENV.fetch("MESH_RELEASE_REVISION") })
+    metadata: { primary_counts: counts(source), queue_counts: counts(queue), blobs: blobs, snapshot_at: Time.current.iso8601, revision: ENV.fetch("MESH_RELEASE_REVISION"), run_id: ENV.fetch("GITHUB_RUN_ID") })
   # A post-snapshot local marker is deliberately outside the stated RPO.
   Identity::Account.create!(email: "post-snapshot@probe.test", display_name: "Not backed up", password: "RecoveryProbe2026!", persona: "client")
   Publishing::ProcessDeployment.call(deployment_id: pending.id)
@@ -90,7 +90,7 @@ when "partner"
   FileUtils.cp(root.join("external-expectation.json"), snapshot.join("expectation.json"))
   Pathname.new("/partner-data").glob("partner.sqlite*").each { |file| FileUtils.cp(file, snapshot.join(file.basename)) }
   raise "Simulator state missing" unless snapshot.join("partner.sqlite").file?
-  PortableSnapshot.seal(snapshot, root.join("transfer/partner.meshbak"), key: key, kind: "partner", metadata: { recorded_at: Time.current.iso8601 })
+  PortableSnapshot.seal(snapshot, root.join("transfer/partner.meshbak"), key: key, kind: "partner", metadata: { recorded_at: Time.current.iso8601, revision: ENV.fetch("MESH_RELEASE_REVISION"), run_id: ENV.fetch("GITHUB_RUN_ID") })
 when "authenticate"
   started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   archive = root.join("transfer/application.meshbak")
@@ -119,7 +119,7 @@ when "authenticate"
   end
   raise "Archive authentication negative control failed" unless denied.values.all?
   manifest = PortableSnapshot.unpack(archive, root.join("verified"), key: key)
-  raise "Wrong snapshot source" unless manifest.fetch("kind") == "application" && manifest.fetch("metadata").fetch("revision") == ENV.fetch("MESH_RELEASE_REVISION")
+  raise "Wrong snapshot source" unless manifest.fetch("kind") == "application" && manifest.fetch("metadata").fetch("revision") == ENV.fetch("MESH_RELEASE_REVISION") && manifest.fetch("metadata").fetch("run_id") == ENV.fetch("GITHUB_RUN_ID")
   missing = root.join("missing-object")
   FileUtils.cp_r(root.join("verified"), missing)
   blob = manifest.fetch("metadata").fetch("blobs").first
@@ -132,8 +132,12 @@ when "authenticate"
   end
   raise "Missing private bytes did not block activation" unless denied[:missing_object]
   partner = PortableSnapshot.unpack(root.join("transfer/partner.meshbak"), root.join("verified-partner"), key: key)
-  raise "Wrong simulator snapshot kind" unless partner.fetch("kind") == "partner"
-  root.join("verified-partner").glob("partner.sqlite*").each { |file| FileUtils.cp(file, Pathname.new("/partner-data").join(file.basename)) }
+  raise "Wrong simulator snapshot kind or source" unless partner.fetch("kind") == "partner" && partner.fetch("metadata").fetch("revision") == ENV.fetch("MESH_RELEASE_REVISION") && partner.fetch("metadata").fetch("run_id") == ENV.fetch("GITHUB_RUN_ID")
+  root.join("verified-partner").glob("partner.sqlite*").each do |file|
+    target = Pathname.new("/partner-data").join(file.basename)
+    FileUtils.cp(file, target)
+    FileUtils.chmod(0o660, target)
+  end
   root.join("negative-controls.json").write(JSON.generate(denied))
   puts JSON.generate(authenticated: true, denied: denied, elapsed_seconds: Process.clock_gettime(Process::CLOCK_MONOTONIC) - started)
 when "import"
