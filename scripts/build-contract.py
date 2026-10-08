@@ -1,5 +1,6 @@
 """Author the checked-in OpenAPI contract. Output is deterministic JSON."""
 import json
+import sys
 from pathlib import Path
 
 
@@ -273,7 +274,7 @@ paths.update(publishing["paths"])
 
 contract = {
     "openapi": "3.1.1",
-    "info": {"title": "MESH API", "version": "0.1.0", "description": "Creator marketplace. Finance endpoints are an explicitly isolated sandbox."},
+    "info": {"title": "MESH API", "version": "0.1.0", "description": "Creator marketplace. Finance endpoints are an explicitly isolated sandbox. Publishing is an operator-only isolated integration laboratory."},
     "servers": [{"url": "/api/v1"}],
     "paths": paths,
     "components": {
@@ -282,5 +283,10 @@ contract = {
     },
 }
 destination = Path(__file__).resolve().parents[1] / "contracts" / "openapi.json"
-destination.parent.mkdir(exist_ok=True)
-destination.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+if "--check" in sys.argv:
+    if json.loads(destination.read_text(encoding="utf-8")) != contract:
+        raise SystemExit("OpenAPI authoring sources differ from the generated contract.")
+    print("OpenAPI authoring sources agree with the generated contract.")
+else:
+    destination.parent.mkdir(exist_ok=True)
+    destination.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

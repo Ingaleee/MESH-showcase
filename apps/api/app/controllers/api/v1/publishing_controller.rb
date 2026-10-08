@@ -54,6 +54,16 @@ module Api
         ), status: :accepted
       end
 
+      def artifact
+        candidate = owned_candidate
+        bytes = Publishing::ValidateCandidate.read_bytes(candidate)
+        unless Digest::SHA256.hexdigest(bytes) == candidate.artifact_sha256
+          raise Platform::Error.new("ARTIFACT_DIGEST_CHANGED", "Stored artifact integrity check failed.", status: 409)
+        end
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        send_data bytes, type: "application/zip", disposition: "attachment", filename: "#{candidate.artifact_sha256}.zip"
+      end
+
       def diagnose
         deployment = Publishing::Deployment.where(partner_id: owned_partners.select(:id)).includes(:partner, candidate: :artifact_blob, validation: :candidate).find(params[:deployment_id])
         render json: {

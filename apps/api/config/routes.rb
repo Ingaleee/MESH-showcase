@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post "publishing/partners/:partner_id/candidates", to: "publishing#submit"
       post "publishing/candidates/:candidate_id/validate", to: "publishing#validate"
       post "publishing/candidates/:candidate_id/publish", to: "publishing#publish"
+      get "publishing/candidates/:candidate_id/artifact", to: "publishing#artifact"
       get "publishing/deployments/:deployment_id/diagnose", to: "publishing#diagnose"
       post "publishing/deployments/:deployment_id/reconcile", to: "publishing#reconcile"
       resource :session, only: %i[show create destroy], controller: :sessions

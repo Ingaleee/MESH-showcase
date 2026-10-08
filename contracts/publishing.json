@@ -35,12 +35,23 @@
                 "type": "string"
               }
             },
-            "required": ["path", "size", "sha256"],
+            "required": [
+              "path",
+              "size",
+              "sha256"
+            ],
             "additionalProperties": false
           }
         }
       },
-      "required": ["schema_version", "title", "version", "contract_version", "entrypoint", "files"],
+      "required": [
+        "schema_version",
+        "title",
+        "version",
+        "contract_version",
+        "entrypoint",
+        "files"
+      ],
       "additionalProperties": false
     },
     "PublishingPartner": {
@@ -71,7 +82,13 @@
           "type": "integer"
         }
       },
-      "required": ["id", "name", "contract_version", "active_deployment_id", "active_sequence"],
+      "required": [
+        "id",
+        "name",
+        "contract_version",
+        "active_deployment_id",
+        "active_sequence"
+      ],
       "additionalProperties": false
     },
     "PublishingCandidate": {
@@ -125,7 +142,13 @@
         },
         "state": {
           "type": "string",
-          "enum": ["pending", "running", "passed", "rejected", "failed"]
+          "enum": [
+            "pending",
+            "running",
+            "passed",
+            "rejected",
+            "failed"
+          ]
         },
         "policy_version": {
           "type": "string"
@@ -166,7 +189,13 @@
                     "type": "string"
                   }
                 },
-                "required": ["code", "ok", "expected", "observed", "fix"],
+                "required": [
+                  "code",
+                  "ok",
+                  "expected",
+                  "observed",
+                  "fix"
+                ],
                 "additionalProperties": false
               }
             }
@@ -240,11 +269,20 @@
         },
         "kind": {
           "type": "string",
-          "enum": ["publish", "rollback"]
+          "enum": [
+            "publish",
+            "rollback"
+          ]
         },
         "state": {
           "type": "string",
-          "enum": ["pending", "dispatching", "unknown", "confirmed", "failed"]
+          "enum": [
+            "pending",
+            "dispatching",
+            "unknown",
+            "confirmed",
+            "failed"
+          ]
         },
         "last_error": {
           "anyOf": [
@@ -384,7 +422,11 @@
               ]
             }
           },
-          "required": ["partners", "candidates", "deployments"],
+          "required": [
+            "partners",
+            "candidates",
+            "deployments"
+          ],
           "additionalProperties": false
         }
       },
@@ -669,7 +711,9 @@
                       "format": "uuid"
                     }
                   },
-                  "required": ["id"],
+                  "required": [
+                    "id"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -796,11 +840,17 @@
                         "type": "string"
                       }
                     },
-                    "required": ["name", "origin", "credential_ref"],
+                    "required": [
+                      "name",
+                      "origin",
+                      "credential_ref"
+                    ],
                     "additionalProperties": false
                   }
                 },
-                "required": ["partner"],
+                "required": [
+                  "partner"
+                ],
                 "additionalProperties": false
               }
             }
@@ -856,7 +906,10 @@
                       "format": "uuid"
                     }
                   },
-                  "required": ["id", "validation_id"],
+                  "required": [
+                    "id",
+                    "validation_id"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -978,7 +1031,10 @@
                     "format": "binary"
                   }
                 },
-                "required": ["manifest", "artifact"],
+                "required": [
+                  "manifest",
+                  "artifact"
+                ],
                 "additionalProperties": false
               }
             }
@@ -1030,7 +1086,9 @@
                       "format": "uuid"
                     }
                   },
-                  "required": ["id"],
+                  "required": [
+                    "id"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -1196,7 +1254,9 @@
                       "format": "uuid"
                     }
                   },
-                  "required": ["id"],
+                  "required": [
+                    "id"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -1316,14 +1376,19 @@
                   },
                   "scenario": {
                     "type": "string",
-                    "enum": ["normal", "timeout_after_success"]
+                    "enum": [
+                      "normal",
+                      "timeout_after_success"
+                    ]
                   },
                   "rollback_of_id": {
                     "type": "string",
                     "format": "uuid"
                   }
                 },
-                "required": ["validation_id"],
+                "required": [
+                  "validation_id"
+                ],
                 "additionalProperties": false
               }
             }
@@ -1506,7 +1571,10 @@
                       "type": "string"
                     }
                   },
-                  "required": ["id", "state"],
+                  "required": [
+                    "id",
+                    "state"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -1682,7 +1750,10 @@
                       "format": "uuid"
                     }
                   },
-                  "required": ["duplicate", "deployment_id"],
+                  "required": [
+                    "duplicate",
+                    "deployment_id"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -1837,6 +1908,50 @@
         },
         "security": [],
         "description": "HMAC-signed callback with timestamp and event ID; session cookies are not used."
+      }
+    },
+    "/publishing/candidates/{candidate_id}/artifact": {
+      "get": {
+        "operationId": "downloadPublishingArtifact",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private integrity-verified ZIP",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

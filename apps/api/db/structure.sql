@@ -1865,6 +1865,20 @@ CREATE INDEX proposals_recent_page ON public.marketplace_proposals USING btree (
 
 
 --
+-- Name: publishing_candidates_history_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX publishing_candidates_history_order ON public.publishing_candidates USING btree (created_at, id);
+
+
+--
+-- Name: publishing_deployments_history_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX publishing_deployments_history_order ON public.publishing_deployments USING btree (created_at, id);
+
+
+--
 -- Name: publishing_latest_validation; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1876,6 +1890,13 @@ CREATE INDEX publishing_latest_validation ON public.publishing_validations USING
 --
 
 CREATE UNIQUE INDEX publishing_one_publish_per_candidate ON public.publishing_deployments USING btree (candidate_id) WHERE ((kind)::text = 'publish'::text);
+
+
+--
+-- Name: publishing_partners_history_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX publishing_partners_history_order ON public.publishing_partners USING btree (owner_id, created_at, id);
 
 
 --
@@ -2470,6 +2491,7 @@ ALTER TABLE ONLY public.engagements_work_files
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261008182000'),
 ('20261008170000'),
 ('20261008160000'),
 ('20261008150000'),
