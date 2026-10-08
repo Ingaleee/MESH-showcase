@@ -1,6 +1,6 @@
 import http from "node:http";
 import { timingSafeEqual } from "node:crypto";
-import { mkdir, appendFile } from "node:fs/promises";
+import { mkdir, appendFile, stat, rename } from "node:fs/promises";
 
 const token = process.env.MESH_ALERT_TOKEN;
 if (!token || token.length < 32) throw new Error("Set a receiver token.");
@@ -29,7 +29,14 @@ http.createServer(async (request, response) => {
       status: body.status,
       alerts: body.alerts.map((alert) => ({ name: alert.labels?.alertname, status: alert.status, severity: alert.labels?.severity, starts_at: alert.startsAt, ends_at: alert.endsAt })),
     };
-    await appendFile("/data/receipts.jsonl", JSON.stringify(receipt) + "\n");
+    const line = JSON.stringify(receipt) + "\n";
+    // Two bounded files preserve the latest delivered timeline across process restarts.
+    const size = await stat("/data/receipts.jsonl").then(info => info.size).catch(error => {
+      if (error.code === "ENOENT") return 0; throw error;
+    });
+    if (size + Buffer.byteLength(line) > 8 * 1024 * 1024)
+      await rename("/data/receipts.jsonl", "/data/receipts.previous.jsonl");
+    await appendFile("/data/receipts.jsonl", line);
     response.writeHead(200).end("accepted");
   } catch {
     response.writeHead(400).end("invalid payload");

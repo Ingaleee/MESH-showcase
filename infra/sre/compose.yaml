@@ -1,28 +1,51 @@
 name: mesh-showcase-observability
 services:
+  storage-init:
+    image: mesh-showcase-partner:local
+    user: "0:0"
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE]
+    security_opt: ["no-new-privileges:true"]
+    entrypoint: [sh, -c]
+    command: ["chown 65534:65534 /prometheus /alerts && chown 1000:1000 /receipts"]
+    volumes:
+      - prometheus_data:/prometheus
+      - alertmanager_data:/alerts
+      - receiver_data:/receipts
+    mem_limit: 32m
+    pids_limit: 16
   prometheus:
+    depends_on:
+      storage-init:
+        condition: service_completed_successfully
     image: prom/prometheus:v3.15.0
-    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus"]
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus", "--storage.tsdb.retention.time=7d", "--storage.tsdb.retention.size=512MB"]
     volumes:
       - ${MESH_SRE_CONFIG:?Set generated config directory}/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./incident-alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus_data:/prometheus
     ports: ["127.0.0.1:32091:9090"]
     read_only: true
-    tmpfs: ["/prometheus:uid=65534,gid=65534,mode=0700"]
+
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
     mem_limit: 160m
     networks: [release]
 
   alertmanager:
+    depends_on:
+      storage-init:
+        condition: service_completed_successfully
     image: mesh-showcase-alertmanager:patched
     build:
       context: ../..
       dockerfile: infra/Dockerfile.alertmanager
     command:
-      ["--config.file=/etc/alertmanager/alertmanager.yml", "--storage.path=/tmp/alertmanager"]
+      ["--config.file=/etc/alertmanager/alertmanager.yml", "--storage.path=/data", "--data.retention=120h"]
     volumes:
       - ${MESH_SRE_CONFIG}/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/data
     ports: ["127.0.0.1:32093:9093"]
     read_only: true
     tmpfs: [/tmp]
@@ -32,6 +55,9 @@ services:
     networks: [release]
 
   receiver:
+    depends_on:
+      storage-init:
+        condition: service_completed_successfully
     image: mesh-showcase-partner:local
     user: "1000:1000"
     command: ["node", "/app/receiver.mjs"]
@@ -39,8 +65,9 @@ services:
       MESH_ALERT_TOKEN: ${MESH_ALERT_TOKEN:?Set receiver authentication}
     volumes:
       - ./receiver.mjs:/app/receiver.mjs:ro
+      - receiver_data:/data
     read_only: true
-    tmpfs: ["/data:uid=1000,gid=1000,mode=0700"]
+
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
     mem_limit: 64m
@@ -49,3 +76,8 @@ networks:
   release:
     external: true
     name: mesh-showcase-release_default
+
+volumes:
+  prometheus_data:
+  alertmanager_data:
+  receiver_data:
