@@ -44,6 +44,21 @@ RSpec.describe "Publishing durable uploads" do
     expect(Publishing::Candidate.find(response[:id]).artifact_blob_id).to eq(intent.artifact_blob_id)
   end
 
+  it "rejects new direct references once cleanup has tombstoned an abandoned upload" do
+    _, partner, candidate, _ = publishing_candidate
+    blob = ActiveStorage::Blob.create_and_upload!(io: StringIO.new("abandoned"), filename: "abandoned.zip")
+    intent = Publishing::UploadIntent.create!(partner: partner, request_key: SecureRandom.uuid,
+      fingerprint: "d" * 64, artifact_blob: blob, state: "discarded")
+    expect {
+      Publishing::Candidate.create!(partner: partner, artifact_blob: blob, manifest: {},
+        artifact_sha256: "a" * 64, manifest_sha256: "b" * 64, correlation_id: SecureRandom.uuid)
+    }.to raise_error(ActiveRecord::StatementInvalid, /reclaimed publishing blob/)
+    expect {
+      ActiveStorage::Attachment.create!(record: candidate, name: "artifact", blob: blob)
+    }.to raise_error(ActiveRecord::StatementInvalid, /reclaimed publishing blob/)
+    expect(intent.reload.state).to eq("discarded")
+  end
+
   it "reclaims only old abandoned uploads and never purges direct candidate references or leases" do
     _, _, candidate, _ = publishing_candidate
     safe_blob = candidate.artifact_blob
@@ -62,6 +77,7 @@ RSpec.describe "Publishing durable uploads" do
     result = Publishing::ReclaimUploads.call(dry_run: false)
     expect(result[:reclaimed]).to eq([ orphan.id ])
     expect(orphan.reload.state).to eq("discarded")
+    expect(orphan.artifact_blob_id).to be_nil
     expect(safe_blob.reload.download).to be_present
     expect(leased.reload.state).to eq("uploading")
   end

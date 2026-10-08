@@ -71,6 +71,42 @@ END $$;
 
 
 --
+-- Name: guard_reclaimed_publishing_attachment(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.guard_reclaimed_publishing_attachment() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE upload_state text;
+BEGIN
+  SELECT state INTO upload_state FROM publishing_upload_intents
+    WHERE artifact_blob_id = NEW.blob_id FOR UPDATE;
+  IF upload_state = 'discarded' THEN
+    RAISE EXCEPTION 'a reclaimed publishing blob cannot acquire references';
+  END IF;
+  RETURN NEW;
+END $$;
+
+
+--
+-- Name: guard_reclaimed_publishing_candidate(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.guard_reclaimed_publishing_candidate() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE upload_state text;
+BEGIN
+  SELECT state INTO upload_state FROM publishing_upload_intents
+    WHERE artifact_blob_id = NEW.artifact_blob_id FOR UPDATE;
+  IF upload_state = 'discarded' THEN
+    RAISE EXCEPTION 'a reclaimed publishing blob cannot acquire references';
+  END IF;
+  RETURN NEW;
+END $$;
+
+
+--
 -- Name: mesh_check_ledger_balance(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -2026,6 +2062,20 @@ CREATE TRIGGER publishing_receipt_immutable BEFORE DELETE OR UPDATE ON public.pu
 
 
 --
+-- Name: active_storage_attachments publishing_reclaimed_attachment; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER publishing_reclaimed_attachment BEFORE INSERT OR UPDATE ON public.active_storage_attachments FOR EACH ROW EXECUTE FUNCTION public.guard_reclaimed_publishing_attachment();
+
+
+--
+-- Name: publishing_candidates publishing_reclaimed_candidate; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER publishing_reclaimed_candidate BEFORE INSERT OR UPDATE ON public.publishing_candidates FOR EACH ROW EXECUTE FUNCTION public.guard_reclaimed_publishing_candidate();
+
+
+--
 -- Name: publishing_deployments publishing_release_basis; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -2491,6 +2541,7 @@ ALTER TABLE ONLY public.engagements_work_files
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261008190000'),
 ('20261008182000'),
 ('20261008170000'),
 ('20261008160000'),
