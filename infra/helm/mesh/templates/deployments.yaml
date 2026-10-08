@@ -19,6 +19,10 @@ spec:
       annotations:
         config-checksum: {{ include (print $.Template.BasePath "/configmap.yaml") $ | sha256sum }}
     spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ $.Release.Name }}-runtime
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 45

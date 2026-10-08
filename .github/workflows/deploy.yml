@@ -47,6 +47,7 @@ jobs:
           path: .cache/downloaded-release
       - name: Provision this Ubuntu host and prove convergence
         run: |
+          set -euo pipefail
           python3 -m venv .cache/ansible
           .cache/ansible/bin/pip install --quiet ansible-core==2.21.5
           mkdir -p "$MESH_EVIDENCE_DIR"

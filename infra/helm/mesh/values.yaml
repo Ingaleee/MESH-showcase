@@ -1,6 +1,7 @@
 images:
   api: ""
   web: ""
+imagePullSecrets: []
 runtimeSecret: mesh-runtime
 migrationSecret: mesh-migration
 publicOrigin: https://mesh.example.test

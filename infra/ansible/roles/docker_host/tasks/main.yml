@@ -29,6 +29,11 @@
       Components: stable
       Architectures: amd64
       Signed-By: /etc/apt/keyrings/docker.asc
+  register: docker_repository
+- name: Refresh package indexes after repository changes
+  ansible.builtin.apt:
+    update_cache: true
+  when: docker_repository.changed
 - name: Install the Docker daemon and Compose plugin
   ansible.builtin.apt:
     name: [docker-ce, docker-ce-cli, containerd.io, docker-buildx-plugin, docker-compose-plugin]

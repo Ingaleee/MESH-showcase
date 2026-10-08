@@ -27,6 +27,8 @@ jobs:
       MESH_BASE_URL: http://localhost:3300
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
@@ -44,6 +46,7 @@ jobs:
       - name: Contracts, boundaries, formatting and frontend build
         run: |
           node --test scripts/release-state.test.mjs scripts/release-lock.test.mjs
+          python3 scripts/build-contract.py --check
           npm run contract:check
           npm run test:architecture
           npm run format:check
@@ -109,6 +112,8 @@ jobs:
           '
       - name: Real partner, lost response and immutable artifact drill
         run: node scripts/run-publishing-demo.mjs
+      - name: Publishing DB, queue, private bytes and authenticated recovery
+        run: node scripts/check-publishing-continuity.mjs
       - name: Real browser and accessibility
         run: |
           npx playwright install --with-deps chromium

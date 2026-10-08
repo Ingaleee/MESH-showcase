@@ -1,0 +1,69 @@
+name: MESH current digest Kubernetes exercise
+on:
+  workflow_dispatch:
+    inputs:
+      release_run_id:
+        description: Successful release run on main
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  packages: read
+jobs:
+  kubernetes:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Verify release workflow and select its exact source
+        run: |
+          [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RELEASE_RUN_ID")
+          [[ $(jq -r .conclusion <<< "$run") == success ]]
+          [[ $(jq -r .path <<< "$run") == .github/workflows/release.yml ]]
+          [[ $(jq -r .head_branch <<< "$run") == main ]]
+          revision=$(jq -r .head_sha <<< "$run")
+          [[ "$revision" =~ ^[a-f0-9]{40}$ ]]
+          git fetch --no-tags --depth=1 origin "$revision"
+          git checkout --detach FETCH_HEAD
+          echo "RELEASE_REVISION=$revision" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.release_run_id }}
+          name: mesh-release-${{ env.RELEASE_REVISION }}
+          path: .cache/downloaded-release
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install checksum verified tooling
+        run: |
+          bash scripts/ci-tools.sh
+          curl -fsSL https://github.com/k3d-io/k3d/releases/download/v5.9.0/k3d-linux-amd64 -o .cache/tools-linux/k3d
+          printf '%s  %s\n' 06d8f25bc3a971c4eb29e0ff08429b180402db0f4dec838c9eac427e296800a0 .cache/tools-linux/k3d | sha256sum --check --status
+          chmod +x .cache/tools-linux/k3d
+      - name: Enforce the same signed image identity
+        run: |
+          for name in api web postgres; do
+            image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-release/release.json)
+            gh attestation verify "oci://$image" --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/image.yml" --source-digest "$RELEASE_REVISION" --source-ref refs/heads/main --deny-self-hosted-runners
+          done
+      - name: Real Terraform, migration ordering, rollout, recovery and rollback
+        run: node scripts/hosted-kubernetes.mjs
+      - name: Save sanitized Kubernetes evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: mesh-kubernetes-${{ github.run_id }}
+          path: .cache/kubernetes-evidence/
+          retention-days: 30
+      - name: Remove this isolated cluster
+        if: always()
+        run: k3d cluster delete mesh-acceptance

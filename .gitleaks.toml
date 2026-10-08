@@ -34,3 +34,10 @@ condition = "AND"
 paths = ['''(^|/)docs/evidence/(publishing-security|publishing-security-grafana|publishing-security-final|publishing-security-complete)/trivy-grafana\.json$''']
 regexTarget = "line"
 regexes = ['''^\s*"Digest": "sha1:[a-f0-9]{40}",?\s*$''']
+[[rules.allowlists]]
+description = "Git history Trivy CVE references contain public GitHub commit SHA-1 URLs, not Sourcegraph credentials; only these exact inventories and URL lines."
+condition = "AND"
+paths = ['''(^|/)docs/evidence/(publishing-security|publishing-security-grafana)/trivy-grafana\.json$''']
+regexTarget = "line"
+regexes = ['''^[+-]?\s*"https://github\.com/(grpc/grpc-go|grafana/tempo)/commit/[a-f0-9]{40}",?\s*$''']
+

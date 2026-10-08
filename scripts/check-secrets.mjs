@@ -92,8 +92,37 @@ try {
   if (result.error) throw result.error;
   if (result.status !== 0)
     throw new Error("Publishable source secret scan failed; inspect the redacted report.");
+  const history = spawnSync(
+    "docker",
+    [
+      "run",
+      "--rm",
+      "--memory=256m",
+      "--mount",
+      `type=bind,source=${root},target=/source,readonly`,
+      "--mount",
+      `type=bind,source=${evidence},target=/evidence`,
+      scanner,
+      "git",
+      "/source",
+      "--config",
+      "/source/.gitleaks.toml",
+      "--log-opts=--all",
+      "--no-banner",
+      "--redact=100",
+      "--report-format",
+      "json",
+      "--report-path",
+      "/evidence/gitleaks-history.json",
+    ],
+    { stdio: "inherit" },
+  );
+  if (history.error || history.status !== 0)
+    throw (
+      history.error ?? new Error("Git history secret scan failed; inspect the redacted report.")
+    );
   console.log(
-    `Secret scan passed for ${files.length} publishable files. Ignored runtime data and Git history are outside this scope.`,
+    `Secret scan passed for ${files.length} publishable files and all fetched Git history.`,
   );
 } finally {
   if (!path.resolve(snapshot).startsWith(path.resolve(base) + path.sep))
