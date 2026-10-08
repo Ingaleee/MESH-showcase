@@ -1,0 +1,29 @@
+﻿{
+    "checked_at":  "2026-10-07T23:42:49.5765061+00:00",
+    "image":  "sha256:e97d683876377bd889060b5b78c4ec3f528b2c8f804347a803dd230e663419a2",
+    "containers":  [
+                       {
+                           "name":  "mesh-api-hardening-ready",
+                           "uid":  999,
+                           "readonly_root":  true,
+                           "cap_drop":  [
+                                            "ALL"
+                                        ],
+                           "security_options":  [
+                                                    "no-new-privileges"
+                                                ]
+                       },
+                       {
+                           "name":  "mesh-api-hardening-outage",
+                           "uid":  999,
+                           "readonly_root":  true,
+                           "cap_drop":  [
+                                            "ALL"
+                                        ],
+                           "security_options":  [
+                                                    "no-new-privileges"
+                                                ]
+                       }
+                   ],
+    "scope":  "Read-only readiness and public feed smoke checks. Uploaded storage needs a separate writable volume in an actual deployment."
+}

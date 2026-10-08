@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-08T10:02:05.894Z",
+  "operation": "deploy",
+  "environment": "mesh-showcase-release",
+  "migration_reverted": false,
+  "release": {
+    "schema_version": 1,
+    "project": "mesh-showcase-release",
+    "created_at": "2026-10-08T10:02:04.880Z",
+    "revision": null,
+    "source_tree_sha256": "57786fbc58b0dbbb25a3601fb410de230cc22fbca2e0a96dfff909bf9a3d780b",
+    "working_tree_dirty": true,
+    "images": {
+      "api": "sha256:95871c27263c9a4e6bca1d4d3007afa959146e2822dfc410ceb333b838821ca7",
+      "web": "sha256:c3c6d8557e11d433860108f4f7fd80631b350bf16224eac4d274739aca39bf47"
+    },
+    "schema_rollback": "Never automatic; use backward-compatible migrations."
+  },
+  "success": false,
+  "failure": "docker compose failed (1)."
+}

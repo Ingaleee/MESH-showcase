@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-10-08T11:49:45.907Z",
+  "operation": "deploy",
+  "environment": "mesh-showcase-release",
+  "success": false,
+  "migration_reverted": false,
+  "failure": "Use immutable local image IDs or GHCR digests."
+}

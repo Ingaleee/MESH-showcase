@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-08T08:36:57.1255937+00:00",
+  "source": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH",
+  "showcase": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase",
+  "copiedFiles": 538,
+  "copiedBytes": 67092352,
+  "copyHashesVerified": true,
+  "productChanges": [
+    "README.md",
+    "docs/interview-roadmap.md",
+    "docs/interview-focus.md",
+    "docs/devops-skills-map.md"
+  ],
+  "productApplicationCodeUnchanged": true,
+  "relocatedDocuments": [
+    "docs/interview-roadmap.md",
+    "docs/interview-focus.md",
+    "docs/devops-skills-map.md"
+  ],
+  "showcaseConfigurationChanges": [
+    "playwright.config.ts",
+    "README.md",
+    ".env.example",
+    "scripts/setup.ps1",
+    "scripts/check-production-csp.mjs",
+    "scripts/check-observability.mjs",
+    "scripts/check-api-runtime.ps1",
+    "scripts/check-api-readiness.mjs",
+    "scripts/benchmark.ps1",
+    "scripts/architecture-lab.ps1",
+    "scripts/architecture-lab-observe.mjs",
+    "scripts/architecture-lab-exercise.ps1",
+    ".gitignore",
+    ".github/workflows/verify.yml",
+    "docs/demo.md",
+    "apps/api/spec/requests/session_reads_spec.rb",
+    "apps/api/config/initializers/session.rb",
+    "apps/api/config/application.rb",
+    "apps/api/script/architecture_lab_verify_restore.rb",
+    "compose.yaml",
+    "apps/api/packs/finance/app/services/finance/sandbox_gateway.rb"
+  ],
+  "composeProject": "mesh-showcase",
+  "network": "mesh-showcase_default",
+  "webPort": 3200,
+  "sessionCookie": "_mesh_showcase_session",
+  "secretsGeneratedIndependently": true,
+  "sourceDatabasesAndStorageCopied": false,
+  "historicalEvidenceIsNewExecution": false,
+  "gitInitialized": true,
+  "externalRepositoryPublished": false
+}

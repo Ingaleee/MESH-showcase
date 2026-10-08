@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-08T13:56:06.089Z",
+  "context": "k3d-mesh-showcase",
+  "success": false,
+  "scope": "One local node, separate databases and private PVC; controlled synthetic events. API liveness/readiness during DB outage and worker drain are measured, not physical HA or production SLO.",
+  "api_before": [
+    {
+      "name": "mesh-api-6d85759d85-jr9nd",
+      "uid": "34e5d47e-8046-4216-a187-8e9a4da88182",
+      "ready": "True",
+      "restarts": 0
+    },
+    {
+      "name": "mesh-api-6d85759d85-wzqbq",
+      "uid": "f5918606-e518-440c-a7e3-2c4e65a33875",
+      "ready": "True",
+      "restarts": 0
+    }
+  ],
+  "backlog": {
+    "events": 50,
+    "queue": {
+      "available": true,
+      "workers": 0,
+      "rows": [
+        {
+          "queue_name": "events",
+          "state": "ready",
+          "count": 51,
+          "oldest_seconds": "0.656392"
+        }
+      ]
+    }
+  },
+  "failure": "stdin:34:in '<main>': Worker recovery timed out (RuntimeError)\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/runner/runner_command.rb:38:in 'Kernel#eval'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/runner/runner_command.rb:38:in 'block in Rails::Command::RunnerCommand#perform'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/activesupport-8.1.4/lib/active_support/execution_wrapper.rb:91:in 'ActiveSupport::ExecutionWrapper.wrap'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/runner/runner_command.rb:70:in 'Rails::Command::RunnerCommand#conditional_executor'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/runner/runner_command.rb:37:in 'Rails::Command::RunnerCommand#perform'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/thor-1.5.0/lib/thor/command.rb:28:in 'Thor::Command#run'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/thor-1.5.0/lib/thor/invocation.rb:127:in 'Thor::Invocation#invoke_command'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command/base.rb:176:in 'Rails::Command::Base#invoke_command'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/thor-1.5.0/lib/thor.rb:538:in 'Thor.dispatch'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command/base.rb:71:in 'Rails::Command::Base.perform'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command.rb:65:in 'block in Rails::Command.invoke'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command.rb:143:in 'Rails::Command.with_argv'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command.rb:63:in 'Rails::Command.invoke'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands.rb:18:in '<main>'\n\tfrom /usr/local/lib/ruby/3.4.0/bundled_gems.rb:82:in 'Kernel.require'\n\tfrom /usr/local/lib/ruby/3.4.0/bundled_gems.rb:82:in 'block (2 levels) in Kernel#replace_require'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/bootsnap-1.26.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:33:in 'Kernel#require'\n\tfrom bin/rails:4:in '<main>'\ncommand terminated with exit code 1\n"
+}

@@ -1,0 +1,188 @@
+{
+  "checkedAt": "2026-10-07T11:58:26.701Z",
+  "scope": "Public project brief redesign, structured versioned brief fields and author proposal panel. Older screen evidence retained separately.",
+  "url": "http://localhost:3100/projects/e6ce59a0-be36-44d7-961d-05229c91d047",
+  "checks": {
+    "rails": {
+      "examples": 45,
+      "failures": 0,
+      "scope": "Dedicated mesh_test database; confirmed by execution output."
+    },
+    "playwright": {
+      "fullSuite": 7,
+      "finalProjectScenarios": 2,
+      "failures": 0
+    },
+    "viewportWidths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "desktopAndMobileWcag": true,
+    "stickyConditions": true,
+    "tallProposalFormAccessible": true,
+    "customerAnchorClear": true,
+    "delayedGuestReadAfterLogin": true,
+    "typeScript": true,
+    "prettier": true,
+    "openApi": true,
+    "moduleBoundaries": true,
+    "rubocop": true,
+    "packwerk": true,
+    "brakemanWarnings": 0,
+    "productionFrontend": true
+  },
+  "productionImage": "mesh-web:project-verification",
+  "productionImageId": "sha256:495efffd77917f541e7895785d9659250aea5b085ba75ca50d16a296b4e7b743",
+  "sources": [
+    {
+      "file": "apps/web/src/app/projects/[id]/page.tsx",
+      "sha256": "bf19ac7b081a40467200b7b5d61da22e507fd9b5b6b40b2002c9c5ab38743bf3"
+    },
+    {
+      "file": "apps/web/src/app/projects/[id]/layout.tsx",
+      "sha256": "d00b0685c47e13926c2d5d27d3af15c29086eebf095afd0879c2efc115655283"
+    },
+    {
+      "file": "apps/web/src/app/projects/[id]/project.css",
+      "sha256": "38b622b1b9b694e2b4578659cc962244e68f8a7eb156b868aff4201d05e34b56"
+    },
+    {
+      "file": "apps/web/src/components/projects/proposal-box.tsx",
+      "sha256": "c8c86a047d77075d5dd849653cb2d1eb234a0d09ffc60eca1e0ab4489afeabb9"
+    },
+    {
+      "file": "apps/web/src/components/projects/brief-gallery.tsx",
+      "sha256": "49557512863f9f33066192a4ea24078b2fcaea05c1f05c54888722f4ba4fd4b4"
+    },
+    {
+      "file": "apps/web/src/lib/project-content.ts",
+      "sha256": "ce0b5e92c09a2b2c860058bd9a6dd173305617aa5991c14e87ffe73ea97145e2"
+    },
+    {
+      "file": "apps/web/src/components/project-form.tsx",
+      "sha256": "dee80ff1c710ab058ae113e7ff1c8beab08de6dab72f235cc0f3309b7efbbea4"
+    },
+    {
+      "file": "apps/web/src/components/shell.tsx",
+      "sha256": "6ec169fa7892bfbaa93dbf13f804b3615445e56769b2d00a3b7db20c3f275fe4"
+    },
+    {
+      "file": "apps/web/src/components/home/project-card.tsx",
+      "sha256": "74117d1c951a6c95f23eeedcbdf4c58fac6b59be823668461426a48fe25bba9a"
+    },
+    {
+      "file": "apps/web/src/app/globals.css",
+      "sha256": "2152190e0e8e12e0dbbfc0903b4d63f2b7fbf9ff43469d661b18f10877ca8247"
+    },
+    {
+      "file": "apps/web/src/app/creators/page.tsx",
+      "sha256": "1449f1eac2c33f9a72916b8d0e4f453971bde7fab6226d80e05203e88555df81"
+    },
+    {
+      "file": "apps/web/src/lib/api.ts",
+      "sha256": "51a61087fffb5aab5c38f83d156fbc63ef3ad7e150e9e959afd1ddad2a1697ac"
+    },
+    {
+      "file": "apps/web/src/lib/api-schema.d.ts",
+      "sha256": "067b5e69f7205263c4bd46458167a53b31a4f0e4189c53596d8478e54c64828f"
+    },
+    {
+      "file": "apps/web/src/components/session-provider.tsx",
+      "sha256": "5b7b74c29247b42a393dbdc0bfcdf20876202d0a78a18325f4fcfde09091a07e"
+    },
+    {
+      "file": "apps/web/public/images/projects/coffee-identity.png",
+      "sha256": "f72c31e5f6782383b920f6b736997a06db35f87118c713c4b5028540634163c6"
+    },
+    {
+      "file": "apps/web/public/images/projects/cafe-space.png",
+      "sha256": "2f7255bcc47c43fe8c9049c8cd5d3ea749af025cc8a5d8739b69c56c54e78085"
+    },
+    {
+      "file": "apps/web/public/images/projects/brand-paper.png",
+      "sha256": "d13dec6d66465b8764d52893849134d25c065be94b39f65f0af655fde77abc98"
+    },
+    {
+      "file": "apps/api/db/migrate/20261007120000_add_structured_project_briefs.rb",
+      "sha256": "07ce7437dbb991c3e7f4fc9abb5cd749b2701fe33ac1fded74f512e29957c643"
+    },
+    {
+      "file": "apps/api/db/structure.sql",
+      "sha256": "92a2b6267aacadae1b3ac97be4913bb17ded675bcaec44a8436bc9bdce8f0436"
+    },
+    {
+      "file": "apps/api/db/seeds.rb",
+      "sha256": "704fe98111028c8bcc46e13e090c93a58dd25124a1d5eceb29109db2d1aaeeda"
+    },
+    {
+      "file": "apps/api/packs/marketplace/app/models/marketplace/project.rb",
+      "sha256": "8026cea7aa51899ac33baf12e439c813289fefd79196751f89ee1255fde3c4c0"
+    },
+    {
+      "file": "apps/api/packs/marketplace/app/services/marketplace/brief_history.rb",
+      "sha256": "8cde190c08861b701eae514ee0a47bd4c2e69d129984572ca24b4db29c4cbbbe"
+    },
+    {
+      "file": "apps/api/app/controllers/api/v1/projects_controller.rb",
+      "sha256": "7551db1dc2736483d7aa2d6f06093de8f07125175a09324e8890f7d94ba1619d"
+    },
+    {
+      "file": "apps/api/app/services/api/presenters.rb",
+      "sha256": "cd29fbb80188b58812ca3946296cead9c79f44b44a3a4cc9a113fb0ecf2748f1"
+    },
+    {
+      "file": "apps/api/spec/requests/project_briefs_spec.rb",
+      "sha256": "834768a79a8f1bdfb689fd5c6ec956407a966237f536947a354f16d3dde1d65b"
+    },
+    {
+      "file": "apps/api/app/controllers/application_controller.rb",
+      "sha256": "54ab408f06d5efc7ee91147e4c7d97e8f4906aa713b291247308e0058410f739"
+    },
+    {
+      "file": "apps/api/app/controllers/api/v1/sessions_controller.rb",
+      "sha256": "9b8aaed6a8e3b8663baf63dfd0365fa2c918c186f43afdfb545cb0b002a90505"
+    },
+    {
+      "file": "apps/api/spec/requests/session_reads_spec.rb",
+      "sha256": "8705f82e807950d7e9bc025c4a6b40e8f43543f97680c459ba9218c433e782af"
+    },
+    {
+      "file": "scripts/build-contract.py",
+      "sha256": "0cc8c728750ffd64c2458e0d76fc24ba6fdf957d4c603b79922d3e6daa2880a0"
+    },
+    {
+      "file": "contracts/openapi.json",
+      "sha256": "868835c8c00b4e0f1319df42eea6989d95303fdfe2e168e6b5491a845709d92a"
+    },
+    {
+      "file": "tests/e2e/projects.spec.ts",
+      "sha256": "e6b31a39a88a83b625b4f411e2696f3e8636881e8fd585f81a65afae61771f3b"
+    },
+    {
+      "file": "tests/e2e/marketplace.spec.ts",
+      "sha256": "2754edc4e993df86204bb07078e09fa2535c52d50b85b022e78b9fd288e0d88b"
+    },
+    {
+      "file": "docs/project-design.md",
+      "sha256": "3f16c31bc9904a20b88d51b97ad30ca1d105ded9bfdc531a004b61764665b0eb"
+    },
+    {
+      "file": "docs/project-image-prompts.json",
+      "sha256": "972c2568fb1d0ec9e6200a7d94150bee3175d8533787632edf206ca6530a3682"
+    },
+    {
+      "file": "README.md",
+      "sha256": "af8d7150e23e1cbe414457b308777d6352f56018c727a3ead2c8c1b0a1ce70d2"
+    }
+  ],
+  "reports": [
+    "browser-check.json",
+    "layout-check.json",
+    "production-check.json",
+    "playwright-full.json",
+    "playwright-projects.json"
+  ]
+}

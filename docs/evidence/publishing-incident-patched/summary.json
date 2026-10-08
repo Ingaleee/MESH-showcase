@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-08T14:50:00.469Z",
+  "environment": "mesh-showcase development",
+  "lab_threshold": "queue age >10s for 5s; 5s scrapes",
+  "success": true,
+  "stopped_at": "2026-10-08T14:50:00.818Z",
+  "backlog": {
+    "events": 50,
+    "queue": {
+      "available": true,
+      "workers": 0,
+      "rows": [
+        {
+          "queue_name": "events",
+          "state": "ready",
+          "count": 50,
+          "oldest_seconds": "2.8333"
+        }
+      ]
+    },
+    "observations_before": 60
+  },
+  "http_while_worker_stopped": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/ready",
+      "status": 200
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200
+    },
+    {
+      "route": "/api/v1/projects",
+      "status": 200
+    }
+  ],
+  "firing_receipt": {
+    "received_at": "2026-10-08T14:50:50.335Z",
+    "status": "firing",
+    "alerts": [
+      {
+        "name": "ShowcaseQueueStalled",
+        "status": "firing",
+        "severity": "warning",
+        "starts_at": "2026-10-08T14:50:45.319Z",
+        "ends_at": "0001-01-01T00:00:00Z"
+      }
+    ]
+  },
+  "drained": {
+    "events": 50,
+    "effects_per_event": [
+      1
+    ],
+    "observations_added": 50,
+    "replay_observations_added": 0,
+    "queue": {
+      "available": true,
+      "workers": 3,
+      "rows": []
+    }
+  },
+  "resolved_receipt": {
+    "received_at": "2026-10-08T14:51:20.315Z",
+    "status": "resolved",
+    "alerts": [
+      {
+        "name": "ShowcaseQueueStalled",
+        "status": "resolved",
+        "severity": "warning",
+        "starts_at": "2026-10-08T14:50:45.319Z",
+        "ends_at": "2026-10-08T14:51:15.319Z"
+      }
+    ]
+  },
+  "detection_seconds": 49.517,
+  "prometheus_observations": [
+    {
+      "query": "histogram_quantile(0.95, max by (le) (rate(mesh_notification_delivery_seconds_bucket[5m])))",
+      "result": [
+        {
+          "metric": {},
+          "value": [
+            1791471080.628,
+            "58.5"
+          ]
+        }
+      ]
+    },
+    {
+      "query": "sum(mesh_http_request_seconds_count)",
+      "result": [
+        {
+          "metric": {},
+          "value": [
+            1791471080.645,
+            "148"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Real local worker outage, HTTP availability, signed internal alert delivery/resolution, 50 once-only DB effects and durable latency observations. Lab thresholds, shared host; WebSocket receipt and production SLO are separate."
+}
