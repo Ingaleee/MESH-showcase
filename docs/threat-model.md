@@ -17,4 +17,6 @@ Credential rotation regression: an old validation cannot authorize a new publish
 
 Published Trivy history produced 24 false positives: public GitHub commit SHA-1 URLs in two exact Grafana reports resembled a legacy Sourcegraph token. The exception matches only those URL lines/paths and preserves the default rule plus a generic-key canary. Runtime keys, DB dumps, Docker auth and recovery keys are never part of evidence uploads.
 
+After preserving hosted evidence, the same generic-key rule also flagged a diagnostic command_key UUID in the new Publishing summary. Its exception applies only to that exact file and a UUID-shaped command_key match; it does not allowlist other fields or authentication tokens. The canary still must be detected.
+
 References: [GitHub attestation action](https://github.com/actions/attest), [verification identity flags](https://cli.github.com/manual/gh_attestation_verify). Registry attestations bind builder identity and source digest; their predicate fields do not independently certify security, test completeness or SRE guarantees.

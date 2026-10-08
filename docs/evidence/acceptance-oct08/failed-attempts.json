@@ -29,6 +29,8 @@
       "failure": "Untrusted CNI connection was rejected with ECONNREFUSED, which the negative probe did not handle.",
       "resolution": "Handle explicit reject as well as drop; repeat the positive control against the same endpoint."
     }
+    ,
+    {"run_id":37838689441,"url":"https://github.com/Ingaleee/MESH-showcase/actions/runs/37838689441","conclusion":"failure","failure":"Generic-key scanner matched the diagnostic command_key UUID in the newly preserved hosted Publishing summary.","resolution":"Exact file plus UUID-shaped command_key match only; keep canary and full history scan."}
   ],
   "policy": "Failed workflow outcomes remain available. This summary records observed failures, not a passing report."
 }
