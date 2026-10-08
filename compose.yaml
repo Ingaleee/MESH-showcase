@@ -11,6 +11,9 @@ x-ruby: &ruby
     - gems:/usr/local/bundle
   environment: &ruby-env
     RAILS_ENV: development
+    # Match the measured production pool; reserve one thread for probes/rejections.
+    RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-6}
+    MESH_API_CONCURRENCY: ${MESH_API_CONCURRENCY:-5}
     MESH_INTERVIEW_DEMO: ${MESH_INTERVIEW_DEMO:-false}
     SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set a local showcase SECRET_KEY_BASE}
     MESH_SESSION_COOKIE: ${MESH_SESSION_COOKIE:-_mesh_showcase_session}
