@@ -50,14 +50,40 @@
 
 ## Метрики и traces
 
-Запускайте observability profile и `OTEL_TRACES_EXPORTER=otlp`. Prometheus target должен быть `up`; error 403 обычно означает, что internal hostname не разрешён Rails или token не совпадает. В Jaeger ищите `mesh-api`, request trace и `mesh.event.consume`. Trace context хранится в outbox и восстанавливается consumer. Monitoring хранит данные в памяти/контейнере локального стенда; production retention и Alertmanager routing не настроены.
+Запускайте observability profile и `OTEL_TRACES_EXPORTER=otlp`. Prometheus target должен быть `up`; error 403 обычно означает, что internal hostname не разрешён Rails или token не совпадает. В Jaeger ищите `mesh-api`, request trace и `mesh.event.consume`. Trace context хранится в outbox и восстанавливается consumer. Showcase telemetry хранит историю Prometheus в named volume (7d/512MB), Alertmanager silences/notification log в named volume (120h), receiver — два файла до 8MB каждый. После restart активные alerts повторно присылает Prometheus. Это process-restart durability на одном host, не offsite monitoring.
 
 ## Изменение схемы и выпуск
 
-Проверки выполняются workflow `.github/workflows/verify.yml`: контракт, границы, стиль, сборка, реальные SQL/race tests, security databases, Money types/mutations, TLC, браузер и restore drill. Workflow подготовлен локально; удалённый зелёный CI до публикации репозитория не заявляется.
+Проверки выполняются workflow `.github/workflows/verify.yml`: контракт, границы, стиль, сборка, реальные SQL/race tests, security databases, Money types/mutations, TLC, браузер и restore drill. Remote verify имеет successful runs; ссылки и их revision находятся в execution-status.md. Hosted deploy принимает только успешный main release, подписанное происхождение и digests.
 
 Для реального rolling release используйте expand/contract: сначала совместимые поля и reader, потом writer/backfill, затем ограничения и удаление старого пути. Здесь начальные миграции создают небольшую пустую схему; online migration большого production dataset и смешанные версии workers не проверялись. Миграционный owner и runtime role должны быть разными. Не переносите известные demo-пароли, tokens и широкую роль `mesh` в публичный deployment.
 
 Поисковая миграция `20261008060000` проверена на 100 000 проектах: GIN индексы строятся concurrently вне DDL transaction с отдельным пятиминутным statement budget. Это не проверка rolling release под конкурентной production записью. После прерванного build проверьте `SELECT indexrelid::regclass, indisvalid FROM pg_index WHERE indexrelid IN (to_regclass('project_title_trigram'), to_regclass('project_description_trigram'));`. Invalid index удалите `DROP INDEX CONCURRENTLY <проверенное имя>` и повторите миграцию. `IF NOT EXISTS` сам по себе не подтверждает валидность; миграция отдельно проверяет её. Контролируйте свободный диск, WAL/IO и ожидающие транзакции. Rollback удаляет только эти индексы, сохраняя extension для других потребителей.
 
 Production boot проверяет origin и отдельные секреты cookies/metrics/gateway/webhook. Runtime role template получает psql variables `runtime_role`, `database_name`, `migration_owner`; пароль задаётся отдельно. Сначала миграции от owner, затем выдача прав runtime. [Ревизия backend](backend-hardening.md) и `scripts/check-api-runtime.ps1` описывают проверенный non-root/read-only запуск. Для реальных файлов требуется отдельный writable storage volume.
+
+## Interrupted Linux deployment
+
+Use the exact accepted release checkout and the isolated state directory. Do not delete the OS lock or journal on the basis of age. A child Docker process may still own descriptor 9 after its parent dies; flock must decide ownership.
+
+```bash
+export MESH_DEPLOYMENT_STATE="$PWD/.cache/deployment"
+bash scripts/release.sh deploy .cache/downloaded-release/release.json
+```
+
+The new owner reads the durable journal. If the preceding operation did not commit, it reapplies the last verified baseline and smoke-checks it before proceeding. Review current.json, previous.json, journal.json and the generated deployment report together with actual container image references. A failed rollback leaves a diagnostic failure; do not declare success merely because the original deploy failed. Preserve the report and repair the required dependency before rerunning the same wrapper. Database migrations are retained; destructive contract migrations require a separately planned release and recovery procedure.
+
+Windows uses the conservative directory lock path and has a narrower recovery guarantee. The demonstrated inherited OS lock and SIGKILL recovery are Linux checks.
+
+## Publishing snapshot and safe cleanup
+
+```powershell
+node scripts/check-publishing-continuity.mjs
+docker compose exec -T api bin/rails publishing:uploads:reclaim
+```
+
+The restore exercise stops this showcase's API, worker and dispatcher, creates a primary and queue snapshot plus private-byte inventory, authenticates the encrypted archive before extraction, and restores into clean databases/files. Before restarting workers, unconfirmed restored Publishing operations become unknown and are looked up under the original operation ID. Never resolve uncertainty by sending a fresh publish command. The independent simulator may have advanced after backup.
+
+Encryption keys stay separate from the archive in ignored local state. That separation is not independent disaster-safe key custody. This exercise does not replace an offsite backup or whole-VM recovery test.
+
+Cleanup is a bounded dry-run unless APPLY=1. GRACE_DAYS must be at least two and must cover the explicitly supported backup recovery window. Active references, ordinary attachments and uploading leases are preserved; reclaimed tombstones cannot gain a new reference. A stale uploading intent uses its original key for recovery. This tool intentionally does not guess ownership of arbitrary legacy objects with no durable intent.

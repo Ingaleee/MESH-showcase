@@ -4,7 +4,7 @@
 
 Отдельная копия backend и frontend MESH для демонстрации Ruby, Docker, GitHub Actions, Ansible, Terraform, Kubernetes и SRE. Основной продукт находится рядом в `../MESH`; дальнейшие showcase-изменения делаются только здесь.
 
-Начните с [результатов выполнения](docs/execution-status.md) и [демонстрации интервью](docs/interview-demo.md). [SHOWCASE.md](SHOWCASE.md) описывает окружения и изоляцию. [Короткий план](docs/interview-focus.md), [карта DevOps-материалов](docs/devops-skills-map.md), [расширенный backlog](docs/interview-roadmap.md).
+Текущий Ruby-runtime проверен настоящим [GitHub CI](https://github.com/Ingaleee/MESH-showcase/actions/runs/37834689919): 131 тест в обычном и native runtime, 13 browser scenarios, partner/recovery и live incident. [Подписанный release](https://github.com/Ingaleee/MESH-showcase/actions/runs/37834690626) содержит immutable digests с зелёным security gate. Начните с [результатов выполнения](docs/execution-status.md) и [демонстрации интервью](docs/interview-demo.md). [SHOWCASE.md](SHOWCASE.md) описывает окружения и изоляцию. [Короткий план](docs/interview-focus.md), [карта DevOps-материалов](docs/devops-skills-map.md), [расширенный backlog](docs/interview-roadmap.md).
 
 Локальный интерфейс после запуска: **http://localhost:3200**. Отдельные Docker project/network/volumes и session cookie не используют окружение основного MESH. Локальные секреты созданы заново; исходные `.env`, credentials, private storage и базы не переносились.
 

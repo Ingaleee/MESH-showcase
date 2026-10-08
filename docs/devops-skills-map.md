@@ -2,27 +2,44 @@
 
 Дата: 8 октября 2026. Это сопоставление тем курса с проектом и план будущих доказательств. Пользователь сообщил об опыте Docker и Kubernetes; степень самостоятельного выполнения перечисленных лабораторных, Ansible/Terraform и GitLab CI пока не уточнена. Тексты заданий и названия лекций не считаются доказательством завершения работ. Прикладной код, CI и инфраструктура в этой ревизии не изменялись.
 
+## Текущая реализация
+
+Первоначальный план ниже сохраняет свой scope. В независимом showcase уже есть текущие Alpine Ruby/Node production images, GitHub verification/release, подписанные GHCR digests, отдельный migration/runtime DB user, loopback TLS и реальное hosted Ubuntu exercise. См. [актуальные результаты](execution-status.md), [выбор среды](decisions/003-hosted-acceptance.md) и [условия приёмки](quality-bar.md).
+
+| Требование вакансии     | Что открыть                                                                | Что объяснить                                                                 |
+| ----------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Ruby backend            | packs/publishing, platform, marketplace; RSpec/native reports              | SQL invariants, fencing, I/O вне transaction, unknown outcome                 |
+| Docker/deployment       | infra/Dockerfile.api, infra/Dockerfile.web, infra/deploy, release manifest | Build/runtime, non-root/read-only, volumes, rollout без потери данных         |
+| CI/CD                   | verify.yml, image.yml, release.yml, deploy.yml                             | Trusted source/digest, signatures, fail gates, rollback после миграций        |
+| Ansible                 | infra/ansible; actual first/second recap                                   | Репозиторий пакетов, convergence, ownership host configuration                |
+| Terraform/Kubernetes    | infra/terraform/namespace, infra/helm/mesh, hosted exercise                | Drift, migration ordering, CNI controls, probes, worker/DB recovery           |
+| SRE/integration support | Publishing CLI/UI, Prometheus/Grafana, restore/incident reports            | Найти root cause, безопасно reconcile, проверить mitigation, объяснить предел |
+
+Это демонстрация навыков на synthetic системе. Она не утверждает, что кандидат лично пять лет работал именно с каждой показанной технологией или что учебный курс был завершён.
+
+## Исторический маршрут
+
 Связанный короткий маршрут: [interview-focus.md](interview-focus.md). Расширенные возможности: [interview-roadmap.md](interview-roadmap.md).
 
 **1. Сопоставление без отдельного учебного продукта**
 
-| Предоставленная тема | Навык | Применение к MESH | Проверка результата |
-|---|---|---|---|
-| VirtualBox, ручная установка Linux | OS, processes, permissions, networks | Разбор устройства и диагностики Linux host | Пройти request path, найти сеть/порт/права по симптомам |
-| Vagrant, SSH, app01/db01/web01 | Повторяемый lab, private network, разделение ролей | При необходимости VM lab: edge, приложение, PostgreSQL | Подъём с нуля по инструкции, SSH и доступ DB только из нужной сети |
-| MySQL/WordPress/Apache/PHP | App/DB integration и reverse proxy | Существующие Rails/Next.js/PostgreSQL дают тот же инфраструктурный класс задачи | Реальный workflow, database connection, private files и proxy routing |
-| Собственный nginx на Alpine | Образ, runtime user, configuration, mounts | Edge exercise или Nginx-вариант для существующего MESH | Config validation, доступность routes, права tmp/log, корректный stop |
-| Docker app + DB | Configuration, persistence, readiness | Production Compose profile для текущего приложения | Только edge открыт, данные живут после replacement, health/smoke реальны |
-| Multi-stage build | Build/runtime separation, layer cache | Уже существующие API/web Dockerfiles развить измерениями | Изменение source не пересобирает неизменившиеся dependency layers; сравнить build time/size |
-| system/build/runtime | Общая build environment и её версия | Раздельные stages или versioned builder image при повторном использовании | Digest builder, reproducible inputs, runtime без build toolchain |
-| Compose и несколько репозиториев | Совместимость отдельно выпускаемых компонентов | Независимые API/web image releases; integration manifest с обоими digests | API/web compatibility и согласованный deployment manifest |
-| GitLab CI build/push | Runner, rules, variables, registry | Понятия курса переносим в GitHub Actions для двух образов MESH | Реальный pipeline, path-sensitive jobs, commit/digest, registry artifact |
-| Общий CI-модуль | Повторное использование и versioning | Один testable build component/template | Два небольших consumers, inputs, фиксированная версия, собственные tests |
-| GitLab CI deploy | Provision/upgrade, environments, сериализация | Первичная установка и обновление одного окружения | Cold deploy, repeat deploy, bad release, rollback, smoke |
-| Ansible roles/variables/templates | OS/app configuration | Roles для host/runtime/edge/monitoring | Второй converge без неожиданных changes; изменение одного параметра применяет ожидаемый diff |
-| Galaxy/Molecule | Dependencies и роль-тестирование | Pinned role dependencies и Molecule scenario для своей роли | Converge → idempotence → verify; реальный сервис и права проверены |
-| Secrets в Ansible | Delivery и доступ к конфигурации | Знакомый кандидату механизм encryption/secret delivery | Secrets не попадают в source/logs/diff; rotation и revocation проверены |
-| Terraform modules/loops/conditions | Resource provisioning и reusable infrastructure | Один provider, network/VM/storage либо кластер по scope | Plan/apply, no-change plan, controlled drift и recreate; ownership ресурса однозначен |
+| Предоставленная тема               | Навык                                              | Применение к MESH                                                               | Проверка результата                                                                          |
+| ---------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| VirtualBox, ручная установка Linux | OS, processes, permissions, networks               | Разбор устройства и диагностики Linux host                                      | Пройти request path, найти сеть/порт/права по симптомам                                      |
+| Vagrant, SSH, app01/db01/web01     | Повторяемый lab, private network, разделение ролей | При необходимости VM lab: edge, приложение, PostgreSQL                          | Подъём с нуля по инструкции, SSH и доступ DB только из нужной сети                           |
+| MySQL/WordPress/Apache/PHP         | App/DB integration и reverse proxy                 | Существующие Rails/Next.js/PostgreSQL дают тот же инфраструктурный класс задачи | Реальный workflow, database connection, private files и proxy routing                        |
+| Собственный nginx на Alpine        | Образ, runtime user, configuration, mounts         | Edge exercise или Nginx-вариант для существующего MESH                          | Config validation, доступность routes, права tmp/log, корректный stop                        |
+| Docker app + DB                    | Configuration, persistence, readiness              | Production Compose profile для текущего приложения                              | Только edge открыт, данные живут после replacement, health/smoke реальны                     |
+| Multi-stage build                  | Build/runtime separation, layer cache              | Уже существующие API/web Dockerfiles развить измерениями                        | Изменение source не пересобирает неизменившиеся dependency layers; сравнить build time/size  |
+| system/build/runtime               | Общая build environment и её версия                | Раздельные stages или versioned builder image при повторном использовании       | Digest builder, reproducible inputs, runtime без build toolchain                             |
+| Compose и несколько репозиториев   | Совместимость отдельно выпускаемых компонентов     | Независимые API/web image releases; integration manifest с обоими digests       | API/web compatibility и согласованный deployment manifest                                    |
+| GitLab CI build/push               | Runner, rules, variables, registry                 | Понятия курса переносим в GitHub Actions для двух образов MESH                  | Реальный pipeline, path-sensitive jobs, commit/digest, registry artifact                     |
+| Общий CI-модуль                    | Повторное использование и versioning               | Один testable build component/template                                          | Два небольших consumers, inputs, фиксированная версия, собственные tests                     |
+| GitLab CI deploy                   | Provision/upgrade, environments, сериализация      | Первичная установка и обновление одного окружения                               | Cold deploy, repeat deploy, bad release, rollback, smoke                                     |
+| Ansible roles/variables/templates  | OS/app configuration                               | Roles для host/runtime/edge/monitoring                                          | Второй converge без неожиданных changes; изменение одного параметра применяет ожидаемый diff |
+| Galaxy/Molecule                    | Dependencies и роль-тестирование                   | Pinned role dependencies и Molecule scenario для своей роли                     | Converge → idempotence → verify; реальный сервис и права проверены                           |
+| Secrets в Ansible                  | Delivery и доступ к конфигурации                   | Знакомый кандидату механизм encryption/secret delivery                          | Secrets не попадают в source/logs/diff; rotation и revocation проверены                      |
+| Terraform modules/loops/conditions | Resource provisioning и reusable infrastructure    | Один provider, network/VM/storage либо кластер по scope                         | Plan/apply, no-change plan, controlled drift и recreate; ownership ресурса однозначен        |
 
 Ссылка на учебный [react-spring-app](https://gitlab.com/deusops/projects/react-spring-app) при проверке открыла sign-in page; содержимое репозитория не изучено. Сопоставление основано на тексте присланного задания, не на предположениях о его исходном коде.
 

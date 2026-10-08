@@ -12,4 +12,4 @@ Only appointed operators manage integrations. Endpoints must match administrator
 
 Tradeoffs: local disk/SQLite simulator demonstrate one host, not HA; filesystem writes are not atomic with a DB transaction; bounded orphan blobs require retention cleanup. Primary metric aggregates cost an extra SQL write per successful notification/validation; HTTP histograms are process local. No live studio, gaming certification, real stake or payment is implied.
 
-Remote GitHub runs still require the deferred repository. Live VM/IaC/cluster evidence must be recorded only after execution.
+The repository and hosted verification/release now exist. See execution-status.md for actual run IDs and their source revisions. Hosted deployment uses exact release source and verified signed registry digests; the disposable environment and Linux crash-recovery choice are recorded in 003-hosted-acceptance.md.

@@ -42,4 +42,4 @@ We reproduced a timeout after the partner had durably accepted the package. We k
 
 ## Эксплуатационные границы
 
-Local alerts/dashboard используют временные TSDB/SQLite paths и не заменяют долгосрочный monitoring retention. Single-node Kubernetes, одна primary DB и local-path PVC не дают физическую HA. Backup+files restore уже проверен отдельно; offsite/encryption/PITR нужны после выбора среды. Секреты в ignored files не являются промышленным secret manager. Обновления образов требуют нового exact scan и repeatable evidence.
+Local Prometheus, Alertmanager silences/notification log и receiver receipts используют persistent volumes с ограниченной retention. Active alerts поступают заново от Prometheus после restart; это не snapshot активных alerts. Single-node Kubernetes, одна primary DB и local-path PVC не дают физическую HA. Current primary/queue/private files восстановлены из AES-256-GCM archive с проверкой hashes и private HTTP; whole-VM/offsite/PITR остаются отдельной приёмкой. Секреты в ignored files не являются промышленным secret manager. Обновления образов требуют нового exact scan и repeatable evidence.

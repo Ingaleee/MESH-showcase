@@ -36,14 +36,14 @@ Production и Kubernetes не запускать одновременно с т�
 
 ## Что подтверждено
 
-118 Ruby examples в Debian development и native Alpine runtime; 13/13 полных browser scenarios; 51 OpenAPI operations; строгий scan девяти runtime images — 0 HIGH/CRITICAL, включая unfixed, без exceptions. Publishing прошёл bad package → validation → release → lost response → lookup → rollback с тремя remote POST, verified private bytes и тремя actual HTTP 200 signed callbacks.
+Current hosted CI: 131 Ruby examples в development и native Alpine runtime; 13/13 browser scenarios без skips/flaky; 52 OpenAPI operations; текущий release scan пяти exact digests — 0 HIGH/CRITICAL, включая unfixed, без CVE exceptions. Более ранний scan девяти образов остаётся историческим. Publishing прошёл bad package → validation → release → lost response → lookup → rollback с тремя remote POST, verified private bytes и тремя actual HTTP 200 signed callbacks.
 
-Terraform real apply/drift/repair, Helm failed-rollout rollback, real NetworkPolicy deny и worker/DB recovery выполнены на single-node k3d. Kubernetes использовал предыдущие Debian application images; более поздние Alpine проверки имеют отдельный scope.
+[Текущий hosted Kubernetes](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) выполнил Terraform apply/drift/repair, migration ordering, Helm failed-rollout rollback, NetworkPolicy positive/negative controls и worker/DB recovery на Alpine registry digests. Scope — single-node K3s в ephemeral Ubuntu VM; старые local Debian results сохранены как исторические.
 
 Сохраняются более ранние измерения 50k fanout, load lab и DB+files restore. Они не превращаются в новые замеры после каждой правки: даты и scope указаны в evidence.
 
 ## Что требует отдельного продолжения
 
-GitHub repository пользователь отложил. Remote Actions/GHCR runs и runner Online ещё отсутствуют; конфигурация не называется выполненным pipeline. Ansible syntax проверен, convergence на Ubuntu VM не выполнен. Offsite/PITR, production SLO и физическая HA требуют другой среды/данных. Платные ресурсы и внешние сообщения не создавались.
+GitHub verify, подписанный GHCR release, Ubuntu deploy/convergence/rollback/crash recovery и Kubernetes текущих registry digests успешно выполнены; [актуальные run IDs](docs/execution-status.md). Hosted VM существует только во время задания. Offsite/PITR, mixed-load capacity, длительное production SLO window и физическая HA не заявляются. Покупка VPS и постоянный self-hosted runner не требуются. Полные пределы приёмки — в [quality-bar.md](docs/quality-bar.md).
 
 [Исторический transfer](docs/evidence/showcase-transfer.json), [separation](docs/evidence/showcase-separation.json), [новый evidence index](docs/evidence/publishing-implementation.json).

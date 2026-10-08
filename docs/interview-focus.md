@@ -17,7 +17,7 @@
 
 ## Следующие внешние шаги
 
-GitHub остаётся выбранной платформой. Repo отложен пользователем, поэтому remote не создавался и CI runs пока не заявляются. После выбора repo: verify/build/scan/GHCR manifest, successful/rejected deployment и сохранённые artifacts. Отдельная Ubuntu VM нужна для Ansible apply дважды и trusted runner; текущий Windows host проверял local Docker/k3d последовательно.
+GitHub repository опубликован; verify/build/scan/GHCR имеют реальные successful runs. Для Ubuntu convergence/deploy/rollback и registry Kubernetes выбран временный hosted stand, который не требует покупки VPS или настройки SSH пользователем. Выполненные outcomes публикуются в execution-status.md; конфигурация не считается acceptance result.
 
 Production SLO/HA/PITR/offsite требуют подходящей среды и данных, а не добавления ещё одного YAML. Local one-node cluster — реальный rollout/network-policy lab, с явно указанными ограничениями.
 
@@ -25,4 +25,4 @@ Production SLO/HA/PITR/offsite требуют подходящей среды и
 
 Самостоятельно пройти сценарий, открыть transaction/SQL, объяснить каждую гарантию и её границу. Написать две личные коммерческие истории: deployment/infra и investigation/incident, с собственной ролью, данными и измеренным результатом. Этот проект не создаёт задним числом пять лет коммерческого опыта.
 
-Modular monolith помогает согласованности; durable polling имеет цену; Active Storage + SQL upload не атомарны, orphan lifecycle нужен отдельно; unknown честнее blind retry; rollback images не откатывает миграции; private PVC и two replicas не создают HA. Это темы для сильного инженерного разговора.
+Modular monolith помогает согласованности; durable polling имеет цену; Active Storage + SQL upload не атомарны: durable upload intent, fencing и tombstoned cleanup закрывают конкретный lifecycle; unknown честнее blind retry; rollback images не откатывает миграции; private PVC и two replicas не создают HA. Это темы для сильного инженерного разговора.
