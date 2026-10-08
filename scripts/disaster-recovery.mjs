@@ -57,7 +57,9 @@ const tool = (action) =>
   dc(["run", "--rm", "tools", "bundle", "exec", "ruby", "script/disaster_recovery.rb", action]);
 try {
   dc(["build", "partner"]);
-  dc(["up", "-d", "--wait", "db", "storage-init"]);
+  dc(["up", "-d", "--wait", "db"]);
+  dc(["up", "-d", "storage-init"]);
+  dc(["wait", "storage-init"]);
   if (mode === "source") {
     dc(["run", "--rm", "tools", "bundle", "exec", "rails", "db:prepare"]);
     dc(["run", "--rm", "grants"]);

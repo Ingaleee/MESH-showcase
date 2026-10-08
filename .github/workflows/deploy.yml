@@ -7,8 +7,8 @@ on:
         required: true
         type: string
       baseline_run_id:
-        description: Optional earlier successful release for schema compatibility
-        required: false
+        description: Earlier successful attested release for compatibility and crash transitions
+        required: true
         type: string
 permissions:
   contents: read
