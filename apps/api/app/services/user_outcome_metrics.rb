@@ -1,44 +1,48 @@
 class UserOutcomeMetrics
   WINDOW_SECONDS = 86_400
-  OBJECTIVES = {
-    "notification" => { table: "platform_deliveries", completion: "processed_at", finished: %w[processed], deadline: 30, filter: "consumer = 'notifications'" },
-    "validation" => { table: "publishing_validations", completion: "completed_at", finished: %w[passed rejected], deadline: 60, filter: "TRUE" },
-    "deployment" => { table: "publishing_deployments", completion: "confirmed_at", finished: %w[confirmed], deadline: 120, filter: "TRUE" }
-  }.freeze
+  OBJECTIVES = { "notification" => { deadline: 30 }.freeze, "validation" => { deadline: 60 }.freeze, "deployment" => { deadline: 120 }.freeze }.freeze
+  FIELDS = %w[total good unfinished failed overdue oldest_seconds].freeze
+  QUERY = <<~SQL.freeze
+    WITH accepted AS (
+      SELECT 'notification' AS operation, created_at, processed_at AS completed_at,
+        state = 'processed' AS finished, state = 'failed' AS failed, :notification_deadline AS deadline
+      FROM platform_deliveries WHERE consumer = 'notifications'
+      UNION ALL
+      SELECT 'validation', created_at, completed_at, state IN ('passed','rejected'), state = 'failed', :validation_deadline
+      FROM publishing_validations
+      UNION ALL
+      SELECT 'deployment', created_at, confirmed_at, state = 'confirmed', state = 'failed', :deployment_deadline
+      FROM publishing_deployments
+    )
+    SELECT operation,
+      COUNT(*) FILTER (WHERE created_at >= :lower AND created_at <= CAST(:now AS timestamp) - deadline * INTERVAL '1 second') AS total,
+      COUNT(*) FILTER (WHERE created_at >= :lower AND created_at <= CAST(:now AS timestamp) - deadline * INTERVAL '1 second'
+        AND finished AND completed_at <= created_at + deadline * INTERVAL '1 second') AS good,
+      COUNT(*) FILTER (WHERE NOT finished AND NOT failed) AS unfinished,
+      COUNT(*) FILTER (WHERE failed) AS failed,
+      COUNT(*) FILTER (WHERE NOT finished AND created_at < CAST(:now AS timestamp) - deadline * INTERVAL '1 second') AS overdue,
+      COALESCE(EXTRACT(EPOCH FROM CAST(:now AS timestamp) - MIN(created_at) FILTER (WHERE NOT finished AND NOT failed)),0) AS oldest_seconds
+    FROM accepted GROUP BY operation
+  SQL
 
   def self.snapshot(now: Time.current)
+    values = OBJECTIVES.to_h { |name, config| [ :"#{name}_deadline", config.fetch(:deadline) ] }.merge(now: now, lower: now - WINDOW_SECONDS)
+    sql = Platform::Record.sanitize_sql_array([ QUERY, values ])
     connection = Platform::Record.connection
-    connection.transaction(requires_new: true) do
+    rows = connection.transaction(requires_new: true) do
       connection.execute("SET LOCAL statement_timeout = '1000ms'")
-      OBJECTIVES.to_h do |name, config|
-        current = connection.quote(now)
-        lower = connection.quote(now - WINDOW_SECONDS)
-        mature = connection.quote(now - config.fetch(:deadline))
-        finished = config.fetch(:finished).map { |state| connection.quote(state) }.join(",")
-        duration = config.fetch(:deadline)
-        table = connection.quote_table_name(config.fetch(:table))
-        completed = connection.quote_column_name(config.fetch(:completion))
-        row = connection.select_one(<<~SQL)
-          SELECT
-            COUNT(*) FILTER (WHERE created_at >= #{lower} AND created_at <= #{mature}) AS total,
-            COUNT(*) FILTER (WHERE created_at >= #{lower} AND created_at <= #{mature}
-              AND state IN (#{finished}) AND #{completed} <= created_at + INTERVAL '#{duration} seconds') AS good,
-            COUNT(*) FILTER (WHERE state NOT IN (#{finished}) AND state <> 'failed') AS unfinished,
-            COUNT(*) FILTER (WHERE state = 'failed') AS failed,
-            COUNT(*) FILTER (WHERE state NOT IN (#{finished}) AND created_at < #{mature}) AS overdue,
-            COALESCE(EXTRACT(EPOCH FROM #{current}::timestamp - MIN(created_at) FILTER (WHERE state NOT IN (#{finished}) AND state <> 'failed')),0) AS oldest_seconds
-          FROM #{table} WHERE #{config.fetch(:filter)}
-        SQL
-        [ name, row.transform_values { |value| value.to_f } ]
-      end
+      connection.select_all(sql).to_a.index_by { |row| row.fetch("operation") }
+    end
+    OBJECTIVES.to_h do |name, _|
+      row = rows.fetch(name, {})
+      [ name, FIELDS.to_h { |field| [ field, row.fetch(field, 0).to_f ] } ]
     end
   end
 
   def self.prometheus
     data = snapshot
-    names = %w[total good unfinished failed overdue oldest_seconds]
     lines = [ "# TYPE mesh_user_sli_up gauge", "mesh_user_sli_up 1" ]
-    names.each do |field|
+    FIELDS.each do |field|
       lines << "# TYPE mesh_user_sli_#{field} gauge"
       data.each { |name, row| lines << "mesh_user_sli_#{field}{operation=\"#{name}\"} #{[ row.fetch(field), 0 ].max}" }
     end
