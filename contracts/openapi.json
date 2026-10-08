@@ -260,16 +260,11 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "email",
-                      "password"
-                    ],
+                    "required": ["email", "password"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "session"
-                ],
+                "required": ["session"],
                 "additionalProperties": false
               }
             }
@@ -544,24 +539,14 @@
                       },
                       "persona": {
                         "type": "string",
-                        "enum": [
-                          "client",
-                          "creator"
-                        ]
+                        "enum": ["client", "creator"]
                       }
                     },
-                    "required": [
-                      "email",
-                      "display_name",
-                      "password",
-                      "persona"
-                    ],
+                    "required": ["email", "display_name", "password", "persona"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "account"
-                ],
+                "required": ["account"],
                 "additionalProperties": false
               }
             }
@@ -628,10 +613,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "data",
-                    "next_cursor"
-                  ],
+                  "required": ["data", "next_cursor"],
                   "additionalProperties": false
                 }
               }
@@ -879,13 +861,7 @@
                       },
                       "category": {
                         "type": "string",
-                        "enum": [
-                          "Тексты",
-                          "Дизайн",
-                          "Видео",
-                          "Разработка",
-                          "Маркетинг"
-                        ]
+                        "enum": ["Тексты", "Дизайн", "Видео", "Разработка", "Маркетинг"]
                       },
                       "budget_minor": {
                         "type": "integer",
@@ -893,12 +869,7 @@
                       },
                       "currency": {
                         "type": "string",
-                        "enum": [
-                          "RUB",
-                          "USD",
-                          "EUR",
-                          "JPY"
-                        ]
+                        "enum": ["RUB", "USD", "EUR", "JPY"]
                       },
                       "deadline": {
                         "type": "string",
@@ -957,9 +928,7 @@
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "project"
-                ],
+                "required": ["project"],
                 "additionalProperties": false
               }
             }
@@ -1286,13 +1255,7 @@
                       },
                       "category": {
                         "type": "string",
-                        "enum": [
-                          "Тексты",
-                          "Дизайн",
-                          "Видео",
-                          "Разработка",
-                          "Маркетинг"
-                        ]
+                        "enum": ["Тексты", "Дизайн", "Видео", "Разработка", "Маркетинг"]
                       },
                       "budget_minor": {
                         "type": "integer",
@@ -1300,12 +1263,7 @@
                       },
                       "currency": {
                         "type": "string",
-                        "enum": [
-                          "RUB",
-                          "USD",
-                          "EUR",
-                          "JPY"
-                        ]
+                        "enum": ["RUB", "USD", "EUR", "JPY"]
                       },
                       "deadline": {
                         "type": "string",
@@ -1367,10 +1325,7 @@
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "project",
-                  "version"
-                ],
+                "required": ["project", "version"],
                 "additionalProperties": false
               }
             }
@@ -1543,18 +1498,11 @@
                         "format": "uuid"
                       }
                     },
-                    "required": [
-                      "price_minor",
-                      "delivery_days",
-                      "message",
-                      "brief_version"
-                    ],
+                    "required": ["price_minor", "delivery_days", "message", "brief_version"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "proposal"
-                ],
+                "required": ["proposal"],
                 "additionalProperties": false
               }
             }
@@ -1712,9 +1660,7 @@
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "file"
-                ],
+                "required": ["file"],
                 "additionalProperties": false
               }
             }
@@ -2271,10 +2217,7 @@
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "proposal_id",
-                  "brief_version"
-                ],
+                "required": ["proposal_id", "brief_version"],
                 "additionalProperties": false
               }
             }
@@ -2434,10 +2377,7 @@
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "accepting_proposals",
-                  "version"
-                ],
+                "required": ["accepting_proposals", "version"],
                 "additionalProperties": false
               }
             }
@@ -2473,9 +2413,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "additionalProperties": false
                 }
               }
@@ -2721,19 +2659,11 @@
                         }
                       }
                     },
-                    "required": [
-                      "headline",
-                      "bio",
-                      "rate_minor",
-                      "currency",
-                      "skills"
-                    ],
+                    "required": ["headline", "bio", "rate_minor", "currency", "skills"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "profile"
-                ],
+                "required": ["profile"],
                 "additionalProperties": false
               }
             }
@@ -2769,9 +2699,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "profile"
-                  ],
+                  "required": ["profile"],
                   "additionalProperties": false
                 }
               }
@@ -2894,9 +2822,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "additionalProperties": false
                 }
               }
@@ -3304,9 +3230,7 @@
                     }
                   }
                 },
-                "required": [
-                  "content"
-                ],
+                "required": ["content"],
                 "additionalProperties": false
               }
             }
@@ -3617,15 +3541,10 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "comment",
-                      "changes_requested"
-                    ]
+                    "enum": ["comment", "changes_requested"]
                   }
                 },
-                "required": [
-                  "content"
-                ],
+                "required": ["content"],
                 "additionalProperties": false
               }
             }
@@ -3809,9 +3728,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "additionalProperties": false
                 }
               }
@@ -4067,9 +3984,7 @@
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "file"
-                ],
+                "required": ["file"],
                 "additionalProperties": false
               }
             }
@@ -4650,9 +4565,7 @@
                     "format": "uuid"
                   }
                 },
-                "required": [
-                  "submission_id"
-                ],
+                "required": ["submission_id"],
                 "additionalProperties": false
               }
             }
@@ -4928,24 +4841,14 @@
                 "properties": {
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "fund",
-                      "payout"
-                    ]
+                    "enum": ["fund", "payout"]
                   },
                   "scenario": {
                     "type": "string",
-                    "enum": [
-                      "normal",
-                      "timeout_after_success",
-                      "decline"
-                    ]
+                    "enum": ["normal", "timeout_after_success", "decline"]
                   }
                 },
-                "required": [
-                  "kind",
-                  "scenario"
-                ],
+                "required": ["kind", "scenario"],
                 "additionalProperties": false
               }
             }
@@ -5102,9 +5005,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "reason"
-                ],
+                "required": ["reason"],
                 "additionalProperties": false
               }
             }
@@ -5136,9 +5037,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "additionalProperties": false
                 }
               }
@@ -5510,11 +5409,7 @@
                       "type": "integer"
                     }
                   },
-                  "required": [
-                    "checked",
-                    "recovered",
-                    "exceptions"
-                  ],
+                  "required": ["checked", "recovered", "exceptions"],
                   "additionalProperties": false
                 }
               }
@@ -5753,9 +5648,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "reason"
-                ],
+                "required": ["reason"],
                 "additionalProperties": false
               }
             }
@@ -5918,9 +5811,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "data"
-                  ],
+                  "required": ["data"],
                   "additionalProperties": false
                 }
               }
@@ -6051,10 +5942,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "state"
-                  ],
+                  "required": ["id", "state"],
                   "additionalProperties": false
                 }
               }
@@ -6166,10 +6054,7 @@
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "title",
-                  "file"
-                ],
+                "required": ["title", "file"],
                 "additionalProperties": false
               }
             }
@@ -6335,9 +6220,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "received"
-                  ],
+                  "required": ["received"],
                   "additionalProperties": false
                 }
               }
@@ -6449,10 +6332,7 @@
                     "format": "uuid"
                   }
                 },
-                "required": [
-                  "event_id",
-                  "operation_id"
-                ],
+                "required": ["event_id", "operation_id"],
                 "additionalProperties": false
               }
             }
@@ -6463,7 +6343,36 @@
     "/publishing": {
       "get": {
         "operationId": "getPublishing",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "partners_cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "candidates_cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deployments_cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -6613,9 +6522,7 @@
                       "format": "uuid"
                     }
                   },
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "additionalProperties": false
                 }
               }
@@ -6742,17 +6649,11 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "name",
-                      "origin",
-                      "credential_ref"
-                    ],
+                    "required": ["name", "origin", "credential_ref"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "partner"
-                ],
+                "required": ["partner"],
                 "additionalProperties": false
               }
             }
@@ -6808,10 +6709,7 @@
                       "format": "uuid"
                     }
                   },
-                  "required": [
-                    "id",
-                    "validation_id"
-                  ],
+                  "required": ["id", "validation_id"],
                   "additionalProperties": false
                 }
               }
@@ -6933,10 +6831,7 @@
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "manifest",
-                  "artifact"
-                ],
+                "required": ["manifest", "artifact"],
                 "additionalProperties": false
               }
             }
@@ -6988,9 +6883,7 @@
                       "format": "uuid"
                     }
                   },
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "additionalProperties": false
                 }
               }
@@ -7156,9 +7049,7 @@
                       "format": "uuid"
                     }
                   },
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "additionalProperties": false
                 }
               }
@@ -7278,19 +7169,14 @@
                   },
                   "scenario": {
                     "type": "string",
-                    "enum": [
-                      "normal",
-                      "timeout_after_success"
-                    ]
+                    "enum": ["normal", "timeout_after_success"]
                   },
                   "rollback_of_id": {
                     "type": "string",
                     "format": "uuid"
                   }
                 },
-                "required": [
-                  "validation_id"
-                ],
+                "required": ["validation_id"],
                 "additionalProperties": false
               }
             }
@@ -7473,10 +7359,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id",
-                    "state"
-                  ],
+                  "required": ["id", "state"],
                   "additionalProperties": false
                 }
               }
@@ -7652,10 +7535,7 @@
                       "format": "uuid"
                     }
                   },
-                  "required": [
-                    "duplicate",
-                    "deployment_id"
-                  ],
+                  "required": ["duplicate", "deployment_id"],
                   "additionalProperties": false
                 }
               }
@@ -7834,10 +7714,7 @@
           },
           "persona": {
             "type": "string",
-            "enum": [
-              "client",
-              "creator"
-            ]
+            "enum": ["client", "creator"]
           },
           "email": {
             "type": "string",
@@ -7847,11 +7724,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "id",
-          "display_name",
-          "persona"
-        ],
+        "required": ["id", "display_name", "persona"],
         "additionalProperties": false
       },
       "Session": {
@@ -7871,10 +7744,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "account",
-          "csrf_token"
-        ],
+        "required": ["account", "csrf_token"],
         "additionalProperties": false
       },
       "Error": {
@@ -7894,11 +7764,7 @@
             "additionalProperties": true
           }
         },
-        "required": [
-          "code",
-          "message",
-          "request_id"
-        ],
+        "required": ["code", "message", "request_id"],
         "additionalProperties": false
       },
       "Project": {
@@ -7929,11 +7795,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "open",
-              "awarded",
-              "closed"
-            ]
+            "enum": ["open", "awarded", "closed"]
           },
           "accepting_proposals": {
             "type": "boolean"
@@ -8032,11 +7894,7 @@
             }
           }
         },
-        "required": [
-          "version",
-          "created_at",
-          "changed_fields"
-        ],
+        "required": ["version", "created_at", "changed_fields"],
         "additionalProperties": false
       },
       "ProjectDetail": {
@@ -8184,21 +8042,12 @@
                   ]
                 }
               },
-              "required": [
-                "id",
-                "kind",
-                "created_at",
-                "brief_version",
-                "actor_name"
-              ],
+              "required": ["id", "kind", "created_at", "brief_version", "actor_name"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "award",
-          "events"
-        ],
+        "required": ["award", "events"],
         "additionalProperties": false
       },
       "Proposal": {
@@ -8279,20 +8128,10 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "quarantined",
-              "available",
-              "rejected"
-            ]
+            "enum": ["quarantined", "available", "rejected"]
           }
         },
-        "required": [
-          "id",
-          "filename",
-          "byte_size",
-          "content_type",
-          "state"
-        ],
+        "required": ["id", "filename", "byte_size", "content_type", "state"],
         "additionalProperties": false
       },
       "Profile": {
@@ -8463,11 +8302,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "quarantined",
-              "available",
-              "rejected"
-            ]
+            "enum": ["quarantined", "available", "rejected"]
           },
           "submission_id": {
             "anyOf": [
@@ -8512,10 +8347,7 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "comment",
-              "changes_requested"
-            ]
+            "enum": ["comment", "changes_requested"]
           },
           "content": {
             "type": "string"
@@ -8528,14 +8360,7 @@
             "$ref": "#/components/schemas/Account"
           }
         },
-        "required": [
-          "id",
-          "submission_id",
-          "kind",
-          "content",
-          "created_at",
-          "actor"
-        ],
+        "required": ["id", "submission_id", "kind", "content", "created_at", "actor"],
         "additionalProperties": false
       },
       "Submission": {
@@ -8572,10 +8397,7 @@
           },
           "manifest_format": {
             "type": "string",
-            "enum": [
-              "ordered-json-v0",
-              "canonical-json-v1"
-            ]
+            "enum": ["ordered-json-v0", "canonical-json-v1"]
           },
           "created_at": {
             "type": "string",
@@ -8619,13 +8441,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "agreed",
-              "in_progress",
-              "submitted",
-              "accepted",
-              "cancelled"
-            ]
+            "enum": ["agreed", "in_progress", "submitted", "accepted", "cancelled"]
           },
           "terms": {
             "$ref": "#/components/schemas/Terms"
@@ -8743,20 +8559,11 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "fund",
-              "payout"
-            ]
+            "enum": ["fund", "payout"]
           },
           "state": {
             "type": "string",
-            "enum": [
-              "requested",
-              "dispatching",
-              "unknown",
-              "confirmed",
-              "failed"
-            ]
+            "enum": ["requested", "dispatching", "unknown", "confirmed", "failed"]
           },
           "amount_minor": {
             "type": "integer"
@@ -8834,14 +8641,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "funded",
-          "hold",
-          "hold_reason",
-          "amount_minor",
-          "currency"
-        ],
+        "required": ["id", "funded", "hold", "hold_reason", "amount_minor", "currency"],
         "additionalProperties": false
       },
       "LedgerEntry": {
@@ -8855,21 +8655,13 @@
           },
           "direction": {
             "type": "string",
-            "enum": [
-              "debit",
-              "credit"
-            ]
+            "enum": ["debit", "credit"]
           },
           "amount_minor": {
             "type": "integer"
           }
         },
-        "required": [
-          "account_key",
-          "currency",
-          "direction",
-          "amount_minor"
-        ],
+        "required": ["account_key", "currency", "direction", "amount_minor"],
         "additionalProperties": false
       },
       "Journal": {
@@ -8892,12 +8684,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "status",
-          "description",
-          "entries"
-        ],
+        "required": ["id", "status", "description", "entries"],
         "additionalProperties": false
       },
       "Finance": {
@@ -8929,12 +8716,7 @@
             }
           }
         },
-        "required": [
-          "sandbox",
-          "settlement",
-          "operations",
-          "ledger"
-        ],
+        "required": ["sandbox", "settlement", "operations", "ledger"],
         "additionalProperties": false
       },
       "Notification": {
@@ -8967,14 +8749,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "title",
-          "body",
-          "resource_path",
-          "read_at",
-          "created_at"
-        ],
+        "required": ["id", "title", "body", "resource_path", "read_at", "created_at"],
         "additionalProperties": false
       },
       "PortfolioItem": {
@@ -9011,13 +8786,7 @@
             ]
           }
         },
-        "required": [
-          "id",
-          "title",
-          "state",
-          "sha256",
-          "scan_error"
-        ],
+        "required": ["id", "title", "state", "sha256", "scan_error"],
         "additionalProperties": false
       },
       "Id": {
@@ -9028,9 +8797,7 @@
             "format": "uuid"
           }
         },
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "additionalProperties": false
       },
       "VersionedId": {
@@ -9044,10 +8811,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "id",
-          "version"
-        ],
+        "required": ["id", "version"],
         "additionalProperties": false
       },
       "Operations": {
@@ -9117,13 +8881,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "id",
-                "event_type",
-                "correlation_id",
-                "aggregate_id",
-                "created_at"
-              ],
+              "required": ["id", "event_type", "correlation_id", "aggregate_id", "created_at"],
               "additionalProperties": false
             }
           },
@@ -9150,13 +8908,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "id",
-                "action",
-                "resource_id",
-                "correlation_id",
-                "created_at"
-              ],
+              "required": ["id", "action", "resource_id", "correlation_id", "created_at"],
               "additionalProperties": false
             }
           },
@@ -9186,24 +8938,12 @@
                   ]
                 }
               },
-              "required": [
-                "id",
-                "state",
-                "attempts",
-                "last_error"
-              ],
+              "required": ["id", "state", "attempts", "last_error"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "sandbox",
-          "metrics",
-          "payments",
-          "events",
-          "audit",
-          "deliveries"
-        ],
+        "required": ["sandbox", "metrics", "payments", "events", "audit", "deliveries"],
         "additionalProperties": false
       },
       "PublishingManifest": {
@@ -9241,11 +8981,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "path",
-                "size",
-                "sha256"
-              ],
+              "required": ["path", "size", "sha256"],
               "additionalProperties": false
             }
           }
@@ -9288,13 +9024,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "id",
-          "name",
-          "contract_version",
-          "active_deployment_id",
-          "active_sequence"
-        ],
+        "required": ["id", "name", "contract_version", "active_deployment_id", "active_sequence"],
         "additionalProperties": false
       },
       "PublishingCandidate": {
@@ -9348,13 +9078,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "pending",
-              "running",
-              "passed",
-              "rejected",
-              "failed"
-            ]
+            "enum": ["pending", "running", "passed", "rejected", "failed"]
           },
           "policy_version": {
             "type": "string"
@@ -9395,13 +9119,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "code",
-                    "ok",
-                    "expected",
-                    "observed",
-                    "fix"
-                  ],
+                  "required": ["code", "ok", "expected", "observed", "fix"],
                   "additionalProperties": false
                 }
               }
@@ -9475,20 +9193,11 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "publish",
-              "rollback"
-            ]
+            "enum": ["publish", "rollback"]
           },
           "state": {
             "type": "string",
-            "enum": [
-              "pending",
-              "dispatching",
-              "unknown",
-              "confirmed",
-              "failed"
-            ]
+            "enum": ["pending", "dispatching", "unknown", "confirmed", "failed"]
           },
           "last_error": {
             "anyOf": [
@@ -9587,6 +9296,49 @@
           },
           "policy_version": {
             "type": "string"
+          },
+          "active_deployments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublishingDeployment"
+            }
+          },
+          "next_cursors": {
+            "type": "object",
+            "properties": {
+              "partners": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "candidates": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "deployments": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": ["partners", "candidates", "deployments"],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -9594,7 +9346,9 @@
           "candidates",
           "validations",
           "deployments",
-          "policy_version"
+          "policy_version",
+          "active_deployments",
+          "next_cursors"
         ],
         "additionalProperties": false
       },

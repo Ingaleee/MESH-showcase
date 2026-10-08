@@ -6,16 +6,24 @@ module Api
       after_action -> { response.headers["Cache-Control"] = "private, no-store" }
 
       def index
-        partners = Publishing::Partner.where(owner_id: current_account.id).order(created_at: :desc).limit(20)
-        candidates = Publishing::Candidate.where(partner_id: partners.map(&:id)).includes(:partner, :artifact_blob).order(created_at: :desc, id: :desc).limit(30)
+        pages = {
+          partners: Publishing::HistoryPage.call(scope: owned_partners, actor: current_account, kind: "partners", cursor: params[:partners_cursor], limit: params.fetch(:limit, 20)),
+          candidates: Publishing::HistoryPage.call(scope: Publishing::Candidate.where(partner_id: owned_partners.select(:id)).includes(:partner, :artifact_blob), actor: current_account, kind: "candidates", cursor: params[:candidates_cursor], limit: params.fetch(:limit, 30)),
+          deployments: Publishing::HistoryPage.call(scope: Publishing::Deployment.where(partner_id: owned_partners.select(:id)), actor: current_account, kind: "deployments", cursor: params[:deployments_cursor], limit: params.fetch(:limit, 30))
+        }
+        partners = pages.fetch(:partners).fetch(:records)
+        candidates = pages.fetch(:candidates).fetch(:records)
         validations = Publishing::LatestValidations.call(candidate_ids: candidates.map(&:id))
         fingerprints = candidates.to_h { |row| [ row.id, Publishing::Settings.fingerprint(row) ] }
-        deployments = Publishing::Deployment.where(partner_id: partners.map(&:id)).order(created_at: :desc).limit(30)
+        deployments = pages.fetch(:deployments).fetch(:records)
+        active = Publishing::Deployment.where(id: partners.filter_map(&:active_deployment_id), partner_id: owned_partners.select(:id)).order(:id)
         render json: {
           partners: partners.map { |row| partner_json(row) },
           candidates: candidates.map { |row| candidate_json(row) },
           validations: validations.map { |row| validation_json(row).merge(current_inputs_match: fingerprints[row.candidate_id] == row.input_fingerprint) },
           deployments: deployments.map { |row| deployment_json(row) },
+          active_deployments: active.map { |row| deployment_json(row) },
+          next_cursors: pages.transform_values { |page| page.fetch(:next_cursor) },
           policy_version: Publishing::Settings.policy_version
         }
       end

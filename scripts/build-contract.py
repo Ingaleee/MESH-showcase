@@ -267,6 +267,10 @@ paths["/webhooks/sandbox"]["post"]["parameters"] = [
     for name in ["X-Mesh-Timestamp", "X-Mesh-Signature"]
 ]
 
+publishing = json.loads((Path(__file__).resolve().parents[1] / "contracts" / "publishing.json").read_text(encoding="utf-8"))
+schemas.update(publishing["schemas"])
+paths.update(publishing["paths"])
+
 contract = {
     "openapi": "3.1.1",
     "info": {"title": "MESH API", "version": "0.1.0", "description": "Creator marketplace. Finance endpoints are an explicitly isolated sandbox."},

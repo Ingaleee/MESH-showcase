@@ -1057,6 +1057,12 @@ export interface components {
             validations: components["schemas"]["PublishingValidation"][];
             deployments: components["schemas"]["PublishingDeployment"][];
             policy_version: string;
+            active_deployments: components["schemas"]["PublishingDeployment"][];
+            next_cursors: {
+                partners: string | null;
+                candidates: string | null;
+                deployments: string | null;
+            };
         };
         PublishingDiagnostic: {
             schema_version: number;
@@ -5776,7 +5782,12 @@ export interface operations {
     };
     getPublishing: {
         parameters: {
-            query?: never;
+            query?: {
+                partners_cursor?: string;
+                candidates_cursor?: string;
+                deployments_cursor?: string;
+                limit?: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;

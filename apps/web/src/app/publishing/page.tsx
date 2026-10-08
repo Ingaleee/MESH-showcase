@@ -40,9 +40,11 @@ export default function PublishingPage() {
   const [zip, setZip] = useState<File | null>(null);
   const [manifest, setManifest] = useState<File | null>(null);
   const command = useCommand();
+  const [historyCursors, setHistoryCursors] = useState<Record<string, string>>({});
   const refresh = useCallback(async () => {
     try {
-      const result = await api<Overview>("/publishing");
+      const query = new URLSearchParams(historyCursors).toString();
+      const result = await api<Overview>("/publishing" + (query ? "?" + query : ""));
       setData(result);
       setError("");
       setSelected((previous) =>
@@ -53,7 +55,7 @@ export default function PublishingPage() {
     } catch (failure) {
       setError((failure as Error).message);
     }
-  }, []);
+  }, [historyCursors]);
   useEffect(() => {
     if (!account?.operator) return;
     void refresh();
@@ -63,7 +65,7 @@ export default function PublishingPage() {
   const candidate = data?.candidates.find((row) => row.id === selected);
   const validation = data?.validations.find((row) => row.candidate_id === selected);
   const releases = data?.deployments.filter((row) => row.candidate_id === selected) ?? [];
-  const active = data?.deployments.find((row) =>
+  const active = data?.active_deployments.find((row) =>
     data.partners.some((partner) => partner.active_deployment_id === row.id),
   );
   async function upload() {
@@ -196,7 +198,38 @@ export default function PublishingPage() {
                   <RefreshCw size={17} />
                 </button>
               </div>
-              <p className="pub-muted">Последние 30 пакетов · приватные артефакты</p>
+              <p className="pub-muted">До 30 пакетов на странице · приватные артефакты</p>
+              <div className="pub-section-title">
+                <button className="button ghost" onClick={() => setHistoryCursors({})}>
+                  Новые записи
+                </button>
+                {data?.next_cursors.candidates && (
+                  <button
+                    className="button ghost"
+                    onClick={() =>
+                      setHistoryCursors((value) => ({
+                        ...value,
+                        candidates_cursor: data.next_cursors.candidates!,
+                      }))
+                    }
+                  >
+                    Предыдущие пакеты
+                  </button>
+                )}
+                {data?.next_cursors.partners && (
+                  <button
+                    className="button ghost"
+                    onClick={() =>
+                      setHistoryCursors((value) => ({
+                        ...value,
+                        partners_cursor: data.next_cursors.partners!,
+                      }))
+                    }
+                  >
+                    Другие студии
+                  </button>
+                )}
+              </div>
               <div
                 className="pub-candidates"
                 role="region"
@@ -402,6 +435,19 @@ export default function PublishingPage() {
                       )}
                     </article>
                   ))}
+                  {data?.next_cursors.deployments && (
+                    <button
+                      className="button ghost"
+                      onClick={() =>
+                        setHistoryCursors((value) => ({
+                          ...value,
+                          deployments_cursor: data.next_cursors.deployments!,
+                        }))
+                      }
+                    >
+                      Предыдущие выпуски
+                    </button>
+                  )}
                   {diagnostic && (
                     <aside className="pub-diagnostic">
                       <span className="eyebrow">READ-ONLY DIAGNOSTICS</span>
