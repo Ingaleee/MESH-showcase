@@ -5,7 +5,9 @@ x-ruby: &ruby
   read_only: true
   cap_drop: [ALL]
   security_opt: ["no-new-privileges:true"]
-  tmpfs: [/tmp, /app/tmp]
+  tmpfs:
+    - /tmp:uid=10001,gid=10001,mode=1777
+    - /app/tmp:uid=10001,gid=10001,mode=1777
   volumes:
     - private_files:/app/storage
     - ${MESH_DR_ROOT:?Set recovery directory}:/recovery
@@ -14,6 +16,8 @@ x-ruby: &ruby
     RAILS_MAX_THREADS: "6"
     MESH_API_CONCURRENCY: "5"
     HOME: /tmp
+    RAILS_LOG_TO_STDOUT: "1"
+    BOOTSNAP_CACHE_DIR: /tmp/bootsnap
     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_production
     QUEUE_DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_queue
@@ -69,21 +73,21 @@ services:
     command: [bundle, exec, rails, server, -b, 0.0.0.0, -p, "3000"]
     ports: ["127.0.0.1:3251:3000"]
     depends_on:
-      db: {condition: service_healthy}
-      storage-init: {condition: service_completed_successfully}
+      db: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
   worker:
     <<: *ruby
     command: [bundle, exec, ruby, bin/jobs]
     stop_grace_period: 35s
     depends_on:
-      db: {condition: service_healthy}
-      storage-init: {condition: service_completed_successfully}
+      db: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
   dispatcher:
     <<: *ruby
     command: [bundle, exec, ruby, script/dispatcher.rb]
     depends_on:
-      db: {condition: service_healthy}
-      storage-init: {condition: service_completed_successfully}
+      db: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
   tools:
     <<: *ruby
     profiles: [tools]
@@ -98,8 +102,8 @@ services:
       - ${MESH_DR_ROOT}:/recovery
       - ${MESH_DR_ROOT}/partner-data:/partner-data
     depends_on:
-      db: {condition: service_healthy}
-      storage-init: {condition: service_completed_successfully}
+      db: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
   grants:
     image: ${POSTGRES_IMAGE}
     profiles: [tools]
@@ -131,7 +135,13 @@ services:
     tmpfs: [/tmp]
     mem_limit: 128m
     healthcheck:
-      test: [CMD, node, -e, "fetch('http://localhost:3216/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      test:
+        [
+          CMD,
+          node,
+          -e,
+          "fetch('http://localhost:3216/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
       interval: 2s
       timeout: 3s
       retries: 30

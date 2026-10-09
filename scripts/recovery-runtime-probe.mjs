@@ -21,7 +21,7 @@ export async function verifyRecoveredRuntime({ dc, root, restored }) {
     return new Promise((resolve, reject) => {
       const req = http.request(
         {
-          hostname: "localhost",
+          hostname: "127.0.0.1",
           port: 3251,
           path: route,
           method,

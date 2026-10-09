@@ -111,7 +111,7 @@ try {
     let status = 0;
     for (let attempt = 0; attempt < 60; attempt++) {
       try {
-        status = (await fetch("http://localhost:3251/ready")).status;
+        status = (await fetch("http://127.0.0.1:3251/ready")).status;
       } catch {}
       if (status === 200) break;
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -127,6 +127,33 @@ try {
     await persistRecoveryReport(root, restored);
     assert.ok(rto <= restored.rto_target_ms, "Declared fresh VM RTO exceeded");
   }
+} catch (error) {
+  const redact = (value) => {
+    for (const secret of [
+      process.env.MESH_DR_KEY,
+      ...Object.entries(variables)
+        .filter(([name]) => /SECRET|TOKEN|PASSWORD/.test(name))
+        .map(([, value]) => value),
+    ])
+      if (secret) value = value.split(secret).join("[REDACTED]");
+    return value;
+  };
+  const failure = { message: redact(error.message), containers: null, logs: null };
+  for (const [name, args] of [
+    ["containers", ["ps", "-a", "--format", "json"]],
+    ["logs", ["logs", "--no-color", "--tail", "100", "api", "worker", "dispatcher"]],
+  ]) {
+    try {
+      failure[name] = redact(dc(args, true));
+    } catch (diagnosticError) {
+      failure[name] = redact(diagnosticError.message);
+    }
+  }
+  await writeFile(
+    path.join(root, "evidence/failure.json"),
+    JSON.stringify(failure, null, 2) + "\n",
+  );
+  throw error;
 } finally {
   dc(["down"]);
 }

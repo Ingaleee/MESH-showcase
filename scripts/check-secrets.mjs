@@ -1,7 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { cp, mkdir, mkdtemp, rm, lstat, appendFile, readFile } from "node:fs/promises";
 import path from "node:path";
-import { randomBytes } from "node:crypto";
 
 const root = process.cwd();
 const base = path.join(root, ".cache/security");
@@ -29,10 +28,9 @@ try {
   }
   // A credential-shaped canary in an allowlisted report must still be detected.
   const probeFile = "docs/evidence/backend-hardening/verification.json";
-  await appendFile(
-    path.join(snapshot, probeFile),
-    `\n"api_key": "${randomBytes(24).toString("base64url")}"\n`,
-  );
+  // Fixed synthetic digits/entropy avoid the default rule excluding random alphabet-only values.
+  const canary = "R8f3Qk9pX2s6M4v7T1y5B0nUeAzCdGhJ";
+  await appendFile(path.join(snapshot, probeFile), `\n"api_key": "${canary}"\n`);
   const probe = spawnSync(
     "docker",
     [
