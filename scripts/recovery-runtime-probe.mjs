@@ -1,11 +1,18 @@
 import http from "node:http";
 import { createHash, randomUUID } from "node:crypto";
-import { writeFile } from "node:fs/promises";
+import { writeFile, rename } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 
 // Loopback HTTP exercises the real Puma process; production assume_ssl models its proxy.
 // This probe claims authorization and DB-role parity, not a new TLS transport test.
+// Public evidence crosses the host/container UID boundary. Never relax plaintext backup permissions.
+export async function persistRecoveryReport(root, report) {
+  const temporary = path.join(root, "evidence/restored-" + randomUUID() + ".tmp");
+  await writeFile(temporary, JSON.stringify(report, null, 2) + "\n", { flag: "wx", mode: 0o644 });
+  await rename(temporary, path.join(root, "evidence/restored.json"));
+}
+
 export async function verifyRecoveredRuntime({ dc, root, restored }) {
   let cookie = "",
     csrf = "";
@@ -117,10 +124,7 @@ export async function verifyRecoveredRuntime({ dc, root, restored }) {
   assert.equal(replay.status, 201);
   assert.equal(created.data.id, replay.data.id);
   restored.runtime_project_id = created.data.id;
-  await writeFile(
-    path.join(root, "evidence/restored.json"),
-    JSON.stringify(restored, null, 2) + "\n",
-  );
+  await persistRecoveryReport(root, restored);
   const began = Date.now();
   let result;
   while (Date.now() - began < 120000) {

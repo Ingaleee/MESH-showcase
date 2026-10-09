@@ -69,6 +69,8 @@ when "source"
   snapshot.join("fixture.json").write(JSON.generate(data))
   PortableSnapshot.seal(snapshot, root.join("transfer/application.meshbak"), key: key, kind: "application",
     metadata: { primary_counts: counts(source), queue_counts: counts(queue), blobs: blobs, snapshot_at: Time.current.iso8601, revision: ENV.fetch("MESH_RELEASE_REVISION"), run_id: ENV.fetch("GITHUB_RUN_ID") })
+  # Only authenticated ciphertext is readable by the host artifact uploader. Plain dumps stay private.
+  File.chmod(0o644, root.join("transfer/application.meshbak"))
   # A post-snapshot local marker is deliberately outside the stated RPO.
   Identity::Account.create!(email: "post-snapshot@probe.test", display_name: "Not backed up", password: "RecoveryProbe2026!", persona: "client")
   Publishing::ProcessDeployment.call(deployment_id: pending.id)
@@ -91,6 +93,7 @@ when "partner"
   Pathname.new("/partner-data").glob("partner.sqlite*").each { |file| FileUtils.cp(file, snapshot.join(file.basename)) }
   raise "Simulator state missing" unless snapshot.join("partner.sqlite").file?
   PortableSnapshot.seal(snapshot, root.join("transfer/partner.meshbak"), key: key, kind: "partner", metadata: { recorded_at: Time.current.iso8601, revision: ENV.fetch("MESH_RELEASE_REVISION"), run_id: ENV.fetch("GITHUB_RUN_ID") })
+  File.chmod(0o644, root.join("transfer/partner.meshbak"))
 when "authenticate"
   started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   archive = root.join("transfer/application.meshbak")

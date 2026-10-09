@@ -3,7 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdir, readFile, writeFile, chmod } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
-import { verifyRecoveredRuntime } from "./recovery-runtime-probe.mjs";
+import { verifyRecoveredRuntime, persistRecoveryReport } from "./recovery-runtime-probe.mjs";
 assert.equal(process.env.GITHUB_ACTIONS, "true");
 const mode = process.argv[2];
 assert.ok(["source", "target"].includes(mode));
@@ -123,10 +123,7 @@ try {
     restored.rto_target_ms = 900000;
     restored.fresh_runtime_readiness_http = status;
     restored.source_job_finished_before_target_started = true;
-    await writeFile(
-      path.join(root, "evidence/restored.json"),
-      JSON.stringify(restored, null, 2) + "\n",
-    );
+    await persistRecoveryReport(root, restored);
     assert.ok(rto <= restored.rto_target_ms, "Declared fresh VM RTO exceeded");
   }
 } finally {
