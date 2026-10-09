@@ -1,0 +1,59 @@
+name: MESH clean clone demo preparation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mesh-clean-demo
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: MESH-showcase
+    env:
+      PLAYWRIGHT_CHANNEL: chromium
+      MESH_TELEMETRY_ENABLED: "true"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: MESH-showcase
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: "22"
+      - name: Prove the checkout has no owner-local state
+        run: |
+          test "$(basename "$PWD")" = MESH-showcase
+          test ! -e .env
+          test ! -e node_modules
+          test ! -e .cache
+          test -z "$(git status --porcelain)"
+          mkdir -p .cache/clean-demo-proof
+          node -e 'require("fs").writeFileSync(".cache/clean-demo-proof/context.json", JSON.stringify({revision: process.env.GITHUB_SHA, run_id: process.env.GITHUB_RUN_ID, environment: "Fresh hosted Ubuntu; clean checkout, no .env, node_modules, data or owner cache", command: "npm run demo"}, null, 2))'
+      - name: Install browser runtime required by the documented preparation
+        run: |
+          npm ci --ignore-scripts --registry=https://registry.npmjs.org
+          npx playwright install --with-deps chromium
+      - name: Execute the real one-command demo preparation
+        run: npm run demo
+      - name: Collect readiness and exact preparation results
+        run: |
+          curl --fail --silent http://localhost:3200/ready > .cache/clean-demo-proof/readiness.json
+          node -e 'const fs=require("fs"); const base=".cache/interview-demo"; const runs=fs.readdirSync(base).sort(); const dir=base+"/"+runs.at(-1); for(const name of ["summary.json","stages.json","playwright.json"]) fs.copyFileSync(dir+"/"+name, ".cache/clean-demo-proof/"+name); const summary=JSON.parse(fs.readFileSync(dir+"/publishing-demo/summary.json")); const proof={success:summary.success,remote_publish_requests:summary.remote_publish_requests,downloads:summary.downloads,scope:summary.scope}; fs.writeFileSync(".cache/clean-demo-proof/partner.json",JSON.stringify(proof,null,2));'
+      - name: Preserve the proof without credentials or database state
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: mesh-clean-demo
+          path: MESH-showcase/.cache/clean-demo-proof
+          include-hidden-files: true
+          retention-days: 30
+      - name: Stop only this ephemeral demo
+        if: always()
+        run: |
+          if test -f .cache/telemetry/runtime.env; then
+            docker compose --env-file .cache/telemetry/runtime.env -f infra/telemetry/compose.yaml down
+          fi
+          if test -f .env; then docker compose --profile files --profile publishing down; fi
