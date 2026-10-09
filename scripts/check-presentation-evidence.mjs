@@ -69,6 +69,13 @@ assert.ok(partner.downloads.every((item) => item.private_authenticated_download 
 const gallery = await json(`${folder}/gallery-capture.json`);
 assert.equal(gallery.no_mocked_api_or_state, true);
 assert.ok(gallery.screens.find((item) => item.name === "creators" && item.visible_images_decoded));
+const site = await json(`${folder}/site-check.json`);
+assert.equal(site.video_playback_progress_verified, true);
+assert.deepEqual(site.seek_positions_seconds, [15, 40, 50]);
+assert.equal(site.decoded_images, 11);
+assert.equal(site.caption_cues, 9);
+assert.deepEqual(site.http_errors, []);
+assert.ok(site.viewports.every((item) => item.overflow_px === 0 && item.wcag_violations === 0));
 const page = await readFile("docs/presentation/index.html", "utf8");
 assert.equal((page.match(/<figure>/g) ?? []).length, 11);
 for (const path of [
