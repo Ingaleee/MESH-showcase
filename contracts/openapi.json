@@ -9509,7 +9509,24 @@
             "type": "string"
           },
           "current_inputs_match": {
-            "type": "boolean"
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "configuration_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -9523,7 +9540,8 @@
           "attempts",
           "completed_at",
           "created_at",
-          "current_inputs_match"
+          "current_inputs_match",
+          "configuration_error"
         ],
         "additionalProperties": false
       },

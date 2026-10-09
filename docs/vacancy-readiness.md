@@ -34,3 +34,5 @@ Use [the 15-minute walkthrough](interview-demo.md), [Clean Architecture map](cle
 A successful showcase is finite: the existing system's stated guarantees hold under its tested failure model. “10/10 under every imaginable criterion” is not an engineering acceptance criterion. It would include mutually incompatible goals and unbounded production conditions. Neither adding unrelated technologies nor presenting a synthetic exercise as commercial work strengthens this application.
 
 Before interviewing, the candidate still needs to rehearse independently: explain the invariant in Ruby/SQL, show the failure, read the report, and state why the recovery is safe. Prepare two real commercial stories with personal responsibility and measured outcomes, and practise an English partner conversation. Those are candidate preparation tasks, not features an agent can implement.
+
+The owned candidate/release catalog remains readable during credential or trust unavailability. Validation exposes null input compatibility and a stable configuration error; new validation/publication commands remain blocked. The UI distinguishes unavailable configuration from changed inputs.

@@ -1044,7 +1044,8 @@ export interface components {
             attempts: number;
             completed_at: string | null;
             created_at: string;
-            current_inputs_match: boolean;
+            current_inputs_match: boolean | null;
+            configuration_error: string | null;
         };
         PublishingDeployment: {
             /** Format: uuid */

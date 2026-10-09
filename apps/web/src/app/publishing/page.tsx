@@ -350,7 +350,14 @@ export default function PublishingPage() {
                     </p>
                   )}
                   {validation?.last_error && <p className="error">{validation.last_error}</p>}
-                  {validation && !validation.current_inputs_match && (
+                  {validation?.configuration_error && (
+                    <p className="error" role="status">
+                      Конфигурация партнёра недоступна: {validation.configuration_error}.
+                      Восстановите доступ перед проверкой и выпуском. История и диагностика
+                      доступны.
+                    </p>
+                  )}
+                  {validation && validation.current_inputs_match === false && (
                     <p className="error" role="status">
                       Настройки проверки изменились. Проверьте пакет по текущим правилам перед
                       выпуском.
@@ -371,7 +378,7 @@ export default function PublishingPage() {
                     <button
                       className="button ghost"
                       onClick={() => void revalidate()}
-                      disabled={command.pending}
+                      disabled={command.pending || Boolean(validation?.configuration_error)}
                     >
                       Проверить снова
                     </button>

@@ -14,13 +14,17 @@ module Api
         partners = pages.fetch(:partners).fetch(:records)
         candidates = pages.fetch(:candidates).fetch(:records)
         validations = Publishing::LatestValidations.call(candidate_ids: candidates.map(&:id))
-        fingerprints = candidates.to_h { |row| [ row.id, Publishing::Settings.fingerprint(row) ] }
+        fingerprints = candidates.to_h { |row| [ row.id, Publishing::Settings.fingerprint_status(row) ] }
         deployments = pages.fetch(:deployments).fetch(:records)
         active = Publishing::Deployment.where(id: partners.filter_map(&:active_deployment_id), partner_id: owned_partners.select(:id)).order(:id)
         render json: {
           partners: partners.map { |row| partner_json(row) },
           candidates: candidates.map { |row| candidate_json(row) },
-          validations: validations.map { |row| validation_json(row).merge(current_inputs_match: fingerprints[row.candidate_id] == row.input_fingerprint) },
+          validations: validations.map { |row|
+            inputs = fingerprints.fetch(row.candidate_id)
+            validation_json(row).merge(current_inputs_match: inputs.fetch(:fingerprint) && inputs.fetch(:fingerprint) == row.input_fingerprint,
+              configuration_error: inputs.fetch(:error))
+          },
           deployments: deployments.map { |row| deployment_json(row) },
           active_deployments: active.map { |row| deployment_json(row) },
           next_cursors: pages.transform_values { |page| page.fetch(:next_cursor) },

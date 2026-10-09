@@ -65,6 +65,27 @@ RSpec.describe "Publishing support diagnostic", type: :request do
       "configuration_error" => "PARTNER_CREDENTIAL_UNAVAILABLE")
   end
 
+  it "keeps owned history readable without credentials while refusing new validation and publication" do
+    _, deployment = operation
+    ENV.delete("MESH_PARTNER_TOKEN_SHOWCASE")
+    get "/api/v1/publishing"
+    expect(response).to have_http_status(:ok)
+    report = response.parsed_body
+    expect(report.fetch("candidates").map { |row| row["id"] }).to include(deployment.candidate_id)
+    expect(report.fetch("deployments").map { |row| row["id"] }).to include(deployment.id)
+    expect(report.fetch("validations").first).to include("current_inputs_match" => nil,
+      "configuration_error" => "PARTNER_CREDENTIAL_UNAVAILABLE")
+    count = Publishing::Deployment.count
+    post "/api/v1/publishing/candidates/#{deployment.candidate_id}/validate",
+      params: {}, headers: { "Idempotency-Key" => SecureRandom.uuid }, as: :json
+    expect(response).to have_http_status(:service_unavailable)
+    post "/api/v1/publishing/candidates/#{deployment.candidate_id}/publish",
+      params: { validation_id: deployment.validation_id }, headers: { "Idempotency-Key" => SecureRandom.uuid }, as: :json
+    expect(response).to have_http_status(:service_unavailable)
+    expect(Publishing::Deployment.count).to eq(count)
+    expect(deployment.reload.state).to eq("pending")
+  end
+
   it "does not reveal an operation to another operator" do
     _, deployment = operation
     sign_in(create(:account, operator: true))

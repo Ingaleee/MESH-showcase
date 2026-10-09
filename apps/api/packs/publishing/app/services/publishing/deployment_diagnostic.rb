@@ -13,13 +13,9 @@ module Publishing
     def self.call(deployment:, now: Time.current)
       # A local snapshot for support, never a command or an assertion of remote health.
       deployment.reload
-      configuration_error = nil
-      inputs_match = begin
-        Settings.fingerprint(deployment.candidate) == deployment.validation.input_fingerprint
-      rescue Platform::Error => error
-        configuration_error = error.code
-        nil
-      end
+      inputs = Settings.fingerprint_status(deployment.candidate)
+      configuration_error = inputs.fetch(:error)
+      inputs_match = inputs.fetch(:fingerprint) && inputs.fetch(:fingerprint) == deployment.validation.input_fingerprint
       code = if deployment.state == "confirmed"
         "inspect_confirmed"
       elsif deployment.state == "failed"

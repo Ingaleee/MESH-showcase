@@ -51,6 +51,13 @@ module Publishing
       raise Platform::Error.new("PARTNER_TRUST_UNAVAILABLE", "Configured trust bundle is unavailable.", status: 503)
     end
 
+    # Read models preserve history when configuration is unavailable; commands still use the raising fingerprint method.
+    def self.fingerprint_status(candidate)
+      { fingerprint: fingerprint(candidate), error: nil }
+    rescue Platform::Error => error
+      { fingerprint: nil, error: error.code }
+    end
+
     def self.fingerprint(candidate)
       partner = candidate.partner
       input = {
