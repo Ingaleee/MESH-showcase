@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-08T15:49:28.274Z",
+  "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+  "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+  "images": {
+    "api": {
+      "image": "sha256:e66914f5a350c0fc3b037683c668fd6013f147be113370a0bd828a734ff2c269",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "web": {
+      "image": "sha256:f1e062e6d828fb0dd5672bd613ac0b742e1d7b69d25879548af539bba5466330",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "postgres": {
+      "image": "sha256:94c5b07b20e41ab47ce315ea24cdaed7b8b7ade1c7f04fcca6a77e47fe60ea21",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "clamav": {
+      "image": "sha256:433b708ec6e46984d9027542c2e67d94cba396ce9789db70482677b40c0cc41c",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    },
+    "caddy": {
+      "image": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+      "scan_exit_code": 0,
+      "findings": 0,
+      "fixable": 0
+    }
+  },
+  "success": true,
+  "scope": "Known OS/library vulnerabilities in each explicitly listed immutable runtime image; applicability decisions and signed provenance are separate."
+}

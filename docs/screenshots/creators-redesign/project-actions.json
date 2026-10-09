@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-10-07T10:28:05.776Z",
+  "checks": [
+    "Создать проект через меню: opens the actual project form for a signed-in client.",
+    "Создать проект из каталога: opens the actual project form for a signed-in client.",
+    "Создать проект и найти автора: opens the actual project form for a signed-in client.",
+    "Profile create-project action closes the profile and opens one project form."
+  ],
+  "javascriptErrors": [],
+  "scope": "Existing demo client; forms opened without publishing projects."
+}

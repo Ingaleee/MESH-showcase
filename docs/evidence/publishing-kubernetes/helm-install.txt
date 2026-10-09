@@ -1,0 +1,8 @@
+Release "mesh" does not exist. Installing it now.
+NAME: mesh
+LAST DEPLOYED: Thu Oct  8 16:47:00 2026
+NAMESPACE: mesh-showcase
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None

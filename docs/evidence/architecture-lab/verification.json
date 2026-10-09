@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-08T00:39:53.143Z",
+  "rspec": {
+    "duration": 46.283747693,
+    "example_count": 94,
+    "failure_count": 0,
+    "pending_count": 0,
+    "errors_outside_of_examples_count": 0
+  },
+  "rubocop": {
+    "offense_count": 0,
+    "target_file_count": 177,
+    "inspected_file_count": 177
+  },
+  "playwright": {
+    "startTime": "2026-10-08T00:32:27.403Z",
+    "duration": 341195.62299999996,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "packwerk": {
+    "validated": true,
+    "checkedFiles": 126,
+    "offenses": 0
+  },
+  "contractOperations": 43,
+  "typecheck": true,
+  "prettier": true,
+  "moduleApi": true,
+  "securityWarnings": 0,
+  "vulnerableRubyDependencies": 0,
+  "cleanup": {
+    "checkedAt": "2026-10-08T00:38:14.0784145+00:00",
+    "runId": "3d65fd3fba48",
+    "status": "cleaned",
+    "containersRemaining": 0,
+    "volumesRemaining": 0,
+    "databasesRemaining": 0,
+    "backupRetainedInIgnoredCache": true
+  },
+  "scope": "Current local Ruby/read-model/queue changes and browser regression. Earlier financial restore, Money/TLC and frontend screenshots retain their original scopes and dates."
+}

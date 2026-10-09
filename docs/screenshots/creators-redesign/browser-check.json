@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-07T10:26:23.171Z",
+  "errors": [],
+  "failed": [],
+  "images": [],
+  "sizes": [
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "columns": "288px"
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "columns": "350px"
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "columns": "346px 346px"
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "columns": "474px 474px"
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "columns": "309.5px 309.5px 309.5px 309.5px"
+    }
+  ]
+}

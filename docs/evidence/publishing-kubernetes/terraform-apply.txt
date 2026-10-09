@@ -1,0 +1,93 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # kubernetes_limit_range_v1.mesh will be created
+  + resource "kubernetes_limit_range_v1" "mesh" {
+      + id = (known after apply)
+
+      + metadata {
+          + generation       = (known after apply)
+          + name             = "mesh-defaults"
+          + namespace        = "mesh-showcase"
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+
+      + spec {
+          + limit {
+              + default         = {
+                  + "cpu"    = "1"
+                  + "memory" = "640Mi"
+                }
+              + default_request = {
+                  + "cpu"    = "100m"
+                  + "memory" = "128Mi"
+                }
+              + type            = "Container"
+            }
+        }
+    }
+
+  # kubernetes_namespace_v1.mesh will be created
+  + resource "kubernetes_namespace_v1" "mesh" {
+      + id                               = (known after apply)
+      + wait_for_default_service_account = false
+
+      + metadata {
+          + generation       = (known after apply)
+          + labels           = {
+              + "mesh.showcase/managed-by"                   = "terraform"
+              + "pod-security.kubernetes.io/enforce"         = "restricted"
+              + "pod-security.kubernetes.io/enforce-version" = "latest"
+            }
+          + name             = "mesh-showcase"
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+    }
+
+  # kubernetes_resource_quota_v1.mesh will be created
+  + resource "kubernetes_resource_quota_v1" "mesh" {
+      + id = (known after apply)
+
+      + metadata {
+          + generation       = (known after apply)
+          + name             = "mesh-budget"
+          + namespace        = "mesh-showcase"
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+
+      + spec {
+          + hard = {
+              + "limits.cpu"             = "12"
+              + "limits.memory"          = "10Gi"
+              + "persistentvolumeclaims" = "4"
+              + "pods"                   = "20"
+              + "requests.cpu"           = "4"
+              + "requests.memory"        = "4Gi"
+              + "services.loadbalancers" = "0"
+            }
+        }
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + namespace = "mesh-showcase"
+kubernetes_namespace_v1.mesh: Creating...
+kubernetes_namespace_v1.mesh: Creation complete after 0s [id=mesh-showcase]
+kubernetes_limit_range_v1.mesh: Creating...
+kubernetes_resource_quota_v1.mesh: Creating...
+kubernetes_resource_quota_v1.mesh: Creation complete after 0s [id=mesh-showcase/mesh-budget]
+kubernetes_limit_range_v1.mesh: Creation complete after 0s [id=mesh-showcase/mesh-defaults]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+namespace = "mesh-showcase"

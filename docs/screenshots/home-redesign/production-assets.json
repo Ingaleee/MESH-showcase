@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-07T09:07:02.571Z",
+  "production": true,
+  "assets": [
+    {
+      "file": "apps/web/public/images/home/hero-portrait.png",
+      "status": 200,
+      "bytes": 2153642
+    },
+    {
+      "file": "apps/web/public/images/home/category-texts.png",
+      "status": 200,
+      "bytes": 2026028
+    },
+    {
+      "file": "apps/web/public/images/home/category-design.png",
+      "status": 200,
+      "bytes": 2310663
+    },
+    {
+      "file": "apps/web/public/images/home/category-video.png",
+      "status": 200,
+      "bytes": 2005797
+    },
+    {
+      "file": "apps/web/public/images/home/category-development.png",
+      "status": 200,
+      "bytes": 1742354
+    },
+    {
+      "file": "apps/web/public/images/home/category-marketing.png",
+      "status": 200,
+      "bytes": 2166175
+    },
+    {
+      "file": "apps/web/public/images/home/mountain-film.png",
+      "status": 200,
+      "bytes": 3233976
+    },
+    {
+      "file": "apps/web/public/images/home/creative-horizon.png",
+      "status": 200,
+      "bytes": 1919037
+    },
+    {
+      "file": "apps/web/public/images/home/creator-portraits.png",
+      "status": 200,
+      "bytes": 2406340
+    },
+    {
+      "file": "apps/web/public/images/home/brand-still-life.png",
+      "status": 200,
+      "bytes": 2556383
+    }
+  ],
+  "localFontStatus": 200,
+  "optimizedHero": {
+    "status": 200,
+    "contentType": "image/webp",
+    "bytes": 17574
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "available": true,
+  "workers": 0,
+  "rows": [
+    {
+      "queue_name": "events",
+      "state": "ready",
+      "count": 54,
+      "oldest_seconds": "2.771991"
+    }
+  ],
+  "events": 50,
+  "worker_stopped": true,
+  "checked_at": "2026-10-08T10:56:20Z"
+}

@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-08T00:31:32.094Z",
+  "phase": "backlog",
+  "metrics": "# TYPE mesh_outbox_pending gauge\nmesh_outbox_pending 54\n# TYPE mesh_outbox_oldest_seconds gauge\nmesh_outbox_oldest_seconds 252\n# TYPE mesh_outbox_failed gauge\nmesh_outbox_failed 0\n# TYPE mesh_files_quarantined gauge\nmesh_files_quarantined 0\n# TYPE mesh_files_oldest_seconds gauge\nmesh_files_oldest_seconds 0\n# TYPE mesh_files_scan_errors gauge\nmesh_files_scan_errors 0\n# TYPE mesh_payment_unknown gauge\nmesh_payment_unknown 0\n# TYPE mesh_reconciliation_exceptions gauge\nmesh_reconciliation_exceptions 0\n# TYPE mesh_ledger_posted gauge\nmesh_ledger_posted 0\n# TYPE mesh_queue_up gauge\nmesh_queue_up 1\n# TYPE mesh_queue_workers gauge\nmesh_queue_workers 0\n# TYPE mesh_queue_ready gauge\nmesh_queue_ready{queue=\"critical\"} 0\nmesh_queue_ready{queue=\"events\"} 54\nmesh_queue_ready{queue=\"files\"} 0\nmesh_queue_ready{queue=\"default\"} 0\n# TYPE mesh_queue_claimed gauge\nmesh_queue_claimed{queue=\"critical\"} 0\nmesh_queue_claimed{queue=\"events\"} 0\nmesh_queue_claimed{queue=\"files\"} 0\nmesh_queue_claimed{queue=\"default\"} 0\n# TYPE mesh_queue_failed gauge\nmesh_queue_failed{queue=\"critical\"} 0\nmesh_queue_failed{queue=\"events\"} 0\nmesh_queue_failed{queue=\"files\"} 0\nmesh_queue_failed{queue=\"default\"} 0\n# TYPE mesh_queue_scheduled gauge\nmesh_queue_scheduled{queue=\"critical\"} 0\nmesh_queue_scheduled{queue=\"events\"} 0\nmesh_queue_scheduled{queue=\"files\"} 0\nmesh_queue_scheduled{queue=\"default\"} 0\n# TYPE mesh_queue_oldest_ready_seconds gauge\nmesh_queue_oldest_ready_seconds{queue=\"critical\"} 0.0\nmesh_queue_oldest_ready_seconds{queue=\"events\"} 6.784\nmesh_queue_oldest_ready_seconds{queue=\"files\"} 0.0\nmesh_queue_oldest_ready_seconds{queue=\"default\"} 0.0\n",
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "LabQueueWait",
+        "instance": "mesh-architecture-3d65fd3fba48-api:3000",
+        "job": "architecture-lab",
+        "queue": "events"
+      },
+      "annotations": {},
+      "state": "firing",
+      "activeAt": "2026-10-08T00:31:27.576515923Z",
+      "value": "5.173e+00"
+    }
+  ],
+  "applicationReady": 200,
+  "scope": "Real Prometheus scrape and rule evaluation. Lab rules use 2-second thresholds/3-second hold times; production uses longer windows. No Alertmanager delivery is claimed."
+}
