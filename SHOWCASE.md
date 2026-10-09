@@ -8,7 +8,7 @@
 npm run demo
 ```
 
-Нужны Docker Desktop и Node.js 22/npm. Первая сборка требует registry access и памяти для ClamAV. Повторный запуск сохраняет secrets/data, применяет миграции, готовит synthetic accounts, проверяет реальный scanner, запускает partner/dashboard и выполняет CLI/browser сценарии. Новые browser reports/screenshots пишутся в отдельный .cache каталог; исторический evidence в Git не перезаписывается.
+Нужны Docker Desktop, Node.js 22/npm и Microsoft Edge на Windows. На Linux заранее установите Playwright Chromium и системные библиотеки: npm ci --ignore-scripts, затем npx playwright install --with-deps chromium. Первая сборка требует registry access и памяти для ClamAV. Повторный запуск сохраняет secrets/data, применяет миграции, готовит synthetic accounts, проверяет реальный scanner, запускает partner/dashboard и выполняет CLI/browser сценарии. Новые browser reports/screenshots пишутся в отдельный .cache каталог; исторический evidence в Git не перезаписывается.
 
 [Publishing Lab](http://localhost:3200/publishing) · [MESH](http://localhost:3200/) · [Grafana](http://localhost:32092/d/mesh-reliability)
 
@@ -45,3 +45,5 @@ Production и Kubernetes не запускать одновременно с т�
 Hosted VM существует только во время задания. Подтверждены перегрузка admission и SQL contention в заявленном mixed profile, восемь deployment fault points с failed recovery, loss of source VM и независимое Windows backup/key custody. Не подтверждены online WAL/PITR, permanent backup retention, GitHub-provider failover, длинное production SLO окно, physical HA, большие concurrent uploads и весь возможный crash state space. Покупка VPS и постоянный self-hosted runner не требуются. Полные критерии и оставшиеся границы — [quality-bar.md](docs/quality-bar.md).
 
 [Исторический transfer](docs/evidence/showcase-transfer.json), [separation](docs/evidence/showcase-separation.json), [новый evidence index](docs/evidence/publishing-implementation.json).
+
+[Английское видео и 11 реальных экранов](https://ingaleee.github.io/MESH-showcase/), [подробный walkthrough](docs/visual-walkthrough.md) и [чистая подготовка Ubuntu](https://github.com/Ingaleee/MESH-showcase/actions/runs/37909616516): настоящий npm run demo, 17 stages, 4/4 browser, без owner-local .env/cache/data. Browser runtime/host libraries обозначены отдельно. Это отличается от старого локального single-scenario proof.

@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-09T10:01:33.982Z",
+  "environment": "Actual local static page, Chromium/Edge on Windows",
+  "viewports": [
+    {
+      "width": 1440,
+      "overflow_px": 0,
+      "wcag_violations": 0
+    },
+    {
+      "width": 1024,
+      "overflow_px": 0,
+      "wcag_violations": 0
+    },
+    {
+      "width": 390,
+      "overflow_px": 0,
+      "wcag_violations": 0
+    }
+  ],
+  "decoded_images": 11,
+  "video": {
+    "duration_seconds": 73.96,
+    "width": 1280,
+    "height": 900
+  },
+  "caption_cues": 9,
+  "http_errors": [],
+  "scope": "Page playback, gallery loading, responsive geometry and automated WCAG checks; not a full manual accessibility certification.",
+  "video_playback_progress_verified": true,
+  "seek_positions_seconds": [
+    15,
+    40,
+    50
+  ],
+  "local_media_server_supports_byte_ranges": true
+}

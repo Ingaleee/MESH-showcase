@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "remote_publish_requests": 3,
+  "downloads": [
+    {
+      "phase": "normal_release",
+      "bytes": 234,
+      "sha256": "54b14be8d89cd657fbe2542f36c3bf851448c373e93da4ea6bf14b4e46906006",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "lost_response",
+      "bytes": 234,
+      "sha256": "fc913b9502dec1488237cf201aab4faba33e3df8fd9e77179823a9fadee8da80",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "rollback",
+      "bytes": 234,
+      "sha256": "54b14be8d89cd657fbe2542f36c3bf851448c373e93da4ea6bf14b4e46906006",
+      "private_authenticated_download": true
+    }
+  ],
+  "scope": "Real authenticated API + ordinary dispatcher/worker + ClamAV + independent SQLite partner; no external studio or uploaded code execution."
+}

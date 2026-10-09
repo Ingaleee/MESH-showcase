@@ -8,6 +8,10 @@
 
 `npm run test:partner-support:evidence` проверяет текущие raw bytes/hashes, source/digest chain, реальную HTTP-ротацию и обязательные infrastructure outcomes. `npm run test:reliability:evidence` отдельно проверяет историческую приёмку f15af36. [Clean boundary](clean-architecture.md): Domain/Application внешнего выпуска запускаются без Rails; остальная система остаётся modular Rails. [SLI definitions](user-reliability-objectives.md), [fresh VM runbook](fresh-vm-recovery.md). Эта приёмка не объявляет все расширенные Q01–Q14 автоматически закрытыми.
 
+## Чистая подготовка и публичная презентация 9 октября
+
+[Fresh Ubuntu run fa40e97](https://github.com/Ingaleee/MESH-showcase/actions/runs/37909616516) выполнил настоящий npm run demo из clean checkout без .env/node_modules/cache/data: 17 stages, 4 browser scenarios, 0 skipped/flaky/errors, ready. Browser runtime и host libraries установлены до команды как явные machine prerequisites. [Raw reports](evidence/presentation-oct09/clean-demo/summary.json), [английское видео и галерея](visual-walkthrough.md) отделены от historical local preparation и previous single-scenario preview proof. Код приложения/demo не менялся относительно accepted 3d849af.
+
 ## Предыдущая приёмка 8 октября
 
 - [Первый исправленный verify](https://github.com/Ingaleee/MESH-showcase/actions/runs/37817942409) — success; исходный красный run сохранён.
@@ -21,7 +25,7 @@
 
 [Kubernetes предыдущей приёмки](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) — success: actual Terraform drift/repair, migration before app, CNI ingress/egress controls, worker 50 once-only effects, DB readiness/liveness recovery, Alpine rollout и Helm failed-upgrade rollback. [Отчёт](evidence/acceptance-oct08/hosted/kubernetes/summary.json), [Helm history](evidence/acceptance-oct08/hosted/kubernetes/helm-history.json). Стенды запускаются вручную через GitHub на временных hosted machines; постоянный VPS/self-hosted public runner не используется.
 
-## Исторические измерения
+## Исторические измерения до первых hosted runs
 
 Таблица ниже относится к более раннему snapshot. Она сохраняет даты, результаты и ограничения предыдущих упражнений.
 
@@ -29,7 +33,7 @@
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ruby invariants     | 118 examples, 0 failures; полный native Alpine suite также 118/0                                                             | [Development](evidence/publishing-rspec-final.json), [Alpine](evidence/publishing-rspec-alpine.json); это весь suite                                                               |
 | Ruby quality        | RuboCop 222 files, 0 offenses; Packwerk validate/check; Steep Money boundary                                                 | [RuboCop](evidence/publishing-quality/rubocop.json); Steep не покрывает весь Rails                                                                                                 |
-| API/frontend        | 51 OpenAPI operations, generated types, TypeScript, module boundaries, format                                                | Проверены локально; remote CI не запускался                                                                                                                                        |
+| API/frontend        | 51 OpenAPI operations, generated types, TypeScript, module boundaries, format                                                | Проверены локально; на момент этого исторического измерения remote CI ещё не запускался; актуальные runs приведены выше                                                            |
 | Browser             | Один полный run 13/13, 0 skips/flaky/errors; finance lost-response path включён                                              | [Full report](evidence/publishing-current-browser/playwright.json); [первый 12/13](evidence/publishing-final-browser/playwright.json) сохранён                                     |
 | Repeatable demo     | Одна команда подготовки, реальный scanner/partner/dashboard, CLI drill, 4 browser checks                                     | [Stages/summary](evidence/publishing-repeatable-demo-final/summary.json); existing secrets/data preserved                                                                          |
 | Publishing          | Дефект отклонён; v1 → lost-response v2 → lookup → rollback v1; 3 POST, 3 private SHA downloads, 3 delivered signed callbacks | [Full drill](evidence/publishing-repeatable-demo-final/publishing-demo/summary.json), [архитектура](publishing-lab.md)                                                             |
@@ -46,7 +50,7 @@
 | Fanout read         | 50k proposals: median 3276,624 → 27,338 ms; Ruby records 50 000 → 20                                                         | [Earlier benchmark](evidence/bounded-read-benchmark.json); пять warm samples, exact COUNT имеет цену                                                                               |
 | SQL/load            | 100001 projects/200001 proposals/20000 profiles; 2406 HTTP requests, p95 79,09ms при 20 iterations/s                         | [Earlier lab](evidence/showcase-architecture-lab/summary.json); 120s shared-host direct API, не production SLA                                                                     |
 | DB+files recovery   | Clean restore, два private files, hashes/history, corruption/lost queue claim probes, 65,02s local elapsed                   | [Earlier restore](evidence/showcase-architecture-lab/restore-verified.json); до Publishing, quiescent snapshot, без PITR/offsite                                                   |
-| CI/Ansible          | 5 workflows actionlint; native parity/Publishing drill/release v2 inventory подготовлены; Ansible syntax                     | Реального GitHub run, Ubuntu convergence и runner Online пока нет                                                                                                                  |
+| CI/Ansible          | 5 workflows actionlint; native parity/Publishing drill/release v2 inventory подготовлены; Ansible syntax                     | На дату этого snapshot GitHub run и Ubuntu convergence ещё не выполнены; сейчас подтверждены выше. Persistent runner Online не заявлен                                             |
 | Formal model        | TLC 18 distinct states/33 generated, safety passed                                                                           | [Earlier log](evidence/showcase-final/tlc.txt); ограниченная money model, не весь Publishing                                                                                       |
 
 Первый full browser run после пересоздания API не дождался home cards. После явной readiness проверки полный run прошёл 13/13; startup timing — наблюдаемая связь, не доказанная первопричина всех возможных UI отказов. Отрицательный отчёт не переписан в pass.

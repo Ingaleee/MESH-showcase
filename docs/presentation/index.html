@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="MESH: a Ruby/Rails integration and release lab. A real 74-second failure and recovery recording, application screens and reproducible engineering evidence."
+    />
+    <meta name="theme-color" content="#7652c9" />
+    <title>MESH — Integration &amp; Release Lab</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header wrap">
+      <a class="wordmark" href="#main" aria-label="MESH home">✳ MESH<span>.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#demo">Watch demo</a><a href="#screens">Screens</a><a href="#evidence">Evidence</a>
+        <a class="repo" href="https://github.com/Ingaleee/MESH-showcase">GitHub ↗</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap">
+        <div>
+          <p class="eyebrow">Ruby engineering · integration reliability</p>
+          <h1>A release can succeed.<br /><span>Its response can disappear.</span></h1>
+          <p class="lead">
+            MESH keeps the operation, explains the uncertainty and reconciles with the partner —
+            without publishing twice.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#demo">Watch the 74-second demo ↓</a
+            ><a
+              class="button"
+              href="https://github.com/Ingaleee/MESH-showcase/blob/main/docs/clean-architecture.md"
+              >Explore the Ruby architecture ↗</a
+            >
+          </div>
+          <p class="byline">
+            An engineering showcase by <a href="https://github.com/Ingaleee">Egor Soloveyv</a>. Real
+            application and HTTP simulator; synthetic data.
+          </p>
+        </div>
+        <aside class="identity" aria-label="The central reliability guarantee">
+          <p class="eyebrow">One durable operation</p>
+          <ol>
+            <li><span>01</span>Validate exact bytes</li>
+            <li><span>02</span>Publish to a partner</li>
+            <li><span>03</span>Preserve an unknown outcome</li>
+            <li><span>04</span>Confirm by the same identity</li>
+          </ol>
+          <p class="identity-result">
+            <strong>1 POST. 1 remote effect.</strong><span>Verified in this recording.</span>
+          </p>
+        </aside>
+      </section>
+      <section class="section wrap" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">The failure is real</p>
+            <h2 id="demo-title">From a defective package to a confirmed release.</h2>
+          </div>
+          <span class="pill">74 seconds · English captions</span>
+        </div>
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            poster="assets/publishing.jpg"
+            aria-label="MESH package validation, lost response, diagnosis and recovery"
+          >
+            <source src="assets/mesh-demo.webm" type="video/webm" />
+            <track
+              kind="captions"
+              src="assets/mesh-demo.en.vtt"
+              srclang="en"
+              label="English"
+              default
+            />
+            Your browser cannot play this recording.
+            <a href="assets/mesh-demo.webm">Download the WebM video</a> or read the transcript
+            below.
+          </video>
+        </div>
+        <p class="caption">
+          Unedited browser screencast of the existing application. Russian UI, English captions, no
+          audio. The lost response is injected through the real API; the independent Node/SQLite
+          partner commits before the reply is lost. No API responses or displayed states are mocked.
+        </p>
+        <div class="chapter-grid">
+          <article>
+            <span class="step">01 / Validate</span>
+            <h3>Reject the exact defect</h3>
+            <p>
+              A manifest digest mismatch returns FILE_DIGEST. Publishing remains disabled until the
+              corrected bytes pass validation and the real scanner.
+            </p>
+          </article>
+          <article>
+            <span class="step">02 / Diagnose</span>
+            <h3>Keep uncertainty visible</h3>
+            <p>
+              HTTP_TIMEOUT becomes unknown. Read-only diagnostics explain lookup_only and explicitly
+              state that the report did not query the partner.
+            </p>
+          </article>
+          <article>
+            <span class="step">03 / Reconcile</span>
+            <h3>Recover the same operation</h3>
+            <p>
+              The ordinary dispatcher looks up the original operation. Its identity, digest and
+              sequence must match before confirmation.
+            </p>
+          </article>
+        </div>
+        <details class="transcript">
+          <summary>Read the full English transcript</summary>
+          <ol id="transcript-list">
+            <li>
+              <time>00:00</time>MESH: Ruby backend engineering, from partner package to a confirmed
+              release.
+            </li>
+            <li>
+              <time>00:07</time>A studio submits a private ZIP and a manifest. Validation checks
+              exact bytes, inventory and the real scanner.
+            </li>
+            <li>
+              <time>00:13</time>The bad package is rejected: FILE_DIGEST explains the defect.
+              Publishing stays disabled.
+            </li>
+            <li>
+              <time>00:19</time>A corrected package passes. The validation is bound to its digest,
+              policy and integration configuration.
+            </li>
+            <li>
+              <time>00:30</time>Inject a lost response through the real API. The independent HTTP
+              partner commits the release before the reply is lost.
+            </li>
+            <li>
+              <time>00:36</time>HTTP_TIMEOUT becomes unknown. A missing response does not authorize
+              another publish request.
+            </li>
+            <li>
+              <time>00:38</time>Read-only diagnosis provides a safe next action: look up the same
+              operation ID. It does not query remote state.
+            </li>
+            <li>
+              <time>00:42</time>The ordinary dispatcher reconciles by lookup. Confirmation must
+              match the operation, artifact digest and sequence.
+            </li>
+            <li>
+              <time>00:56</time>One real publish request, one remote effect. The captured workflow
+              is a local simulator exercise, not a live external studio.
+            </li>
+          </ol>
+          <p>
+            <a href="assets/mesh-demo.webm">Download video</a> ·
+            <a href="assets/mesh-demo.en.vtt">Download captions</a> ·
+            <a
+              href="https://github.com/Ingaleee/MESH-showcase/blob/main/docs/evidence/presentation-oct09/capture.json"
+              >Capture report</a
+            >
+          </p>
+        </details>
+      </section>
+      <section class="section wrap" id="screens" aria-labelledby="screens-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">A useful frontend, a Ruby core</p>
+            <h2 id="screens-title">See the workflow, then inspect its guarantees.</h2>
+          </div>
+        </div>
+        <p class="section-intro">
+          The marketplace follows brief → proposal → immutable agreement → versioned delivery →
+          acceptance. Publishing adds a focused external integration lab. All images below are
+          actual application captures; portraits and portfolio artwork are illustrative demo assets.
+        </p>
+        <div class="gallery" id="gallery">
+          <figure>
+            <a href="assets/marketplace.jpg"
+              ><img
+                src="assets/marketplace.jpg"
+                alt="A complete marketplace entrance — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">01 / Discovery</span>
+              <h3>A complete marketplace entrance</h3>
+              <p>
+                Editorial discovery introduces projects, categories and creators. The catalogue is
+                backed by the Rails API; this image is captured after project data arrives.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/marketplace"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/creators.jpg"
+              ><img
+                src="assets/creators.jpg"
+                alt="Loaded creator profiles — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">02 / People</span>
+              <h3>Loaded creator profiles</h3>
+              <p>
+                Six actual synthetic profiles, skills and prices. Cards and all visible images were
+                loaded before capture. Portrait and portfolio imagery is illustrative.
+              </p>
+              <a href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/talent"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/brief.jpg"
+              ><img
+                src="assets/brief.jpg"
+                alt="A project with explicit requirements — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">03 / Brief</span>
+              <h3>A project with explicit requirements</h3>
+              <p>
+                A public brief holds requirements, references, materials and versioned project
+                information. A proposal is attached to the brief version it answers.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/marketplace"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/workspace.jpg"
+              ><img
+                src="assets/workspace.jpg"
+                alt="Conditions and concrete result versions — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">04 / Delivery</span>
+              <h3>Conditions and concrete result versions</h3>
+              <p>
+                The author workspace keeps agreed cost and deadline together with submitted versions
+                and feedback. This capture shows two real versions and acceptance of the second.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/engagements"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/publishing.jpg"
+              ><img
+                src="assets/publishing.jpg"
+                alt="The operator release lab — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">05 / Integration</span>
+              <h3>The operator release lab</h3>
+              <p>
+                An authenticated operator works with private packages, validation reports and
+                durable release history. The recording uses its own synthetic operator.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/rejected.jpg"
+              ><img
+                src="assets/rejected.jpg"
+                alt="A useful, stable defect report — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">06 / Rejection</span>
+              <h3>A useful, stable defect report</h3>
+              <p>
+                FILE_DIGEST explains the mismatch and the expected value. The rejected package
+                cannot authorize publication.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing/app/services/publishing/validate_candidate.rb"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/validated.jpg"
+              ><img
+                src="assets/validated.jpg"
+                alt="Verified bytes and current inputs — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">07 / Validation</span>
+              <h3>Verified bytes and current inputs</h3>
+              <p>
+                The corrected ZIP passes inventory, manifest, file-digest, real antivirus and
+                partner-contract checks. The result is tied to policy and configuration.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/uncertain.jpg"
+              ><img
+                src="assets/uncertain.jpg"
+                alt="Unknown is a protected state — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">08 / Failure</span>
+              <h3>Unknown is a protected state</h3>
+              <p>
+                The real peer commits but its response is lost. HTTP_TIMEOUT retains the operation
+                ID and exposes a safe lookup-only next action.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing/app/application/publishing/application/process_deployment.rb"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/diagnostic.jpg"
+              ><img
+                src="assets/diagnostic.jpg"
+                alt="An English partner update — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">09 / Support</span>
+              <h3>An English partner update</h3>
+              <p>
+                A read-only snapshot explains the state, last error and safe action. It explicitly
+                says remote state was not queried by this report. The operator reviews the English
+                update before sending it.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing/app/services/publishing/deployment_diagnostic.rb"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/confirmed.jpg"
+              ><img
+                src="assets/confirmed.jpg"
+                alt="The same operation, confirmed — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">10 / Recovery</span>
+              <h3>The same operation, confirmed</h3>
+              <p>
+                The ordinary dispatcher reconciles by lookup. The capture proof records one POST,
+                one remote effect and the same original/recovered operation ID.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/apps/api/packs/publishing/app/domain/publishing/domain/deployment_rules.rb"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="assets/observability.jpg"
+              ><img
+                src="assets/observability.jpg"
+                alt="A real reliability dashboard — actual MESH screen"
+                width="1280"
+                height="900"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span class="step">11 / Operations</span>
+              <h3>A real reliability dashboard</h3>
+              <p>
+                The local Grafana dashboard reads real Prometheus data: HTTP latency, jobs and
+                unfinished work. This screenshot demonstrates a working dashboard, not a long
+                production SLO window.
+              </p>
+              <a
+                href="https://github.com/Ingaleee/MESH-showcase/tree/main/infra/telemetry/dashboard.json"
+                >Inspect the relevant code ↗</a
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section wrap" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Executed, not just configured</p>
+            <h2 id="evidence-title">Follow the evidence.</h2>
+          </div>
+          <a
+            href="https://github.com/Ingaleee/MESH-showcase/blob/main/docs/partner-support-acceptance-oct09.md"
+            >Exact sources and limits ↗</a
+          >
+        </div>
+        <div class="evidence-grid">
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37909615272"
+            ><strong>153 + 153</strong
+            ><span
+              >Ruby examples, development and native Alpine. The same 153 examples in each runtime;
+              13 browser scenarios, no skipped or flaky cases.</span
+            ><em>Open verification ↗</em></a
+          >
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37892419510"
+            ><strong>5 exact digests</strong
+            ><span
+              >Runtime inventory scanned with zero HIGH/CRITICAL findings at release time, including
+              unfixed. Four signed build outputs.</span
+            ><em>Open signed release ↗</em></a
+          >
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37898543604"
+            ><strong>8 crash points</strong
+            ><span
+              >Ubuntu deployment recovery and failed recovery; rejected release rollback. Second
+              Ansible apply changed=0.</span
+            ><em>Open deployment exercise ↗</em></a
+          >
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37898550160"
+            ><strong>Real CNI controls</strong
+            ><span
+              >Single-node Kubernetes rollout/rollback, NetworkPolicy positive/negative controls and
+              Terraform drift repair.</span
+            ><em>Open cluster exercise ↗</em></a
+          >
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37898547328"
+            ><strong>Separate-VM restore</strong
+            ><span
+              >Primary and queue databases, private files and an uncertain partner operation
+              restored. Small, quiescent fixture; no repeated publish.</span
+            ><em>Open recovery exercise ↗</em></a
+          >
+          <a href="https://github.com/Ingaleee/MESH-showcase/actions/runs/37909616516"
+            ><strong>A clean starting point</strong
+            ><span
+              >Fresh Ubuntu checkout with no .env, node_modules, owner cache or data. Actual npm run
+              demo: all 17 stages and four browser checks passed.</span
+            ><em>Open cold preparation ↗</em></a
+          >
+        </div>
+        <p class="caption">
+          Accepted application release: 3d849af. Recording and first clean preparation: fa40e97,
+          with application source unchanged. Each linked report has its own source revision and
+          environment. A scan is a dated observation, not a permanent security guarantee.
+        </p>
+      </section>
+      <section class="closing wrap">
+        <div>
+          <p class="eyebrow">Explain the guarantee and its cost</p>
+          <h2>Small enough to understand.<br />Serious enough to investigate.</h2>
+          <p>
+            Eight-domain Rails monolith. Framework-independent Domain/Application layers for
+            Publishing execution. PostgreSQL, private storage and HTTP adapters protect real
+            invariants; the rest stays idiomatic Rails.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/Ingaleee/MESH-showcase"
+              >Read the repository ↗</a
+            ><a
+              class="button"
+              href="https://github.com/Ingaleee/MESH-showcase/blob/main/docs/partner-support.md"
+              >Partner support guide ↗</a
+            >
+          </div>
+        </div>
+        <aside>
+          <h3>Explicit laboratory boundaries</h3>
+          <p>
+            This static presentation does not expose a backend. Hosted machines are ephemeral.
+            Kubernetes is single-node. Recovery uses a small, quiescent fixture.
+          </p>
+          <p>
+            Multi-node HA, online WAL/PITR, large-restore throughput, permanent backup retention and
+            a long production SLO window are not demonstrated. Partners and payments are simulators;
+            uploaded code is never executed.
+          </p>
+        </aside>
+      </section>
+    </main>
+    <footer class="wrap">
+      <a class="wordmark" href="#main">MESH<span>.</span></a>
+      <p>Integration &amp; Release Lab · October 2026</p>
+      <a href="https://github.com/Ingaleee/MESH-showcase/blob/main/docs/visual-walkthrough.md"
+        >Detailed walkthrough ↗</a
+      >
+    </footer>
+  </body>
+</html>

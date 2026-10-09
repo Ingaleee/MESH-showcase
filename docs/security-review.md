@@ -1,8 +1,8 @@
-# Security review — 8 октября 2026
+# Security review — updated 9 October 2026
 
 Строгий HIGH/CRITICAL gate для перечисленных текущих runtime artifacts прошёл. Политика включает unfixed findings; CVE allowlist/ignore-unfixed не включены. Результат относится к exact digests и времени scan, не ко всем будущим образам или возможным уязвимостям.
 
-[Текущий hosted release](https://github.com/Ingaleee/MESH-showcase/actions/runs/37834690626) и [deployment](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837289487) прошли: scan пяти exact registry digests, verified signature/source/workflow и negative wrong-revision control. [Актуальный каталог](evidence/acceptance-oct08/README.md) сохраняет отчёты; детали allowlists и trust boundaries — в [threat-model.md](threat-model.md).
+[Текущий hosted release 3d849af](https://github.com/Ingaleee/MESH-showcase/actions/runs/37892419510) и [deployment](https://github.com/Ingaleee/MESH-showcase/actions/runs/37898543604) прошли: scan пяти exact registry digests, verified signature/source/workflow и negative wrong-revision control. [Актуальная приёмка](partner-support-acceptance-oct09.md) сохраняет отчёты; детали allowlists и trust boundaries — в [threat-model.md](threat-model.md).
 
 ## Историческое устранение находок
 
@@ -18,7 +18,7 @@
 
 Alertmanager — временный fork сборки, не новый официальный upstream release. У него есть стоимость сопровождения: нужно пересматривать patch и возвращаться к официальному исправленному образу после проверки. Origin archive/checksum/version labels зафиксированы в Dockerfile; build dependency разрешение всё ещё требует network. Grafana plugin version зафиксирована, signature проверяется Grafana; builder скачивает официальный package.
 
-[Последний nine-image scan](evidence/publishing-security-complete/image-security.json): API, web, partner, PostgreSQL, ClamAV, Caddy, Prometheus, Grafana, Alertmanager — у каждого 0 HIGH/CRITICAL entries. Он записан после финальной сборки demo, включая bounded history UI. [Пятикомпонентный production release](evidence/publishing-release-security-current/image-security.json) также прошёл gate и [настоящий HTTPS business/file workflow + exit-42 rollback](evidence/publishing-release-current/runtime-and-rollback.json).
+[Исторический nine-image scan](evidence/publishing-security-complete/image-security.json): API, web, partner, PostgreSQL, ClamAV, Caddy, Prometheus, Grafana, Alertmanager — у каждого 0 HIGH/CRITICAL entries. Он записан после финальной сборки demo, включая bounded history UI. [Исторический пятикомпонентный production release](evidence/publishing-release-security-current/image-security.json) также прошёл gate и [настоящий HTTPS business/file workflow + exit-42 rollback](evidence/publishing-release-current/runtime-and-rollback.json).
 
 Эти inventories имеют собственные timestamps и exact IDs. Production rollback выполнен до небольшой финальной CSS-правки списка и повторных Compose rebuild metadata; его references не подменяются последним nine-image scan. API в production report включает stateless signed callback и отформатированный Ruby CLI. Исторические красные и прежние зелёные reports сохранены отдельно.
 
@@ -48,4 +48,6 @@ Gitleaks проверил publishable source snapshot: clean report и найд�
 
 ## Оставшаяся эксплуатационная работа
 
-GHCR attestations/signature verification выполнены. Credential rotation regression проверяет приложение через double, но independent secret manager/custody, offsite retention и hardened multi-host deployment ещё требуют отдельной приёмки. Zero findings сегодня не заменяет повторный scan при security updates и release.
+GHCR attestations/signature verification выполнены. Credential rotation прошла через реальный HTTP peer, independent Windows key/ciphertext custody и fresh-VM restore подтверждены. Production secret manager, scheduled/offsite retention и hardened multi-host deployment требуют отдельного основания и проверки. Zero findings сегодня не заменяет повторный scan при security updates и release.
+
+Таблицы ранних локальных scans ниже/выше сохраняют исходную дату и scope. Актуальные development/native suites — 153/0 каждый; current exact-image acceptance относится только к пяти digests release 3d849af. Старый nine-image scan не приписывается новой ревизии.

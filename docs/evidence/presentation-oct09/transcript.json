@@ -1,0 +1,41 @@
+{
+  "duration_seconds": 74.001,
+  "chapters": [
+    {
+      "start": 0,
+      "text": "MESH: Ruby backend engineering, from partner package to a confirmed release."
+    },
+    {
+      "start": 7.588,
+      "text": "A studio submits a private ZIP and a manifest. Validation checks exact bytes, inventory and the real scanner."
+    },
+    {
+      "start": 13.118,
+      "text": "The bad package is rejected: FILE_DIGEST explains the defect. Publishing stays disabled."
+    },
+    {
+      "start": 19.678,
+      "text": "A corrected package passes. The validation is bound to its digest, policy and integration configuration."
+    },
+    {
+      "start": 30.201,
+      "text": "Inject a lost response through the real API. The independent HTTP partner commits the release before the reply is lost."
+    },
+    {
+      "start": 36.48,
+      "text": "HTTP_TIMEOUT becomes unknown. A missing response does not authorize another publish request."
+    },
+    {
+      "start": 38.262,
+      "text": "Read-only diagnosis provides a safe next action: look up the same operation ID. It does not query remote state."
+    },
+    {
+      "start": 42.88,
+      "text": "The ordinary dispatcher reconciles by lookup. Confirmation must match the operation, artifact digest and sequence."
+    },
+    {
+      "start": 56.313,
+      "text": "One real publish request, one remote effect. The captured workflow is a local simulator exercise, not a live external studio."
+    }
+  ]
+}

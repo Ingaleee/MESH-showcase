@@ -52,6 +52,7 @@ jobs:
           npm run test:acceptance
           npm run test:reliability:evidence
           npm run test:partner-support:evidence
+          node scripts/check-presentation-evidence.mjs
           npm run format:check
           npm run typecheck
           npm run build

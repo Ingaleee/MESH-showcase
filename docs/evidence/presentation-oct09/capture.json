@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-09T09:41:32.359Z",
+  "revision": "fa40e9778ab8453aafff5fc8180c12fb8769aa99",
+  "source_application_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "environment": "Windows Docker Desktop; actual current compiled preview, real Rails/PostgreSQL/ClamAV/Node partner",
+  "duration_seconds": 74.001,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "no_mocked_api_or_state": true,
+  "failure_injected_through_real_api": true,
+  "unknown_observed": true,
+  "action_code": "lookup_only",
+  "remote_state_queried_by_diagnostic": false,
+  "recovered_operation_id": "90c477d8-3d0a-4992-b1fe-54f7f875e52f",
+  "original_operation_id": "90c477d8-3d0a-4992-b1fe-54f7f875e52f",
+  "publish_requests_delta": 1,
+  "remote_effects_for_operation": 1,
+  "scope": "Raw browser screencast with separate English captions. Synthetic operator and package; no login credentials are recorded. This capture is not a security scan, full regression suite or production benchmark."
+}

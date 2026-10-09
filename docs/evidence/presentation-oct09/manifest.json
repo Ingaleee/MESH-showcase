@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "recorded_revision": "fa40e9778ab8453aafff5fc8180c12fb8769aa99",
+  "accepted_application_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "clean_run_id": 37909616516,
+  "clean_run_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37909616516",
+  "downloaded_artifact_id": 11606064166,
+  "downloaded_artifact_sha256": "ce25a2349fd260eb4d0f8b1da1c6461404c4346d3f65b0814fb0d8c1d8664969",
+  "files": [
+    {
+      "path": "docs/evidence/presentation-oct09/capture.json",
+      "bytes": 998,
+      "sha256": "860cf329fb675c549518c98dbaeff59c2b5fad2dddd3fe8de60332edf442c08c"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/context.json",
+      "bytes": 216,
+      "sha256": "504db0d747974fee01edb9da7173500e266cc5543f2b0e2c90c100a0962e0392"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/partner.json",
+      "bytes": 804,
+      "sha256": "dc53fe9b0ef94b24a11ebc99105e25f50b56d5143a6f655f12de91a3b58decc2"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/playwright.json",
+      "bytes": 8458,
+      "sha256": "df40149c7cf3c9700efad1f30d98a7ec0774dc85094b990af6b9d2401793c166"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/readiness.json",
+      "bytes": 18,
+      "sha256": "31bf75f4c0a97cc1f7b60df824fa390b3be9ba014f29b63c87c698ba63d9a9fd"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/stages.json",
+      "bytes": 1846,
+      "sha256": "4dc83895a844950a9530d174c3b974d2c4aadc4a0f7cfda426134bc28b36bc6a"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/clean-demo/summary.json",
+      "bytes": 2486,
+      "sha256": "497abd7a2c0c6828e2a55f0f92dc84645afb673287f45e22043bf65dd53e9ff5"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/gallery-capture.json",
+      "bytes": 616,
+      "sha256": "fba2fc4512f653b0991effcb45cea84db053076026dda48393eba6a66fc6c794"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/transcript.json",
+      "bytes": 1459,
+      "sha256": "59f498b7f78d47ab691d906db9e46ffc386d5342355175658ae05848e5d6f018"
+    },
+    {
+      "path": "docs/presentation/assets/brief.jpg",
+      "bytes": 107774,
+      "sha256": "d0f719ff9f9ce95a312e3668494b99b950f89778be28efd3690fe50770a54ad1"
+    },
+    {
+      "path": "docs/presentation/assets/confirmed.jpg",
+      "bytes": 93919,
+      "sha256": "771232744a9e1d8b9badc08ff09b4884bcac021f42621df3f3566d27e3be0df6"
+    },
+    {
+      "path": "docs/presentation/assets/creators.jpg",
+      "bytes": 181773,
+      "sha256": "1316a3a1a1a886d77d44fe477c5434d251ba9773a3c7f9efd01b9540af9ab7b1"
+    },
+    {
+      "path": "docs/presentation/assets/diagnostic.jpg",
+      "bytes": 92280,
+      "sha256": "3d10034a252fb7e7ac3843289e0df1c6d1d47aac99cc024c8cf2056a9cc1263b"
+    },
+    {
+      "path": "docs/presentation/assets/marketplace.jpg",
+      "bytes": 171648,
+      "sha256": "de80c25cf41b1e41aa08c952a9c845b453907a0aad875e9ba0c5b8a9ad09defd"
+    },
+    {
+      "path": "docs/presentation/assets/mesh-demo.en.vtt",
+      "bytes": 850,
+      "sha256": "d07b895df2c773515288faf1aee92c7aaba886ce8b36c2bb0ed6002304ef6464"
+    },
+    {
+      "path": "docs/presentation/assets/mesh-demo.webm",
+      "bytes": 5264341,
+      "sha256": "e175c8eaf65cf759ef9fd77b7c6e25b9eb963c83706e1691448301e2cf5b026c"
+    },
+    {
+      "path": "docs/presentation/assets/observability.jpg",
+      "bytes": 76692,
+      "sha256": "9866bc2e5233f50586a21d7f23663be93dbf93ad49231d34f0eaa09520842810"
+    },
+    {
+      "path": "docs/presentation/assets/publishing.jpg",
+      "bytes": 92743,
+      "sha256": "3ae5778344b39f7b1503ac631b10d1bde21407c58b3bd30a38f9551df7a6e354"
+    },
+    {
+      "path": "docs/presentation/assets/rejected.jpg",
+      "bytes": 110742,
+      "sha256": "ce68ff0f05d388ee34e987822696bed7629f8a41d445413ec97ee10816fd0222"
+    },
+    {
+      "path": "docs/presentation/assets/uncertain.jpg",
+      "bytes": 85521,
+      "sha256": "1a9e3d3ee275cab967d432d365b3a49b896647fbcb3bfd781e129e8284133eea"
+    },
+    {
+      "path": "docs/presentation/assets/validated.jpg",
+      "bytes": 107768,
+      "sha256": "7d44b131fcace6c33fce65612235d2104bca6902253c03148e6b4550ab230814"
+    },
+    {
+      "path": "docs/presentation/assets/workspace.jpg",
+      "bytes": 128178,
+      "sha256": "973378f384e07d6de082a06cb60d5a8e1eb720c7970a88452d52577a38e9690e"
+    },
+    {
+      "path": "docs/evidence/presentation-oct09/site-check.json",
+      "bytes": 875,
+      "sha256": "eca69ff529e1c13352318ae6dc8a4524e4f54ea6584046d62ca510ee3d300ce2"
+    }
+  ],
+  "scope": "Original reviewed reports and actual media, with integrity hashes. This is not an independent certification or signature. Preparation prerequisite installation is explicit; reports retain exact source identity."
+}

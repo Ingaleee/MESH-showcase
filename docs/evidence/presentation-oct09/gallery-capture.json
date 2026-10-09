@@ -1,0 +1,23 @@
+{
+  "screens": [
+    {
+      "name": "creators",
+      "url": "http://localhost:3200/creators",
+      "captured_at": "2026-10-09T09:45:55.607Z",
+      "visible_images_decoded": true
+    },
+    {
+      "name": "marketplace",
+      "url": "http://localhost:3200/",
+      "captured_at": "2026-10-09T09:45:57.241Z",
+      "visible_images_decoded": true
+    },
+    {
+      "name": "workspace",
+      "url": "http://localhost:3200/workspace?engagement=af26a074-0d1a-404f-a8d7-980ec13b2e6c",
+      "captured_at": "2026-10-09T09:46:05.463Z",
+      "visible_images_decoded": true
+    }
+  ],
+  "no_mocked_api_or_state": true
+}

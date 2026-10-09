@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.588
+MESH: Ruby/Rails integration and release lab.
+
+2
+00:00:07.588 --> 00:00:13.118
+A studio submits a private ZIP and manifest.
+
+3
+00:00:13.118 --> 00:00:19.678
+FILE_DIGEST rejects the bad package. Publishing is disabled.
+
+4
+00:00:19.678 --> 00:00:30.201
+Corrected bytes pass validation and the real ClamAV scanner.
+
+5
+00:00:30.201 --> 00:00:36.480
+Inject a real API timeout after the partner commits the release.
+
+6
+00:00:36.480 --> 00:00:38.262
+Unknown outcome. Do not publish again.
+
+7
+00:00:38.262 --> 00:00:42.880
+Read-only diagnosis: lookup_only. This report makes no remote query.
+
+8
+00:00:42.880 --> 00:00:56.313
+The dispatcher reconciles the same operation by lookup.
+
+9
+00:00:56.313 --> 00:01:14.001
+Confirmed: one publish POST, one remote effect. Synthetic partner.
