@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-09T06:19:30.605Z",
+  "phases": {
+    "prepare": {
+      "phase": "prepare",
+      "checked_at": "2026-10-09T06:19:32.517121Z",
+      "checks": {
+        "real_scanner_passed": true,
+        "remote_accepted_once_before_timeout": true,
+        "local_outcome_unknown": true
+      },
+      "partner_id": "7505d43a-d042-4a0a-9fef-ebf451d1b9c3",
+      "operation_id": "7d1024da-e00d-4d97-8b75-3d2875279dc9",
+      "candidate_id": "a4d3263b-5751-46bd-86a1-b653cdcda8a1",
+      "validation_id": "1550dd77-8943-49d7-b45f-a89b7f615731",
+      "success": true
+    },
+    "rotated": {
+      "phase": "rotated",
+      "checked_at": "2026-10-09T06:19:36.197881Z",
+      "checks": {
+        "auth_rejection_kept_unknown": true,
+        "old_http_credential_denied": true,
+        "new_http_credential_accepted": true,
+        "stale_validation_blocked": true,
+        "old_worker_result_fenced": true,
+        "old_failure_fenced": true,
+        "expired_lease_looked_up": true,
+        "old_callback_denied": true,
+        "rotated_callback_replay_once": true,
+        "secret_outage_preserved_local_report": true,
+        "remote_posts": 1
+      },
+      "operation_id": "7d1024da-e00d-4d97-8b75-3d2875279dc9",
+      "uncertain_operation_id": "fbe52f16-d921-4bb3-aded-a56d2c507523",
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "7d1024da-e00d-4d97-8b75-3d2875279dc9",
+        "state": "confirmed",
+        "artifact_sha256": "a4c569bc576e9365e771589dc820dd3a9d2539735590376a8090e9a46e40c3ab",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "3c8e751aa2330fe152a7a79a7acc0390109f9fe84e54da70ff724ada80b62171",
+        "current_inputs_match": null,
+        "configuration_error": "PARTNER_CREDENTIAL_UNAVAILABLE",
+        "correlation_id": "1acb8c3f-3d4a-4c67-8d6e-cf0799aed298",
+        "attempts": 4,
+        "last_error": null,
+        "local_confirmed_at": "2026-10-09 06:19:36 UTC",
+        "remote_sequence": 1,
+        "observed_at": "2026-10-09T06:19:36.481889Z",
+        "lease_until": null,
+        "action_code": "inspect_confirmed",
+        "remote_state_queried": false,
+        "next_action": "Inspect the confirmed operation and release history; this report does not query the partner's current state.",
+        "support_update_en": "Local operation 7d1024da-e00d-4d97-8b75-3d2875279dc9 is confirmed. Artifact SHA-256: a4c569bc576e9365e771589dc820dd3a9d2539735590376a8090e9a46e40c3ab. Correlation ID: 1acb8c3f-3d4a-4c67-8d6e-cf0799aed298. Remote state was not queried by this report. Inspect the confirmed operation and release history; this report does not query the partner's current state.",
+        "reproduce": "mesh-publish diagnose 7d1024da-e00d-4d97-8b75-3d2875279dc9"
+      },
+      "rejected_credential_diagnostic": {
+        "schema_version": 1,
+        "operation_id": "7d1024da-e00d-4d97-8b75-3d2875279dc9",
+        "state": "unknown",
+        "artifact_sha256": "a4c569bc576e9365e771589dc820dd3a9d2539735590376a8090e9a46e40c3ab",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "3c8e751aa2330fe152a7a79a7acc0390109f9fe84e54da70ff724ada80b62171",
+        "current_inputs_match": true,
+        "configuration_error": null,
+        "correlation_id": "1acb8c3f-3d4a-4c67-8d6e-cf0799aed298",
+        "attempts": 2,
+        "last_error": "PARTNER_AUTH_REJECTED",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "observed_at": "2026-10-09T06:19:36.301273Z",
+        "lease_until": null,
+        "action_code": "restore_configuration",
+        "remote_state_queried": false,
+        "next_action": "Restore the approved credential or trust configuration, then resume the same operation; do not create another POST.",
+        "support_update_en": "Local operation 7d1024da-e00d-4d97-8b75-3d2875279dc9 is unknown. Artifact SHA-256: a4c569bc576e9365e771589dc820dd3a9d2539735590376a8090e9a46e40c3ab. Correlation ID: 1acb8c3f-3d4a-4c67-8d6e-cf0799aed298. Remote state was not queried by this report. Restore the approved credential or trust configuration, then resume the same operation; do not create another POST.",
+        "reproduce": "mesh-publish diagnose 7d1024da-e00d-4d97-8b75-3d2875279dc9"
+      },
+      "success": true
+    },
+    "unavailable": {
+      "phase": "unavailable",
+      "checked_at": "2026-10-09T06:19:37.532689Z",
+      "checks": {
+        "unavailable_peer_kept_unknown": true,
+        "original_operation_preserved": true
+      },
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "fbe52f16-d921-4bb3-aded-a56d2c507523",
+        "state": "unknown",
+        "artifact_sha256": "0522209a1541fd4c295fa51b9b124374d51953bfca707b9c8d8ce9b42377b7ef",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "a686b55164f4c614317cce5afb696a2a3fc60ea14d8564a2febb0554c567c5ee",
+        "current_inputs_match": true,
+        "configuration_error": null,
+        "correlation_id": "e9ed5c82-1ba0-4250-97aa-79490a271f7e",
+        "attempts": 2,
+        "last_error": "HTTP_CONNECTION_FAILED",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "observed_at": "2026-10-09T06:19:37.624832Z",
+        "lease_until": null,
+        "action_code": "lookup_only",
+        "remote_state_queried": false,
+        "next_action": "Lookup remote state by the same operation ID; a timeout or 404 does not authorize another POST.",
+        "support_update_en": "Local operation fbe52f16-d921-4bb3-aded-a56d2c507523 is unknown. Artifact SHA-256: 0522209a1541fd4c295fa51b9b124374d51953bfca707b9c8d8ce9b42377b7ef. Correlation ID: e9ed5c82-1ba0-4250-97aa-79490a271f7e. Remote state was not queried by this report. Lookup remote state by the same operation ID; a timeout or 404 does not authorize another POST.",
+        "reproduce": "mesh-publish diagnose fbe52f16-d921-4bb3-aded-a56d2c507523"
+      },
+      "success": true
+    },
+    "absent": {
+      "phase": "absent",
+      "checked_at": "2026-10-09T06:19:39.060311Z",
+      "checks": {
+        "absent_lookup_kept_unknown": true,
+        "no_republication": true,
+        "read_only_diagnostic": true
+      },
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "fbe52f16-d921-4bb3-aded-a56d2c507523",
+        "state": "unknown",
+        "artifact_sha256": "0522209a1541fd4c295fa51b9b124374d51953bfca707b9c8d8ce9b42377b7ef",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "a686b55164f4c614317cce5afb696a2a3fc60ea14d8564a2febb0554c567c5ee",
+        "current_inputs_match": true,
+        "configuration_error": null,
+        "correlation_id": "e9ed5c82-1ba0-4250-97aa-79490a271f7e",
+        "attempts": 3,
+        "last_error": "PARTNER_OUTCOME_UNKNOWN",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "observed_at": "2026-10-09T06:19:39.162889Z",
+        "lease_until": null,
+        "action_code": "lookup_only",
+        "remote_state_queried": false,
+        "next_action": "Lookup remote state by the same operation ID; a timeout or 404 does not authorize another POST.",
+        "support_update_en": "Local operation fbe52f16-d921-4bb3-aded-a56d2c507523 is unknown. Artifact SHA-256: 0522209a1541fd4c295fa51b9b124374d51953bfca707b9c8d8ce9b42377b7ef. Correlation ID: e9ed5c82-1ba0-4250-97aa-79490a271f7e. Remote state was not queried by this report. Lookup remote state by the same operation ID; a timeout or 404 does not authorize another POST.",
+        "reproduce": "mesh-publish diagnose fbe52f16-d921-4bb3-aded-a56d2c507523"
+      },
+      "remote_posts": 1,
+      "remote_effects": 1,
+      "success": true
+    }
+  },
+  "scope": "Disposable independent Node/SQLite peer on the showcase network; real authenticated HTTP, real ClamAV and Rails use cases on mesh_test. Callback HMAC/replay uses the real Rails Rack endpoint in-process. Lease expiry is controlled clock injection, not a claim of SIGKILL coverage. No external studio, main MESH or existing partner volume is changed.",
+  "project": "mesh-showcase-ci-37892418562",
+  "runtime": {
+    "api_image": "sha256:196deba57d6eee3bfd2aadba52365e7b5e14dc1d3754996bad6ff7ab11d2c7f7",
+    "peer_image": "sha256:38621eba3350774932bc37d452d3565d2eb9418451145bdcda5806cf0d7f2e00"
+  },
+  "revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "dirty_source": false,
+  "source_hashes": {
+    "apps/api/script/partner_support_drill.rb": "ad17d465a0d3a2c2736f1ac3a1338f102b5d52310b3199a815ac78d543d9af63",
+    "apps/api/packs/publishing/app/services/publishing/deployment_diagnostic.rb": "fc50a3c619ba5364e18faf35fff4db76f7aaa7b8296f14c7a40733f9ca4edf93",
+    "apps/partner/src/server.ts": "7fd22cd393ace76bbcb7655edeae25cfe588f50842a66b414f0c65e207b05a75",
+    "apps/api/packs/publishing/app/services/publishing/settings.rb": "afc50e07267c677c78f2682c913b822636a0215f03f72ee038b2ecc28531a929",
+    "apps/api/packs/publishing/app/domain/publishing/domain/deployment_rules.rb": "e41e2d8b597306abc1bfc1202d42156ebf0aa9436890a573f0b27f6c7beadc56",
+    "apps/api/packs/publishing/app/services/publishing/apply_observation.rb": "e41ae4f71a46404fa79965e7c5f39cad807434ae73849759053e8b520d5117f4",
+    "apps/api/packs/publishing/app/infrastructure/publishing/infrastructure/deployment_partner.rb": "8f81a730e4fb92bf65f96ab4858b6f64b3e6ce0c70acd1c27dfa881a36d70723",
+    "scripts/run-partner-support-drill.mjs": "c762458c3d31e7f99abd2063a588c8faf443f63175673ab3c0477581f37c9f45"
+  },
+  "success": true,
+  "disposable_resources_removed": true
+}

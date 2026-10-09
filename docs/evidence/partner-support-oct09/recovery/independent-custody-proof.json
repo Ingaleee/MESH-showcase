@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-09T07:25:39.499193+00:00",
+  "environment": "Windows workstation, independent of source/target hosted VMs",
+  "github_api_used_for_verification": false,
+  "key_read_from_windows_credential_manager": true,
+  "only_encrypted_backup_persisted": true,
+  "inventories_verified": [
+    {
+      "kind": "application",
+      "files": 5,
+      "source_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "archive_sha256": "1b3d44a56dedb8e4d3f2efea33d2ed860a002566a2a6a243442edd5c7464ba59"
+    },
+    {
+      "kind": "partner",
+      "files": 2,
+      "source_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "archive_sha256": "fb1943eac6a8d8a1d49a3b8eb5852f7d639028f6a2404b5ad386690f59d4247d"
+    }
+  ],
+  "scope": "Another physical device holds ciphertext and an independent key copy; no scheduled retention or full Windows application restore claim."
+}

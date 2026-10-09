@@ -1,0 +1,33 @@
+{
+  "scope": "Controlled CSS negative/positive experiment on the previous compiled preview, using the real current authenticated diagnostic. New compiled E2E remains the GitHub acceptance gate.",
+  "before": [
+    {
+      "viewport": 1440,
+      "scroll_width": 1440
+    },
+    {
+      "viewport": 1024,
+      "scroll_width": 1062
+    },
+    {
+      "viewport": 390,
+      "scroll_width": 539
+    }
+  ],
+  "after": [
+    {
+      "viewport": 1440,
+      "scroll_width": 1440
+    },
+    {
+      "viewport": 1024,
+      "scroll_width": 1024
+    },
+    {
+      "viewport": 390,
+      "scroll_width": 390
+    }
+  ],
+  "css_sha256": "2f8ddd8cae7d47fdb3b7f152354112fb3cadc6dc9b2f5b0d35aedd64bf320cc1",
+  "success": true
+}

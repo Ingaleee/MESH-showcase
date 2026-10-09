@@ -1,0 +1,42 @@
+
+PLAY [Prepare an isolated ephemeral Ubuntu release lab] ************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Validate the lab host] ***************************************************
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [docker_host : Install host tooling] **************************************
+ok: [localhost]
+
+TASK [docker_host : Create Docker keyring directory] ***************************
+ok: [localhost]
+
+TASK [docker_host : Fetch the Docker signing key] ******************************
+ok: [localhost]
+
+TASK [docker_host : Remove the replaced legacy Docker apt source] **************
+ok: [localhost]
+
+TASK [docker_host : Configure the Docker apt source] ***************************
+ok: [localhost]
+
+TASK [docker_host : Refresh package indexes after repository changes] **********
+skipping: [localhost]
+
+TASK [docker_host : Install the Docker daemon and Compose plugin] **************
+ok: [localhost]
+
+TASK [docker_host : Bound Docker container log growth] *************************
+ok: [localhost]
+
+TASK [docker_host : Enable Docker] *********************************************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=10   changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

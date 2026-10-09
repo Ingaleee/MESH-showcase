@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-09T06:21:40.623Z",
+  "environment": "GitHub hosted Ubuntu telemetry",
+  "historic_scrape_preserved": true,
+  "silence_preserved": true,
+  "active_alert_policy": "Alerts are resent by Prometheus, not persisted as an active-alert snapshot.",
+  "receipt_history_preserved": true,
+  "prometheus_retention": "7d / 512MB, whichever limit is reached first",
+  "alert_retention": "120h",
+  "receipt_budget_bytes": 16777216,
+  "sample": [
+    {
+      "metric": {
+        "__name__": "up",
+        "instance": "api:3000",
+        "job": "mesh-api"
+      },
+      "value": [
+        1791526889.338,
+        "1"
+      ]
+    }
+  ],
+  "scope": "Process restart on the same host; no offsite durability claim."
+}

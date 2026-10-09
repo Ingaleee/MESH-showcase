@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-09T06:18:22.745Z",
+  "container": "/mesh-showcase-ci-37892418562-api-1",
+  "abrupt_signal": "SIGKILL",
+  "pidfile": "/dev/null",
+  "recovered": true,
+  "elapsed_seconds": 2.402,
+  "scope": "One development API container; databases, files and other services stay running."
+}

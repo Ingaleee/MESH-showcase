@@ -1,0 +1,75 @@
+{
+  "checked_at": "2026-10-09T07:33:44.218Z",
+  "phases": [
+    {
+      "phase": "intent",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 9446
+    },
+    {
+      "phase": "runtime",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 9199
+    },
+    {
+      "phase": "migrated",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 19998
+    },
+    {
+      "phase": "services",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 52177
+    },
+    {
+      "phase": "smoke",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 53382
+    },
+    {
+      "phase": "verified",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 52723
+    },
+    {
+      "phase": "previous",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 52760
+    },
+    {
+      "phase": "current",
+      "killed_signal": "SIGKILL",
+      "recovered": true,
+      "interrupted_target_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "recovered_baseline_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+      "elapsed_ms": 52458
+    }
+  ],
+  "recovery_sigkill": true,
+  "unavailable_engine_preserved_state": true,
+  "subsequent_recovery": true,
+  "corrupt_journal_denied": true,
+  "schema_downgraded": false,
+  "scope": "Actual Linux process death and Docker service outage on an ephemeral hosted VM; no kernel power-loss/HA claim."
+}

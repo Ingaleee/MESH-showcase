@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "ci",
+  "recorded_at": "2026-10-09T07:22:19.154241+00:00",
+  "workflow_run": {
+    "id": 37892418562,
+    "name": "MESH verification",
+    "head_sha": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+    "path": ".github/workflows/verify.yml",
+    "event": "push",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T06:13:24Z",
+    "updated_at": "2026-10-09T06:27:44Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37892418562"
+  },
+  "artifact": {
+    "id": 11599532160,
+    "name": "mesh-evidence",
+    "size_in_bytes": 3409870,
+    "digest": "sha256:647798e9bcd99199fe25b82e70ac13dd40cba4061186975ccf444b0833818903",
+    "downloaded_archive_sha256": "647798e9bcd99199fe25b82e70ac13dd40cba4061186975ccf444b0833818903",
+    "expired": false
+  },
+  "reports": [
+    {
+      "file": "context.json",
+      "sha256": "ac338704c22809e392ae56e6e6cd6892cff078d6c63cc478d18410663d03b36e",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "partner-support.json",
+      "sha256": "aed0ec7088dd9da5aa412d8939a200cf88e713d4610788e2764105cc3a8c1a8e",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "rspec.json",
+      "sha256": "e8a01301c2fbb36e115cac8f4d711e46418b3c46bc22af9aa7929d10670ce350",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "rspec-native.json",
+      "sha256": "ed35b51765aa521a24d8dcbe1382c5e8d67a79d0883decfe651e7d2ae24da0b8",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "playwright.json",
+      "sha256": "70e60e3e6ea8387b803adb254c151601b81e503f6e9c8ec0a665df0c7e863b34",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "publishing-continuity.json",
+      "sha256": "3370a06b97fcba620f5f9fad11705b08a978681f9867e68deb0d8665e43b5c86",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "telemetry-retention.json",
+      "sha256": "600f992886ec6f2730841d9a1d1280712666898f6a060e30f5942cc6f6892ded",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "api-restart.json",
+      "sha256": "c6e50d18c6a63b12203e7b0bf4a55efad034887ab64bc7e66f6eec73564d40e9",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "restore-drill.json",
+      "sha256": "fa737f9f355a95ec466bac41f252aca417698b9914f3a79989a87ac7b887e818",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "gitleaks.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "gitleaks-history.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "gitleaks-canary.json",
+      "sha256": "2039a3da92c1f8fb06ad89101632b4d98b97318b664d96fff6f05fc00359709b",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "tlc.txt",
+      "sha256": "cc9e4335abd91e0aa0b1ac61b6be2c5a69986c8d37e49bc84839bbbe51ddf1b6",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "worker-incident-summary.json",
+      "sha256": "d6eff2ec5ec105ba81cbb64216806f9fb650417e6313d597bc263eb59092bc43",
+      "artifact_id": 11599532160
+    },
+    {
+      "file": "browser-layouts.json",
+      "sha256": "6c0965a7b3b614ae19076bd1fc2d060daa58ba230950f954b2ff8995916ee960",
+      "artifact_id": 11599532160
+    }
+  ],
+  "related_artifacts": []
+}

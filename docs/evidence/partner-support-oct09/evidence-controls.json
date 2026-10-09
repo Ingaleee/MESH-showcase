@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-09T07:39:39.270862+00:00",
+  "environment": "Windows local proof gate negative controls",
+  "accepted_application_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "checker_sha256": "0e45a102ed819c8aedb768c55518ba2a7dc7383bdda0d3d6b176c4ab31544957",
+  "controls": {
+    "raw_corruption": {
+      "rejected": true,
+      "exit_code": 1,
+      "report_hash_recomputed": false
+    },
+    "duplicate_post": {
+      "rejected": true,
+      "exit_code": 1,
+      "report_hash_recomputed": true
+    },
+    "unsafe_next_action": {
+      "rejected": true,
+      "exit_code": 1,
+      "report_hash_recomputed": true
+    },
+    "wrong_checked_source": {
+      "rejected": true,
+      "exit_code": 1,
+      "report_hash_recomputed": true
+    }
+  },
+  "scope": "Controlled modifications to copies of archived evidence, not new infrastructure exercises."
+}

@@ -1,0 +1,13 @@
+{
+  "drill": "snapshot_before_provider_commit",
+  "timestamp": "2026-10-09T06:27:28Z",
+  "restored_state_before": "requested",
+  "restored_state_after": "confirmed",
+  "provider_post_attempts": 1,
+  "recovered_journals": 1,
+  "restored_trigger_verified": true,
+  "payouts_disabled_during_recovery": true,
+  "recovered_by_reconciliation_before_duplicate_replay": true,
+  "dump_sha256": "dd1dd89ed821deca9010608eaca476c14f530735a67692e89781e7d1f0685a93",
+  "elapsed_seconds": 0.87
+}

@@ -4,9 +4,9 @@
 
 | Требование присланной вакансии | Что можно показать сейчас                                                                                                              |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Ruby / сложные задачи          | 146 current hosted RSpec examples, transactions/constraints, bounded reads, fenced claims, uncertain outcomes                          |
+| Ruby / сложные задачи          | 153 current hosted RSpec examples, transactions/constraints, bounded reads, fenced claims, uncertain outcomes                          |
 | Автоматизация выпуска          | ZIP/manifest validation, exact digest/policy, operator API и Ruby CLI, immutable runtime inventory                                     |
-| Поддержка внешних студий       | Stable error codes + fix, independent simulator, diagnostic report и EN partner update                                                 |
+| Поддержка внешних студий       | Real HTTP credential rotation, stable error codes, lease fencing, safe diagnostic и EN partner update                                                 |
 | Production investigation       | HTTP vs worker health, real delivered alerts, replay-safe recovery, fresh-VM DB+files restore, mixed-load admission, user-deadline SLI |
 | Docker / Kubernetes            | Native production parity, strict image scan, live Helm rollback, real NetworkPolicy denies, readiness/liveness                         |
 | IaC                            | Actual Terraform apply/drift/repair; Ubuntu Ansible second apply changed=0; signed rollout/rollback                                    |
@@ -19,7 +19,7 @@
 
 GitHub repository опубликован; verify/build/scan/GHCR имеют реальные successful runs. Для Ubuntu convergence/deploy/rollback и registry Kubernetes выбран временный hosted stand, который не требует покупки VPS или настройки SSH пользователем. Выполненные outcomes публикуются в execution-status.md; конфигурация не считается acceptance result.
 
-[Reliability acceptance](reliability-acceptance-oct09.md) теперь включает mixed load, failed recovery, loss of source VM и independent Windows backup/key custody. Production SLO/HA/PITR, continuous backup и provider-wide failover требуют отдельной среды и требований. Hosted one-node cluster — реальный rollout/network-policy lab с явно указанными ограничениями.
+[Текущая приёмка](partner-support-acceptance-oct09.md) повторила инфраструктуру на release 3d849af. Историческая [Reliability acceptance](reliability-acceptance-oct09.md) включает mixed load, failed recovery, loss of source VM и independent Windows backup/key custody. Production SLO/HA/PITR, continuous backup и provider-wide failover требуют отдельной среды и требований. Hosted one-node cluster — реальный rollout/network-policy lab с явно указанными ограничениями.
 
 ## Подготовка кандидата
 

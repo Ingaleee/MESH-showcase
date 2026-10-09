@@ -23,9 +23,9 @@ The project's central demonstration is external studio package â†’ validation â†
 
 The audit found two application-level support gaps: missing local credentials made the diagnostic itself fail; partner 401/403 was reduced to a generic HTTP status failure. DeploymentDiagnostic now preserves local history and reports configuration availability separately. The HTTP adapter translates authentication rejection into a domain integration code while retaining unknown.
 
-The read model and OpenAPI distinguish unavailable fingerprint (null) from a changed fingerprint (false). The UI offers a factual English partner update and explicitly says that this diagnostic did not query the partner. Closed failures do not receive a resume instruction. Inputs with empty, oversized or header-breaking credentials fail before network I/O.
+The read model and OpenAPI distinguish unavailable fingerprint (null) from a changed fingerprint (false). The UI offers a factual English partner update and explicitly says that this diagnostic did not query the partner. Closed failures do not receive a resume instruction. Inputs with missing, empty, oversized, header-breaking or invalid-encoding credentials fail before network I/O.
 
-The live disposable-peer drill has passed locally: one remote POST, one remote result through timeout, key rotation, process replacement, auth rejection, stale worker completion, unavailable peer and 404. GitHub acceptance and its archived exact source/report hashes are recorded after the current checks complete. Existing infrastructure evidence stays bound to its original release f15af36; it is not silently attributed to these new source changes.
+The live disposable-peer drill passed in hosted CI at release 3d849af: one remote POST, one remote result through timeout, key rotation, process replacement, auth rejection, stale worker completion, unavailable peer and 404. The same signed/scanned release passed Ubuntu, Kubernetes and separate-VM recovery. [Current acceptance and raw reports](partner-support-acceptance-oct09.md) bind these results to exact source and digests. Earlier f15af36 evidence remains a separate historical record.
 
 ## What counts as ready to show
 

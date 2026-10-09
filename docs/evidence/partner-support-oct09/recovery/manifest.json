@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "recovery",
+  "recorded_at": "2026-10-09T07:25:39.522560+00:00",
+  "workflow_run": {
+    "id": 37898547328,
+    "name": "MESH fresh VM disaster recovery",
+    "head_sha": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+    "path": ".github/workflows/recovery.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T07:21:27Z",
+    "updated_at": "2026-10-09T07:25:06Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37898547328"
+  },
+  "artifact": {
+    "id": 11601597460,
+    "name": "recovery-target-evidence-37898547328",
+    "size_in_bytes": 25274,
+    "digest": "sha256:1d777a4875b79cabf7313d03e121066eab1f03b77797bb34924df7a2c99e3e69",
+    "downloaded_archive_sha256": "1d777a4875b79cabf7313d03e121066eab1f03b77797bb34924df7a2c99e3e69",
+    "expired": false
+  },
+  "reports": [
+    {
+      "file": "restored.json",
+      "sha256": "2adebff480cf91794b9ba7e09d80204ff16996cf747aadc927c77e0502cb1fbf",
+      "artifact_id": 11601597460
+    },
+    {
+      "file": "vm-isolation.json",
+      "sha256": "a3db3e5f1ec4e5a0e549598f2e3fb9afd8d1f6f6e9e28ec2ec5b884300eabdfc",
+      "artifact_id": 11601597460
+    },
+    {
+      "file": "attestation-api.json",
+      "sha256": "5e8bb8c3b64f554dd46e3ec3ef0021a7f9fc369114e5da255b33aea2611c56e9",
+      "artifact_id": 11601597460
+    },
+    {
+      "file": "attestation-clamav.json",
+      "sha256": "89074557d5123092e945225889d6fa7ddd361a24ab5c4b8601c7995baa204800",
+      "artifact_id": 11601597460
+    },
+    {
+      "file": "attestation-postgres.json",
+      "sha256": "73e7b89d1facce52624d72a9a26eef19aa8a2e1ccef8e5e67bbc99c2d9906b7c",
+      "artifact_id": 11601597460
+    },
+    {
+      "file": "source.json",
+      "sha256": "8a61877a7dbbe43a01e16458264920713876b08054139317ec0418cf15cd6f36",
+      "artifact_id": 11601158618
+    },
+    {
+      "file": "independent-custody-proof.json",
+      "sha256": "3a3f16ee4531e37c6385ff2a3784a18430312d449f18bc6d3eb137adc31c72d8",
+      "origin": "Windows local verification of the exact encrypted source artifact"
+    }
+  ],
+  "related_artifacts": [
+    {
+      "id": 11601158618,
+      "name": "encrypted-recovery-37898547328",
+      "size_in_bytes": 250934,
+      "digest": "sha256:ee4bb1ecf4774d82c104343985f6122f661ee69bc3e8c2d45ab49e34fe0500d8",
+      "downloaded_archive_sha256": "ee4bb1ecf4774d82c104343985f6122f661ee69bc3e8c2d45ab49e34fe0500d8",
+      "expired": false
+    }
+  ]
+}

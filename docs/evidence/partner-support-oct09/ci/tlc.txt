@@ -1,0 +1,38 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 110 and seed -804613171177901734 with 1 worker on 4 cores with 228MB heap and 64MB offheap memory [pid: 1] (Linux 6.17.0-1022-azure amd64, Eclipse Adoptium 21.0.12.1 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /workspace/specs/PayoutRecovery.tla
+Parsing file /tmp/Naturals.tla
+Semantic processing of module Naturals
+Semantic processing of module PayoutRecovery
+Starting... (2026-10-09 06:17:48)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-10-09 06:17:48.
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 1.5E-17
+33 states generated, 18 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 8.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-09 06:17:48)
+Unable to find image 'eclipse-temurin:21-jre-alpine@sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555' locally
+docker.io/library/eclipse-temurin@sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555: Pulling from library/eclipse-temurin
+e2de96513ba9: Already exists
+8d3daccf082f: Pulling fs layer
+2242b49db976: Pulling fs layer
+b3405c83ad56: Pulling fs layer
+5abc2579d091: Pulling fs layer
+5abc2579d091: Waiting
+b3405c83ad56: Verifying Checksum
+b3405c83ad56: Download complete
+5abc2579d091: Verifying Checksum
+8d3daccf082f: Verifying Checksum
+8d3daccf082f: Download complete
+2242b49db976: Verifying Checksum
+2242b49db976: Download complete
+8d3daccf082f: Pull complete
+2242b49db976: Pull complete
+b3405c83ad56: Pull complete
+5abc2579d091: Pull complete
+Digest: sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555
+Status: Downloaded newer image for eclipse-temurin@sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555

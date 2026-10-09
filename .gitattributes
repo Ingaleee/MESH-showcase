@@ -9,3 +9,4 @@ Dockerfile* text eol=lf
 *.yml text eol=lf
 docs/evidence/acceptance-oct08/** -text
 docs/evidence/reliability-oct09/** -text
+docs/evidence/partner-support-oct09/** -text

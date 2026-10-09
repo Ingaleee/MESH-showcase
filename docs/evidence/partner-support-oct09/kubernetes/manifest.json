@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "kind": "kubernetes",
+  "recorded_at": "2026-10-09T07:25:44.056491+00:00",
+  "workflow_run": {
+    "id": 37898550160,
+    "name": "MESH current digest Kubernetes exercise",
+    "head_sha": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+    "path": ".github/workflows/kubernetes.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T07:21:29Z",
+    "updated_at": "2026-10-09T07:25:27Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37898550160"
+  },
+  "artifact": {
+    "id": 11601358351,
+    "name": "mesh-kubernetes-37898550160",
+    "size_in_bytes": 9389,
+    "digest": "sha256:8c6f1c190ecef59580ec3be4ad48e9c64233403f46fb45fb9ff72c8cc6a1fb5e",
+    "downloaded_archive_sha256": "8c6f1c190ecef59580ec3be4ad48e9c64233403f46fb45fb9ff72c8cc6a1fb5e",
+    "expired": false
+  },
+  "reports": [
+    {
+      "file": "summary.json",
+      "sha256": "0bad2e7fbe773d2f9d73fb789a7b6d68aa10e04fd6ac33c69831d935cf2b12cb",
+      "artifact_id": 11601358351
+    }
+  ],
+  "related_artifacts": []
+}

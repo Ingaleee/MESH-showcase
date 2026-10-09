@@ -1,0 +1,20 @@
+[
+  {
+    "viewport": 1440,
+    "scroll_width": 1440,
+    "fonts": "loaded",
+    "overflowing_elements": []
+  },
+  {
+    "viewport": 1024,
+    "scroll_width": 1024,
+    "fonts": "loaded",
+    "overflowing_elements": []
+  },
+  {
+    "viewport": 390,
+    "scroll_width": 390,
+    "fonts": "loaded",
+    "overflowing_elements": []
+  }
+]

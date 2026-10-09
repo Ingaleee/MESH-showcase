@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-09T07:25:19.153Z",
+  "release_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "images": {
+    "api": "ghcr.io/ingaleee/mesh-showcase-api@sha256:24830bdb7e046e3873cf036dff7800d4617c1d38b6ac0dae7b6807ee3115c9fe",
+    "web": "ghcr.io/ingaleee/mesh-showcase-web@sha256:7d2c2f52055a58af4cad02c37feffd68493e2089287a1cdc113ac6e9786c0bd5",
+    "postgres": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:cf930afeba966ed9b08a6120ee47361bdfb21e21f894dcecdc349ead45a44102",
+    "clamav": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:da3339f99364a40822af338893ba7eb574443535e7846a5855d370433b523c08",
+    "caddy": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+  },
+  "terraform_drift_detected_and_repaired": true,
+  "migration_completed_before_application": true,
+  "positive_api_and_db": true,
+  "untrusted_ingress_denied": true,
+  "unapproved_egress_denied_with_positive_control": true,
+  "worker_50_once_only_effects": true,
+  "database_outage_ready_503_live_200": true,
+  "outage_preserved_api_uids_and_restarts": true,
+  "alpine_rollout": true,
+  "broken_upgrade_rejected": true,
+  "registry_digest_restored": true,
+  "scope": "One K3s node in an ephemeral hosted Ubuntu VM. No physical HA, offsite recovery or Publishing partner/scanner workload in this cluster."
+}

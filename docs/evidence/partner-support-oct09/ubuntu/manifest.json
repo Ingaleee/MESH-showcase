@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "ubuntu",
+  "recorded_at": "2026-10-09T07:34:05.872627+00:00",
+  "workflow_run": {
+    "id": 37898543604,
+    "name": "MESH isolated Ubuntu deployment",
+    "head_sha": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+    "path": ".github/workflows/deploy.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T07:21:25Z",
+    "updated_at": "2026-10-09T07:33:50Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37898543604"
+  },
+  "artifact": {
+    "id": 11601748141,
+    "name": "mesh-deployment-37898543604",
+    "size_in_bytes": 142719,
+    "digest": "sha256:235d709c6b13868ec105ad272bde3582c72d040a929fb174a6feed2c60177b99",
+    "downloaded_archive_sha256": "235d709c6b13868ec105ad272bde3582c72d040a929fb174a6feed2c60177b99",
+    "expired": false
+  },
+  "reports": [
+    {
+      "file": "ansible-first.log",
+      "sha256": "17c8ee8368b48695e7297e923a9fd6f4efdcfc2fe34017b1e966c5f5bf740b1a",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "ansible-second.log",
+      "sha256": "2185b0492f83bc98d01043d906337dea5bd7503d5d3c13d5b16e0d0099e4b9c0",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "attestation-api.json",
+      "sha256": "5e8bb8c3b64f554dd46e3ec3ef0021a7f9fc369114e5da255b33aea2611c56e9",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "attestation-clamav.json",
+      "sha256": "89074557d5123092e945225889d6fa7ddd361a24ab5c4b8601c7995baa204800",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "attestation-postgres.json",
+      "sha256": "73e7b89d1facce52624d72a9a26eef19aa8a2e1ccef8e5e67bbc99c2d9906b7c",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "attestation-web.json",
+      "sha256": "04832b23450c7df5e18a2e5f90659e036e0806b524c15e6a019702ad39905564",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "business-probe.json",
+      "sha256": "f8fbb56a56d43fcbb533a860a72a6afb6492702d52d2a96ca45bbfc6b2d1ecca",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "crash-recovery.json",
+      "sha256": "47d3dd16e20b75ea62ef332e8c895fb7d35be4bb7896b7c4ae3f69c1b5b3eba2",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "mixed-load.json",
+      "sha256": "c50073fab940af2af10b3a1c520b7b48869b6c75bfe5a655c7a0daf66e78d0fa",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "runtime-and-rollback.json",
+      "sha256": "dca4802d2aeb5fbbc6b58946b4319f97b25b95892bb6216e96903f180f8ef3b4",
+      "artifact_id": 11601748141
+    },
+    {
+      "file": "tls-read-profile.json",
+      "sha256": "6427ab00118f69503e2e972ee41b0748219eeae2f71a6abff5a6eb21c1ed98b8",
+      "artifact_id": 11601748141
+    }
+  ],
+  "related_artifacts": []
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "workflow_run": {
+    "id": 37890030765,
+    "head_sha": "c845f52042a7b757f725c91cdd32996b6d3036a2",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37890030765",
+    "conclusion": "failure"
+  },
+  "artifact": {
+    "id": 11597809669,
+    "name": "mesh-evidence",
+    "digest": "sha256:0ee7b34f99b382248b90db9ba619a9abe3fc6899eaca94556b654bd64ccf42b2"
+  },
+  "downloaded_archive_sha256": "0ee7b34f99b382248b90db9ba619a9abe3fc6899eaca94556b654bd64ccf42b2",
+  "reports": [
+    {
+      "file": "layouts.json",
+      "sha256": "b53b661b823d17274ebb69a4839fb13068d770632222bab4b3a09b2b5dd5f5d0"
+    },
+    {
+      "file": "css-control.json",
+      "sha256": "cb0af0c0f3c5e1fc714c3f40064f5a34e53e1903a91ee11b41ff56e125bed80d",
+      "origin": "Scoped local CSS experiment; not whole compiled UI acceptance"
+    }
+  ],
+  "finding": "Unbroken diagnostic SHA-256 text overflowed the viewport. Full compiled browser gate rejected it; overflow-wrap: anywhere fixed the text. No width threshold was relaxed."
+}

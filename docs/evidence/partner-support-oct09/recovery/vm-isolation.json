@@ -1,0 +1,13 @@
+{
+  "source": {
+    "hostname": "runnervmmprz5",
+    "vm_uuid": "906272d8-5f56-4e2f-8754-b7694fc1754a",
+    "job": "source"
+  },
+  "target": {
+    "hostname": "runnervmmprz5",
+    "vm_uuid": "8259624b-6d2f-49ea-86f7-4d0af4045f3c",
+    "job": "target"
+  },
+  "source_job_completed": true
+}

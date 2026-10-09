@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-09T07:39:39.270862+00:00",
+  "environment": "Windows Docker Desktop; existing isolated showcase data",
+  "application_revision": "3d849af84c9afd8885f57ae7f6390c2d540361e4",
+  "web_image": "ghcr.io/ingaleee/mesh-showcase-web@sha256:7d2c2f52055a58af4cad02c37feffd68493e2089287a1cdc113ac6e9786c0bd5",
+  "scope": "One real Publishing responsive/accessibility scenario against the current compiled frontend and bind-mounted API. Full 13-scenario acceptance is the hosted CI run. Existing containers resumed after Docker Desktop restart; no claim of full cold-clone setup here.",
+  "reports": [
+    {
+      "file": "playwright.json",
+      "sha256": "d901225acbc11b8d68c96afac9dc9260bdbbcecbcf33da0885735a2987164c0b"
+    },
+    {
+      "file": "layouts.json",
+      "sha256": "6c0965a7b3b614ae19076bd1fc2d060daa58ba230950f954b2ff8995916ee960"
+    }
+  ]
+}
