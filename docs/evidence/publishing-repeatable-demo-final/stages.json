@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Docker readiness",
+    "exit_code": 0,
+    "elapsed_seconds": 0.776
+  },
+  {
+    "name": "Preserve and prepare partner credentials",
+    "exit_code": 0,
+    "elapsed_seconds": 0.074
+  },
+  {
+    "name": "Locked host dependencies",
+    "exit_code": 0,
+    "elapsed_seconds": 29.412
+  },
+  {
+    "name": "Build Ruby development environment",
+    "exit_code": 0,
+    "elapsed_seconds": 2.973
+  },
+  {
+    "name": "Start isolated PostgreSQL and real scanner",
+    "exit_code": 0,
+    "elapsed_seconds": 2.094
+  },
+  {
+    "name": "Install locked Ruby dependencies",
+    "exit_code": 0,
+    "elapsed_seconds": 5.151
+  },
+  {
+    "name": "Apply showcase migrations",
+    "exit_code": 0,
+    "elapsed_seconds": 32.158
+  },
+  {
+    "name": "Prepare repeatable synthetic accounts and projects",
+    "exit_code": 0,
+    "elapsed_seconds": 18.9
+  },
+  {
+    "name": "Build independent partner",
+    "exit_code": 0,
+    "elapsed_seconds": 3.956
+  },
+  {
+    "name": "Build production frontend",
+    "exit_code": 0,
+    "elapsed_seconds": 80.056
+  },
+  {
+    "name": "Record immutable preview image",
+    "exit_code": 0,
+    "elapsed_seconds": 0.243
+  },
+  {
+    "name": "Start bounded preview and ordinary workers",
+    "exit_code": 0,
+    "elapsed_seconds": 26.676
+  },
+  {
+    "name": "Real scanner readiness",
+    "exit_code": 0,
+    "elapsed_seconds": 20.61
+  },
+  {
+    "name": "Provision real telemetry",
+    "exit_code": 0,
+    "elapsed_seconds": 0.112
+  },
+  {
+    "name": "Start dashboard and authenticated internal alerts",
+    "exit_code": 0,
+    "elapsed_seconds": 5.782
+  },
+  {
+    "name": "Partner validation, uncertain outcome, lookup and rollback",
+    "exit_code": 0,
+    "elapsed_seconds": 76.245
+  },
+  {
+    "name": "Market workflow and Publishing browser checks",
+    "exit_code": 0,
+    "elapsed_seconds": 49.471
+  }
+]

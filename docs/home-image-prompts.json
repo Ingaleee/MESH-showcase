@@ -1,0 +1,46 @@
+{
+  "generator": "Built-in imagegen",
+  "purpose": "Illustrative artwork and fictional portraits for the MESH demo homepage. These images are not actual creator portfolios or uploaded account photos.",
+  "assets": [
+    {
+      "file": "apps/web/public/images/home/hero-portrait.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial portrait for the hero of MESH, a premium creative marketplace. Generate one portrait photograph, not a website or UI. An adult female creative director, age 28, short tousled dark brown hair, black sleeveless contemporary top, expressive confident gaze turned slightly upward to the left. Tight bust portrait, three-quarter view, wind catching the hair, shoulders visible. Warm architectural plaster studio background with a single soft diagonal sunlight shadow, ivory, taupe and charcoal palette. Beautiful natural skin texture, modern independent magazine art direction, elegant and human, candid yet carefully composed. Frame 4:5 vertical, face upper center, clean side margins so it works inside a tilted card. Soft analog film grain, warm natural sunlight, editorial 85mm lens. No text, logos, icons, watermarks, borders or UI."
+    },
+    {
+      "file": "apps/web/public/images/home/category-texts.png",
+      "prompt": "Use case: stylized-concept. Asset type: photographic art cover for a premium creative marketplace category Writing. One beautiful abstract sculptural composition of ivory paper ribbons floating gently in a warm off-white studio, architectural folded sheets, elegant flowing layered curves, subtle fibrous paper texture, soft daylight and shadows, high-end Swiss editorial design, restrained cream beige palette, composition in upper two-thirds with simple ivory negative space at bottom for HTML text, vertical 4:5 framing. Photoreal 3D material study, refined, tactile. No typography, logos, watermark, borders, UI or text."
+    },
+    {
+      "file": "apps/web/public/images/home/category-design.png",
+      "prompt": "Use case: stylized-concept. Asset type: photographic art cover for a premium creative marketplace category Design. A complex elegant folded translucent violet glass ribbon sculpture suspended in a near-black studio, intersecting thin amethyst sheets and curved smoked glass surfaces, soft purple rim lights and reflections, refined material study, art-directed modern luxury editorial quality, not neon sci-fi. Portrait 4:5 framing, sculpture concentrated in upper two-thirds, dark quiet negative space at bottom for HTML text. Dramatic charcoal and lavender palette, crisp highlights, subtle grain. No typography, logos, watermark, borders, UI or text."
+    },
+    {
+      "file": "apps/web/public/images/home/category-video.png",
+      "prompt": "Use case: product-mockup. Asset type: photographic cover for a premium creative marketplace category Video. A spectacular close-up of a single professional cinema camera lens, brushed silver metal outer rings and black optical glass, lens floating diagonally in a soft ivory studio with subtle translucent glass movement streaks, editorial lighting, modern restrained high-end product photography. Portrait 4:5, lens in upper two thirds, warm light gray quiet negative space at bottom for HTML category label. Realistic optics and fine machining details, cream silver black palette. No brands, lettering, text, logos, watermark, border or UI."
+    },
+    {
+      "file": "apps/web/public/images/home/category-development.png",
+      "prompt": "Use case: product-mockup. Asset type: creative marketplace Development category cover. Premium editorial macro photograph of three black smartphones at elegant diagonal angles on a near-black desk. Screens show a beautifully refined abstract dark-mode productivity interface with tiny orange accent controls, calendar grids, subtle cards and hairline graph strokes, all text illegible and no actual brand. Realistic glass reflections, softly lit edges, charcoal black and restrained warm orange palette, high-end digital product design mood. Vertical 4:5 frame, devices concentrated in upper two-thirds, quiet dark bottom for HTML label. No logos, no readable text, no watermark, no border or website UI."
+    },
+    {
+      "file": "apps/web/public/images/home/category-marketing.png",
+      "prompt": "Use case: stylized-concept. Asset type: premium creative marketplace Marketing category cover. Architectural composition of folded sculptural ivory planes and translucent lilac acrylic fins, rising upwards in an elegant rhythmic arrangement, soft studio daylight, sharp detailed edges, tactile cream plaster floor, warm off-white background, restrained beautiful lavender and beige palette, high-end art directed 3D still life representing ideas growing. Portrait 4:5, main structure in upper two-thirds, light negative space bottom for HTML label. No text, logos, watermark, borders, icons or UI."
+    },
+    {
+      "file": "apps/web/public/images/home/mountain-film.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: cinematic portfolio-style cover used decoratively on a creative marketplace. An astonishing alpine mountain landscape, sharp rugged peaks and a clear lake in the foreground, tiny evergreen forest, rich but restrained natural color grading, warm late-afternoon sunlight and atmospheric soft clouds, muted blue and taupe stone, shot like a premium independent travel documentary still on medium format film. Landscape 3:2 framing, detailed realistic geology and subtle film grain. No people, text, logos, icons, watermark, borders or UI."
+    },
+    {
+      "file": "apps/web/public/images/home/creative-horizon.png",
+      "prompt": "Use case: stylized-concept. Asset type: full-width footer background for premium creative marketplace MESH. Wide cinematic surreal landscape of rough dark basalt rock terraces on the RIGHT half, one tiny human silhouette on a rock gazing at a large translucent luminous violet glass sphere and elegant orbital light arcs against charcoal smoky sky. Beautiful restrained purple glow, dramatic atmosphere, photorealistic 3D fine textures, luxury creative campaign art direction. Very wide 3:1 horizontal framing. LEFT 55 percent intentionally near-black empty soft atmospheric space to put live HTML heading and buttons over, no objects there. Main rocks sphere human only on right. No words, typography, watermark, UI, logos or borders."
+    },
+    {
+      "file": "apps/web/public/images/home/creator-portraits.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: ONE four-panel portrait strip for illustrative demo avatars on a creative marketplace. A single wide 4:1 image split into four equally wide seamlessly aligned square photo panels, no gutters. Each panel is a close head-and-shoulders portrait with full head centered. Left to right: 1 adult woman age 29 with tousled dark bob black top, warm ivory background; 2 adult man age 32 with shoulder-length dark hair and slight stubble black shirt, warm gray background; 3 adult woman age 30 with shoulder-length brown wavy hair beige top, cream background; 4 adult man age 31 with short curly dark hair light stubble black top, ivory background. Four DIFFERENT fictional people. Independent creative professional energy, confident relaxed gaze, natural realistic skin texture, warm magazine editorial soft window light, analogous neutral palette. All faces occupy similar scale and align at same eye line. This is one portrait-strip asset, no text, logos, watermarks, border or UI."
+    },
+    {
+      "file": "apps/web/public/images/home/brand-still-life.png",
+      "prompt": "Use case: product-mockup. Asset type: landscape portfolio-style decorative project cover for a premium creative marketplace. A beautifully art-directed unbranded contemporary coffee and ceramics identity still life: ivory matte ceramic cup, taupe cylindrical coffee tin, textured folded cream stationery, small sculptural beige vase, all arranged on a stone plinth in a warm architectural studio. Soft diagonal window light, precise shadows, elegant monochrome off-white beige warm gray, analog grain, luxury independent design studio quality. Horizontal 3:2 framing. No branding, no text, no logos, no watermark, no website UI or borders."
+    }
+  ]
+}

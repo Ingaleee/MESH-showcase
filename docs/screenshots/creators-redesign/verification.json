@@ -1,0 +1,117 @@
+{
+  "checkedAt": "2026-10-07T10:31:30.614Z",
+  "scope": "Creator directory redesign. Older project evidence is retained separately.",
+  "checks": {
+    "playwright": {
+      "passed": 5,
+      "unexpected": 0,
+      "durationMs": 183594.643
+    },
+    "rails": {
+      "examples": 39,
+      "failures": 0,
+      "evidence": "Full RSpec suite executed in dedicated mesh_test database; result confirmed in the task tool output."
+    },
+    "additionalActions": 10,
+    "clientProjectForms": 4,
+    "viewportWidths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "production": true,
+    "sourceFiles": 20
+  },
+  "productionImage": "mesh-web:creators-verification",
+  "sources": [
+    {
+      "file": "apps/web/src/app/creators/page.tsx",
+      "sha256": "d2b297f3e0d8001fedf2c7cbed2f88bc8c56fa33d140d2ddcb4e81fa07c560d4"
+    },
+    {
+      "file": "apps/web/src/app/creators/creators.css",
+      "sha256": "0538b8b9759bc34fd9172a1fc4e1d32c78f01ef02a7a3227fe9e3b5f64ed6b62"
+    },
+    {
+      "file": "apps/web/src/app/creators/layout.tsx",
+      "sha256": "5ba1a11603a1e5c0a12e63747244eb2f9817a595cd0e0c1cb126bf27a28282a0"
+    },
+    {
+      "file": "apps/web/src/components/creators/card.tsx",
+      "sha256": "974800541152dfed7692a98bb8dc9b2dd81fc03fb99bb9c75e59afe7b8d7a879"
+    },
+    {
+      "file": "apps/web/src/components/creators/portrait.tsx",
+      "sha256": "4091b02c8c8b736c438e5e3125bfce72d1f8fc66ac5ec1d317c0a2b59e9b6b02"
+    },
+    {
+      "file": "apps/web/src/components/creators/profile-dialog.tsx",
+      "sha256": "601a7fa49852cad79199da57976b9f2c9cbaa74f17f066788ff3efc2c5dd3b09"
+    },
+    {
+      "file": "apps/web/src/components/creators/profile-editor.tsx",
+      "sha256": "e099646b134b7f3ef43d0aa04182c44c712b7fa38fb772b1160afc7a153e9a59"
+    },
+    {
+      "file": "apps/web/src/components/home/editorial-avatar.tsx",
+      "sha256": "ff778f890f88e5c999c512523b15a1106ce20a8aacce2ca6661a4b788577de8f"
+    },
+    {
+      "file": "apps/web/src/components/shell.tsx",
+      "sha256": "22d47f616d3cdad8cc7178bec01ca1945fe316da9344f97355b7f29f5f66cc60"
+    },
+    {
+      "file": "apps/web/src/components/modal.tsx",
+      "sha256": "374fcdfc35436e95f617a43cb51097f1a897baf95ad8741c3294b06d7529bad1"
+    },
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "sha256": "d198fe092864850822bc6c5a5ef97362f9c3974423d9c724b0c12f77cf6395b1"
+    },
+    {
+      "file": "apps/web/src/app/home.css",
+      "sha256": "d826487ac2503a916ad1d2d59b86ced3151695e452d7e2414b7896d8739c03d0"
+    },
+    {
+      "file": "apps/web/src/lib/creator-content.ts",
+      "sha256": "474dad5f5a15bd6b27587ebc1cf15cb912af212de74dfffaaf44d9156e8f2a63"
+    },
+    {
+      "file": "apps/api/packs/talent/app/services/talent/directory.rb",
+      "sha256": "aad7cda1d0f4b6fc9e88d02f32851c2b96a92f89e72e3ac9ab72d77095884baa"
+    },
+    {
+      "file": "apps/api/spec/requests/creators_directory_spec.rb",
+      "sha256": "b3c9edf94dc89f6c4a2e5156a855a07be7bf961eb3e5d5c04daa9e57304fbec2"
+    },
+    {
+      "file": "apps/web/public/images/creators/portrait-duo.png",
+      "sha256": "39ba9049ac13a741024b98f05a2d0a3d78e58736868af57815539335529fdf41"
+    },
+    {
+      "file": "docs/creator-image-prompts.json",
+      "sha256": "40cc4b2cb1c9eb0d3fd8a4e8dc18324d00f3ad9355115f37cb3c878471e025c9"
+    },
+    {
+      "file": "tests/e2e/creators.spec.ts",
+      "sha256": "11fab007199cad29e349cff56a05c5f59d55213168dedd6954b414ad2b8b35b8"
+    },
+    {
+      "file": "tests/e2e/accessibility.spec.ts",
+      "sha256": "b71d0c285f78621e522673f2a5a99a51156be753d19d95ee3445ea5c9c4dc3de"
+    },
+    {
+      "file": "tests/e2e/marketplace.spec.ts",
+      "sha256": "026f7d9de41c049151af8556165a1b5e0105b1f0a4d83d4d13ceaa9bdb507991"
+    }
+  ],
+  "reports": [
+    "browser-check.json",
+    "interactions.json",
+    "project-actions.json",
+    "production-check.json",
+    "../../evidence/playwright.json"
+  ]
+}

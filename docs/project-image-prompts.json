@@ -1,0 +1,17 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "path": "apps/web/public/images/projects/coffee-identity.png",
+      "prompt": "Use case: product-mockup. Asset type: editorial project hero for MESH, coffee brand identity example. Create a premium realistic vertical 3:4 editorial photograph of a warm ivory takeaway coffee cup with a matte black lid in the foreground, subtle black serif wordmark exactly 'NORA' on cup, resting at a slight angle on warm cream plaster blocks. Behind it a matte black typography card with ONLY the simple text 'Good Coffee. Better Days.' and a small natural branch with olive leaves. A second ivory packaging box in the background. Tactile uncoated paper, soft afternoon sunlight, natural shadows, elegant understated contemporary cafe identity, editorial portfolio photography. Warm ivory, beige, black, subtle olive palette. Fill the frame with materials, clean sophisticated composition, shallow depth of field, no humans, no UI, no watermark, no extra decorative writing. Fictional brand demonstration."
+    },
+    {
+      "path": "apps/web/public/images/projects/cafe-space.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial inspiration image for a fictional coffee branding project on MESH. Premium vertical 3:4 architecture photograph of a calm contemporary small coffee shop, warm cream plaster, oak round table, sculptural ivory ceramic cup and vase with a few olive branches, large window throwing afternoon sun and soft shadows, warm dark brown wood accents, inviting restrained atmosphere, tactile linen and travertine details. Architectural magazine photography, realistic, no people, no logos, no text, no watermark, no UI. Warm white, sand, brown and black palette. A beautiful place to linger, same visual family as warm ivory and black NORA coffee identity."
+    },
+    {
+      "path": "apps/web/public/images/projects/brand-paper.png",
+      "prompt": "Use case: product-mockup. Asset type: editorial inspiration for a fictional cafe identity on MESH. Create a premium vertical 3:4 top-down photographic flatlay of cream uncoated stationery, a minimal black rectangular brand guide booklet, folded warm ivory paper coffee packaging and two small cream business cards, scattered carefully on warm travertine with soft side sunlight. The ONLY readable word on one ivory card and paper bag is 'NORA' in an elegant restrained black serif. No other writing, no watermark. A small black abstract simple line drawing like a curved leaf on a card. Tactile paper textures, editorial branding case study photography, sophisticated warm cream and black palette, realistic natural shadows. No people, no UI."
+    }
+  ]
+}

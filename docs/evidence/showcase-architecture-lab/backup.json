@@ -1,0 +1,35 @@
+{
+  "database_counts": {
+    "identity_accounts": 20001,
+    "talent_profiles": 20000,
+    "marketplace_projects": 100001,
+    "marketplace_proposals": 200001,
+    "engagements_engagements": 1,
+    "engagements_submissions": 1,
+    "engagements_work_files": 2,
+    "active_storage_blobs": 2,
+    "active_storage_attachments": 2,
+    "platform_outbox_events": 57,
+    "platform_deliveries": 57,
+    "notifications_notifications": 56
+  },
+  "blobs": [
+    {
+      "key": "21lm9evaxi0qj0mm4pb985a78ci6",
+      "size": 17014,
+      "checksum": "JsFRCB5yZE/C9ImBQPd+0g==",
+      "sha256": "f93fe3b57253a1f64d7d359b8c82e256b0ea77070c50e3b6709266227d79498f"
+    },
+    {
+      "key": "p5b62mac427t09fe607pm65yswtc",
+      "size": 38014,
+      "checksum": "CxEomnYGEYHMYeCWOk6F4g==",
+      "sha256": "2515445478e5328b24353b6d29cb38e6df73f04ff6003695e891cbec19d740b9"
+    }
+  ],
+  "dump_sha256": "de4df9e58ad9e7be9a7c256bf30438f30806b4f5ffd8a9376d782914bdf8a47d",
+  "dump_bytes": 14822792,
+  "backup_seconds": 6.87,
+  "consistency": "Quiescent isolated writers; queue is deliberately excluded and rebuilt empty. Not an online multi-database snapshot.",
+  "checked_at": "2026-10-08T10:58:48Z"
+}

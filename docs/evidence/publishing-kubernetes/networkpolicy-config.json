@@ -1,0 +1,146 @@
+{
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "NetworkPolicy",
+    "metadata": {
+        "annotations": {
+            "meta.helm.sh/release-name": "mesh",
+            "meta.helm.sh/release-namespace": "mesh-showcase"
+        },
+        "creationTimestamp": "2026-10-08T13:47:01Z",
+        "generation": 1,
+        "labels": {
+            "app.kubernetes.io/managed-by": "Helm"
+        },
+        "name": "mesh",
+        "namespace": "mesh-showcase",
+        "resourceVersion": "562",
+        "uid": "f62a369b-4323-49bd-b89e-e5cc61f40b37"
+    },
+    "spec": {
+        "egress": [
+            {
+                "ports": [
+                    {
+                        "port": 3000,
+                        "protocol": "TCP"
+                    }
+                ],
+                "to": [
+                    {
+                        "podSelector": {
+                            "matchLabels": {
+                                "app": "mesh"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "ports": [
+                    {
+                        "port": 53,
+                        "protocol": "UDP"
+                    },
+                    {
+                        "port": 53,
+                        "protocol": "TCP"
+                    }
+                ],
+                "to": [
+                    {
+                        "namespaceSelector": {
+                            "matchLabels": {
+                                "kubernetes.io/metadata.name": "kube-system"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "ports": [
+                    {
+                        "port": 5432,
+                        "protocol": "TCP"
+                    },
+                    {
+                        "port": 3102,
+                        "protocol": "TCP"
+                    },
+                    {
+                        "port": 3310,
+                        "protocol": "TCP"
+                    }
+                ],
+                "to": [
+                    {
+                        "podSelector": {
+                            "matchLabels": {
+                                "mesh.showcase/dependency": "true"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "ports": [
+                    {
+                        "port": 5432,
+                        "protocol": "TCP"
+                    }
+                ],
+                "to": [
+                    {
+                        "ipBlock": {
+                            "cidr": "172.25.0.2/32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "ingress": [
+            {
+                "from": [
+                    {
+                        "namespaceSelector": {
+                            "matchLabels": {
+                                "kubernetes.io/metadata.name": "ingress-nginx"
+                            }
+                        }
+                    }
+                ],
+                "ports": [
+                    {
+                        "port": 3000,
+                        "protocol": "TCP"
+                    }
+                ]
+            },
+            {
+                "from": [
+                    {
+                        "podSelector": {
+                            "matchLabels": {
+                                "app": "mesh"
+                            }
+                        }
+                    }
+                ],
+                "ports": [
+                    {
+                        "port": 3000,
+                        "protocol": "TCP"
+                    }
+                ]
+            }
+        ],
+        "podSelector": {
+            "matchLabels": {
+                "app": "mesh"
+            }
+        },
+        "policyTypes": [
+            "Ingress",
+            "Egress"
+        ]
+    }
+}

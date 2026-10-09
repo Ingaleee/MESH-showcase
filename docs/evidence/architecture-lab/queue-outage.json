@@ -1,0 +1,10 @@
+{
+  "unavailable_snapshot": {
+    "available": false
+  },
+  "durable_intent_preserved": true,
+  "state_after": "processed",
+  "notifications": 1,
+  "failure": "An isolated producer connects to a closed PostgreSQL port; the shared PostgreSQL server stays running.",
+  "checked_at": "2026-10-08T00:32:38Z"
+}
