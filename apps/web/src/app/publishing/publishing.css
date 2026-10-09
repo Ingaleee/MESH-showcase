@@ -367,6 +367,7 @@
   margin: 12px 0;
 }
 .pub-diagnostic p {
+  overflow-wrap: anywhere;
   font-size: 12px;
   line-height: 1.6;
   color: #736286;
