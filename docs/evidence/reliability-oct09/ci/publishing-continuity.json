@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-09T01:25:37Z",
+  "schema_version": 1,
+  "environment": "isolated Docker Desktop",
+  "partner_publish_requests_before_recovery": 5,
+  "partner_publish_requests_after_recovery": 5,
+  "primary_tables_verified": 38,
+  "queue_tables_verified": 15,
+  "private_objects_verified": 13,
+  "private_bytes": 22193484,
+  "private_http_artifact_verified": true,
+  "restored_pending_reconciled": true,
+  "remote_identity_unchanged": true,
+  "replay_preserved_active": true,
+  "wrong_key_denied": true,
+  "ciphertext_corruption_denied": true,
+  "encrypted_backup_sha256": "378ad811f3f3c7e41de7b927fd9c460c6827e4639e728837663f03d092fd2512",
+  "elapsed_seconds": 5.372,
+  "backup_key_path": "/workspace/.cache/recovery-keys/6613cad22797.key",
+  "encrypted_backup_path": "/workspace/.cache/continuity/6613cad22797/snapshot.meshbak",
+  "rpo": "Quiescent snapshot of primary and queue; all local writers stopped.",
+  "scope": "Two newly created databases and a clean private-file directory on the same PostgreSQL host. Independent partner process remains live. No whole-host/offsite disaster claim."
+}

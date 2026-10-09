@@ -14,6 +14,9 @@ for (const kind of kinds) {
     manifest.workflow_run.html_url,
     "https://github.com/Ingaleee/MESH-showcase/actions/runs/" + manifest.workflow_run.id,
   );
+  for (const artifact of [manifest.artifact, ...(manifest.related_artifacts ?? [])]) {
+    assert.equal("sha256:" + artifact.downloaded_archive_sha256, artifact.digest);
+  }
   const files = {};
   for (const entry of manifest.reports) {
     assert.equal(path.basename(entry.file), entry.file);
@@ -28,6 +31,9 @@ for (const kind of kinds) {
   accepted[kind] = { manifest, files };
 }
 const release = accepted.release.files["release.json"];
+const ciContext = accepted.ci.files["context.json"];
+assert.equal(ciContext.revision, release.revision);
+assert.equal(Number(ciContext.run_id), accepted.ci.manifest.workflow_run.id);
 for (const kind of ["ci", "release"])
   assert.equal(accepted[kind].manifest.workflow_run.head_sha, release.revision);
 for (const file of ["rspec.json", "rspec-native.json"]) {
@@ -79,7 +85,8 @@ for (const flag of [
   assert.equal(crash[flag], true);
 const restored = accepted.recovery.files["restored.json"];
 assert.equal(restored.source_revision, release.revision);
-assert.ok(restored.rto_ms <= restored.rto_target_ms);
+assert.equal(restored.rto_target_ms, 900000);
+assert.ok(restored.rto_ms > 0 && restored.rto_ms <= restored.rto_target_ms);
 assert.equal(restored.external_post_count_before, restored.external_post_count_after);
 for (const flag of [
   "restored_pending_reconciled",
@@ -104,12 +111,28 @@ for (const flag of ["wrong_key", "truncated", "tampered", "missing_object"])
   assert.equal(restored.negative_controls[flag], true);
 const isolation = accepted.recovery.files["vm-isolation.json"];
 assert.notEqual(isolation.source.vm_uuid, isolation.target.vm_uuid);
+assert.equal(isolation.source_job_completed, true);
 const custody = accepted.recovery.files["independent-custody-proof.json"];
 assert.equal(custody.github_api_used_for_verification, false);
 assert.equal(custody.key_read_from_windows_credential_manager, true);
 assert.equal(custody.only_encrypted_backup_persisted, true);
 assert.equal(custody.inventories_verified.length, 2);
 for (const row of custody.inventories_verified) assert.equal(row.source_revision, release.revision);
+const sourceBackup = accepted.recovery.files["source.json"];
+assert.equal(sourceBackup.source_revision, release.revision);
+assert.equal(Number(sourceBackup.run_id), accepted.recovery.manifest.workflow_run.id);
+assert.equal(sourceBackup.snapshot_primary_tables, restored.primary_tables_verified);
+assert.equal(sourceBackup.snapshot_queue_tables, restored.queue_tables_verified);
+assert.equal(sourceBackup.private_objects, restored.private_objects_verified);
+assert.equal(sourceBackup.private_bytes, restored.private_bytes_verified);
+assert.equal(
+  custody.inventories_verified.find((row) => row.kind === "application").archive_sha256,
+  sourceBackup.application_sha256,
+);
+const tls = accepted.ubuntu.files["tls-read-profile.json"];
+assert.equal(tls.errors + tls.rejected_arrivals, 0);
+assert.equal(tls.requests, tls.config.arrival_rate_per_second * tls.config.duration_seconds);
+assert.ok(tls.p95_ms <= tls.config.maximum_read_p95_ms);
 const kube = accepted.kubernetes.files["summary.json"];
 assert.equal(kube.release_revision, release.revision);
 for (const flag of [

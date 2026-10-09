@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "release",
+  "recorded_at": "2026-10-09T01:41:37.969450+00:00",
+  "workflow_run": {
+    "id": 37869324980,
+    "name": "MESH image release",
+    "head_sha": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+    "path": ".github/workflows/release.yml",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T01:20:46Z",
+    "updated_at": "2026-10-09T01:41:03Z",
+    "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37869324980"
+  },
+  "artifact": {
+    "id": 11590845719,
+    "name": "mesh-release-f15af36d1d5a22b98fac1b466275096a5a0f1355",
+    "size_in_bytes": 617,
+    "digest": "sha256:aea526002e8a98eea2ffe64eceec26c466ccb95e6c77d0fabafa9b3214939407",
+    "downloaded_archive_sha256": "aea526002e8a98eea2ffe64eceec26c466ccb95e6c77d0fabafa9b3214939407",
+    "expired": false
+  },
+  "reports": [
+    {
+      "file": "release.json",
+      "sha256": "36e85ee06bb266fbe7f51d2877e75ceca5e7702512e8c0c093460fdf89790ba9",
+      "artifact_id": 11590845719
+    },
+    {
+      "file": "image-security.json",
+      "sha256": "8efd7630e4d767fb3f9fb38925c8a002264276e28dfc7701b7303502a29fcd0f",
+      "artifact_id": 11590870674
+    },
+    {
+      "file": "trivy-api.json",
+      "sha256": "317a46881a962b9354f5df1ade68f90418c9d31499d3535784c5ddf8110a9f3b",
+      "artifact_id": 11590870674
+    },
+    {
+      "file": "trivy-caddy.json",
+      "sha256": "c225315a9fb7c03df5ca07901aa90bc73290460fc38a93c8d71997bde110c09a",
+      "artifact_id": 11590870674
+    },
+    {
+      "file": "trivy-clamav.json",
+      "sha256": "11232a6888624802579671ecbb6585ea6fdbf6a84911a97fe8dab0f916c98681",
+      "artifact_id": 11590870674
+    },
+    {
+      "file": "trivy-postgres.json",
+      "sha256": "4f82f4d47e74d7c02f379f84dcc36d93aa491a457a729d4e25a98ea89c4cfe28",
+      "artifact_id": 11590870674
+    },
+    {
+      "file": "trivy-web.json",
+      "sha256": "479c50b5ca0f606f38219cc4fd40688b2fa40257d26ad17b2f9f7f83481c4016",
+      "artifact_id": 11590870674
+    }
+  ],
+  "related_artifacts": [
+    {
+      "id": 11590870674,
+      "name": "mesh-image-security-f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "size_in_bytes": 75237,
+      "digest": "sha256:a2d2e871836fdc657efd62c55715c41108de9857e1c4312b9a72d8da85c3f00f",
+      "downloaded_archive_sha256": "a2d2e871836fdc657efd62c55715c41108de9857e1c4312b9a72d8da85c3f00f",
+      "expired": false
+    }
+  ]
+}

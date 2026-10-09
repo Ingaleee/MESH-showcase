@@ -12,7 +12,7 @@
 
 `mesh_queue_up=0` означает, что метрики queue DB не удалось прочитать; её counters при этом отсутствуют, а не равны нулю. `mesh_queue_ready{queue="events"}` и `mesh_queue_oldest_ready_seconds` показывают ожидание, `mesh_queue_claimed` — взятые jobs, `mesh_queue_scheduled` — отложенные, `mesh_queue_failed` — физически failed jobs Solid Queue. `mesh_queue_workers` учитывает Worker heartbeat моложе 90 секунд; это признак процесса, а не доказательство прогресса каждой задачи. Для application poison events отдельно смотрите `mesh_outbox_failed`: пустая очередь после restore не означает, что все durable intents успешны.
 
-В [Prometheus](http://localhost:31090) сравните возраст ready jobs, workers и outbox. Если workers=0 — проверьте supervisor, connection budget и подписки. Если workers есть, а возраст растёт — проверьте зависшую работу, scanner/провайдер и saturation. Failed Solid Queue jobs сохраняйте до разбора; не включайте бесконечный retry poison events. Нужны правила retention и безопасной очистки failed history для длительной эксплуатации. `MeshMetricsUnavailable` также обнаруживает неуспешный scrape самого API: отсутствие метрики очереди нельзя считать здоровьем.
+В [Prometheus](http://localhost:32091) сравните возраст ready jobs, workers и outbox. Если workers=0 — проверьте supervisor, connection budget и подписки. Если workers есть, а возраст растёт — проверьте зависшую работу, scanner/провайдер и saturation. Failed Solid Queue jobs сохраняйте до разбора; не включайте бесконечный retry poison events. Нужны правила retention и безопасной очистки failed history для длительной эксплуатации. `MeshMetricsUnavailable` также обнаруживает неуспешный scrape самого API: отсутствие метрики очереди нельзя считать здоровьем.
 
 ## Неопределённый платёж
 
@@ -91,3 +91,17 @@ The restore exercise stops this showcase's API, worker and dispatcher, creates a
 Encryption keys stay separate from the archive in ignored local state. That separation is not independent disaster-safe key custody. This exercise does not replace an offsite backup or whole-VM recovery test.
 
 Cleanup is a bounded dry-run unless APPLY=1. GRACE_DAYS must be at least two and must cover the explicitly supported backup recovery window. Active references, ordinary attachments and uploading leases are preserved; reclaimed tombstones cannot gain a new reference. A stale uploading intent uses its original key for recovery. This tool intentionally does not guess ownership of arbitrary legacy objects with no durable intent.
+
+## Invalid journal and failed recovery
+
+Unknown phases or malformed journal JSON block automatic deployment before runtime changes. Preserve the journal bytes and deployment reports; check actual container digests against the verified current/previous inventories and signed release manifests. Repair the failed dependency first. Never remove the lock or invent a committed journal to force progress. A trusted intact journal copy may be restored only after its inventory is checked against actual runtime and incident history. If metadata cannot be reconstructed, recover into a fresh isolated target from a verified backup rather than bypassing this guard. The hosted negative control verifies denial and unchanged current inventory; it does not demonstrate automated reconstruction of corrupt metadata.
+
+## Fresh VM recovery and user deadlines
+
+The separate current workflow, encrypted custody, snapshot barrier and source/target roles are described in [fresh-vm-recovery.md](fresh-vm-recovery.md). This is distinct from the earlier same-host drill above. See the current acceptance record for the executed release revision and measured RTO.
+
+[User outcome objectives](user-reliability-objectives.md) define mature cohorts and late/unfinished/failed gauges. For a late notification inspect dispatcher, worker, both databases and oldest age. For delayed validation inspect scanner and queue progress. For an uncertain deployment preserve the original operation ID, use partner lookup/diagnostics and follow [publishing-lab.md](publishing-lab.md); a timeout is never permission for a new remote POST. Missing SLI/scrape requires restoring measurement, not assuming zero failures. An exhausted budget remains visible after the backlog drains.
+
+## Provenance service unavailable
+
+A GitHub attestation API 503 is a failed trust check, never permission to execute an unverified image. Keep the accepted release ID, exact revision/digests, failure status and the job step in the incident record. Check service availability and retry the unchanged trusted workflow after a pause; signature identity and source-digest gates must still pass. Do not substitute unsigned images or deployment tooling from another revision. The hosted exercise may not have started an application yet; a failed preflight is not a completed rollout/recovery test. A persistent provider outage prevents a new release; the existing verified runtime has a separate failure domain.

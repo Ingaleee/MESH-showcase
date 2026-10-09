@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "project": "mesh-showcase-release",
+  "revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+  "working_tree_dirty": false,
+  "images": {
+    "api": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+    "web": "ghcr.io/ingaleee/mesh-showcase-web@sha256:a5686c0a31e3ffbccea9d90328220c2c28acc7ce74d1c5def06769fe0a0afe50",
+    "postgres": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:04d291d4ad1cdc502e57a011260297bb342f7fdf65d6535a04c6ad49c04f2348",
+    "clamav": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:d4f1b350d006258b2b2c5f51e3c712ecaffb22a12189cc7eb500bb182f9eadaf",
+    "caddy": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+  },
+  "schema_rollback": "Never automatic; use backward-compatible migrations."
+}

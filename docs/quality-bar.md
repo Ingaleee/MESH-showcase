@@ -8,24 +8,28 @@
 
 Аудит ниже относится к исходной ревизии 0034674 и сохраняется как основание работ. Его фраза «не выполнено» описывает состояние на начало аудита. Новые фактические результаты находятся в [acceptance-oct08.md](acceptance-oct08.md) и [execution-status.md](execution-status.md).
 
-| Критерий | Реализованное и проверенное                                                                             | Остаток полного критерия                                                                 |
-| -------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Q01      | Hosted clean preparation, Ruby/native parity, security, partner, browser, recovery                      | Принят hosted run 37834689919; artifact проверен                                         |
-| Q02      | NULL-safe confirmed fields, active/rollback guards, direct SQL negatives                                | Runtime-role SQL probe прошёл в run 37837289487                                          |
-| Q03      | Durable upload intent, I/O вне transaction, bounded reclaim и SQL reference guards                      | Произвольные legacy objects без intent не очищаются; общий destructive GC не заявлен     |
-| Q04      | Inherited Linux flock, atomic fsync journal, три настоящих SIGKILL/recovery                             | Не все fault points, kernel/power loss и failed-rollback recovery воспроизведены         |
-| Q05      | Threat model, ownership/HMAC/HTTP/ZIP tests, history scan, exact-image scan, signed source verification | Rotation regression использует double; независимый adversarial review не выполнен        |
-| Q06      | Signed scoped cursor, ties/insertion/page tests, active отдельно от history, API types                  | Проверен declared API/read scope                                                         |
-| Q07      | Real partner timeout/lookup/rollback, callbacks, fencing и diagnostic                                   | Полная interleaving/property crash matrix шире выполненного real drill                   |
-| Q08      | Registry release, A→B→old runtime on new schema, failed image rollback                                  | Migration locks на большом dataset и все старые Publishing job payloads не профилированы |
-| Q09      | 50k SQL before/after; объявленный TLS read profile                                                      | Mixed load, overload, metric-counter contention и resource saturation не приняты         |
-| Q10      | Durable restart, fresh firing/resolved receipt, 50 once-only effects, live graphs                       | Полный denominator pending work и длительное production SLO окно не доказаны             |
-| Q11      | Encrypted primary+queue+private bytes restore, negative authentication, remote state lookup             | Потеря исходной VM, независимое key custody, offsite/PITR не проверены                   |
-| Q12      | Hosted Ansible convergence и текущий registry Kubernetes exercise                                       | Run 37837294244 принят; single-node не доказывает HA/общий PVC strategy                  |
-| Q13      | Rails boundaries, generated contract, Money typing/mutation, negative regression suite                  | Steep не покрывает весь Rails; mutation всех критических guards не выполнена             |
-| Q14      | RU/EN сценарий, source/run/hash evidence, failed attempts сохранены                                     | Личная репетиция и реальные коммерческие истории кандидата требуют его участия           |
+| Критерий | Реализованное и проверенное                                                                                                                    | Остаток полного критерия                                                                                |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Q01      | Current hosted clean preparation, 146/0 Ruby and 146/0 native, 13 browser; security/partner/recovery                                           | Exact reports and artifact/source hashes recorded in reliability acceptance; no independent audit claim |
+| Q02      | NULL-safe confirmed fields, active/rollback guards, direct SQL negatives                                                                       | Runtime-role SQL probe прошёл в run 37837289487                                                         |
+| Q03      | Durable upload intent, I/O вне transaction, bounded reclaim и SQL reference guards                                                             | Произвольные legacy objects без intent не очищаются; общий destructive GC не заявлен                    |
+| Q04      | Inherited flock/fsync journal; eight actual SIGKILL phases, killed recovery, unavailable engine and corrupt journal denial                     | No kernel/power-loss or complete interleaving matrix; damaged metadata needs manual investigation       |
+| Q05      | Threat model, ownership/HMAC/HTTP/ZIP tests, history scan, exact-image scan, signed source verification                                        | Rotation regression использует double; независимый adversarial review не выполнен                       |
+| Q06      | Signed scoped cursor, ties/insertion/page tests, active отдельно от history, API types                                                         | Проверен declared API/read scope                                                                        |
+| Q07      | Real partner timeout/lookup/rollback, callbacks, fencing и diagnostic                                                                          | Полная interleaving/property crash matrix шире выполненного real drill                                  |
+| Q08      | Registry release, A→B→old runtime on new schema, failed image rollback                                                                         | Migration locks на большом dataset и все старые Publishing job payloads не профилированы                |
+| Q09      | 50k SQL; current 10k mixed TLS reads/commands/replays, open arrivals, admission overload + SQL contention, resources                           | Declared profile accepted; no machine CPU/RAM ceiling, long soak or large concurrent uploads claim      |
+| Q10      | Mature denominator includes failed/unfinished; user deadline alert firing/resolved, 50 once-only effects; durable restart                      | Initial 99% lab objectives are not measured 30-day production SLO                                       |
+| Q11      | Separate source/target VM UUIDs, authenticated primary/queue/private restore; resumed mesh_runtime API/workers; Windows key/ciphertext custody | Quiescent RPO only; no online WAL/PITR, permanent retention or provider-wide failover                   |
+| Q12      | Current signed registry digests: Ansible changed=0, Terraform drift/repair, CNI positive/negative and Helm rollout/rollback                    | Single-node ephemeral K3s; no physical HA or multi-node shared PVC guarantee                            |
+| Q13      | Packwerk/contracts/Money; Rails-free Publishing Domain/Application + ports/adapters and dependency negative control                            | Other modules retain Rails coupling; whole-backend Steep/mutation/strict Clean Architecture not claimed |
+| Q14      | RU/EN сценарий, source/run/hash evidence, failed attempts сохранены                                                                            | Личная репетиция и реальные коммерческие истории кандидата требуют его участия                          |
 
 Эта матрица намеренно не объявляет все Q01–Q14 принятыми. Завершение семи ближайших шагов делает showcase пригодным для инженерного разбора, но не превращает его в доказанную production систему без эксплуатационных границ.
+
+## Дополнительная приёмка 9 октября
+
+[Текущий reliability record](reliability-acceptance-oct09.md) закрывает четыре выбранных пробела: declared mixed overload, расширенные deployment crash/failed-recovery переходы, другая VM + independent key/backup custody и user-outcome SLIs. Q04/Q09/Q10/Q11/Q13 выше обновлены по фактическим outcomes. Остальные пределы сохраняются; личные коммерческие истории и репетиция кандидата не могут быть заменены generated code/report.
 
 ## Значение оценки
 

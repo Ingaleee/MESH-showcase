@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-09T02:17:21.864247+00:00",
+  "scope": "Negative controls for archived report validation; not cryptographic authentication of CI reports or independent security audit.",
+  "controls": [
+    {
+      "case": "raw-byte-tamper",
+      "rejected": true,
+      "exit_code": 1,
+      "guard": "raw hash"
+    },
+    {
+      "case": "external-repeat-with-new-hash",
+      "rejected": true,
+      "exit_code": 1,
+      "guard": "semantic checks after recomputed report hash"
+    },
+    {
+      "case": "inflated-rto-with-new-hash",
+      "rejected": true,
+      "exit_code": 1,
+      "guard": "semantic checks after recomputed report hash"
+    },
+    {
+      "case": "wrong-inventory-with-new-hash",
+      "rejected": true,
+      "exit_code": 1,
+      "guard": "semantic checks after recomputed report hash"
+    }
+  ]
+}

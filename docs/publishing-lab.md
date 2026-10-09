@@ -87,7 +87,7 @@ Rollback — новая удалённая операция на ранее по
 
 SubmitCandidate сохраняет durable upload intent и blob metadata до storage I/O. Claim fencing, одинаковый fingerprint/key и bounded lease позволяют повторить потерянный ответ; finalized response не создаёт второй candidate. ReclaimUploads по умолчанию dry-run, сохраняет candidate FK, обычные attachments и uploading lease. Перед delete I/O пишет tombstone; SQL запрещает ссылаться на reclaimed blob. Общая очистка legacy files без intent не заявляется.
 
-Partners/candidates/deployments имеют независимые signed owner/kind cursors и total order created_at/id; active_deployments читаются отдельно от страницы истории. Private artifact download требует owning operator и сверяет SHA. Current constraints исключают NULL sequence у confirmed, unconfirmed active pointer и unconfirmed rollback basis. Проверки и current 131-test native/runtime parity находятся в [acceptance evidence](evidence/acceptance-oct08/README.md).
+Partners/candidates/deployments имеют независимые signed owner/kind cursors и total order created_at/id; active_deployments читаются отдельно от страницы истории. Private artifact download требует owning operator и сверяет SHA. Current constraints исключают NULL sequence у confirmed, unconfirmed active pointer и unconfirmed rollback basis. Текущие 146-test native/runtime parity и executed outcomes находятся в [reliability acceptance](reliability-acceptance-oct09.md); [приёмка 8 октября](evidence/acceptance-oct08/README.md) сохраняет историческую ревизию.
 
 ## Код для разговора
 
@@ -101,3 +101,5 @@ Partners/candidates/deployments имеют независимые signed owner/k
 Machine callback — stateless ActionController::API: raw-body HMAC и replay/sequence checks обязательны, browser session не является authority. Остальные browser mutations сохраняют session/CSRF protection; regression включает CSRF при проверке настоящей machine delivery.
 
 Publishing API доступен owning operator. Origins выбирает administrator, HTTP разрешён только для явно указанной lab origin. Настоящая внешняя студия должна использовать HTTPS и свой approved credential/trust contract. Simulator, failpoints и synthetic accounts не являются готовой публичной платформой казино.
+
+External publication execution имеет отдельные Domain/Application/Infrastructure слои: [карта классов и направление зависимостей](clean-architecture.md). Legacy ProcessDeployment остаётся внешним compatibility facade; строгая граница не заявлена для всего Rails backend.

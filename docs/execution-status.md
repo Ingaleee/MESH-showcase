@@ -1,8 +1,14 @@
 # Реализация MESH-showcase
 
-Обновлено 8 октября 2026. Работа выполняется только в MESH-showcase. Репозиторий опубликован: [Ingaleee/MESH-showcase](https://github.com/Ingaleee/MESH-showcase).
+Обновлено 9 октября 2026. Работа выполняется только в MESH-showcase. Репозиторий опубликован: [Ingaleee/MESH-showcase](https://github.com/Ingaleee/MESH-showcase).
 
-## Актуальные проверки
+## Актуальная приёмка 9 октября
+
+Проверенный release `f15af36`: [CI](https://github.com/Ingaleee/MESH-showcase/actions/runs/37869060208) — 146/0 Ruby в development и 146/0 в native Alpine, 13 browser scenarios без skips/flaky; [подписанный GHCR release](https://github.com/Ingaleee/MESH-showcase/actions/runs/37869324980) — scan пяти exact digests, 0 HIGH/CRITICAL включая unfixed. [Ubuntu](https://github.com/Ingaleee/MESH-showcase/actions/runs/37872648042) прошёл mixed load, Ansible convergence и восемь SIGKILL/recovery фаз; [Kubernetes](https://github.com/Ingaleee/MESH-showcase/actions/runs/37870973532) — drift, CNI controls и rollout/rollback. [Другая VM](https://github.com/Ingaleee/MESH-showcase/actions/runs/37871090618) восстановила primary/queue/private files и возобновила API/worker/dispatcher, RTO 76.6s. Windows ciphertext/key custody проверена отдельно. [Приёмка четырёх reliability вопросов](reliability-acceptance-oct09.md) содержит raw hashes, измерения, failures и границы.
+
+`npm run test:reliability:evidence` проверяет сохранённые raw bytes/hashes, source/digest chain и обязательные outcomes. [Clean boundary](clean-architecture.md): Domain/Application внешнего выпуска запускаются без Rails; остальная система остаётся modular Rails. [SLI definitions](user-reliability-objectives.md), [fresh VM runbook](fresh-vm-recovery.md). Эта приёмка не объявляет все расширенные Q01–Q14 автоматически закрытыми.
+
+## Предыдущая приёмка 8 октября
 
 - [Первый исправленный verify](https://github.com/Ingaleee/MESH-showcase/actions/runs/37817942409) — success; исходный красный run сохранён.
 - [Verify ревизии 7f7a0e3](https://github.com/Ingaleee/MESH-showcase/actions/runs/37834689919) — success: 131/0 Ruby и native, 13/13 browser без skips/flaky, Publishing/recovery, telemetry restart и live worker incident. [Проверенный artifact manifest](evidence/acceptance-oct08/hosted/ci/manifest.json).
@@ -13,7 +19,7 @@
 - Primary + queue + private files восстановлены в чистые локальные цели; GCM corruption/wrong-key negative controls, авторизованное HTTP-скачивание и lookup без нового POST подтверждены.
 - Persistent telemetry: sample, silence и receipt пережили restart. После исправления receiver regression новый worker exercise получил firing/resolved и 50 once-only effects. Предыдущие failed attempts сохранены.
 
-[Kubernetes текущей ревизии](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) — success: actual Terraform drift/repair, migration before app, CNI ingress/egress controls, worker 50 once-only effects, DB readiness/liveness recovery, Alpine rollout и Helm failed-upgrade rollback. [Отчёт](evidence/acceptance-oct08/hosted/kubernetes/summary.json), [Helm history](evidence/acceptance-oct08/hosted/kubernetes/helm-history.json). Стенды запускаются вручную через GitHub на временных hosted machines; постоянный VPS/self-hosted public runner не используется.
+[Kubernetes предыдущей приёмки](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) — success: actual Terraform drift/repair, migration before app, CNI ingress/egress controls, worker 50 once-only effects, DB readiness/liveness recovery, Alpine rollout и Helm failed-upgrade rollback. [Отчёт](evidence/acceptance-oct08/hosted/kubernetes/summary.json), [Helm history](evidence/acceptance-oct08/hosted/kubernetes/helm-history.json). Стенды запускаются вручную через GitHub на временных hosted machines; постоянный VPS/self-hosted public runner не используется.
 
 ## Исторические измерения
 
@@ -49,7 +55,7 @@ Release выявил CRLF shell portability issue; исходники shell пр
 
 Повторная подготовка на тесном host дала development HTTP 500 / Errno::ENOMEM в file watcher. [Отрицательный browser report](evidence/publishing-demo-memory-failure/playwright.json) и stages сохранены; interview mode отключает auto-reload и заранее загружает Ruby. Настоящие machine callbacks также выявили CSRF 422; теперь endpoint stateless с обязательной HMAC, а demo ждёт три actual HTTP 200 callbacks и проверяет локальную активную версию после поздней доставки.
 
-## Оставшаяся приёмка
+## Исторический статус на 8 октября
 
 Техническая часть семи ближайших этапов выполнена в scope showcase: hosted CI, Ansible Ubuntu, signed release и rollback, Ruby/SQL gaps, current Publishing restore, live telemetry/current Kubernetes и сценарий показа. Все четыре hosted workflows относятся к release source 7f7a0e3. Документационные commits после этой ревизии не переименовывают её в новый проверенный image.
 

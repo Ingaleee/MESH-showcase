@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-10-08T23:41:13.544063+00:00",
+  "environment": "Windows Docker Desktop, separate mesh-showcase-init-control project",
+  "successful_exit": 0,
+  "rejected_exit": 7,
+  "another_service_remained_running": true,
+  "scope": "Two lightweight shell containers; live source/target recovery remains separate hosted acceptance."
+}

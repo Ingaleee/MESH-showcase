@@ -30,7 +30,7 @@ regexes = ['''^command_key":\s*"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-
 [[rules.allowlists]]
 description = "The hosted synthetic Publishing diagnostic command key is a UUID identifier, never an authentication credential."
 condition = "AND"
-paths = ['''(^|/)docs/evidence/acceptance-oct08/hosted/ci/publishing-demo-summary\.json$''']
+paths = ['''(^|/)docs/evidence/(acceptance-oct08/hosted|reliability-oct09)/ci/publishing-demo-summary\.json$''']
 regexTarget = "match"
 regexes = ['''^command_key":\s*"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"$''']
 

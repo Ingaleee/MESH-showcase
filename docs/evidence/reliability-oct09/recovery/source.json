@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-09T01:44:10Z",
+  "source_job": "source",
+  "run_id": "37871090618",
+  "snapshot_primary_tables": 38,
+  "snapshot_queue_tables": 15,
+  "private_objects": 2,
+  "private_bytes": 394,
+  "source_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+  "quiescent_rpo_seconds": 0,
+  "application_sha256": "da742f79729385739a1fff022051c2dec1e6c825d66268f205cf84a620a77a3e",
+  "key_location": "Repository Actions secret MESH_DR_RECOVERY_KEY (not in the artifact/checkout)"
+}

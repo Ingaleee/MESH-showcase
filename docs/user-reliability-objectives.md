@@ -4,13 +4,13 @@ HTTP success does not imply a completed notification, validation or release. His
 
 Each scrape evaluates records accepted in the preceding 24h, excluding only the newest deadline interval while those operations are immature. Numerator: terminal completion within the deadline from created_at. Denominator: every accepted mature record, including failed and still unfinished work. A validation rejection is a valid completed answer; an infrastructure failure is not. Notification means an effect committed to the inbox, not guaranteed WebSocket delivery. Deployment means verified partner confirmation persisted locally. Retry and callback duplicates reuse the same record and do not inflate the denominator.
 
-| Operation | Deadline | Initial lab objective | User impact |
-| --- | --- | --- | --- |
-| notification | 30s | 99% | Inbox event has not arrived |
-| validation | 60s | 99% | Partner cannot obtain a validation decision |
-| deployment | 120s | 99% | Operator cannot know which version is active |
+| Operation    | Deadline | Initial lab objective | User impact                                  |
+| ------------ | -------- | --------------------- | -------------------------------------------- |
+| notification | 30s      | 99%                   | Inbox event has not arrived                  |
+| validation   | 60s      | 99%                   | Partner cannot obtain a validation decision  |
+| deployment   | 120s     | 99%                   | Operator cannot know which version is active |
 
-The 24h cohort is a moving gauge, not a monotone counter: do not apply rate() to it. Export from one authoritative API per logical database; do not sum the same rows across API replicas. Pending/failed ages cover all retained unfinished records even outside the SLI cohort. No traffic means insufficient evidence, not 100% success.
+The 24h cohort is a moving gauge, not a monotone counter: do not apply rate() to it. Export from one authoritative API per logical database; do not sum the same rows across API replicas. The unfinished and failed gauges cover all retained records, independently of the 24h cohort. The oldest age covers nonterminal, nonfailed work; overdue counts every operation without a successful answer past its deadline, including terminal infrastructure failures. No traffic means insufficient evidence, not 100% success.
 
 For HTTP, use route/method bounded labels; 5xx availability and latency counters reset with the Puma process. Keep 429 admission signals separate. Metrics endpoint errors and absent scraping are failures of observation and must alert. The /ready probe includes primary/queue connectivity.
 

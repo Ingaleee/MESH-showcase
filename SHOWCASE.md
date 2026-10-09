@@ -36,14 +36,12 @@ Production и Kubernetes не запускать одновременно с т�
 
 ## Что подтверждено
 
-Current hosted CI: 131 Ruby examples в development и native Alpine runtime; 13/13 browser scenarios без skips/flaky; 52 OpenAPI operations; текущий release scan пяти exact digests — 0 HIGH/CRITICAL, включая unfixed, без CVE exceptions. Более ранний scan девяти образов остаётся историческим. Publishing прошёл bad package → validation → release → lost response → lookup → rollback с тремя remote POST, verified private bytes и тремя actual HTTP 200 signed callbacks.
+Проверенный release `f15af36`: [CI](https://github.com/Ingaleee/MESH-showcase/actions/runs/37869060208) — 146/0 Ruby в development и 146/0 в native Alpine, 13 browser scenarios без skips/flaky; [подписанный GHCR release](https://github.com/Ingaleee/MESH-showcase/actions/runs/37869324980) — scan пяти exact digests, 0 HIGH/CRITICAL включая unfixed. [Ubuntu](https://github.com/Ingaleee/MESH-showcase/actions/runs/37872648042) прошёл mixed load, Ansible convergence и восемь SIGKILL/recovery фаз; [Kubernetes](https://github.com/Ingaleee/MESH-showcase/actions/runs/37870973532) — drift, CNI controls и rollout/rollback. [Другая VM](https://github.com/Ingaleee/MESH-showcase/actions/runs/37871090618) восстановила primary/queue/private files и возобновила API/worker/dispatcher, RTO 76.6s. Windows ciphertext/key custody проверена отдельно. [Приёмка четырёх reliability вопросов](docs/reliability-acceptance-oct09.md) содержит raw hashes, измерения, failures и границы.
 
-[Текущий hosted Kubernetes](https://github.com/Ingaleee/MESH-showcase/actions/runs/37837294244) выполнил Terraform apply/drift/repair, migration ordering, Helm failed-rollout rollback, NetworkPolicy positive/negative controls и worker/DB recovery на Alpine registry digests. Scope — single-node K3s в ephemeral Ubuntu VM; старые local Debian results сохранены как исторические.
+Для каждого отчёта указана точная ревизия, workload/fault configuration и окружение. Исторические 50k/fanout/DB+files результаты сохраняют прежнюю дату и scope; новый прогон не превращает их в новые измерения.
 
-Сохраняются более ранние измерения 50k fanout, load lab и DB+files restore. Они не превращаются в новые замеры после каждой правки: даты и scope указаны в evidence.
+## Эксплуатационные границы
 
-## Что требует отдельного продолжения
-
-GitHub verify, подписанный GHCR release, Ubuntu deploy/convergence/rollback/crash recovery и Kubernetes текущих registry digests успешно выполнены; [актуальные run IDs](docs/execution-status.md). Hosted VM существует только во время задания. Offsite/PITR, mixed-load capacity, длительное production SLO window и физическая HA не заявляются. Покупка VPS и постоянный self-hosted runner не требуются. Полные пределы приёмки — в [quality-bar.md](docs/quality-bar.md).
+Hosted VM существует только во время задания. Подтверждены перегрузка admission и SQL contention в заявленном mixed profile, восемь deployment fault points с failed recovery, loss of source VM и независимое Windows backup/key custody. Не подтверждены online WAL/PITR, permanent backup retention, GitHub-provider failover, длинное production SLO окно, physical HA, большие concurrent uploads и весь возможный crash state space. Покупка VPS и постоянный self-hosted runner не требуются. Полные критерии и оставшиеся границы — [quality-bar.md](docs/quality-bar.md).
 
 [Исторический transfer](docs/evidence/showcase-transfer.json), [separation](docs/evidence/showcase-separation.json), [новый evidence index](docs/evidence/publishing-implementation.json).

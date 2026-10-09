@@ -1,0 +1,228 @@
+{
+  "checked_at": "2026-10-09T01:24:20Z",
+  "environment": "mesh-showcase",
+  "phases": {
+    "defective_candidate": {
+      "candidate_id": "2ac63682-1fc4-4129-9e0f-dc444031aa09",
+      "state": "rejected",
+      "publish_blocked": true,
+      "checks": [
+        {
+          "ok": true,
+          "fix": "Upload a new candidate; stored bytes must match its immutable digest.",
+          "code": "ARTIFACT_DIGEST",
+          "expected": "987751a53ca62badd47ae5ed489e513e888d4d3764f2db5c3cc1eb131a24e44a",
+          "observed": "987751a53ca62badd47ae5ed489e513e888d4d3764f2db5c3cc1eb131a24e44a"
+        },
+        {
+          "ok": true,
+          "fix": "Use the documented manifest-v1 fields and contract version.",
+          "code": "MANIFEST_SCHEMA",
+          "expected": "manifest-v1 / index.html / 1..16 files",
+          "observed": "valid"
+        },
+        {
+          "ok": true,
+          "fix": "Remove duplicates, unsafe paths and unsupported metadata.",
+          "code": "MANIFEST_FILES",
+          "expected": "unique relative files with size and SHA-256",
+          "observed": "valid"
+        },
+        {
+          "ok": false,
+          "fix": "Regenerate the manifest from the actual file bytes.",
+          "code": "FILE_DIGEST",
+          "expected": "0000000000000000000000000000000000000000000000000000000000000000",
+          "observed": "mismatch"
+        },
+        {
+          "ok": true,
+          "fix": "Include index.html and remove undeclared or duplicate entries.",
+          "code": "ZIP_INVENTORY",
+          "expected": "exactly the declared files including index.html",
+          "observed": "matched"
+        }
+      ]
+    },
+    "normal_release": {
+      "id": "c7738c4d-4233-40f8-95e1-62934c4d2712",
+      "partner_id": "c1088d55-0a3d-47e9-88de-b87eb73be10b",
+      "candidate_id": "0eefe45f-b2c0-48f1-8bcb-a2e38a15c2a2",
+      "validation_id": "dcdccec4-c3fb-49f1-8bb6-e9a7ef3e06d1",
+      "kind": "publish",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 1,
+      "confirmed_at": "2026-10-09T01:24:24.305Z",
+      "created_at": "2026-10-09T01:24:23.694Z",
+      "correlation_id": "48ab9f6f-64df-44c6-99e9-faeefb575d66",
+      "rollback_of_id": null,
+      "artifact_sha256": "2b1da8c9c34dad69703d0d047c99f529d5b073eebebbe325bce479ae4ee13a3d"
+    },
+    "lost_response": {
+      "unknown": {
+        "id": "0bfafa3c-4dd6-4d64-829c-89657915a14c",
+        "partner_id": "c1088d55-0a3d-47e9-88de-b87eb73be10b",
+        "candidate_id": "2bd4c9ce-9d55-4015-a63c-4932bc2dbf46",
+        "validation_id": "8201c91e-1a9a-45c8-8fec-e28726d90ca6",
+        "kind": "publish",
+        "state": "unknown",
+        "last_error": "HTTP_TIMEOUT",
+        "attempts": 1,
+        "remote_sequence": null,
+        "confirmed_at": null,
+        "created_at": "2026-10-09T01:24:25.930Z",
+        "correlation_id": "25c4b3dc-5a89-419a-808f-e85998bb017a",
+        "rollback_of_id": null
+      },
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "0bfafa3c-4dd6-4d64-829c-89657915a14c",
+        "state": "unknown",
+        "artifact_sha256": "b6e314d9834ef9b0d354f9fd438798ff9337eb785c4e4703edccad9bd34400e4",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "008083b9ebd9729e408b8051bab6b14973c16b5f7e8d73c449189b514bf64599",
+        "current_inputs_match": true,
+        "correlation_id": "25c4b3dc-5a89-419a-808f-e85998bb017a",
+        "attempts": 1,
+        "last_error": "HTTP_TIMEOUT",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "next_action": "Lookup remote state by the same operation ID; do not create another POST.",
+        "reproduce": "mesh-publish diagnose 0bfafa3c-4dd6-4d64-829c-89657915a14c",
+        "command_key": "a94b04a6-d8da-4b09-93e1-e71880f3482a"
+      },
+      "recovered": {
+        "id": "0bfafa3c-4dd6-4d64-829c-89657915a14c",
+        "partner_id": "c1088d55-0a3d-47e9-88de-b87eb73be10b",
+        "candidate_id": "2bd4c9ce-9d55-4015-a63c-4932bc2dbf46",
+        "validation_id": "8201c91e-1a9a-45c8-8fec-e28726d90ca6",
+        "kind": "publish",
+        "state": "confirmed",
+        "last_error": null,
+        "attempts": 2,
+        "remote_sequence": 2,
+        "confirmed_at": "2026-10-09T01:24:30.609Z",
+        "created_at": "2026-10-09T01:24:25.930Z",
+        "correlation_id": "25c4b3dc-5a89-419a-808f-e85998bb017a",
+        "rollback_of_id": null
+      },
+      "artifact_sha256": "b6e314d9834ef9b0d354f9fd438798ff9337eb785c4e4703edccad9bd34400e4"
+    },
+    "rollback": {
+      "id": "a417a092-5f13-4a11-a677-45dcf01ebaf8",
+      "partner_id": "c1088d55-0a3d-47e9-88de-b87eb73be10b",
+      "candidate_id": "0eefe45f-b2c0-48f1-8bcb-a2e38a15c2a2",
+      "validation_id": "dcdccec4-c3fb-49f1-8bb6-e9a7ef3e06d1",
+      "kind": "rollback",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 3,
+      "confirmed_at": "2026-10-09T01:24:31.678Z",
+      "created_at": "2026-10-09T01:24:30.736Z",
+      "correlation_id": "9d0e8bf1-16dd-49da-bb6b-b436fd8d364f",
+      "rollback_of_id": "c7738c4d-4233-40f8-95e1-62934c4d2712",
+      "artifact_sha256": "2b1da8c9c34dad69703d0d047c99f529d5b073eebebbe325bce479ae4ee13a3d"
+    }
+  },
+  "partner_id": "c1088d55-0a3d-47e9-88de-b87eb73be10b",
+  "success": true,
+  "scope": "Real authenticated API + ordinary dispatcher/worker + ClamAV + independent SQLite partner; no external studio or uploaded code execution.",
+  "signed_callbacks_delivered": [
+    {
+      "event_id": "750ebcbb-41e4-4d5a-a11a-71bb75878e54",
+      "operation_id": "0bfafa3c-4dd6-4d64-829c-89657915a14c",
+      "attempts": 1,
+      "last_status": 200,
+      "delivered_at": "2026-10-09T01:25:27.481Z"
+    },
+    {
+      "event_id": "b1fdee57-a8f2-4e7c-95da-a02f7ad1b759",
+      "operation_id": "a417a092-5f13-4a11-a677-45dcf01ebaf8",
+      "attempts": 1,
+      "last_status": 200,
+      "delivered_at": "2026-10-09T01:24:32.936Z"
+    },
+    {
+      "event_id": "5eeeb4cf-921b-493a-9063-9aa9bbdec1fc",
+      "operation_id": "c7738c4d-4233-40f8-95e1-62934c4d2712",
+      "attempts": 1,
+      "last_status": 200,
+      "delivered_at": "2026-10-09T01:24:25.468Z"
+    }
+  ],
+  "remote_publish_requests": 3,
+  "local_active_after_delayed_callback": {
+    "deployment_id": "a417a092-5f13-4a11-a677-45dcf01ebaf8",
+    "sequence": 3
+  },
+  "downloads": [
+    {
+      "phase": "normal_release",
+      "bytes": 234,
+      "sha256": "2b1da8c9c34dad69703d0d047c99f529d5b073eebebbe325bce479ae4ee13a3d",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "lost_response",
+      "bytes": 234,
+      "sha256": "b6e314d9834ef9b0d354f9fd438798ff9337eb785c4e4703edccad9bd34400e4",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "rollback",
+      "bytes": 234,
+      "sha256": "2b1da8c9c34dad69703d0d047c99f529d5b073eebebbe325bce479ae4ee13a3d",
+      "private_authenticated_download": true
+    }
+  ],
+  "partner_state_after": {
+    "deployments": {
+      "count": 3
+    },
+    "active": {
+      "operation_id": "a417a092-5f13-4a11-a677-45dcf01ebaf8",
+      "artifact_sha256": "2b1da8c9c34dad69703d0d047c99f529d5b073eebebbe325bce479ae4ee13a3d",
+      "sequence": 3
+    },
+    "requests": [
+      {
+        "route": "contract",
+        "count": 2
+      },
+      {
+        "route": "lookup",
+        "count": 1
+      },
+      {
+        "route": "publish",
+        "count": 3
+      }
+    ],
+    "callbacks": [
+      {
+        "event_id": "750ebcbb-41e4-4d5a-a11a-71bb75878e54",
+        "operation_id": "0bfafa3c-4dd6-4d64-829c-89657915a14c",
+        "attempts": 1,
+        "last_status": 200,
+        "delivered_at": "2026-10-09T01:25:27.481Z"
+      },
+      {
+        "event_id": "b1fdee57-a8f2-4e7c-95da-a02f7ad1b759",
+        "operation_id": "a417a092-5f13-4a11-a677-45dcf01ebaf8",
+        "attempts": 1,
+        "last_status": 200,
+        "delivered_at": "2026-10-09T01:24:32.936Z"
+      },
+      {
+        "event_id": "5eeeb4cf-921b-493a-9063-9aa9bbdec1fc",
+        "operation_id": "c7738c4d-4233-40f8-95e1-62934c4d2712",
+        "attempts": 1,
+        "last_status": 200,
+        "delivered_at": "2026-10-09T01:24:25.468Z"
+      }
+    ]
+  }
+}

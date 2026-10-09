@@ -1,0 +1,189 @@
+{
+  "recorded_at": "2026-10-09T01:22:26.356132+00:00",
+  "attempts": [
+    {
+      "workflow_run": {
+        "id": 37854371443,
+        "head_sha": "821c29ecbe66a2253d262025546445897acf9bf4",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37854371443",
+        "created_at": "2026-10-08T22:34:57Z",
+        "updated_at": "2026-10-08T22:40:48Z"
+      },
+      "issue": "Brakeman rejected dynamically constructed SLI SQL.",
+      "fix": "Replaced query fragments with fixed SQL and bound scalar values; no suppression."
+    },
+    {
+      "workflow_run": {
+        "id": 37856004679,
+        "head_sha": "34af9767e621d68726e464df665292ead34f7bc8",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37856004679",
+        "created_at": "2026-10-08T22:50:54Z",
+        "updated_at": "2026-10-08T23:05:03Z"
+      },
+      "issue": "Five browser scenarios failed; API admission rejected normal requests with a two-permit pool.",
+      "fix": "Aligned development Puma/ActiveRecord/admission with the six-thread production profile."
+    },
+    {
+      "workflow_run": {
+        "id": 37856136504,
+        "head_sha": "34af9767e621d68726e464df665292ead34f7bc8",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37856136504",
+        "created_at": "2026-10-08T22:52:13Z",
+        "updated_at": "2026-10-08T23:07:49Z"
+      },
+      "issue": "Release verification failed at browser acceptance before any image release.",
+      "fix": "Same pool configuration correction; full replacement release passed."
+    },
+    {
+      "workflow_run": {
+        "id": 37860040976,
+        "head_sha": "42bc7347426180fb62de9e7586d14acdc313be5d",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37860040976",
+        "created_at": "2026-10-08T23:32:54Z",
+        "updated_at": "2026-10-08T23:33:37Z"
+      },
+      "issue": "Fresh recovery bootstrap: Compose wait could not find an already-exited init container.",
+      "fix": "Wait while attached and propagate the init exit code. Local controls accepted 0 and rejected 7 without stopping another service."
+    },
+    {
+      "workflow_run": {
+        "id": 37865112308,
+        "head_sha": "63faa5080b4888d4a6419fb0f70d28ede70349a5",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37865112308",
+        "created_at": "2026-10-09T00:30:17Z",
+        "updated_at": "2026-10-09T00:33:04Z"
+      },
+      "issue": "Source backup succeeded; fresh target binary extraction attempted ASCII-8BIT to UTF-8 conversion. World-writable non-sticky parent then masked the exception during secure cleanup.",
+      "fix": "Explicit binary output, refuse unsafe shared parents and use a sticky recovery root. Regression uses every byte 0..255 with the production UTF-8 internal encoding; safe cleanup and pre-existing targets tested.",
+      "fix_revision": "5f26750eb176e386e1a2215e34db4820e6a0eb7a",
+      "local_regression": {
+        "before_fix_examples": 5,
+        "before_fix_failures": 2,
+        "after_fix_rails_free_examples": 13,
+        "after_fix_failures": 0
+      }
+    },
+    {
+      "workflow_run": {
+        "id": 37865109801,
+        "head_sha": "63faa5080b4888d4a6419fb0f70d28ede70349a5",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37865109801",
+        "created_at": "2026-10-09T00:30:16Z",
+        "updated_at": "2026-10-09T00:35:34Z"
+      },
+      "issue": "Declared 300 TLS read arrivals: client maximum-in-flight bound dropped one arrival; 299 transmitted responses were HTTP 200. The no-drop acceptance guard rejected this measurement.",
+      "resolution": "Keep the original 10/s, 30s, in-flight 8, zero-errors/zero-drops gates. Repeat in the final full Ubuntu exercise; no claim of machine-independent production capacity. Exact cause of this isolated client scheduling/concurrency saturation was not established by the stored end-of-run resource sample.",
+      "observed": {
+        "requests": 299,
+        "rejected_arrivals": 1,
+        "http_errors": 0,
+        "p95_ms": 162.2431160000001,
+        "maximum_response_ms": 983.6224060000004
+      }
+    },
+    {
+      "workflow_run": {
+        "id": 37865791999,
+        "head_sha": "5f26750eb176e386e1a2215e34db4820e6a0eb7a",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37865791999",
+        "created_at": "2026-10-09T00:38:21Z",
+        "updated_at": "2026-10-09T00:38:58Z"
+      },
+      "issue": "Publishable secret scan negative control missed its randomly generated synthetic token; verification stopped before application tests.",
+      "fix": "Use a deterministic high-entropy synthetic token containing digits, tested with the pinned Gitleaks version. The original token was not retained; the alphabet-only allowlist explanation is an inference from the official scanner configuration.",
+      "fix_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355"
+    },
+    {
+      "workflow_run": {
+        "id": 37867311177,
+        "head_sha": "5f26750eb176e386e1a2215e34db4820e6a0eb7a",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37867311177",
+        "created_at": "2026-10-09T00:56:40Z",
+        "updated_at": "2026-10-09T01:00:10Z"
+      },
+      "issue": "Fresh target imported primary/queue/private data and passed owner-level reconciliation and access checks, but the actual non-root Puma failed to start. Read-only filesystem with root-owned tmpfs prevented creation of /app/tmp/cache; no successful runtime or RTO acceptance is claimed.",
+      "fix": "Explicit tmpfs uid/gid/mode consistent with the accepted deployment profile; stdout logging and bounded redacted failure diagnostics captured before cleanup.",
+      "fix_revision": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+      "local_regression": "puma-mount-control.json",
+      "partial_report": {
+        "file": "failed-puma-restore-partial.json",
+        "sha256": "2f3803c7889345c76bed2668407e390b921e35a0fc547f6ac2b8de99da37c6ce",
+        "artifact_id": 11588354652,
+        "archive_sha256": "d4b3ce9d734632a323bbff44394e9eb0f7948503683528411ff45feeb3b0a7fe",
+        "scope": "Owner-level import/reconciliation only. Runtime readiness and RTO not accepted."
+      }
+    },
+    {
+      "workflow_run": {
+        "id": 37870971065,
+        "head_sha": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37870971065",
+        "created_at": "2026-10-09T01:41:10Z",
+        "updated_at": "2026-10-09T01:41:54Z"
+      },
+      "issue": "GitHub attestation trust-metadata-api returned HTTP 503 during source-image provenance verification. Source backup and target restore were never started.",
+      "resolution": "Fail closed. Repeat the unchanged trusted workflow against the same accepted signed release; no bypass, weakened signature gate or new application revision.",
+      "scope": "External GitHub service availability, not an application recovery failure."
+    },
+    {
+      "workflow_run": {
+        "id": 37870968540,
+        "head_sha": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37870968540",
+        "created_at": "2026-10-09T01:41:08Z",
+        "updated_at": "2026-10-09T01:43:03Z"
+      },
+      "issue": "GitHub attestation trust-metadata-api returned HTTP 503 before signed deployment. Ansible completed, but runtime/load/crash exercises were never started.",
+      "resolution": "Repeat the unchanged trusted workflow against the same accepted signed release and baseline; original provenance gate remains mandatory.",
+      "scope": "External GitHub service availability."
+    },
+    {
+      "workflow_run": {
+        "id": 37871213020,
+        "head_sha": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37871213020",
+        "created_at": "2026-10-09T01:44:14Z",
+        "updated_at": "2026-10-09T01:45:21Z"
+      },
+      "issue": "The repeated deployment hit the same transient GitHub trust-metadata-api HTTP 503 before runtime execution.",
+      "resolution": "Keep fail-closed provenance verification; pause before another unchanged workflow invocation. Recovery and Kubernetes obtained verified attestations in this period.",
+      "scope": "External GitHub service availability; no successful deployment claim for this attempt."
+    },
+    {
+      "workflow_run": {
+        "id": 37871536566,
+        "head_sha": "f15af36d1d5a22b98fac1b466275096a5a0f1355",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/Ingaleee/MESH-showcase/actions/runs/37871536566",
+        "created_at": "2026-10-09T01:48:20Z",
+        "updated_at": "2026-10-09T01:49:56Z"
+      },
+      "issue": "Third unchanged Ubuntu invocation failed closed on GitHub trust-metadata-api HTTP 503. No runtime exercise executed.",
+      "resolution": "Wait and verify service availability before retrying; retain mandatory cryptographic/source validation.",
+      "scope": "External GitHub availability, not a passed deployment."
+    }
+  ]
+}

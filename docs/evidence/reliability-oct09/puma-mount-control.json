@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-09T01:16:23.996296+00:00",
+  "image": "mesh-showcase-api:alpine",
+  "image_id": "sha256:37f53b3fd87284de67e9f84a3f77e1a134e9c897655111e14f76a714031818e6",
+  "controls": [
+    {
+      "corrected_mounts": false,
+      "liveness": 0,
+      "state": {
+        "Running": false,
+        "ExitCode": 1,
+        "OOMKilled": false
+      },
+      "logs_excerpt": "=> Booting Puma\n=> Rails 8.1.4 application starting in production \n=> Run `bin/rails server --help` for more startup options\nExiting\n/usr/local/lib/ruby/3.4.0/fileutils.rb:403:in 'Dir.mkdir': Permission denied @ dir_s_mkdir - /app/tmp/cache (Errno::EACCES)\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:403:in 'FileUtils.fu_mkdir'\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:381:in 'block (2 levels) in FileUtils.mkdir_p'\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:379:in 'Array#reverse_each'\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:379:in 'block in FileUtils.mkdir_p'\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:371:in 'Array#each'\n\tfrom /usr/local/lib/ruby/3.4.0/fileutils.rb:371:in 'FileUtils.mkdir_p'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/server/server_command.rb:71:in 'block in Rails::Server#create_tmp_directories'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/server/server_command.rb:70:in 'Array#each'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/commands/server/server_command.rb:70:in 'Rails::Server#create_tmp_directories'\n\tfrom /usr/local/bundle/ruby/3.4.0/gems/railties-8.1.4/lib/rails/command"
+    },
+    {
+      "corrected_mounts": true,
+      "liveness": 200,
+      "state": {
+        "Running": true,
+        "ExitCode": 0,
+        "OOMKilled": false
+      },
+      "logs_excerpt": "y installed with the following options {peer_service: nil, db_statement: :obfuscate, obfuscation_limit: 2000, propagator: \"none\", db_response_returned_rows: false, db_response_affected_rows: false}\nPuma starting in single mode...\n* Puma version: 8.0.2 (\"Into the Arena\")\n* Ruby version: ruby 3.4.11 (2026-09-23 revision 592f1ffdb3) +YJIT +PRISM [x86_64-linux-musl]\n*  Min threads: 3\n*  Max threads: 3\n*  Environment: production\n*          PID: 1\n* Listening on http://0.0.0.0:3000\nUse Ctrl-C to stop\n"
+    }
+  ],
+  "scope": "Local cached historical Alpine image, production read-only tmpfs/liveness only; no DB-readiness assertion on the dummy nonexistent DNS host. Not signed release/fresh VM restore acceptance."
+}

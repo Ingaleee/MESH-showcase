@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-09T00:59:04Z",
+  "environment": "Fresh hosted Ubuntu VM; source job already completed",
+  "primary_tables_verified": 38,
+  "queue_tables_verified": 15,
+  "private_objects_verified": 2,
+  "private_bytes_verified": 394,
+  "restored_pending_reconciled": true,
+  "private_http_artifact_verified": true,
+  "callback_replay_deduplicated": true,
+  "private_candidate_id": "847f5f64-d4fb-4a4a-a4ac-6d42de7ea023",
+  "private_artifact_sha256": "863b1fdd739060d418a84d2d973f477596b22ec549d75f308812324bc48709ed",
+  "external_post_count_before": 2,
+  "external_post_count_after": 2,
+  "post_snapshot_local_marker_lost_as_declared": true,
+  "negative_controls": {
+    "wrong_key": true,
+    "truncated": true,
+    "tampered": true,
+    "missing_object": true
+  },
+  "source_snapshot_at": "2026-10-09T00:57:53Z",
+  "source_revision": "5f26750eb176e386e1a2215e34db4820e6a0eb7a",
+  "rpo_scope": "Zero at quiescent snapshot; no online WAL/PITR promise",
+  "key_custody": "GitHub repository secret outside source VM; not an independent provider KMS",
+  "partner_scope": "Separately encrypted simulator state ahead of app backup; continuous external partner availability not claimed"
+}

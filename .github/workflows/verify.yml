@@ -50,6 +50,7 @@ jobs:
           npm run contract:check
           npm run test:architecture
           npm run test:acceptance
+          npm run test:reliability:evidence
           npm run format:check
           npm run typecheck
           npm run build

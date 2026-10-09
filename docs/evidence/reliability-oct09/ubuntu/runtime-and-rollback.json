@@ -1,0 +1,206 @@
+{
+  "checked_at": "2026-10-09T02:09:21.128Z",
+  "success": true,
+  "environment": "mesh-showcase-release",
+  "release": {
+    "api": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+    "web": "ghcr.io/ingaleee/mesh-showcase-web@sha256:a5686c0a31e3ffbccea9d90328220c2c28acc7ce74d1c5def06769fe0a0afe50",
+    "postgres": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:04d291d4ad1cdc502e57a011260297bb342f7fdf65d6535a04c6ad49c04f2348",
+    "clamav": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:d4f1b350d006258b2b2c5f51e3c712ecaffb22a12189cc7eb500bb182f9eadaf",
+    "caddy": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+  },
+  "smoke": {
+    "origin": "https://localhost:3243",
+    "ca_trusted_by_smoke_only": true,
+    "session": true,
+    "frontend": true,
+    "csp": true,
+    "internal_metrics_blocked": true,
+    "database_runtime_role_restricted": true,
+    "containers": [
+      {
+        "service": "api",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      },
+      {
+        "service": "db",
+        "image_id": "sha256:039f99aed6a58e71acac9122f703cda85d8177677f82b9c3db5f3d656cf1251e",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:04d291d4ad1cdc502e57a011260297bb342f7fdf65d6535a04c6ad49c04f2348",
+        "user": "postgres",
+        "readonly": false,
+        "memory_limit_bytes": 402653184
+      },
+      {
+        "service": "dispatcher",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 35
+      },
+      {
+        "service": "edge",
+        "image_id": "sha256:f77f856a30f0004200b36b322d61da17fade31e24875699d77fb968399b9eb77",
+        "image_reference": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728
+      },
+      {
+        "service": "gateway",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 35
+      },
+      {
+        "service": "scanner",
+        "image_id": "sha256:6acd5eeb5b5e902e6749c4bc5e7f4ea086a86cde296a0f59ce73eaec3a599e2f",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:d4f1b350d006258b2b2c5f51e3c712ecaffb22a12189cc7eb500bb182f9eadaf",
+        "user": "",
+        "readonly": false,
+        "memory_limit_bytes": 1610612736
+      },
+      {
+        "service": "web",
+        "image_id": "sha256:7d915b57965510f2511bc86a7aa722779b8d9465a448cc816a9b2e5226217fa4",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-web@sha256:a5686c0a31e3ffbccea9d90328220c2c28acc7ce74d1c5def06769fe0a0afe50",
+        "user": "1000:1000",
+        "readonly": true,
+        "memory_limit_bytes": 402653184
+      },
+      {
+        "service": "worker",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      }
+    ]
+  },
+  "business_probe": {
+    "checked_at": "2026-10-09T02:09:03Z",
+    "environment": "mesh-showcase-release production runtime role",
+    "business_workflow": "create -> propose -> award -> real file scan -> version -> accept",
+    "accepted": true,
+    "balanced_journal_posted": true,
+    "denied": {
+      "ddl": true,
+      "immutable_history": true,
+      "posted_journal": true,
+      "publishing_null_confirmation": true,
+      "publishing_unconfirmed_active": true,
+      "publishing_unconfirmed_rollback": true
+    },
+    "private_file_sha256": "670decaa46f82b85394937054704a274a676d7fa35bf0154a7791a9d1f090714",
+    "storage_file_exists": true,
+    "scope": "Synthetic accounts/results in the isolated production-shaped local deployment. No external payout."
+  },
+  "rejected_exit": 1,
+  "previous_images_restored": true,
+  "data_before": {
+    "schema_version": 1,
+    "submissions": 4,
+    "blobs": 4,
+    "journals": 4,
+    "file_inventory_sha256": "66da65dba67a54f19e2fb643d8e12df0df16725ca3afef4ca98079ac14cea52e"
+  },
+  "data_after": {
+    "schema_version": 1,
+    "submissions": 4,
+    "blobs": 4,
+    "journals": 4,
+    "file_inventory_sha256": "66da65dba67a54f19e2fb643d8e12df0df16725ca3afef4ca98079ac14cea52e"
+  },
+  "migration_reverted": false,
+  "restored_smoke": {
+    "origin": "https://localhost:3243",
+    "ca_trusted_by_smoke_only": true,
+    "session": true,
+    "frontend": true,
+    "csp": true,
+    "internal_metrics_blocked": true,
+    "database_runtime_role_restricted": true,
+    "containers": [
+      {
+        "service": "api",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      },
+      {
+        "service": "db",
+        "image_id": "sha256:039f99aed6a58e71acac9122f703cda85d8177677f82b9c3db5f3d656cf1251e",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-postgres@sha256:04d291d4ad1cdc502e57a011260297bb342f7fdf65d6535a04c6ad49c04f2348",
+        "user": "postgres",
+        "readonly": false,
+        "memory_limit_bytes": 402653184
+      },
+      {
+        "service": "dispatcher",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 35
+      },
+      {
+        "service": "edge",
+        "image_id": "sha256:f77f856a30f0004200b36b322d61da17fade31e24875699d77fb968399b9eb77",
+        "image_reference": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728
+      },
+      {
+        "service": "gateway",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 35
+      },
+      {
+        "service": "scanner",
+        "image_id": "sha256:6acd5eeb5b5e902e6749c4bc5e7f4ea086a86cde296a0f59ce73eaec3a599e2f",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-clamav@sha256:d4f1b350d006258b2b2c5f51e3c712ecaffb22a12189cc7eb500bb182f9eadaf",
+        "user": "",
+        "readonly": false,
+        "memory_limit_bytes": 1610612736
+      },
+      {
+        "service": "web",
+        "image_id": "sha256:7d915b57965510f2511bc86a7aa722779b8d9465a448cc816a9b2e5226217fa4",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-web@sha256:a5686c0a31e3ffbccea9d90328220c2c28acc7ce74d1c5def06769fe0a0afe50",
+        "user": "1000:1000",
+        "readonly": true,
+        "memory_limit_bytes": 402653184
+      },
+      {
+        "service": "worker",
+        "image_id": "sha256:66b86cc4b2f5c21ca9ec3ca089675b6668748fdef88a5c60bb4ef7e1a3cda2d0",
+        "image_reference": "ghcr.io/ingaleee/mesh-showcase-api@sha256:6f4721698269cb40ab6bb7fc8e71e7826ca00ef00906f9e18f132c7cba9e11a9",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      }
+    ]
+  },
+  "scope": "Actual loopback HTTPS v2 inventory, restricted runtime, real private file scan and local exit-42 rollback. Host/run context is recorded separately; this loopback stand does not prove physical high availability."
+}

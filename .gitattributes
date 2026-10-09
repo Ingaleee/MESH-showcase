@@ -8,3 +8,4 @@ Dockerfile* text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
 docs/evidence/acceptance-oct08/** -text
+docs/evidence/reliability-oct09/** -text

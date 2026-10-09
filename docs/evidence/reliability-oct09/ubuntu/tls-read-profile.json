@@ -1,0 +1,1611 @@
+{
+  "checked_at": "2026-10-09T02:07:20.125Z",
+  "config": {
+    "arrival_rate_per_second": 10,
+    "duration_seconds": 30,
+    "maximum_in_flight": 8,
+    "maximum_unexpected_errors": 0,
+    "maximum_read_p95_ms": 750
+  },
+  "elapsed_seconds": 29.905068779,
+  "achieved_requests_per_second": 10.031744190826494,
+  "requests": 300,
+  "rejected_arrivals": 0,
+  "errors": 0,
+  "p50_ms": 4.783206000000064,
+  "p95_ms": 116.39606999999978,
+  "p99_ms": 453.73527599999943,
+  "containers": [
+    {
+      "BlockIO": "0B / 12.3kB",
+      "CPUPerc": "0.01%",
+      "Container": "d92d0700c6cc",
+      "ID": "d92d0700c6cc",
+      "MemPerc": "61.90%",
+      "MemUsage": "950.8MiB / 1.5GiB",
+      "Name": "mesh-showcase-release-scanner-1",
+      "NetIO": "1.57kB / 126B",
+      "PIDs": "5"
+    },
+    {
+      "BlockIO": "0B / 0B",
+      "CPUPerc": "2.77%",
+      "Container": "b90835e61e0b",
+      "ID": "b90835e61e0b",
+      "MemPerc": "36.90%",
+      "MemUsage": "141.7MiB / 384MiB",
+      "Name": "mesh-showcase-release-dispatcher-1",
+      "NetIO": "131kB / 77.2kB",
+      "PIDs": "4"
+    },
+    {
+      "BlockIO": "0B / 0B",
+      "CPUPerc": "2.00%",
+      "Container": "df66d7d13a29",
+      "ID": "df66d7d13a29",
+      "MemPerc": "61.87%",
+      "MemUsage": "396MiB / 640MiB",
+      "Name": "mesh-showcase-release-worker-1",
+      "NetIO": "286kB / 432kB",
+      "PIDs": "27"
+    },
+    {
+      "BlockIO": "0B / 0B",
+      "CPUPerc": "0.01%",
+      "Container": "175d302c7ff7",
+      "ID": "175d302c7ff7",
+      "MemPerc": "19.45%",
+      "MemUsage": "24.89MiB / 128MiB",
+      "Name": "mesh-showcase-release-gateway-1",
+      "NetIO": "2.88kB / 1.73kB",
+      "PIDs": "10"
+    },
+    {
+      "BlockIO": "0B / 0B",
+      "CPUPerc": "0.01%",
+      "Container": "845b60546637",
+      "ID": "845b60546637",
+      "MemPerc": "25.49%",
+      "MemUsage": "163.2MiB / 640MiB",
+      "Name": "mesh-showcase-release-api-1",
+      "NetIO": "459kB / 454kB",
+      "PIDs": "14"
+    },
+    {
+      "BlockIO": "0B / 0B",
+      "CPUPerc": "0.01%",
+      "Container": "4a33c194da01",
+      "ID": "4a33c194da01",
+      "MemPerc": "12.35%",
+      "MemUsage": "47.43MiB / 384MiB",
+      "Name": "mesh-showcase-release-web-1",
+      "NetIO": "2.84kB / 11.6kB",
+      "PIDs": "12"
+    },
+    {
+      "BlockIO": "0B / 770kB",
+      "CPUPerc": "3.37%",
+      "Container": "7eea64203e45",
+      "ID": "7eea64203e45",
+      "MemPerc": "14.81%",
+      "MemUsage": "56.88MiB / 384MiB",
+      "Name": "mesh-showcase-release-db-1",
+      "NetIO": "821kB / 999kB",
+      "PIDs": "19"
+    },
+    {
+      "BlockIO": "0B / 61.4kB",
+      "CPUPerc": "0.02%",
+      "Container": "de6e011b4955",
+      "ID": "de6e011b4955",
+      "MemPerc": "12.91%",
+      "MemUsage": "16.53MiB / 128MiB",
+      "Name": "mesh-showcase-release-edge-1",
+      "NetIO": "506kB / 794kB",
+      "PIDs": "10"
+    }
+  ],
+  "samples": [
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 11.859838999999965
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 28.59097799999995
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 18.916255999999976
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 53.39509300000009
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 20.06991599999992
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 119.55306100000007
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 31.309324999999944
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 16.37146400000006
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 23.340579999999818
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 77.30021899999997
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 11.282598000000007
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 251.35985199999982
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 173.14407000000006
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 180.547008
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 29.343573000000106
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 169.8850050000001
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 212.740272
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 126.93381399999998
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 72.29363999999987
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 43.994451000000026
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 59.04169400000001
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 57.68517299999985
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 30.48191100000031
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 45.70540299999993
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 174.17785700000013
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 116.39606999999978
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 78.63721099999975
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 11.869065000000319
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 9.777391999999963
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 18.262484999999742
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 5.9193890000001375
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 6.171562999999878
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 17.747059000000263
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 20.524719000000005
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 27.95662799999991
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 6.916220000000067
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 11.494104000000334
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 13.952841999999691
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 29.221559999999954
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 13.119163000000299
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 14.149325000000317
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 19.62367499999982
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 87.9020759999994
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 36.51019199999973
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 69.31557599999996
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 53.3207739999998
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 9.738792999999532
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 7.44398799999999
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 13.493865999999798
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 11.260777999999846
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.584785000000011
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.098257999999987
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 9.15376600000036
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 39.8917249999995
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 81.39526999999998
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.64549100000022
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 14.745764000000236
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 27.204069999999774
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.468072000000575
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.097178999999414
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.630860999999641
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 13.628749999999854
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 15.127651000000697
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 8.356596999999965
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 19.61946100000023
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 67.2645109999994
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 15.5708680000007
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.1109379999998055
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 9.199985999999626
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.1554669999995895
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 5.879769999999553
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.8241189999998824
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.915095000000292
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 7.224654999999984
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.021153000000595
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 5.066631000001507
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 7.845334999999977
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 7.4215039999999135
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 5.444440999999642
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 5.5177979999989475
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.290047000000413
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 37.74022599999989
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 7.82607199999984
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.047037000000273
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 13.316650999999183
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 12.091458999999304
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.57968400000027
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.749386999999842
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.446952000000238
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.898822999999538
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.630016000000978
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.357238000000507
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 22.737286999999924
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.672779999998966
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.65204199999971
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 5.33643900000061
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.532516000001124
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 8.525792999998885
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 22.481799999999566
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 5.069370000001072
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 8.350671000000148
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 486.2500880000007
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 489.34733700000106
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 453.73527599999943
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 259.52421200000026
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 468.0276410000006
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 178.64662700000008
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 378.6462480000009
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 107.07270100000096
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 18.86055699999997
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 53.26196399999935
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.7739830000009533
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.813867000000755
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.360389999999825
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.5673420000002807
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.80453899999884
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.823534999999538
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.998537999999826
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.793901999999434
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.5131299999993644
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.54118600000038
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.821230999999898
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.8427319999991596
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.045459999999366
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.8544309999997495
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.311031999999614
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.9504180000003544
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.1121519999996963
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.351759999999558
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.807893999999578
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.914436000000933
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.054663000000801
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.8544269999983953
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.072758000000249
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.015511999999944
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.4798050000008516
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 10.304188000000067
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.6860169999999925
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.030980999999883
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.702923999999257
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.8350419999987935
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.90919699999904
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.853297999999995
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.303765000000567
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.262894999999844
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 79.01375499999995
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.674360000000888
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.2982609999999113
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.311199000001579
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.471650000001318
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6471650000003137
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 5.6993480000001
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.824316000000181
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.128951000000598
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.986815000000206
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.431526999998823
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.840199999998731
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.322046000001137
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.927519000000757
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.4793029999964347
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.918506999998499
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.016195999996853
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 5.119116000001668
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.2996639999983017
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.375757000001613
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.87500799999907
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6344830000016373
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 7.254826000000321
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.604013000000123
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.001421000000846
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.338189000001876
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.5693329999994603
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.3068679999996675
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.488593999998557
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.9621750000005704
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.6272700000008626
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.242828999998892
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.284148999999161
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.675489000001107
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.6156649999975343
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.231293999997433
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 7.034382999998343
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.9213330000020505
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.9464459999981045
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.164248000000953
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 14.913909999999305
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.783206000000064
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.843813999999838
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.836272000000463
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.001832000001741
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.2119390000007115
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.849672999996983
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.7372620000023744
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.816915999999765
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.7513709999984712
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.055002000000968
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9889360000015586
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.996719000002486
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.4179890000013984
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.644580000000133
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.622025999997277
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.19065700000283
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.490991999999096
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.780370000000403
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.6556860000018787
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.71091399999932
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.4234249999972235
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.4633470000007947
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 10.125403999998525
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.844844999999623
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.373702000000776
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.1382120000016585
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.8790029999981925
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.431758999999147
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.7185309999986202
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.447316999998293
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.745842000000266
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 6.573152000000846
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.8423259999981383
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.5905449999991106
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.845898999999918
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.87362800000119
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.969101000002411
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.281089999996766
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 13.472588000000542
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 55.003421000001254
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.026464999999007
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.037306999998691
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 10.078894000002038
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 9.979933999999048
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 5.049466999997094
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.277701999999408
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.914819000001444
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.728330999998434
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.0016949999990175
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.4113739999993413
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9435039999989385
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.851636999999755
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6442190000016126
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.4920880000026955
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.5079450000012002
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.116006000000198
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6241319999971893
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.5580690000024333
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.6785190000009607
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.5481479999980365
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6237999999975727
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.10997000000134
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9390070000008564
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.813128999998298
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.8437190000004193
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.3388969999978144
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.641577000002144
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.501716999999189
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.1098259999998845
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.907351000001654
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.3941999999988184
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.031685000001744
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6864169999971637
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.879660999999032
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9013989999984915
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.871194999999716
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.4591509999991104
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.63827400000082
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.7994679999974323
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.8322210000005725
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 4.2723580000019865
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.63829700000133
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9820230000004813
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.215499999998428
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.9650460000011662
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.050452999999834
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.475188000000344
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 8.26316399999996
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.6259079999981623
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.597084000000905
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.81447499999922
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.674338000000716
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.497636000000057
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.6746899999998277
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.1537329999991925
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.256905999998708
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.4329059999981837
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.186521999999968
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.9656559999966703
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.585713000000396
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.344550000001618
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.3909459999995306
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.7011859999984154
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.339410000000498
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.721295999999711
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 4.550278999999136
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 3.987471000000369
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.709179999998014
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.5210820000029344
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.495236999999179
+    },
+    {
+      "route": "/api/v1/projects?limit=20",
+      "status": 200,
+      "elapsed_ms": 4.2780219999986
+    },
+    {
+      "route": "/api/v1/creators?limit=20",
+      "status": 200,
+      "elapsed_ms": 5.065685000001395
+    },
+    {
+      "route": "/api/v1/session",
+      "status": 200,
+      "elapsed_ms": 3.8401640000010957
+    },
+    {
+      "route": "/ready",
+      "status": 200,
+      "elapsed_ms": 3.446828000000096
+    }
+  ],
+  "scope": "Current loopback TLS release, existing synthetic business dataset, bounded arrival experiment on hosted Ubuntu. Reads only; no mixed-load capacity or sustained production SLO claim."
+}
