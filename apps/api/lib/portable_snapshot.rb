@@ -14,7 +14,9 @@ module PortableSnapshot
     created = false
     plain_created = false
     target = Pathname.new(target)
-    raise "Recovery directory already exists" if target.exist?
+    raise "Recovery directory already exists" if target.exist? || target.symlink?
+    parent = target.dirname.stat
+    raise "Recovery parent must be private or sticky" if parent.world_writable? && (parent.mode & 0o1000).zero?
     plain = target.to_s + ".authenticated.tar"
     RecoveryArchive.decrypt(archive, plain, key: key)
     plain_created = true
@@ -43,6 +45,7 @@ module PortableSnapshot
           file = target.join(entry.full_name.sub(/\A\.\//, ""))
           FileUtils.mkdir_p(file.dirname)
           File.open(file, File::WRONLY | File::CREAT | File::EXCL, 0o600) do |output|
+            output.binmode
             while (chunk = entry.read(65_536)) && !chunk.empty?
               output.write(chunk)
             end

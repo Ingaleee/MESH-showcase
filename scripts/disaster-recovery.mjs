@@ -18,7 +18,8 @@ const derive = (name) =>
     .digest("hex");
 for (const directory of ["", "transfer", "evidence", "partner-data"]) {
   await mkdir(path.join(root, directory), { recursive: true });
-  await chmod(path.join(root, directory), 0o777);
+  // Sticky root permits secure cleanup; public report subdirectories cross the host/container UID.
+  await chmod(path.join(root, directory), directory === "" ? 0o1777 : 0o777);
 }
 const variables = {
   MESH_DR_PROJECT: project,
