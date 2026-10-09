@@ -22,7 +22,8 @@
     "demo:publishing": "node scripts/run-publishing-demo.mjs",
     "test:evidence": "node scripts/check-publishing-evidence.mjs",
     "test:acceptance": "node scripts/check-hosted-acceptance.mjs",
-    "test:reliability:evidence": "node scripts/check-reliability-evidence.mjs"
+    "test:reliability:evidence": "node scripts/check-reliability-evidence.mjs",
+    "demo:partner-support": "node scripts/run-partner-support-drill.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

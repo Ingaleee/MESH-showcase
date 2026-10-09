@@ -464,7 +464,14 @@
           "type": "string"
         },
         "current_inputs_match": {
-          "type": "boolean"
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "correlation_id": {
           "type": "string"
@@ -507,6 +514,49 @@
         },
         "reproduce": {
           "type": "string"
+        },
+        "configuration_error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lease_until": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "action_code": {
+          "type": "string",
+          "enum": [
+            "inspect_confirmed",
+            "await_lease",
+            "lookup_only",
+            "restore_configuration",
+            "revalidate",
+            "await_dispatch",
+            "inspect_failure"
+          ]
+        },
+        "remote_state_queried": {
+          "type": "boolean",
+          "const": false
+        },
+        "support_update_en": {
+          "type": "string"
         }
       },
       "required": [
@@ -523,7 +573,13 @@
         "local_confirmed_at",
         "remote_sequence",
         "next_action",
-        "reproduce"
+        "reproduce",
+        "configuration_error",
+        "lease_until",
+        "observed_at",
+        "action_code",
+        "remote_state_queried",
+        "support_update_en"
       ],
       "additionalProperties": false
     }

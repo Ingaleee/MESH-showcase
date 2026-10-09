@@ -31,7 +31,11 @@ module Publishing
       unless refs.include?(partner.credential_ref)
         raise Platform::Error.new("PARTNER_CREDENTIAL_UNAVAILABLE", "Configure the approved credential reference.", status: 503)
       end
-      ENV.fetch("MESH_PARTNER_TOKEN_#{partner.credential_ref}")
+      value = ENV.fetch("MESH_PARTNER_TOKEN_#{partner.credential_ref}")
+      unless value.bytesize.between?(32, 256) && value.match?(/\A[!-~]+\z/)
+        raise Platform::Error.new("PARTNER_CREDENTIAL_UNAVAILABLE", "Configure a bounded printable partner credential.", status: 503)
+      end
+      value
     rescue KeyError
       raise Platform::Error.new("PARTNER_CREDENTIAL_UNAVAILABLE", "Partner credential is unavailable.", status: 503)
     end

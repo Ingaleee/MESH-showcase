@@ -66,15 +66,7 @@ module Api
 
       def diagnose
         deployment = Publishing::Deployment.where(partner_id: owned_partners.select(:id)).includes(:partner, candidate: :artifact_blob, validation: :candidate).find(params[:deployment_id])
-        render json: {
-          schema_version: 1, operation_id: deployment.id, state: deployment.state, artifact_sha256: deployment.candidate.artifact_sha256,
-          policy_version: deployment.validation.policy_version, input_fingerprint: deployment.validation.input_fingerprint,
-          current_inputs_match: Publishing::Settings.fingerprint(deployment.candidate) == deployment.validation.input_fingerprint,
-          correlation_id: deployment.correlation_id, attempts: deployment.attempts, last_error: deployment.last_error,
-          local_confirmed_at: deployment.confirmed_at, remote_sequence: deployment.remote_sequence,
-          next_action: deployment.state == "unknown" ? "Lookup remote state by the same operation ID; do not create another POST." : "Inspect the validation report and release history.",
-          reproduce: "mesh-publish diagnose #{deployment.id}"
-        }
+        render json: Publishing::DeploymentDiagnostic.call(deployment: deployment)
       end
 
       def reconcile

@@ -459,8 +459,22 @@ export default function PublishingPage() {
                         <dt>Последний код</dt>
                         <dd>{diagnostic.last_error ?? "—"}</dd>
                         <dt>Входы проверки актуальны</dt>
-                        <dd>{diagnostic.current_inputs_match ? "Да" : "Нет"}</dd>
+                        <dd>
+                          {diagnostic.current_inputs_match === null
+                            ? "Недоступно"
+                            : diagnostic.current_inputs_match
+                              ? "Да"
+                              : "Нет"}
+                        </dd>
+                        <dt>Конфигурация</dt>
+                        <dd>{diagnostic.configuration_error ?? "Доступна"}</dd>
+                        <dt>Состояние партнёра</dt>
+                        <dd>Не запрашивалось этим отчётом</dd>
                       </dl>
+                      <details>
+                        <summary>Сообщение для партнёра · EN</summary>
+                        <p>{diagnostic.support_update_en}</p>
+                      </details>
                       <code>{diagnostic.reproduce}</code>
                       <small>Correlation: {diagnostic.correlation_id}</small>
                     </aside>

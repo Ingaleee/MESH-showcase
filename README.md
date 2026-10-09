@@ -144,3 +144,5 @@ docker build -t mesh-web -f infra/Dockerfile.web .
 Образы работают от пользователя без root. Миграции запускаются отдельно ролью владельца; API должен использовать ограниченную роль по образцу `infra/runtime-role.sql`. Production требует `SECRET_KEY_BASE`, URL двух баз, HTTPS `MESH_PUBLIC_ORIGIN` и длинный `MESH_METRICS_TOKEN`; платёжные команды по умолчанию отключены. Для демонстрационного production-стенда нужно явно выбрать `MESH_PAYMENTS_MODE=sandbox`.
 
 Подготовлен GitHub Actions workflow, но публикация репозитория, запуск GitHub CI и внешний deployment в этой работе не выполнялись. Email verification, password recovery, организации, лицензирование контента, этапы оплаты, реальный PSP, распределённое ограничение частоты входа и долговременная политика хранения данных требуют отдельного продуктового и эксплуатационного этапа.
+
+[Проверка по вакансии BGaming](docs/vacancy-readiness.md) связывает каждый навык с реализацией, доказательством и границей. [EN partner support guide](docs/partner-support.md) и npm run demo:partner-support показывают настоящую HTTP-ротацию ключа и безопасную работу с неопределённым исходом.

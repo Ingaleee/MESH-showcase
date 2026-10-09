@@ -54,6 +54,11 @@ test("operator uploads, validates and publishes real private artifacts on respon
   await page.getByRole("button", { name: "Диагностика", exact: true }).first().click();
   await expect(page.locator(".pub-diagnostic")).toContainText("Входы проверки актуальны");
   await expect(page.locator(".pub-diagnostic")).toContainText("Да");
+  await expect(page.locator(".pub-diagnostic")).toContainText("Не запрашивалось этим отчётом");
+  await page.getByText("Сообщение для партнёра · EN", { exact: true }).click();
+  await expect(page.locator(".pub-diagnostic")).toContainText(
+    "Remote state was not queried by this report.",
+  );
   const directory = (process.env.MESH_EVIDENCE_DIR ?? ".cache/browser-evidence") + "/publishing-ui";
   await mkdir(directory, { recursive: true });
   const layouts = [];

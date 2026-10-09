@@ -1088,7 +1088,7 @@ export interface components {
             artifact_sha256: string;
             policy_version: string;
             input_fingerprint: string;
-            current_inputs_match: boolean;
+            current_inputs_match: boolean | null;
             correlation_id: string;
             attempts: number;
             last_error: string | null;
@@ -1096,6 +1096,15 @@ export interface components {
             remote_sequence: number | null;
             next_action: string;
             reproduce: string;
+            configuration_error: string | null;
+            lease_until: string | null;
+            /** Format: date-time */
+            observed_at: string;
+            /** @enum {string} */
+            action_code: "inspect_confirmed" | "await_lease" | "lookup_only" | "restore_configuration" | "revalidate" | "await_dispatch" | "inspect_failure";
+            /** @constant */
+            remote_state_queried: false;
+            support_update_en: string;
         };
     };
     responses: never;

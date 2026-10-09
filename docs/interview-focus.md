@@ -13,7 +13,7 @@
 | Frontend / разные языки        | TypeScript Next.js UI, отдельный Node partner, 13 full browser scenarios                                                               |
 | AI tools / коммуникация        | Проверяемые гипотезы, сохранённые failures, postmortem; кандидат объясняет свои решения сам                                            |
 
-[Фактический статус](execution-status.md), [демо на 15 минут](interview-demo.md), [Publishing architecture](publishing-lab.md), [Kubernetes evidence](kubernetes-live-lab.md) определяют уже подтверждённые утверждения.
+[Сопоставление с вакансией](vacancy-readiness.md), [EN partner guide](partner-support.md), [Фактический статус](execution-status.md), [демо на 15 минут](interview-demo.md), [Publishing architecture](publishing-lab.md), [Kubernetes evidence](kubernetes-live-lab.md) определяют уже подтверждённые утверждения.
 
 ## Следующие внешние шаги
 

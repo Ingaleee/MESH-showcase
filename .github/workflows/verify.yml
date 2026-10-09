@@ -118,6 +118,8 @@ jobs:
           '
       - name: Real partner, lost response and immutable artifact drill
         run: node scripts/run-publishing-demo.mjs
+      - name: Real partner credential rotation, lease fencing and safe support
+        run: npm run demo:partner-support
       - name: Publishing DB, queue, private bytes and authenticated recovery
         run: node scripts/check-publishing-continuity.mjs
       - name: Prepare live telemetry for this isolated CI network
