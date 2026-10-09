@@ -11,6 +11,8 @@ x-ruby: &ruby
     - ${MESH_DR_ROOT:?Set recovery directory}:/recovery
   environment: &ruby-env
     RAILS_ENV: production
+    RAILS_MAX_THREADS: "6"
+    MESH_API_CONCURRENCY: "5"
     HOME: /tmp
     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_production
@@ -66,6 +68,19 @@ services:
     <<: *ruby
     command: [bundle, exec, rails, server, -b, 0.0.0.0, -p, "3000"]
     ports: ["127.0.0.1:3251:3000"]
+    depends_on:
+      db: {condition: service_healthy}
+      storage-init: {condition: service_completed_successfully}
+  worker:
+    <<: *ruby
+    command: [bundle, exec, ruby, bin/jobs]
+    stop_grace_period: 35s
+    depends_on:
+      db: {condition: service_healthy}
+      storage-init: {condition: service_completed_successfully}
+  dispatcher:
+    <<: *ruby
+    command: [bundle, exec, ruby, script/dispatcher.rb]
     depends_on:
       db: {condition: service_healthy}
       storage-init: {condition: service_completed_successfully}

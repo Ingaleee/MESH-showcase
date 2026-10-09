@@ -52,6 +52,12 @@ assert.equal(workload.phases.length, 5);
 assert.equal(workload.phases[0].dropped_arrivals, 0);
 assert.ok(workload.phases[0].p95_ms < workload.config.baseline_max_p95_ms);
 assert.ok(workload.samples.some((sample) => sample.status === 429));
+assert.ok(
+  workload.telemetry.some((sample) => sample.pg?.lock_waiters > 0 && sample.containers?.length > 0),
+);
+assert.ok(
+  Object.keys(workload.phases[0].statuses).every((status) => ["200", "201"].includes(status)),
+);
 for (const key of ["projects", "events", "processed", "notifications"])
   assert.equal(workload.verified[key], workload.commands);
 assert.equal(workload.verified.duplicate_events + workload.verified.duplicate_effects, 0);
@@ -84,6 +90,16 @@ for (const flag of [
 ])
   assert.equal(restored[flag], true);
 assert.ok(restored.private_objects_verified > 0);
+assert.equal(restored.runtime_database_role, "mesh_runtime");
+assert.equal(restored.post_restore_notification_effects, 1);
+assert.equal(restored.external_post_count_after_workers, restored.external_post_count_before);
+for (const flag of [
+  "runtime_private_http_artifact_verified",
+  "anonymous_private_download_denied",
+  "background_processing_resumed",
+  "post_restore_command_replayed_once",
+])
+  assert.equal(restored[flag], true);
 for (const flag of ["wrong_key", "truncated", "tampered", "missing_object"])
   assert.equal(restored.negative_controls[flag], true);
 const isolation = accepted.recovery.files["vm-isolation.json"];

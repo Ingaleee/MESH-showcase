@@ -198,6 +198,7 @@ when "verify"
     primary_tables_verified: metadata.fetch("primary_counts").size, queue_tables_verified: metadata.fetch("queue_counts").size,
     private_objects_verified: metadata.fetch("blobs").size, private_bytes_verified: metadata.fetch("blobs").sum { |blob| blob.fetch("size") },
     restored_pending_reconciled: true, private_http_artifact_verified: true, callback_replay_deduplicated: true,
+    private_candidate_id: candidate.id, private_artifact_sha256: candidate.artifact_sha256,
     external_post_count_before: count.call(before), external_post_count_after: count.call(after),
     post_snapshot_local_marker_lost_as_declared: true, negative_controls: JSON.parse(root.join("negative-controls.json").read),
     source_snapshot_at: metadata.fetch("snapshot_at"), source_revision: ENV.fetch("MESH_RELEASE_REVISION"),

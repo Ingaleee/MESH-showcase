@@ -3,6 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdir, readFile, writeFile, chmod } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
+import { verifyRecoveredRuntime } from "./recovery-runtime-probe.mjs";
 assert.equal(process.env.GITHUB_ACTIONS, "true");
 const mode = process.argv[2];
 assert.ok(["source", "target"].includes(mode));
@@ -50,10 +51,21 @@ const compose = [
   "-p",
   project,
 ];
-function dc(args) {
-  const result = spawnSync("docker", [...compose, ...args], { stdio: "inherit", timeout: 420000 });
+function dc(args, capture = false) {
+  const result = spawnSync("docker", [...compose, ...args], {
+    stdio: capture ? "pipe" : "inherit",
+    encoding: "utf8",
+    timeout: 420000,
+    maxBuffer: 4 * 1024 * 1024,
+  });
   if (result.error || result.status !== 0)
-    throw result.error ?? Error("Recovery command failed: " + args[0]);
+    throw (
+      result.error ??
+      Error(
+        "Recovery command failed: " + args[0] + (capture ? ": " + result.stderr.slice(-1000) : ""),
+      )
+    );
+  return capture ? result.stdout.trim() : undefined;
 }
 const tool = (action) =>
   dc(["run", "--rm", "tools", "bundle", "exec", "ruby", "script/disaster_recovery.rb", action]);
@@ -104,8 +116,9 @@ try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
     assert.equal(status, 200);
-    const rto = Date.now() - began;
     const restored = JSON.parse(await readFile(path.join(root, "evidence/restored.json"), "utf8"));
+    await verifyRecoveredRuntime({ dc, root, restored });
+    const rto = Date.now() - began;
     restored.rto_ms = rto;
     restored.rto_target_ms = 900000;
     restored.fresh_runtime_readiness_http = status;
