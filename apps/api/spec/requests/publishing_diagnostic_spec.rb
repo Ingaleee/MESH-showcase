@@ -50,7 +50,7 @@ RSpec.describe "Publishing support diagnostic", type: :request do
 
   it "fails closed for empty, oversized and header-breaking credentials while keeping the report readable" do
     partner, deployment = operation
-    [ "", "a" * 257, "a" * 32 + "\n" ].each do |value|
+    [ "", "a" * 257, "a" * 32 + "\n", ("a" * 32 + [ 255 ].pack("C")).force_encoding("UTF-8") ].each do |value|
       ENV["MESH_PARTNER_TOKEN_SHOWCASE"] = value
       expect { Publishing::Settings.token(partner) }.to raise_error(Platform::Error) { |error| expect(error.code).to eq("PARTNER_CREDENTIAL_UNAVAILABLE") }
       expect(diagnose(deployment)).to include("current_inputs_match" => nil, "configuration_error" => "PARTNER_CREDENTIAL_UNAVAILABLE")
