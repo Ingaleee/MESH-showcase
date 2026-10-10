@@ -1,0 +1,103 @@
+#!/usr/bin/env ruby
+require "json"
+require "securerandom"
+require "uri"
+require "active_support/core_ext/object/blank"
+require_relative "../packs/platform/app/services/platform/http_client"
+
+class PublishingCLI
+  def initialize
+    origin = ENV.fetch("MESH_DEMO_ORIGIN", "http://localhost:3200")
+    uri = URI(origin)
+    local = %w[localhost 127.0.0.1].include?(uri.hostname)
+    @http = Platform::HttpClient.new(origin: origin, allow_http: local, ca_file: ENV["MESH_DEMO_CA_FILE"], deadline: 8, request_limit: 2_100_000, response_limit: 200_000)
+    @cookie, @csrf = "", ""
+    @key = ENV.fetch("MESH_COMMAND_KEY", SecureRandom.uuid)
+  end
+
+  def authenticate
+    session = request(:get, "/session")
+    @csrf = session.fetch("csrf_token")
+    session = request(:post, "/session", body: { session: {
+      email: ENV.fetch("MESH_DEMO_EMAIL", "ops@mesh.local"), password: ENV.fetch("MESH_DEMO_PASSWORD")
+    } })
+    @csrf = session.fetch("csrf_token")
+    @authenticated = true
+  end
+
+  def call(args, print_result: true)
+    @key = ENV.fetch("MESH_COMMAND_KEY", SecureRandom.uuid)
+    command = args.shift
+    authenticate unless @authenticated
+    result = case command
+    when "list"
+      request(:get, "/publishing")
+    when "register"
+      request(:post, "/publishing/partners", body: { partner: {
+        name: args.fetch(0, "MESH Demo Studio"), origin: ENV.fetch("MESH_DEMO_PARTNER_ORIGIN", "http://partner:3216"), credential_ref: "SHOWCASE"
+      } })
+    when "submit"
+      partner, zip_file, manifest_file = args
+      raise ArgumentError, "submit PARTNER_ID ZIP_FILE MANIFEST_FILE" unless manifest_file
+      raise ArgumentError, "Package too large" if File.size(zip_file) > 2_000_000 || File.size(manifest_file) > 16_384
+      manifest = File.binread(manifest_file)
+      JSON.parse(manifest, max_nesting: 10)
+      boundary = "mesh-#{SecureRandom.hex(16)}"
+      raw = "--#{boundary}\r\nContent-Disposition: form-data; name=\"manifest\"\r\n\r\n#{manifest}\r\n".b
+      raw << "--#{boundary}\r\nContent-Disposition: form-data; name=\"artifact\"; filename=\"package.zip\"\r\nContent-Type: application/zip\r\n\r\n".b
+      raw << File.binread(zip_file)
+      raw << "\r\n--#{boundary}--\r\n".b
+      request(:post, "/publishing/partners/#{uuid(partner)}/candidates", raw_body: raw, content_type: "multipart/form-data; boundary=#{boundary}")
+    when "validate"
+      request(:post, "/publishing/candidates/#{uuid(args.fetch(0))}/validate", body: {})
+    when "publish", "rollback"
+      candidate, validation = uuid(args.fetch(0)), uuid(args.fetch(1))
+      data = { validation_id: validation }
+      data[:scenario] = args.fetch(2, "normal") if command == "publish"
+      data[:rollback_of_id] = uuid(args.fetch(2)) if command == "rollback"
+      request(:post, "/publishing/candidates/#{candidate}/publish", body: data)
+    when "diagnose"
+      request(:get, "/publishing/deployments/#{uuid(args.fetch(0))}/diagnose")
+    when "reconcile"
+      request(:post, "/publishing/deployments/#{uuid(args.fetch(0))}/reconcile", body: {})
+    else
+      raise ArgumentError, "Use list/register/submit/validate/publish/rollback/diagnose/reconcile."
+    end
+    result = result.merge("command_key" => @key)
+    puts JSON.pretty_generate(result) if print_result
+    result
+  end
+
+  private
+
+  def uuid(value)
+    raise ArgumentError, "Expected a UUID" unless value.to_s.match?(/\A[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\z/)
+    value
+  end
+
+  def request(method, path, body: nil, raw_body: nil, content_type: "application/json")
+    response = @http.request(
+      method: method, path: "/api/v1#{path}", body: body, raw_body: raw_body, content_type: content_type,
+      headers: { "Cookie" => @cookie, "X-CSRF-Token" => @csrf, "Idempotency-Key" => @key }, statuses: [ 200, 201, 202, 400, 401, 403, 404, 409, 413, 422, 429, 503 ]
+    )
+    cookies = response.headers["set-cookie"]
+    @cookie = cookies.map { |value| value.split(";", 2).first }.join("; ") if cookies&.any?
+    if response.status >= 400
+      code = response.body&.fetch("code", nil) || "HTTP_#{response.status}"
+      raise Platform::HttpClient::Failure.new(code, status: response.status)
+    end
+    response.body
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  begin
+    PublishingCLI.new.call(ARGV)
+  rescue Platform::HttpClient::Failure => error
+    warn JSON.generate(code: error.code, status: error.status)
+    exit 1
+  rescue KeyError, ArgumentError, Errno::ENOENT
+    warn JSON.generate(code: "CLI_INPUT_INVALID", message: "Check the command arguments and configured credentials.")
+    exit 2
+  end
+end

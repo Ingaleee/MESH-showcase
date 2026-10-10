@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-08T10:28:40.344Z",
+  "operation": "deploy",
+  "environment": "mesh-showcase-release",
+  "migration_reverted": false,
+  "release": {
+    "schema_version": 1,
+    "project": "mesh-showcase-release",
+    "created_at": "2026-10-08T10:28:39.166Z",
+    "revision": null,
+    "source_tree_sha256": "04a8688e5b868334be1d95ce7e1b0c447442dbced19ebb0e8c769a778486dfb0",
+    "working_tree_dirty": true,
+    "images": {
+      "api": "sha256:dcf21783dd6d48564125cdc3a1acf3e6aee8488d60a0e6030a0c7caec6138fa3",
+      "web": "sha256:c3c6d8557e11d433860108f4f7fd80631b350bf16224eac4d274739aca39bf47"
+    },
+    "schema_rollback": "Never automatic; use backward-compatible migrations."
+  },
+  "success": false,
+  "failure": "curl --silent failed (60)."
+}

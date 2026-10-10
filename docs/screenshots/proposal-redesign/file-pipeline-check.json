@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-07T12:47:23.773Z",
+  "actualClamAV": true,
+  "projectId": "d614c01b-7ef3-49d9-84b8-7bde4d7ed86e",
+  "fileId": "a05da33c-890a-4699-ba28-61b6284d6756",
+  "state": "available",
+  "clientDownloadStatus": 200,
+  "byteSize": 68,
+  "sha256": "b313917648e5d3464379af335f137e00b8bc336e3c1e6a09b440aa464a43a11d",
+  "guestDownloadStatus": 401,
+  "publicProposals": 0,
+  "scope": "Real local scanner, Solid Queue dispatcher and worker, authenticated customer download. Existing isolated E2E fixture; no changes to the coffee demo."
+}

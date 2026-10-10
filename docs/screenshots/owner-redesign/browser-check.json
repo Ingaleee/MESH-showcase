@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-10-07T16:42:14.516Z",
+  "route": "/projects/aed62a01-5ee3-4981-8550-b8f234af31b7",
+  "sizes": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 390,
+      "state": "list",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "list",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "drawer",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "state": "drawer",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "confirmationOnly": true
+}

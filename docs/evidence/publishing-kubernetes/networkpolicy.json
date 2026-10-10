@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-08T13:53:11.055Z",
+  "context": "k3d-mesh-showcase",
+  "real_cni": true,
+  "api_ip": "10.43.67.95",
+  "partner_ip": "172.25.0.3",
+  "db_ip": "172.25.0.2",
+  "probes": [
+    {
+      "name": "mesh-network-approved",
+      "api_http": 200,
+      "database_tcp": "connected"
+    },
+    {
+      "name": "mesh-network-untrusted",
+      "api_ingress": "denied",
+      "partner_positive_control": 200
+    },
+    {
+      "name": "mesh-network-egress",
+      "partner_egress": "denied"
+    }
+  ],
+  "success": true,
+  "scope": "Actual pod-to-service ingress and pod-to-private-Docker-network egress enforced by K3s network-policy controller, with positive HTTP and DB controls. Port-forward is not used as policy evidence. One local node is not physical HA."
+}

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-07T11:54:39.535Z",
+  "url": "http://localhost:3100/projects/e6ce59a0-be36-44d7-961d-05229c91d047",
+  "errors": [],
+  "failed": [],
+  "broken": [],
+  "sizes": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ]
+}
