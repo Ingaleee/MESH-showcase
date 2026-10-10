@@ -1,0 +1,61 @@
+{
+  "app_source_scope": "MESH-showcase only; original API stale runtime PID cleared after Docker host failure",
+  "production_demo_running": false,
+  "production_volumes_retained": true,
+  "checked_at": "2026-10-08T11:52:32.4970598Z",
+  "showcase_http_status": "200",
+  "services": [
+    {
+      "image": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a",
+      "running": true,
+      "health": null,
+      "service": "web"
+    },
+    {
+      "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9",
+      "running": true,
+      "health": null,
+      "service": "gateway"
+    },
+    {
+      "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9",
+      "running": true,
+      "health": "healthy",
+      "service": "api"
+    },
+    {
+      "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9",
+      "running": true,
+      "health": null,
+      "service": "dispatcher"
+    },
+    {
+      "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9",
+      "running": true,
+      "health": null,
+      "service": "worker"
+    },
+    {
+      "image": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+      "running": true,
+      "health": null,
+      "service": "edge"
+    },
+    {
+      "image": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
+      "running": true,
+      "health": "healthy",
+      "service": "db"
+    },
+    {
+      "image": "sha256:d97f5ef70fbe9f1f8e5490278082067f16f5824eca2eb4176f4df3748a45a4c2",
+      "running": true,
+      "health": "healthy",
+      "service": "scanner"
+    }
+  ],
+  "original_http_status": "200",
+  "original_origin": "http://localhost:3100",
+  "payouts_enabled": false,
+  "showcase_origin": "http://localhost:3200"
+}

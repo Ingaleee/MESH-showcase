@@ -1,0 +1,264 @@
+{
+  "checked_at": "2026-10-08T14:34:59Z",
+  "environment": "mesh-showcase",
+  "phases": {
+    "defective_candidate": {
+      "candidate_id": "15523f40-adf5-49b0-9f29-0b36b36ce586",
+      "state": "rejected",
+      "publish_blocked": true,
+      "checks": [
+        {
+          "ok": true,
+          "fix": "Upload a new candidate; stored bytes must match its immutable digest.",
+          "code": "ARTIFACT_DIGEST",
+          "expected": "dec385f1d946f9cd320ec905cfaa9aeb2410c42c180c572e3bf7123ddf604153",
+          "observed": "dec385f1d946f9cd320ec905cfaa9aeb2410c42c180c572e3bf7123ddf604153"
+        },
+        {
+          "ok": true,
+          "fix": "Use the documented manifest-v1 fields and contract version.",
+          "code": "MANIFEST_SCHEMA",
+          "expected": "manifest-v1 / index.html / 1..16 files",
+          "observed": "valid"
+        },
+        {
+          "ok": true,
+          "fix": "Remove duplicates, unsafe paths and unsupported metadata.",
+          "code": "MANIFEST_FILES",
+          "expected": "unique relative files with size and SHA-256",
+          "observed": "valid"
+        },
+        {
+          "ok": false,
+          "fix": "Regenerate the manifest from the actual file bytes.",
+          "code": "FILE_DIGEST",
+          "expected": "0000000000000000000000000000000000000000000000000000000000000000",
+          "observed": "mismatch"
+        },
+        {
+          "ok": true,
+          "fix": "Include index.html and remove undeclared or duplicate entries.",
+          "code": "ZIP_INVENTORY",
+          "expected": "exactly the declared files including index.html",
+          "observed": "matched"
+        }
+      ]
+    },
+    "normal_release": {
+      "id": "412fd1ae-aa75-4735-9d0c-82c4a1c55daa",
+      "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+      "candidate_id": "5b4d53ba-bd16-4358-b3ea-8328576e4a2b",
+      "validation_id": "ad43abc6-febd-48e3-9dc6-0336491ce2fa",
+      "kind": "publish",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 10,
+      "confirmed_at": "2026-10-08T14:35:17.413Z",
+      "created_at": "2026-10-08T14:35:15.987Z",
+      "correlation_id": "c79906f7-6485-480d-8a81-a723f51ecaa5",
+      "rollback_of_id": null,
+      "artifact_sha256": "b09d19fbde05b6ca1a1fd6d61901bc1c2122a30146fa9d106df2ef1f4e95a8c7"
+    },
+    "lost_response": {
+      "unknown": {
+        "id": "d5042256-7708-495b-bd7a-b2f7db293d04",
+        "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+        "candidate_id": "2bc65f8a-a249-404f-a676-9e3fdac95184",
+        "validation_id": "bbbe45cf-1953-45f7-91cd-a1936be2faaf",
+        "kind": "publish",
+        "state": "unknown",
+        "last_error": "HTTP_TIMEOUT",
+        "attempts": 1,
+        "remote_sequence": null,
+        "confirmed_at": null,
+        "created_at": "2026-10-08T14:35:20.771Z",
+        "correlation_id": "11aa8012-0a70-4474-a1d9-bfed1d2bd483",
+        "rollback_of_id": null
+      },
+      "diagnostic": {
+        "schema_version": 1,
+        "operation_id": "d5042256-7708-495b-bd7a-b2f7db293d04",
+        "state": "unknown",
+        "artifact_sha256": "87c727b4fb521839b6a81c84703e9b93b829744c56c990b9b06fa82375496eef",
+        "policy_version": "publishing-v1",
+        "input_fingerprint": "b79f71d461862ee6d3b1088c21e6443c35605006d33cdef38067ff962bc8af1b",
+        "current_inputs_match": true,
+        "correlation_id": "11aa8012-0a70-4474-a1d9-bfed1d2bd483",
+        "attempts": 1,
+        "last_error": "HTTP_TIMEOUT",
+        "local_confirmed_at": null,
+        "remote_sequence": null,
+        "next_action": "Lookup remote state by the same operation ID; do not create another POST.",
+        "reproduce": "mesh-publish diagnose d5042256-7708-495b-bd7a-b2f7db293d04",
+        "command_key": "04c0d99f-bbc8-47e0-95b5-be64e7b290b9"
+      },
+      "recovered": {
+        "id": "d5042256-7708-495b-bd7a-b2f7db293d04",
+        "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+        "candidate_id": "2bc65f8a-a249-404f-a676-9e3fdac95184",
+        "validation_id": "bbbe45cf-1953-45f7-91cd-a1936be2faaf",
+        "kind": "publish",
+        "state": "confirmed",
+        "last_error": null,
+        "attempts": 2,
+        "remote_sequence": 11,
+        "confirmed_at": "2026-10-08T14:35:27.778Z",
+        "created_at": "2026-10-08T14:35:20.771Z",
+        "correlation_id": "11aa8012-0a70-4474-a1d9-bfed1d2bd483",
+        "rollback_of_id": null
+      },
+      "artifact_sha256": "87c727b4fb521839b6a81c84703e9b93b829744c56c990b9b06fa82375496eef"
+    },
+    "rollback": {
+      "id": "3c59dd12-d794-4573-8472-33ac2c441c40",
+      "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+      "candidate_id": "5b4d53ba-bd16-4358-b3ea-8328576e4a2b",
+      "validation_id": "ad43abc6-febd-48e3-9dc6-0336491ce2fa",
+      "kind": "rollback",
+      "state": "confirmed",
+      "last_error": null,
+      "attempts": 1,
+      "remote_sequence": 12,
+      "confirmed_at": "2026-10-08T14:35:29.945Z",
+      "created_at": "2026-10-08T14:35:28.871Z",
+      "correlation_id": "02e7cccb-cefc-4cc3-9472-a60a1a3211a0",
+      "rollback_of_id": "412fd1ae-aa75-4735-9d0c-82c4a1c55daa",
+      "artifact_sha256": "b09d19fbde05b6ca1a1fd6d61901bc1c2122a30146fa9d106df2ef1f4e95a8c7"
+    }
+  },
+  "partner_id": "dc960dff-862d-4348-a421-25addb919934",
+  "success": true,
+  "scope": "Real authenticated API + ordinary dispatcher/worker + ClamAV + independent SQLite partner; no external studio or uploaded code execution.",
+  "remote_publish_requests": 3,
+  "downloads": [
+    {
+      "phase": "normal_release",
+      "bytes": 234,
+      "sha256": "b09d19fbde05b6ca1a1fd6d61901bc1c2122a30146fa9d106df2ef1f4e95a8c7",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "lost_response",
+      "bytes": 234,
+      "sha256": "87c727b4fb521839b6a81c84703e9b93b829744c56c990b9b06fa82375496eef",
+      "private_authenticated_download": true
+    },
+    {
+      "phase": "rollback",
+      "bytes": 234,
+      "sha256": "b09d19fbde05b6ca1a1fd6d61901bc1c2122a30146fa9d106df2ef1f4e95a8c7",
+      "private_authenticated_download": true
+    }
+  ],
+  "partner_state_after": {
+    "deployments": {
+      "count": 12
+    },
+    "active": {
+      "operation_id": "3c59dd12-d794-4573-8472-33ac2c441c40",
+      "artifact_sha256": "b09d19fbde05b6ca1a1fd6d61901bc1c2122a30146fa9d106df2ef1f4e95a8c7",
+      "sequence": 12
+    },
+    "requests": [
+      {
+        "route": "contract",
+        "count": 9
+      },
+      {
+        "route": "lookup",
+        "count": 3
+      },
+      {
+        "route": "publish",
+        "count": 12
+      }
+    ],
+    "callbacks": [
+      {
+        "event_id": "96bc9cfa-7d9a-425b-89bc-dde04ff7ff52",
+        "operation_id": "d5042256-7708-495b-bd7a-b2f7db293d04",
+        "attempts": 0,
+        "last_status": null,
+        "delivered_at": null
+      },
+      {
+        "event_id": "f9a06d29-bfba-4833-8e10-5218ca6451e8",
+        "operation_id": "3c59dd12-d794-4573-8472-33ac2c441c40",
+        "attempts": 0,
+        "last_status": null,
+        "delivered_at": null
+      },
+      {
+        "event_id": "35de3b08-b29a-4039-8de5-a4de4e216915",
+        "operation_id": "412fd1ae-aa75-4735-9d0c-82c4a1c55daa",
+        "attempts": 2,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "78f91713-6106-400c-be2d-2798f736652f",
+        "operation_id": "5498dd72-6a28-46ef-a4f2-6f391312cea4",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "4157694b-63af-4106-8262-0230e9e8a6f6",
+        "operation_id": "e37544cc-ee65-4037-b37c-eae991ab3670",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "1502c30d-2dd3-425e-a50e-f55c5f2148e1",
+        "operation_id": "27937980-4a4a-4308-89e1-d72ca2eed385",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "7ba7b173-91a6-4225-b52f-3171ba70c797",
+        "operation_id": "f2de7476-45f9-4fba-9334-20e42cc7f422",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "e0cb77a4-bcc9-4e85-b711-7086793a2802",
+        "operation_id": "6f7e571f-0f1c-4ade-9bd6-f9bd058f2a90",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "b6e4dff2-e5fc-4153-9280-dec8346893b1",
+        "operation_id": "ea6bb6ad-6b42-45ce-9999-939620a33812",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "6505e9c4-dd3b-420f-b5dc-ba3294d081d9",
+        "operation_id": "54a0af27-0869-44c4-bee9-62ae58436b00",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "cc425a53-401c-42a7-b7bc-f798cff102ef",
+        "operation_id": "2c91cb7f-b106-40bc-980c-fb40b7c1772d",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      },
+      {
+        "event_id": "316b355c-6e5d-4d1f-8f13-e71be9e1c2a5",
+        "operation_id": "2a9168b9-956a-46a8-b93f-c440335c1bc9",
+        "attempts": 5,
+        "last_status": 422,
+        "delivered_at": null
+      }
+    ]
+  }
+}

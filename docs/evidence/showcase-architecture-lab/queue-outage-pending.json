@@ -1,0 +1,9 @@
+{
+  "unavailable_snapshot": {
+    "available": false
+  },
+  "state": "pending",
+  "claim_cleared": true,
+  "error_recorded": true,
+  "checked_at": "2026-10-08T10:57:07Z"
+}

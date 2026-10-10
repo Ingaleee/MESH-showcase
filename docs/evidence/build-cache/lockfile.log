@@ -1,0 +1,117 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.web
+#1 transferring dockerfile: 1.38kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 284B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [build 1/8] FROM docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9
+#5 resolve docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9
+#5 resolve docker.io/library/node:22-bookworm-slim@sha256:48e4b67d85f87bd551df43704e24d252f56cc5f8e9718841aace50f19948f0f9 0.0s done
+#5 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 60.86kB 0.0s done
+#4 DONE 0.0s
+
+#6 [build 2/8] WORKDIR /app
+#6 CACHED
+
+#7 [build 3/8] COPY package.json package-lock.json ./
+#7 DONE 1.3s
+
+#8 [build 4/8] COPY apps/web/package.json apps/web/package.json
+#8 DONE 0.0s
+
+#9 [build 5/8] RUN npm ci --ignore-scripts
+#9 22.69 
+#9 22.69 added 82 packages, and audited 84 packages in 22s
+#9 22.69 
+#9 22.69 17 packages are looking for funding
+#9 22.69   run `npm fund` for details
+#9 22.69 
+#9 22.69 found 0 vulnerabilities
+#9 22.70 npm notice
+#9 22.70 npm notice New major version of npm available! 10.9.8 -> 12.2.0
+#9 22.70 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#9 22.70 npm notice To update run: npm install -g npm@12.2.0
+#9 22.70 npm notice
+#9 DONE 25.6s
+
+#10 [build 6/8] COPY apps/web/ apps/web/
+#10 DONE 0.6s
+
+#11 [build 7/8] COPY contracts/ contracts/
+#11 DONE 0.0s
+
+#12 [build 8/8] RUN npm run build --workspace @mesh/web
+#12 0.553 
+#12 0.553 > @mesh/web@0.1.0 build
+#12 0.553 > next build --webpack
+#12 0.553 
+#12 1.028 ▲ Next.js 16.4.0 (webpack)
+#12 1.123 ✓ Running next.config.ts took 93ms
+#12 1.142 
+#12 1.168   Creating an optimized production build ...
+#12 17.71 ✓ Compiled successfully in 14.1s
+#12 17.71   Running TypeScript ...
+#12 23.10   Finished TypeScript in 5.4s ...
+#12 23.10   Collecting page data using 8 workers ...
+#12 24.16   Generating static pages using 8 workers (0/6) ...
+#12 25.47   Generating static pages using 8 workers (1/6) 
+#12 25.47   Generating static pages using 8 workers (2/6) 
+#12 25.47   Generating static pages using 8 workers (4/6) 
+#12 25.53 ✓ Generating static pages using 8 workers (6/6) in 1372ms
+#12 25.74   Finalizing page optimization ...
+#12 25.74   Collecting build traces ...
+#12 47.96 
+#12 47.96 Route (app)
+#12 47.96 ┌ ƒ /
+#12 47.96 ├ ƒ /_not-found
+#12 47.96 ├ ƒ /creators
+#12 47.96 ├ ƒ /operations
+#12 47.96 ├ ƒ /projects/[id]
+#12 47.96 └ ƒ /workspace
+#12 47.96 
+#12 47.96 
+#12 47.96 ƒ Proxy (Middleware)
+#12 47.96 
+#12 47.96 ƒ  (Dynamic)  server-rendered on demand
+#12 47.96 
+#12 DONE 48.1s
+
+#13 [stage-1 2/6] RUN apt-get update -qq     && apt-get upgrade --no-install-recommends -y     && rm -rf /var/lib/apt/lists/* /usr/local/lib/node_modules     && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack /usr/local/bin/yarn /usr/local/bin/yarnpkg /usr/local/bin/pnpm /usr/local/bin/pnpx
+#13 CACHED
+
+#14 [stage-1 3/6] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1 4/6] COPY --from=build --chown=node:node /app/apps/web/.next/standalone ./
+#15 DONE 1.2s
+
+#16 [stage-1 5/6] COPY --from=build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static
+#16 DONE 0.1s
+
+#17 [stage-1 6/6] COPY --from=build --chown=node:node /app/apps/web/public ./apps/web/public
+#17 DONE 0.6s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 2.5s done
+#18 exporting manifest sha256:c70827cfdcd0ec5fca40a4c98421f4c84ee3e8978136ed3f20797a4ab99fcd53 0.0s done
+#18 exporting config sha256:41a5d70d2fc5fbee40244e07b29e71a3d8b3b54787090c0bbd4b954ab720e439 0.0s done
+#18 exporting attestation manifest sha256:8431d3e9475cbae9679d68d7a21ae49673e2d9da724973919eaca3ceb0e1e41a 0.0s done
+#18 exporting manifest list sha256:c4978e9b27bc8c4f438cf6d4f2bc666be7be14cb6b87fda1eb6f201a22cc6559 0.0s done
+#18 naming to docker.io/library/mesh-showcase-cache:8fda95b0308a-lockfile done
+#18 unpacking to docker.io/library/mesh-showcase-cache:8fda95b0308a-lockfile
+#18 unpacking to docker.io/library/mesh-showcase-cache:8fda95b0308a-lockfile 0.9s done
+#18 DONE 3.6s

@@ -1,0 +1,93 @@
+{
+  "checked_at": "2026-10-08T14:00:13.846Z",
+  "context": "k3d-mesh-showcase",
+  "success": true,
+  "scope": "One local node, separate databases and private PVC; controlled synthetic events. API liveness/readiness during DB outage and worker drain are measured, not physical HA or production SLO.",
+  "api_before": [
+    {
+      "name": "mesh-api-6d85759d85-jr9nd",
+      "uid": "34e5d47e-8046-4216-a187-8e9a4da88182",
+      "ready": "True",
+      "restarts": 0
+    },
+    {
+      "name": "mesh-api-6d85759d85-wzqbq",
+      "uid": "f5918606-e518-440c-a7e3-2c4e65a33875",
+      "ready": "True",
+      "restarts": 0
+    }
+  ],
+  "backlog": {
+    "events": 50,
+    "queue": {
+      "available": true,
+      "workers": 0,
+      "rows": [
+        {
+          "queue_name": "events",
+          "state": "ready",
+          "count": 51,
+          "oldest_seconds": "0.999676"
+        }
+      ]
+    }
+  },
+  "worker_recovery": {
+    "events": 50,
+    "effects_per_event": [
+      1
+    ],
+    "queue": {
+      "available": true,
+      "workers": 3,
+      "rows": []
+    }
+  },
+  "database_stopped_at": "2026-10-08T14:00:27.802Z",
+  "api_while_database_down": [
+    {
+      "name": "mesh-api-6d85759d85-jr9nd",
+      "uid": "34e5d47e-8046-4216-a187-8e9a4da88182",
+      "ready": "False",
+      "restarts": 0
+    },
+    {
+      "name": "mesh-api-6d85759d85-wzqbq",
+      "uid": "f5918606-e518-440c-a7e3-2c4e65a33875",
+      "ready": "False",
+      "restarts": 0
+    }
+  ],
+  "http_while_database_down": {
+    "ready": 503,
+    "liveness": 200
+  },
+  "api_after_liveness_cycles": [
+    {
+      "name": "mesh-api-6d85759d85-jr9nd",
+      "uid": "34e5d47e-8046-4216-a187-8e9a4da88182",
+      "ready": "False",
+      "restarts": 0
+    },
+    {
+      "name": "mesh-api-6d85759d85-wzqbq",
+      "uid": "f5918606-e518-440c-a7e3-2c4e65a33875",
+      "ready": "False",
+      "restarts": 0
+    }
+  ],
+  "api_restored": [
+    {
+      "name": "mesh-api-6d85759d85-jr9nd",
+      "uid": "34e5d47e-8046-4216-a187-8e9a4da88182",
+      "ready": "True",
+      "restarts": 0
+    },
+    {
+      "name": "mesh-api-6d85759d85-wzqbq",
+      "uid": "f5918606-e518-440c-a7e3-2c4e65a33875",
+      "ready": "True",
+      "restarts": 0
+    }
+  ]
+}

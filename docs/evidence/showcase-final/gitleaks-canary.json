@@ -1,0 +1,22 @@
+[
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 109,
+  "EndLine": 109,
+  "StartColumn": 3,
+  "EndColumn": 46,
+  "Match": "api_key\": \"REDACTED\"",
+  "Secret": "REDACTED",
+  "File": "/source/docs/evidence/backend-hardening/verification.json",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 4.625,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "/source/docs/evidence/backend-hardening/verification.json:generic-api-key:109"
+ }
+]

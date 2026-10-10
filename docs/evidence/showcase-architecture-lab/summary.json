@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-10-08T11:37:40.848Z",
+  "dataset": {
+    "projects": 100001,
+    "profiles": 20000,
+    "proposals": 200001,
+    "accounts": 20001,
+    "blobs": 2,
+    "seed_seconds": 28.79,
+    "data": "Deterministic synthetic rows inserted in batches with SQL, plus one real business workflow and two files verified by the existing ClamAV. Synthetic rows do not pretend to be complete product history.",
+    "checked_at": "2026-10-08T10:52:41Z"
+  },
+  "queryTimings": [
+    {
+      "name": "feed",
+      "beforeP50Ms": 9.173,
+      "afterP50Ms": 5.348,
+      "afterP95Ms": 8.895,
+      "sqlCount": [
+        2
+      ]
+    },
+    {
+      "name": "deep_feed",
+      "beforeP50Ms": 30.613,
+      "afterP50Ms": 5.543,
+      "afterP95Ms": 16.278,
+      "sqlCount": [
+        2
+      ]
+    },
+    {
+      "name": "category",
+      "beforeP50Ms": 6.827,
+      "afterP50Ms": 8.365,
+      "afterP95Ms": 56.368,
+      "sqlCount": [
+        2
+      ]
+    },
+    {
+      "name": "project_search",
+      "beforeP50Ms": 222.138,
+      "afterP50Ms": 6.749,
+      "afterP95Ms": 53.605,
+      "sqlCount": [
+        2
+      ]
+    },
+    {
+      "name": "creator_search",
+      "beforeP50Ms": 71.725,
+      "afterP50Ms": 69.62,
+      "afterP95Ms": 84.189,
+      "sqlCount": [
+        2
+      ]
+    }
+  ],
+  "httpRequests": 2406,
+  "iterations": 2401,
+  "httpP95Ms": 79.08870475,
+  "routeP95Ms": {
+    "http_req_duration{route:project_search}": 12.420199,
+    "http_req_duration{route:category}": 12.575959,
+    "http_req_duration{route:creator_search}": 104.107406,
+    "http_req_duration{route:deep_feed}": 14.87734,
+    "http_req_duration{route:feed}": 9.522490699999999
+  },
+  "indexBytes": 13942784,
+  "dumpBytes": 14822792,
+  "restoredFileBytes": 55028,
+  "localRecoverySeconds": 65.0210089,
+  "artifacts": {
+    "dataset.json": "08730be3b52c540b1ec6e87f5f8519b6eca7cd1504a971055f9b3ab93be1b2a0",
+    "queries-before.json": "82cb07b8d8d599c7dc302e578043fc81f1058561ada057beaac9277190605d3a",
+    "queries-after.json": "03cb3133cb8d87846c7bfc47cc2e1e570a732f826954e3c624c320e3f237c9c8",
+    "indexes.json": "08811fee3bf7e19abb790e9de9c4672e3ae4562c60cc7b364a491032fa5eb593",
+    "environment.json": "b4303c6c4e16cb82aa3e5f851035312b8242f50c5cafbb44064b7582d99b8845",
+    "load.json": "84dea938ab188112fa2574587e4881ddb36b42959d03bbeb7a1c9388e42b5d07",
+    "queue-backlog.json": "7a45f6d37818fe9c29385c2470a60128964bf51f27e989a38ee9a1a7badd9cf4",
+    "queue-drained.json": "b3725b412cdcf1eb9ffe0578167890e2cdd47db9c3cd47219f9970b22575079b",
+    "queue-outage.json": "1082ad2fc592074b6f1d6acd8bf724dfdb27dcd7cf898b0ab7fb23d95c8feba1",
+    "queue-poison.json": "91175d46ae6542ae3b20115fb4615d1e96a5fd7c52f9c03a14cc8bc971c82cf3",
+    "prometheus-backlog.json": "93b23649f30bdedfc51ae624c77e907ef5c74085c0f24b583823acb5520f7393",
+    "prometheus-drained.json": "41792163af12da977d0215444d5e08ec4469995038f96ef95879133e7460b97a",
+    "prometheus-poison.json": "26d60f62c3b320fe192c9bf7170573179835bb470c00aaab729c9fc6ea5879c7",
+    "queue-timeline.json": "db461d5cd44c10422f7ff6c142c5c8de5359ae3b543b3d3c1e9f17dda5cf1878",
+    "backup.json": "933f75a62ee5c8b9b032c5d45ba8f5319a5eff9eb86e8b77d596dc08e97fcda4",
+    "restore-copy.json": "6a1e000fc747eaffab7144f259195f2da6e12facffa17e78cc54ed318c3b485e",
+    "restore-verified.json": "26f1f3653d90bc1fb28cee89b6ea678ea095f0cb5a1ba3cdf7e3ef5d9a8a021f",
+    "restored-queue.json": "5157b6850b78d07b02bb587b7ddbf2efaf202a07f063af8a92e48bd28d8cd687",
+    "recovery-time.json": "0750fa227b0c8702452beb013459a991515ad1bd93896f984a026e042e65e1a8"
+  },
+  "scope": "Executed local diagnostic experiments on synthetic data. Hashes detect drift relative to this manifest; they are not a signed attestation. RSpec/security and earlier financial restore evidence are separate. No production capacity, PITR, S3, multi-region or SLA claim."
+}

@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-07T12:50:02.859Z",
+  "production": true,
+  "route": "/projects/e6ce59a0-be36-44d7-961d-05229c91d047",
+  "scriptsWithMatchingNonce": 13,
+  "assets": [
+    {
+      "name": "coffee-identity",
+      "status": 200,
+      "optimizedBytes": 20530
+    },
+    {
+      "name": "cafe-space",
+      "status": 200,
+      "optimizedBytes": 32556
+    },
+    {
+      "name": "brand-paper",
+      "status": 200,
+      "optimizedBytes": 23768
+    }
+  ],
+  "bookmark": true,
+  "gallery": true,
+  "authorForm": true,
+  "draftRestored": true,
+  "cancelAndResume": true,
+  "mobileNoOverflow": true,
+  "cspViolations": [],
+  "javascriptErrors": [],
+  "scope": "Standalone production frontend; browser API requests forwarded to the existing local Rails API with origin adjusted to the target Caddy. Proposal form checked without submitting. Full same-origin workflow tested separately at localhost:3100."
+}

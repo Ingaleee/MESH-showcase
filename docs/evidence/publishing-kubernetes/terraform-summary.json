@@ -1,0 +1,9 @@
+{
+  "real_cluster": true,
+  "repaired_plan_exit": 0,
+  "drift_plan_exit": 2,
+  "paid_resources_created": false,
+  "checked_at": "2026-10-08T13:48:37.2806658Z",
+  "context": "k3d-mesh-showcase",
+  "resources_created": 3
+}
