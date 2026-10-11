@@ -1,0 +1,86 @@
+{
+  "source": "playwright-full.json",
+  "checkedAt": "2026-10-07T11:58:26.680Z",
+  "suites": [
+    {
+      "title": "projects.spec.ts",
+      "file": "projects.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public brief has working materials navigation, persistent bookmarks and accessible layouts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T11:52:06.961Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-e3a4f3f4633217256bd8",
+          "file": "projects.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "author keeps the draft when the client changes the brief and submits against the reviewed version",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44351,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T11:52:20.262Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-fd9a611535ad5232683f",
+          "file": "projects.spec.ts",
+          "line": 62,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "expected": 2,
+    "unexpected": 0
+  }
+}

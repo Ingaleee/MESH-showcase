@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-10-08T11:35:08.894Z",
+  "project": "mesh-showcase",
+  "origin": "http://localhost:3200",
+  "probes": {
+    "frontend": {
+      "ok": true,
+      "status": 200,
+      "elapsed_ms": 197
+    },
+    "database_readiness": {
+      "ok": true,
+      "status": 200,
+      "elapsed_ms": 594
+    },
+    "session_contract": {
+      "ok": true,
+      "status": 200,
+      "elapsed_ms": 700
+    },
+    "containers": {
+      "ok": false,
+      "services": [
+        {
+          "service": "web",
+          "running": true,
+          "health": null,
+          "oom_killed": false,
+          "image": "sha256:c3c6d8557e11d433860108f4f7fd80631b350bf16224eac4d274739aca39bf47"
+        },
+        {
+          "service": "gateway",
+          "running": true,
+          "health": null,
+          "oom_killed": false,
+          "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9"
+        },
+        {
+          "service": "api",
+          "running": true,
+          "health": "healthy",
+          "oom_killed": false,
+          "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9"
+        },
+        {
+          "service": "dispatcher",
+          "running": true,
+          "health": null,
+          "oom_killed": false,
+          "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9"
+        },
+        {
+          "service": "worker",
+          "running": false,
+          "health": null,
+          "oom_killed": false,
+          "image": "sha256:c2082c3f876de2ba55da8712b231ce9e774375e947d0155dc097d108d034c6e9"
+        },
+        {
+          "service": "edge",
+          "running": true,
+          "health": null,
+          "oom_killed": false,
+          "image": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+        },
+        {
+          "service": "db",
+          "running": true,
+          "health": "healthy",
+          "oom_killed": false,
+          "image": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f"
+        },
+        {
+          "service": "scanner",
+          "running": true,
+          "health": "healthy",
+          "oom_killed": false,
+          "image": "sha256:d97f5ef70fbe9f1f8e5490278082067f16f5824eca2eb4176f4df3748a45a4c2"
+        }
+      ],
+      "elapsed_ms": 405
+    },
+    "queue": {
+      "ok": false,
+      "available": true,
+      "workers": 0,
+      "ready": 0,
+      "failed": 0,
+      "oldest_ready_seconds": 0,
+      "elapsed_ms": 11621
+    },
+    "gateway": {
+      "ok": true,
+      "simulator_only": true,
+      "elapsed_ms": 284
+    }
+  },
+  "scope": "Read-only local triage: HTTP readiness, container state, bounded queue snapshot and simulator health. No log bodies, environment secrets, mutations or external provider calls.",
+  "success": false
+}

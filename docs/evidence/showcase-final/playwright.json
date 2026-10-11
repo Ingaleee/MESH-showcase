@@ -1,0 +1,539 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\playwright.config.ts",
+    "rootDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/egor_/OneDrive/Desktop/Work/Проекты/MESH-showcase/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/showcase-final/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accessibility.spec.ts",
+      "file": "accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public pages and login meet automated WCAG 2.1 AA checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:09:43.804Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddd864604af8a6a0198f-05e0002a584c0cf3b6ec",
+          "file": "accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "creators.spec.ts",
+      "file": "creators.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "creator search, combined filters, saved authors and shared profile links work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:10:21.233Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "871221d37a1cdbec852a-6e56d601d038651bc50e",
+          "file": "creators.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "filtered catalog retains the current author's profile when opening the editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5541,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:10:29.661Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "871221d37a1cdbec852a-0656cc7102039c111905",
+          "file": "creators.spec.ts",
+          "line": 63,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "marketplace.spec.ts",
+      "file": "marketplace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client and creator complete a real agreement and recover a lost provider response",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 81599,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:10:35.533Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-11863fcb4c73abbcc249",
+          "file": "marketplace.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "public directory, keyboard navigation and mobile layout work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10795,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:11:57.174Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "170e8a9d719db4caeb1d-d77b33767baae2d0caa6",
+          "file": "marketplace.spec.ts",
+          "line": 135,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "owner.spec.ts",
+      "file": "owner.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "owner searches, sorts, saves, compares offers and uses the accessible drawer on five widths",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 50335,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected substring: \u001b[32m\"до трёх\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('status') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    43 × locator resolved to <span role=\"status\" class=\"owner-feedback\"></span>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected substring: \u001b[32m\"до трёх\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('status') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    43 × locator resolved to <span role=\"status\" class=\"owner-feedback\"></span>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\owner.spec.ts:117:42",
+                    "location": {
+                      "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\owner.spec.ts",
+                      "column": 42,
+                      "line": 117
+                    },
+                    "snippet": "  115 |   await checks.nth(3).click();\n  116 |   await expect(checks.nth(3)).not.toBeChecked();\n> 117 |   await expect(page.getByRole(\"status\")).toContainText(\"до трёх\");\n      |                                          ^\n  118 |   await page.getByRole(\"button\", { name: \"Сравнить\", exact: true }).click();\n  119 |   await expect(page.locator(\".owner-compare-columns article\")).toHaveCount(3);\n  120 |   await expect(page.getByRole(\"dialog\")).toContainText(\"Версия брифа\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\owner.spec.ts",
+                        "column": 42,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected substring: \u001b[32m\"до трёх\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('status') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    43 × locator resolved to <span role=\"status\" class=\"owner-feedback\"></span>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  115 |   await checks.nth(3).click();\n  116 |   await expect(checks.nth(3)).not.toBeChecked();\n> 117 |   await expect(page.getByRole(\"status\")).toContainText(\"до трёх\");\n      |                                          ^\n  118 |   await page.getByRole(\"button\", { name: \"Сравнить\", exact: true }).click();\n  119 |   await expect(page.locator(\".owner-compare-columns article\")).toHaveCount(3);\n  120 |   await expect(page.getByRole(\"dialog\")).toContainText(\"Версия брифа\");\n    at C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\owner.spec.ts:117:42"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:12:08.002Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\owner-owner-searches-sorts-4c76f-sible-drawer-on-five-widths\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\owner-owner-searches-sorts-4c76f-sible-drawer-on-five-widths\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\test-results\\owner-owner-searches-sorts-4c76f-sible-drawer-on-five-widths\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\egor_\\OneDrive\\Desktop\\Work\\Проекты\\MESH-showcase\\tests\\e2e\\owner.spec.ts",
+                    "column": 42,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6a1ca0e46405ca979136-0e7cc789cdf9e785ff74",
+          "file": "owner.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "owner cannot award an obsolete confirmation, can award while paused, and retains offers and fixed agreement terms",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24717,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:12:59.588Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6a1ca0e46405ca979136-c59ac9c7dab6c515d55d",
+          "file": "owner.spec.ts",
+          "line": 158,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "projects.spec.ts",
+      "file": "projects.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public brief has working materials navigation, persistent bookmarks and accessible layouts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8055,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:13:24.787Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-e3a4f3f4633217256bd8",
+          "file": "projects.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "author keeps the draft when the client changes the brief and submits against the reviewed version",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31668,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:13:32.859Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3a2958b1096c5d9a8472-fd9a611535ad5232683f",
+          "file": "projects.spec.ts",
+          "line": 67,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "workspace.spec.ts",
+      "file": "workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "workspace preserves uploaded versions, requests changes and accepts only the latest ready result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 54539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:14:04.563Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-2c87bd801e87be5f463b",
+          "file": "workspace.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "workspace draft survives reload and accessible panels fit five widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T11:14:59.132Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-15c7170e1138d100eaa6",
+          "file": "workspace.spec.ts",
+          "line": 171,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T11:09:41.447Z",
+    "duration": 344595.995,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

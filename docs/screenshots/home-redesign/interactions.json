@@ -1,0 +1,15 @@
+{
+  "capturedAt": "2026-10-07T09:03:32.292Z",
+  "passed": 8,
+  "checks": [
+    "Category filtering displays actual matching API projects.",
+    "All projects resets the category and expands the loaded feed.",
+    "Budget filtering narrows the projects to the selected price range.",
+    "Project bookmarks survive reload and the saved-project filter works.",
+    "Keyboard search, empty results and clearing the search work.",
+    "Featured creator links open and highlight the selected real profile.",
+    "Header and footer project buttons route guests to login and clients to the real project form.",
+    "The hero entrance animation completes without hiding the portrait."
+  ],
+  "javascriptErrors": []
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-08T11:51:11.353688+00:00",
+  "environment": "Windows / Docker Desktop Linux; isolated MESH-showcase copy",
+  "git_revision": null,
+  "working_tree_dirty": true,
+  "results": {
+    "ruby": {
+      "duration": 55.067086321,
+      "example_count": 97,
+      "failure_count": 0,
+      "pending_count": 0,
+      "errors_outside_of_examples_count": 0
+    },
+    "rubocop": {
+      "offense_count": 0,
+      "target_file_count": 185,
+      "inspected_file_count": 185
+    },
+    "browser": {
+      "first_full": {
+        "startTime": "2026-10-08T11:09:41.447Z",
+        "duration": 344595.995,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "owner_recheck": {
+        "startTime": "2026-10-08T11:17:38.104Z",
+        "duration": 60571.67,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "unique_successful_scenarios": 11,
+      "single_full_11_of_11_run": false
+    },
+    "load": {
+      "dataset": {
+        "projects": 100001,
+        "profiles": 20000,
+        "proposals": 200001,
+        "accounts": 20001,
+        "blobs": 2,
+        "seed_seconds": 28.79,
+        "data": "Deterministic synthetic rows inserted in batches with SQL, plus one real business workflow and two files verified by the existing ClamAV. Synthetic rows do not pretend to be complete product history.",
+        "checked_at": "2026-10-08T10:52:41Z"
+      },
+      "requests": 2406,
+      "http_p95_ms": 79.08870475,
+      "local_recovery_seconds": 65.0210089
+    },
+    "security": {
+      "checked_at": "2026-10-08T11:29:48.444Z",
+      "scanner": "aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa",
+      "policy": "Report HIGH/CRITICAL including unfixed; reject any finding.",
+      "images": {
+        "api": {
+          "image": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+          "scan_exit_code": 1,
+          "findings": 54,
+          "fixable": 0
+        },
+        "web": {
+          "image": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a",
+          "scan_exit_code": 1,
+          "findings": 49,
+          "fixable": 0
+        }
+      },
+      "success": false,
+      "scope": "Known OS/library vulnerabilities in two application release images; dependency services, runtime exploitability and signed provenance are separate."
+    },
+    "diagnostics": {
+      "healthy": true,
+      "worker_stop_detected": true,
+      "https_runtime": true
+    }
+  },
+  "prepared_not_live": [
+    "GitHub Actions/GHCR",
+    "private Linux runner",
+    "Helm Kubernetes rollout",
+    "Ansible apply/convergence",
+    "Terraform real apply/drift"
+  ],
+  "remaining": [
+    "Exact remaining image CVE applicability review and infrastructure-image scans",
+    "User-selected GitHub repository",
+    "Dedicated VM and cluster resources",
+    "Measured user SLIs/dashboards",
+    "Offsite encrypted backup/PITR/separate-host restore",
+    "Personal commercial interview stories"
+  ],
+  "artifacts": {
+    "docs/evidence/showcase-final/rspec.json": "a6d0bac755e888c946166dcaceb5439cb2f81cee7e2658cb94c29926eec1bf5d",
+    "docs/evidence/showcase-final/rubocop.json": "2a7328819c6cd0d70d39d2ed9bab85eee65377cdc951a5ef9221e3555506fbe7",
+    "docs/evidence/showcase-final/playwright-first.json": "38875a89a6b42ca0af0f095b87ab9257558b3784a03dbfc065e1aff2392d808c",
+    "docs/evidence/showcase-final/owner-recheck/playwright.json": "138c447ff58d4710acd2e16fe68fe19e86f2b939c65f2ccf1a2e2a61eb69b0b4",
+    "docs/evidence/showcase-final/tlc.txt": "784287f3dcefb23adbaf72b4e882589abc70074f61c85416f1a4b6569f6c2125",
+    "docs/evidence/bounded-read-benchmark.json": "7ee620510438fb7672e0dfef6ad2381b6acecc3872b75d3158c57e0afe22139b",
+    "docs/evidence/deployment-1791459486789.json": "6d2885f33e2dcf3855cac3df33a1db99cac937e9dd0b1d13e6f9095ef0b0b8e5",
+    "docs/evidence/deployment-probe.json": "dbba9645295651b9ad93fbe0746804f92399a2ec5e55c3b824e18cb39d02525d",
+    "docs/evidence/showcase-final/rollback-drill.json": "374c3e7639db351b66b7942a0483847ece1ac8776268048b25d3a139c5f7a3fb",
+    "docs/evidence/showcase-incident.json": "cf3dcdbd7c81fd500bfddb70cea3c34f08a5ccb63d2f130452d35f5be57a12cd",
+    "docs/evidence/showcase-architecture-lab/summary.json": "06865ff4170cc850f3f3bad0fa98ed9cf2009f1e4cecc880b1fa03437a5da0ec",
+    "docs/evidence/build-cache/summary.json": "0e72fcc394139573b21cf4f8c24cc68fbbcd24d9888ef3557584cbca588496e8",
+    "docs/evidence/showcase-final/infrastructure.txt": "c055b214b7d61f60a398e6ceb84db09d29b361d7fcd6bb1a87998148975e6698",
+    "docs/evidence/showcase-final/ansible-syntax.txt": "74c4010de3227e59dcc38e8909642498916aa6d3e7cf109a1f97970f8e662bf9",
+    "docs/evidence/showcase-final/gitleaks.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "docs/evidence/showcase-final/gitleaks-canary.json": "d39fccb45c64c75e1a7ea3450e9b60a3db0400bf2ff10c88442a591375ea40e1",
+    "docs/evidence/showcase-final/image-security-before.json": "5cfe8838be29cfe4f5f137b6b9b3274ec5eb3a3fafc1e7d16b87768315991893",
+    "docs/evidence/showcase-final/image-security.json": "2051b41b8ec7720ba93823e45a931228fd762bcccf042806a4e882b3d7027855",
+    "docs/evidence/showcase-final/diagnostic.json": "2def79ed4aea7857d674c9401207135b0255ada91e41663452bbbc44e1a9f863",
+    "docs/evidence/showcase-final/diagnostic-degraded/diagnostic.json": "8ec44c563af062bfd27f39e0b190ab7377f3f491e3c331191646f2783cbe3cb7",
+    "docs/evidence/showcase-final/patched-runtime/diagnostic.json": "6935640eaa1c84b652993eb754cb5aaa7b5d99af81f235a73e233f483ef0744a",
+    "docs/evidence/showcase-final/runtime-state.json": "7daddd14d27c01be17400a6f5f797cfe167ba80d6d8ddd1f51ae47eb7a7e9c9d"
+  },
+  "scope": "Executed local experiments, static infrastructure checks and honest remaining work. Artifact hashes are not signed attestation. No production capacity/HA/SLA or remote CI claim."
+}

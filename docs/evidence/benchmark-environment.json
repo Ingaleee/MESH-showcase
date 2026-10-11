@@ -1,0 +1,18 @@
+﻿{
+    "timestamp":  "2026-10-07T07:35:00.9249542+00:00",
+    "api_image":  "sha256:0f6ef0682aa3a3603c88ee51a75adfd18f5c8788f4227550185dc31514c931c1",
+    "k6_image":  "grafana/k6@sha256:5221b620a4f874faff6e32ba597aa667c058391fe4898b1c6f6377f062c6cdec",
+    "rails_env":  "production",
+    "puma_threads":  3,
+    "otel_exporter":  "none",
+    "docker_cpus":  22,
+    "docker_memory_bytes":  8015904768,
+    "dataset":  {
+                    "projects":  16,
+                    "profiles":  6,
+                    "proposals":  8
+                },
+    "warmup":  "One request per endpoint before a 30-second, 20 req/s scenario.",
+    "route":  "Direct API inside mesh_default; no TLS, Caddy or frontend cost.",
+    "exit_code":  0
+}

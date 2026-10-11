@@ -1,0 +1,51 @@
+name: mesh-showcase-observability
+services:
+  prometheus:
+    image: prom/prometheus:v3.15.0
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus"]
+    volumes:
+      - ${MESH_SRE_CONFIG:?Set generated config directory}/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./incident-alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports: ["127.0.0.1:32091:9090"]
+    read_only: true
+    tmpfs: ["/prometheus:uid=65534,gid=65534,mode=0700"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 160m
+    networks: [release]
+
+  alertmanager:
+    image: mesh-showcase-alertmanager:patched
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.alertmanager
+    command:
+      ["--config.file=/etc/alertmanager/alertmanager.yml", "--storage.path=/tmp/alertmanager"]
+    volumes:
+      - ${MESH_SRE_CONFIG}/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports: ["127.0.0.1:32093:9093"]
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 96m
+    networks: [release]
+
+  receiver:
+    image: mesh-showcase-partner:local
+    user: "1000:1000"
+    command: ["node", "/app/receiver.mjs"]
+    environment:
+      MESH_ALERT_TOKEN: ${MESH_ALERT_TOKEN:?Set receiver authentication}
+    volumes:
+      - ./receiver.mjs:/app/receiver.mjs:ro
+    read_only: true
+    tmpfs: ["/data:uid=1000,gid=1000,mode=0700"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 64m
+    networks: [release]
+networks:
+  release:
+    external: true
+    name: mesh-showcase-release_default

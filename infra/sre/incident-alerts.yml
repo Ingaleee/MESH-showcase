@@ -1,0 +1,10 @@
+groups:
+  - name: controlled-incident
+    rules:
+      - alert: ShowcaseQueueStalled
+        expr: mesh_queue_oldest_ready_seconds{queue="events"} > 3
+        for: 3s
+        labels: {severity: warning}
+        annotations:
+          summary: The isolated demo worker is not draining accepted events
+          runbook: docs/sre-exercise.md

@@ -1,0 +1,78 @@
+name: mesh-showcase-telemetry
+services:
+  prometheus:
+    image: prom/prometheus:v3.15.0
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus"]
+    volumes:
+      - ${MESH_TELEMETRY_CONFIG:?Run prepare-telemetry.mjs}/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports: ["127.0.0.1:32091:9090"]
+    read_only: true
+    tmpfs: ["/prometheus:uid=65534,gid=65534,mode=0700"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 160m
+    networks: [showcase]
+  grafana:
+    image: mesh-showcase-grafana:patched
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.grafana
+    user: "472:472"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${MESH_GRAFANA_ADMIN_PASSWORD:?Generate a local secret}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+      GF_PLUGINS_PREINSTALL_AUTO_UPDATE: "false"
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
+      GF_PLUGINS_DISABLE_PLUGINS: "tempo,loki,pyroscope,zipkin,jaeger,mysql,postgres,grafana-exploretraces-app,grafana-lokiexplore-app,grafana-pyroscope-app"
+      GF_SERVER_ROOT_URL: http://localhost:32092
+    ports: ["127.0.0.1:32092:3000"]
+    volumes:
+      - ./datasource.yaml:/etc/grafana/provisioning/datasources/mesh.yaml:ro
+      - ./provider.yaml:/etc/grafana/provisioning/dashboards/mesh.yaml:ro
+      - ./dashboard.json:/etc/grafana/dashboards/mesh.json:ro
+    read_only: true
+    tmpfs: ["/var/lib/grafana:uid=472,gid=472,mode=0700", "/tmp:uid=472,gid=472,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 384m
+    networks: [showcase]
+  alertmanager:
+    image: mesh-showcase-alertmanager:patched
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.alertmanager
+    command:
+      ["--config.file=/etc/alertmanager/alertmanager.yml", "--storage.path=/tmp/alertmanager"]
+    volumes:
+      - ${MESH_TELEMETRY_CONFIG}/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports: ["127.0.0.1:32093:9093"]
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 96m
+    networks: [showcase]
+  receiver:
+    image: mesh-showcase-partner:local
+    user: "1000:1000"
+    command: ["node", "/app/receiver.mjs"]
+    environment:
+      MESH_ALERT_TOKEN: ${MESH_ALERT_TOKEN:?Generate a local alert secret}
+    volumes:
+      - ../sre/receiver.mjs:/app/receiver.mjs:ro
+    read_only: true
+    tmpfs: ["/data:uid=1000,gid=1000,mode=0700"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 64m
+    networks: [showcase]
+networks:
+  showcase:
+    external: true
+    name: mesh-showcase_default

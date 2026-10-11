@@ -1,0 +1,17 @@
+groups:
+  - name: controlled-showcase
+    rules:
+      - alert: ShowcaseQueueStalled
+        expr: mesh_queue_oldest_ready_seconds{queue="events"} > 10
+        for: 5s
+        labels: {severity: warning}
+        annotations:
+          summary: Accepted notifications are waiting for the isolated showcase worker
+          runbook: docs/sre-exercise.md
+      - alert: ShowcasePublishingUncertain
+        expr: mesh_publishing_unknown > 0
+        for: 2m
+        labels: {severity: warning}
+        annotations:
+          summary: Partner deployment requires lookup or operator investigation
+          runbook: docs/publishing-lab.md

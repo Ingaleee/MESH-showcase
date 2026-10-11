@@ -1,0 +1,13 @@
+==> Linting infra/helm/mesh
+[INFO] Chart.yaml: icon is recommended
+
+1 chart(s) linted, 0 chart(s) failed
+Success! The configuration is valid.
+
+tests\namespace.tftest.hcl... in progress
+  run "isolated_namespace"... pass
+tests\namespace.tftest.hcl... tearing down
+tests\namespace.tftest.hcl... pass
+
+Success! 1 passed, 0 failed.
+Checked workflow syntax, Helm render, Terraform validation/mock plan and shell parsing; no live GitHub/cluster/VM execution.

@@ -1,0 +1,7 @@
+FROM grafana/grafana:13.2.3@sha256:b28bae15e219c998fb0e0424ed724930cc61b1f61fb404d47c862f9a23f9e572
+USER root
+# This dashboard needs only Prometheus; remove unused standalone datasource binaries.
+RUN find /usr/share/grafana/data/plugins-bundled -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} + \
+    && grafana cli --pluginsDir /usr/share/grafana/data/plugins-bundled plugins install prometheus 13.2.3 \
+    && chown -R 472:472 /usr/share/grafana/data/plugins-bundled
+USER 472

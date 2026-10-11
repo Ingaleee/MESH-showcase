@@ -1,0 +1,65 @@
+groups:
+  - name: mesh
+    rules:
+      - alert: MeshMetricsUnavailable
+        expr: up{job="mesh"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: MESH metrics cannot be scraped
+          runbook: docs/runbooks.md
+      - alert: MeshEventBacklog
+        expr: mesh_outbox_oldest_seconds > 60
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Durable event delivery is delayed
+          runbook: docs/runbooks.md
+      - alert: MeshPoisonEvent
+        expr: mesh_outbox_failed > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: An event reached its retry budget
+      - alert: MeshProviderReconciliationMismatch
+        expr: mesh_reconciliation_exceptions > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Provider state and local payment state require review
+      - alert: MeshFileScanBacklog
+        expr: mesh_files_oldest_seconds > 300
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Private files remain quarantined beyond the scan budget
+          runbook: docs/runbooks.md
+      - alert: MeshQueueUnavailable
+        expr: mesh_queue_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: The durable job queue cannot be queried
+          runbook: docs/runbooks.md
+      - alert: MeshQueueWait
+        expr: mesh_queue_oldest_ready_seconds > 60
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Ready jobs are waiting for a worker
+          runbook: docs/runbooks.md
+      - alert: MeshWorkersMissing
+        expr: mesh_queue_up == 1 and mesh_queue_workers == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: No recent worker heartbeat is visible
+          runbook: docs/runbooks.md
