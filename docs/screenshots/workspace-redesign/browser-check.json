@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-07T22:51:53.075Z",
+  "route": "/workspace?engagement=c3a1bdb8-8264-4164-b1d7-2d06dd70ea2f",
+  "sizes": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 390,
+      "state": "workspace",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "workspace",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "state": "composer",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "submitted": false
+}

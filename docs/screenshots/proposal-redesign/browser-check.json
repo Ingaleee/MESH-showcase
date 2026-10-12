@@ -1,0 +1,39 @@
+{
+  "draftOnly": true,
+  "screenshotFile": "Original generated MESH editorial brand-paper.png attached as an author sample; no proposal sent on the coffee demo.",
+  "checkedAt": "2026-10-07T12:47:43.499Z",
+  "sizes": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 390,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "url": "http://localhost:3100/projects/e6ce59a0-be36-44d7-961d-05229c91d047?proposal=new"
+}

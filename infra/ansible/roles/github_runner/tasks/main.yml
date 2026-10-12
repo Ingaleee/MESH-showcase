@@ -1,0 +1,77 @@
+---
+# Dependencies match the pinned runner's official installdependencies.sh.
+- name: Install runtime dependencies for the pinned Linux runner
+  ansible.builtin.apt:
+    name:
+      - libkrb5-3
+      - zlib1g
+      - "{{ 'liblttng-ust1t64' if ansible_facts.distribution_version == '24.04' else 'liblttng-ust1' }}"
+      - "{{ 'libssl3t64' if ansible_facts.distribution_version == '24.04' else 'libssl3' }}"
+      - "{{ 'libicu74' if ansible_facts.distribution_version == '24.04' else 'libicu70' }}"
+    state: present
+- name: Create the dedicated runner identity
+  ansible.builtin.user:
+    name: "{{ mesh_runner_user }}"
+    shell: /bin/bash
+    groups: docker
+    append: true
+    create_home: true
+- name: Create persistent runner and deployment paths
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ mesh_runner_user }}"
+    group: "{{ mesh_runner_user }}"
+    mode: "0700"
+  loop:
+    - "{{ mesh_runner_directory }}"
+    - /var/lib/mesh-showcase/deployment
+- name: Download the pinned runner
+  ansible.builtin.get_url:
+    url: "https://github.com/actions/runner/releases/download/v{{ mesh_runner_version }}/actions-runner-linux-x64-{{ mesh_runner_version }}.tar.gz"
+    checksum: "sha256:{{ mesh_runner_sha256 }}"
+    dest: "/var/cache/actions-runner-{{ mesh_runner_version }}.tar.gz"
+    mode: "0644"
+- name: Extract the pinned runner
+  ansible.builtin.unarchive:
+    src: "/var/cache/actions-runner-{{ mesh_runner_version }}.tar.gz"
+    remote_src: true
+    dest: "{{ mesh_runner_directory }}"
+    owner: "{{ mesh_runner_user }}"
+    group: "{{ mesh_runner_user }}"
+    creates: "{{ mesh_runner_directory }}/bin/Runner.Listener"
+- name: Download pinned Node.js
+  ansible.builtin.get_url:
+    url: "https://nodejs.org/dist/v{{ mesh_node_version }}/node-v{{ mesh_node_version }}-linux-x64.tar.xz"
+    checksum: "sha256:{{ mesh_node_sha256 }}"
+    dest: "/var/cache/node-v{{ mesh_node_version }}.tar.xz"
+    mode: "0644"
+- name: Extract Node.js
+  ansible.builtin.unarchive:
+    src: "/var/cache/node-v{{ mesh_node_version }}.tar.xz"
+    remote_src: true
+    dest: /opt
+    creates: "/opt/node-v{{ mesh_node_version }}-linux-x64/bin/node"
+- name: Make Node.js tools available to the service
+  ansible.builtin.file:
+    src: "/opt/node-v{{ mesh_node_version }}-linux-x64/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    state: link
+  loop: [node, npm, npx]
+- name: Install the registration helper
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../scripts/runner/register.sh"
+    dest: /usr/local/bin/mesh-register-runner
+    mode: "0755"
+- name: Install GitHub CLI using the Ubuntu package
+  ansible.builtin.apt:
+    name: gh
+    state: present
+- name: Read installed tool versions
+  ansible.builtin.command:
+    argv: "{{ item }}"
+  changed_when: false
+  loop:
+    - [docker, compose, version]
+    - [node, --version]
+    - [gh, --version]

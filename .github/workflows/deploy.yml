@@ -1,0 +1,73 @@
+name: MESH trusted VM deployment
+on:
+  workflow_dispatch:
+    inputs:
+      release_run_id:
+        description: Successful MESH image release run on main
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  packages: read
+concurrency:
+  group: mesh-demo-deployment
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.event.repository.private && github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, linux, x64, mesh-demo]
+    environment: mesh-demo
+    timeout-minutes: 20
+    env:
+      MESH_DEPLOYMENT_STATE: /var/lib/mesh-showcase/deployment
+      MESH_EVIDENCE_DIR: .cache/deployment-evidence
+      RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check release provenance and select its commit
+        run: |
+          [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RELEASE_RUN_ID")
+          [[ $(jq -r .conclusion <<< "$run") == success ]]
+          [[ $(jq -r .event <<< "$run") == workflow_dispatch ]]
+          [[ $(jq -r .head_branch <<< "$run") == main ]]
+          [[ $(jq -r .path <<< "$run") == .github/workflows/release.yml ]]
+          revision=$(jq -r .head_sha <<< "$run")
+          [[ "$revision" =~ ^[a-f0-9]{40}$ ]]
+          git fetch --no-tags --depth=1 origin "$revision"
+          git checkout --detach FETCH_HEAD
+          [[ $(git rev-parse HEAD) == "$revision" ]]
+          echo "RELEASE_REVISION=$revision" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.release_run_id }}
+          name: mesh-release-${{ env.RELEASE_REVISION }}
+          path: .cache/downloaded-release
+      - name: Validate release identity
+        run: |
+          jq -e --arg revision "$RELEASE_REVISION" '.revision == $revision and .working_tree_dirty == false' .cache/downloaded-release/release.json
+          test -f "$MESH_DEPLOYMENT_STATE/secrets.env"
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull the selected digests
+        run: |
+          for name in api web postgres clamav caddy; do
+            image=$(jq -r --arg name "$name" '.images[$name]' .cache/downloaded-release/release.json)
+            [[ "$image" =~ ^(ghcr\.io/[a-z0-9_.\/-]+|docker\.io/library/caddy)@sha256:[a-f0-9]{64}$ ]]
+            docker pull "$image"
+          done
+      - name: Migrate, release, smoke and automatic image rollback
+        run: node scripts/release.mjs deploy .cache/downloaded-release/release.json
+      - name: Save this deployment's report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mesh-deployment-${{ github.run_id }}
+          path: .cache/deployment-evidence/deployment-*.json
+          retention-days: 7

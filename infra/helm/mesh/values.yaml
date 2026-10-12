@@ -1,0 +1,45 @@
+images:
+  api: ""
+  web: ""
+runtimeSecret: mesh-runtime
+migrationSecret: mesh-migration
+publicOrigin: https://mesh.example.test
+gatewayUrl: http://gateway:3102
+scannerHost: scanner
+files:
+  existingClaim: ""
+api:
+  replicas: 2
+  resources:
+    requests: {cpu: 200m, memory: 256Mi}
+    limits: {cpu: "1", memory: 640Mi}
+web:
+  replicas: 1
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: "1", memory: 384Mi}
+worker:
+  replicas: 1
+  resources:
+    requests: {cpu: 200m, memory: 256Mi}
+    limits: {cpu: "1", memory: 640Mi}
+dispatcher:
+  replicas: 1
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: "1", memory: 384Mi}
+migration:
+  enabled: false
+ingress:
+  enabled: false
+  className: ""
+  hostname: mesh.example.test
+  tlsSecret: mesh-tls
+networkPolicy:
+  enabled: false
+  ingressNamespaceLabels: {kubernetes.io/metadata.name: ingress-nginx}
+  dependencyPodLabels: {mesh.showcase/dependency: "true"}
+  # Administrator-reviewed private dependencies outside this namespace.
+  externalDependencies: []
+topologySpread:
+  enabled: false

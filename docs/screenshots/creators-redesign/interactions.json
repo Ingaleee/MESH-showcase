@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-07T10:30:05.750Z",
+  "checks": [
+    "Header search focuses the catalog input.",
+    "All five directions filter actual author specializations.",
+    "Budget and descending cost sorting use actual profile rates.",
+    "Bookmarks persist after reload and the saved filter returns the selected author.",
+    "Empty search results provide a working reset.",
+    "A late response to an older search cannot overwrite the latest results.",
+    "All three project actions open guest sign-in without dead buttons.",
+    "The home creator link opens the correct detailed profile.",
+    "A failed API response displays an error and retry restores the catalog.",
+    "Unavailable browser storage is reported without claiming the bookmark was saved."
+  ],
+  "javascriptErrors": []
+}

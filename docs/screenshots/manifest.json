@@ -1,0 +1,143 @@
+{
+  "capturedAt": "2026-10-07T07:54:23.940Z",
+  "baseURL": "http://localhost:3100",
+  "screenshots": [
+    {
+      "file": "01-projects.png",
+      "title": "Проекты",
+      "description": "Главная страница: брифы, бюджеты, направления и поиск проектов.",
+      "role": "Гость",
+      "url": "http://localhost:3100/",
+      "fullPage": true
+    },
+    {
+      "file": "02-creators.png",
+      "title": "Каталог авторов",
+      "description": "Специализации, навыки, описания и ориентиры стоимости.",
+      "role": "Гость",
+      "url": "http://localhost:3100/creators",
+      "fullPage": true
+    },
+    {
+      "file": "03-project-public.png",
+      "title": "Бриф проекта",
+      "description": "Публичные условия проекта и приглашение предложить свою идею.",
+      "role": "Гость",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": true
+    },
+    {
+      "file": "04-project-creator.png",
+      "title": "Предложение автора",
+      "description": "Автор указывает цену, срок и свой подход к задаче.",
+      "role": "Автор",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": true
+    },
+    {
+      "file": "05-workspace-creator.png",
+      "title": "Моя работа — автор",
+      "description": "Согласованные условия, передача результата и состояние расчётов.",
+      "role": "Автор",
+      "url": "http://localhost:3100/workspace?engagement=686d502d-4536-43cf-8d3a-8732dc051f6d",
+      "fullPage": true
+    },
+    {
+      "file": "06-workspace-client.png",
+      "title": "Моя работа — заказчик",
+      "description": "Результат, принятая версия, платежи симулятора и история проводок.",
+      "role": "Заказчик",
+      "url": "http://localhost:3100/workspace?engagement=53957a80-b5e1-4e62-bc0c-9314cd3d0546",
+      "fullPage": true
+    },
+    {
+      "file": "07-project-client.png",
+      "title": "Проект — заказчик",
+      "description": "Просмотр брифа и предложений авторов, выбор исполнителя.",
+      "role": "Заказчик",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": true
+    },
+    {
+      "file": "08-operations.png",
+      "title": "Операционный пульт",
+      "description": "Очереди событий, неопределённые платежи, сверка и журнал событий.",
+      "role": "Оператор",
+      "url": "http://localhost:3100/operations",
+      "fullPage": false
+    },
+    {
+      "file": "08b-operations-audit.png",
+      "title": "Операционный пульт — аудит",
+      "description": "Вторая часть пульта: история действий над ресурсами.",
+      "role": "Оператор",
+      "url": "http://localhost:3100/operations",
+      "fullPage": false
+    },
+    {
+      "file": "09-login.png",
+      "title": "Вход",
+      "description": "Вход в аккаунт с демонстрационными учётными записями.",
+      "role": "Гость",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": false
+    },
+    {
+      "file": "10-registration.png",
+      "title": "Регистрация",
+      "description": "Создание аккаунта и выбор роли: заказчик или автор.",
+      "role": "Гость",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": false
+    },
+    {
+      "file": "11-create-project.png",
+      "title": "Создание проекта",
+      "description": "Бриф, категория, бюджет и дедлайн нового проекта.",
+      "role": "Заказчик",
+      "url": "http://localhost:3100/",
+      "fullPage": false
+    },
+    {
+      "file": "12-edit-brief.png",
+      "title": "Уточнение брифа",
+      "description": "Редактирование условий с сохранением новой версии брифа.",
+      "role": "Заказчик",
+      "url": "http://localhost:3100/projects/d6afc9ef-3ab3-4568-81a0-a845b3617704",
+      "fullPage": false
+    },
+    {
+      "file": "13-profile-editor.png",
+      "title": "Профиль автора",
+      "description": "Редактирование специализации, описания, навыков и стоимости.",
+      "role": "Автор",
+      "url": "http://localhost:3100/creators",
+      "fullPage": false
+    },
+    {
+      "file": "14-notifications.png",
+      "title": "Уведомления",
+      "description": "События проекта, результата и расчётов в личной панели обновлений.",
+      "role": "Заказчик",
+      "url": "http://localhost:3100/",
+      "fullPage": false
+    },
+    {
+      "file": "15-payment-hold.png",
+      "title": "Приостановка выплаты",
+      "description": "Форма фиксации причины спора. Спор при съёмке не создавался.",
+      "role": "Автор",
+      "url": "http://localhost:3100/workspace?engagement=686d502d-4536-43cf-8d3a-8732dc051f6d",
+      "fullPage": false
+    },
+    {
+      "file": "16-projects-mobile.png",
+      "title": "Мобильная версия",
+      "description": "Адаптивное отображение главной страницы на ширине 390 px.",
+      "role": "Гость",
+      "url": "http://localhost:3100/",
+      "fullPage": false
+    }
+  ],
+  "pageErrors": []
+}

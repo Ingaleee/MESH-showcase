@@ -1,0 +1,5 @@
+{
+  "localRecoverySeconds": 74.6947698,
+  "checkedAt": "2026-10-08T00:35:16.9929556+00:00",
+  "scope": "Includes backup, DB/file restore, authentication checks, worker boot and recovery of a lost queue claim. Single local run, not a production RTO/RPO promise."
+}

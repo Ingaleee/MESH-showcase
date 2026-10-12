@@ -1,0 +1,103 @@
+{
+  "checked_at": "2026-10-08T11:37:17.485Z",
+  "operation": "deploy",
+  "environment": "mesh-showcase-release",
+  "migration_reverted": false,
+  "release": {
+    "schema_version": 1,
+    "project": "mesh-showcase-release",
+    "created_at": "2026-10-08T11:29:47.564Z",
+    "revision": null,
+    "source_tree_sha256": "d99157fe4719542355705bd96b97f637e4f969cf11a3389ca530271a9b3c3bd3",
+    "working_tree_dirty": true,
+    "images": {
+      "api": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+      "web": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a"
+    },
+    "schema_rollback": "Never automatic; use backward-compatible migrations."
+  },
+  "smoke": {
+    "origin": "https://localhost:3243",
+    "ca_trusted_by_smoke_only": true,
+    "session": true,
+    "frontend": true,
+    "csp": true,
+    "internal_metrics_blocked": true,
+    "database_runtime_role_restricted": true,
+    "containers": [
+      {
+        "service": "api",
+        "image_id": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "image_reference": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      },
+      {
+        "service": "db",
+        "image_id": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
+        "image_reference": "postgres:18.6-alpine3.23",
+        "user": "",
+        "readonly": false,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 1
+      },
+      {
+        "service": "dispatcher",
+        "image_id": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "image_reference": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 35
+      },
+      {
+        "service": "edge",
+        "image_id": "sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+        "image_reference": "caddy:2.11.7-alpine",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 1
+      },
+      {
+        "service": "gateway",
+        "image_id": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "image_reference": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 134217728,
+        "stop_timeout": 35
+      },
+      {
+        "service": "scanner",
+        "image_id": "sha256:d97f5ef70fbe9f1f8e5490278082067f16f5824eca2eb4176f4df3748a45a4c2",
+        "image_reference": "clamav/clamav:1.4",
+        "user": "",
+        "readonly": false,
+        "memory_limit_bytes": 1610612736,
+        "stop_timeout": 1
+      },
+      {
+        "service": "web",
+        "image_id": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a",
+        "image_reference": "sha256:02c98f31cb96d572cf6d284b5eb1b1e56a37e91bd0e9e5c0aee4426220257f6a",
+        "user": "1000:1000",
+        "readonly": true,
+        "memory_limit_bytes": 402653184,
+        "stop_timeout": 1
+      },
+      {
+        "service": "worker",
+        "image_id": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "image_reference": "sha256:6ea0733acd23bf2cf7ca9675cf34f575d88e78ed12a8d1c8c3e9b12236b97946",
+        "user": "10001:10001",
+        "readonly": true,
+        "memory_limit_bytes": 671088640,
+        "stop_timeout": 35
+      }
+    ]
+  },
+  "success": true
+}

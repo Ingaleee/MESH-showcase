@@ -1,0 +1,44 @@
+---
+- name: Install host tooling
+  ansible.builtin.apt:
+    name: [ca-certificates, curl, git, jq, tar, xz-utils, unzip, libicu-dev]
+    update_cache: true
+    cache_valid_time: 3600
+- name: Create Docker keyring directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+- name: Fetch the Docker signing key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0644"
+- name: Configure the Docker apt source
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/docker.sources
+    mode: "0644"
+    content: |
+      Types: deb
+      URIs: https://download.docker.com/linux/ubuntu
+      Suites: {{ ansible_facts.distribution_release }}
+      Components: stable
+      Architectures: amd64
+      Signed-By: /etc/apt/keyrings/docker.asc
+- name: Install the Docker daemon and Compose plugin
+  ansible.builtin.apt:
+    name: [docker-ce, docker-ce-cli, containerd.io, docker-buildx-plugin, docker-compose-plugin]
+    update_cache: true
+    state: present
+- name: Bound Docker container log growth
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    mode: "0644"
+    content: |
+      {"log-driver":"local","log-opts":{"max-size":"10m","max-file":"3"},"live-restore":true}
+  notify: Restart Docker
+- name: Enable Docker
+  ansible.builtin.systemd_service:
+    name: docker
+    enabled: true
+    state: started

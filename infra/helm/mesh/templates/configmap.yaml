@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-runtime
+data:
+  RAILS_ENV: production
+  RAILS_LOG_TO_STDOUT: "1"
+  RAILS_MAX_THREADS: "6"
+  BOOTSNAP_CACHE_DIR: /tmp/bootsnap
+  MESH_SESSION_COOKIE: _mesh_showcase_k8s_session
+  MESH_PUBLIC_ORIGIN: {{ .Values.publicOrigin | quote }}
+  MESH_GATEWAY_URL: {{ .Values.gatewayUrl | quote }}
+  MESH_CLAMAV_HOST: {{ .Values.scannerHost | quote }}
+  MESH_SCAN_FILES: "true"
+  MESH_PAYOUTS_ENABLED: "false"
+  OTEL_TRACES_EXPORTER: none

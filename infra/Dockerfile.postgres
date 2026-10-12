@@ -1,0 +1,6 @@
+FROM postgres:18.6-alpine3.23@sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f
+USER root
+# Keep the same PostgreSQL major/minor; update its OS dependencies.
+# The runtime starts directly as postgres, so the unused privileged gosu helper is removed.
+RUN apk upgrade --no-cache && rm -f /usr/local/bin/gosu
+USER postgres

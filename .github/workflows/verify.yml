@@ -1,0 +1,131 @@
+name: MESH verification
+
+on:
+  workflow_call:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mesh-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  infrastructure:
+    uses: ./.github/workflows/infrastructure.yml
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      PLAYWRIGHT_CHANNEL: chromium
+      MESH_SCAN_FILES: "true"
+      COMPOSE_ENV_FILES: .env.ci
+      MESH_EVIDENCE_DIR: .cache/ci-evidence
+      MESH_BASE_URL: http://localhost:3300
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Fresh isolated environment and evidence
+        run: |
+          mkdir -p .cache/ci-evidence
+          node scripts/prepare-environment.mjs ci
+          node scripts/prepare-publishing.mjs .env.ci
+          printf '{"repository":"%s","revision":"%s","run_id":"%s","environment":"GitHub hosted Linux"}\n' "$GITHUB_REPOSITORY" "$GITHUB_SHA" "$GITHUB_RUN_ID" > .cache/ci-evidence/context.json
+      - name: Install locked Node dependencies
+        run: npm ci --ignore-scripts --registry=https://registry.npmjs.org
+      - name: Publishable source secret scan
+        run: node scripts/check-secrets.mjs
+      - name: Contracts, boundaries, formatting and frontend build
+        run: |
+          npm run contract:check
+          npm run test:architecture
+          npm run format:check
+          npm run typecheck
+          npm run build
+      - name: Prepare isolated PostgreSQL and Ruby
+        run: |
+          docker compose build api
+          docker compose up -d db
+          docker compose run --rm api bundle install --jobs 4
+          docker compose run --rm api bin/rails db:prepare
+          docker compose run --rm api bin/rails db:seed
+          docker compose run --rm -e RAILS_ENV=test api bin/rails db:prepare
+      - name: Backend invariants and concurrent tests
+        run: docker compose run --rm -e RAILS_ENV=test api bundle exec rspec --format progress --format json --out /workspace/.cache/ci-evidence/rspec.json
+      - name: Native production runtime parity
+        run: |
+          project=$(docker compose config --format json | jq -r .name)
+          docker build --target verification -f infra/Dockerfile.api -t mesh-native-verification .
+          docker run --rm --network "$project"_default --env-file .env.ci \
+            -e RAILS_ENV=test -e BUNDLE_WITHOUT= \
+            -e DATABASE_URL=postgres://mesh:mesh_development@db:5432/mesh_test \
+            -e QUEUE_DATABASE_URL=postgres://mesh:mesh_development@db:5432/mesh_queue_test \
+            -e TEST_DATABASE_URL=postgres://mesh:mesh_development@db:5432/mesh_test \
+            -e TEST_QUEUE_DATABASE_URL=postgres://mesh:mesh_development@db:5432/mesh_queue_test \
+            --mount "type=bind,source=$PWD,target=/workspace" -w /workspace/apps/api \
+            mesh-native-verification bundle exec rspec --format progress --format json --out /workspace/.cache/ci-evidence/rspec-native.json
+      - name: Ruby architecture, types and security
+        run: |
+          docker compose run --rm api bundle exec rubocop --format simple
+          docker compose run --rm api bundle exec packwerk validate
+          docker compose run --rm api bundle exec packwerk check
+          docker compose run --rm api bundle exec steep check
+          docker compose run --rm api bundle exec ruby script/mutation_money.rb
+          docker compose run --rm api bundle exec brakeman --no-pager -q
+          docker compose run --rm api bundle exec bundler-audit check --update
+          npm audit --omit=dev --registry=https://registry.npmjs.org
+      - name: Formal safety model
+        run: node scripts/check-model.mjs
+      - name: Start the complete local system
+        run: |
+          docker compose run --rm --no-deps web npm ci --ignore-scripts
+          docker compose --profile files --profile publishing up -d scanner api gateway worker dispatcher web edge partner
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://localhost:3300/api/v1/session >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+      - name: Wait for the real file scanner
+        run: |
+          docker compose exec -T api bundle exec rails runner '
+            deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 180
+            loop do
+              begin
+                abort "Unexpected scanner result" unless Talent::FileScanner.scan("MESH readiness probe") == :clean
+                break
+              rescue Talent::FileScanner::Unavailable
+                abort "File scanner did not become ready" if Process.clock_gettime(Process::CLOCK_MONOTONIC) >= deadline
+                sleep 2
+              end
+            end
+          '
+      - name: Real partner, lost response and immutable artifact drill
+        run: node scripts/run-publishing-demo.mjs
+      - name: Real browser and accessibility
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - name: Restore drill
+        run: |
+          docker compose stop dispatcher
+          docker compose exec -T -e MESH_DRILL_DISPATCHER_STOPPED=true -e MESH_EVIDENCE_DIR=/workspace/.cache/ci-evidence api bundle exec ruby script/restore_drill.rb
+          docker compose start dispatcher
+      - name: Save verification artifacts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mesh-evidence
+          path: |
+            .cache/ci-evidence
+            test-results
+          retention-days: 7
+      - name: Stop this job's containers
+        if: always()
+        run: docker compose down

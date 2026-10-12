@@ -1,0 +1,45 @@
+{{- if .Values.migration.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migration-{{ .Release.Revision }}
+  labels: {app: {{ .Release.Name }}, component: migration}
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 300
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      labels: {app: {{ .Release.Name }}, component: migration}
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: migration
+          image: {{ .Values.images.api | quote }}
+          command: ["bundle", "exec", "rails", "db:prepare"]
+          envFrom:
+            - configMapRef: {name: {{ .Release.Name }}-runtime}
+            - secretRef: {name: {{ .Values.migrationSecret }}}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: "1", memory: 640Mi}
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}
+            - {name: rails-tmp, mountPath: /app/tmp}
+      volumes:
+        - name: tmp
+          emptyDir: {sizeLimit: 128Mi}
+        - name: rails-tmp
+          emptyDir: {sizeLimit: 64Mi}
+{{- end }}

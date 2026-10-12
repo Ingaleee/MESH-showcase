@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-07T16:44:58.128Z",
+  "production": true,
+  "route": "/projects/aed62a01-5ee3-4981-8550-b8f234af31b7",
+  "scriptsWithMatchingNonce": 14,
+  "privateImagePreviews": 4,
+  "sort": true,
+  "shortlistRestored": true,
+  "comparison": true,
+  "confirmationCancelled": true,
+  "mobileDrawer": true,
+  "cspViolations": [],
+  "javascriptErrors": [],
+  "scope": "Standalone production frontend on 3110. Browser API requests forwarded to the local Rails API with target origin. Confirmation cancelled; demo project remains open. Same-origin award workflow checked separately by E2E on 3100."
+}

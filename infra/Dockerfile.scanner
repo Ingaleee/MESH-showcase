@@ -1,0 +1,3 @@
+FROM clamav/clamav:1.4@sha256:d97f5ef70fbe9f1f8e5490278082067f16f5824eca2eb4176f4df3748a45a4c2
+# Preserve the upstream scanner/signature initialization contract.
+RUN apk upgrade --no-cache

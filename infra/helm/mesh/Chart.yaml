@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mesh
+description: MESH Ruby API, workers and frontend with explicit external dependencies
+type: application
+version: 0.1.0
+appVersion: "showcase"

@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-07T10:29:48.919Z",
+  "production": true,
+  "distinct_nonce_per_response": true,
+  "scripts_with_matching_nonce": 15,
+  "unsafe_eval": false,
+  "browser_hydration_and_keyboard_verified": true,
+  "csp_violations": [],
+  "javascript_errors": [],
+  "scope": "Standalone production web image; API integration is covered separately by E2E."
+}

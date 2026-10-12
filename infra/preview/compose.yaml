@@ -1,0 +1,19 @@
+# Lightweight preview uses the already built frontend; edit mode remains compose.yaml.
+services:
+  web:
+    image: ${MESH_PREVIEW_WEB_IMAGE:?Set the verified local frontend image ID}
+    working_dir: /app
+    volumes: !reset []
+    command: ["node", "apps/web/server.js"]
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+    tmpfs:
+      - /tmp:uid=1000,gid=1000
+      - /app/apps/web/.next/cache:uid=1000,gid=1000
+    mem_limit: 384m

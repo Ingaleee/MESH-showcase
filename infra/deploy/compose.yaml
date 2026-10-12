@@ -1,0 +1,209 @@
+name: mesh-showcase-release
+
+x-ruby: &ruby
+  image: ${API_IMAGE:?Use a release manifest}
+  init: true
+  read_only: true
+  user: "10001:10001"
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  tmpfs:
+    - /tmp:uid=10001,gid=10001,mode=1777
+    - /app/tmp:uid=10001,gid=10001,mode=1777
+  volumes:
+    - private_files:/app/storage
+  environment: &ruby-env
+    HOME: /tmp
+    RAILS_ENV: production
+    RAILS_LOG_TO_STDOUT: "1"
+    RAILS_MAX_THREADS: "6"
+    BOOTSNAP_CACHE_DIR: /tmp/bootsnap
+    SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Generate deployment secrets}
+    MESH_SESSION_COOKIE: _mesh_showcase_release_session
+    MESH_PUBLIC_ORIGIN: ${MESH_PUBLIC_ORIGIN:?Set HTTPS origin}
+    MESH_METRICS_TOKEN: ${MESH_METRICS_TOKEN:?Set metrics secret}
+    DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_production
+    QUEUE_DATABASE_URL: postgres://mesh_runtime:${RUNTIME_DATABASE_PASSWORD}@db:5432/mesh_queue
+    MESH_GATEWAY_URL: http://gateway:3102
+    MESH_GATEWAY_SECRET: ${MESH_GATEWAY_SECRET:?Set simulator secret}
+    MESH_WEBHOOK_SECRET: ${MESH_WEBHOOK_SECRET:?Set webhook secret}
+    MESH_PAYOUTS_ENABLED: ${MESH_PAYOUTS_ENABLED:-false}
+    MESH_SCAN_FILES: ${MESH_SCAN_FILES:-true}
+    MESH_CLAMAV_HOST: scanner
+    OTEL_TRACES_EXPORTER: none
+  stop_grace_period: 35s
+  mem_limit: 640m
+  cpus: 1.0
+  pids_limit: 160
+  depends_on:
+    db:
+      condition: service_healthy
+    storage-init:
+      condition: service_completed_successfully
+
+services:
+  db:
+    image: ${POSTGRES_IMAGE:-mesh-showcase-postgres:patched}
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.postgres
+    environment:
+      POSTGRES_USER: mesh_owner
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set database owner password}
+      POSTGRES_DB: mesh_production
+      RUNTIME_DATABASE_PASSWORD: ${RUNTIME_DATABASE_PASSWORD:?Set runtime password}
+    command: ["postgres", "-c", "max_connections=80"]
+    volumes:
+      - database:/var/lib/postgresql
+      - ./init-databases.sh:/docker-entrypoint-initdb.d/mesh.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mesh_owner -d mesh_production"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    mem_limit: 384m
+    cpus: 1.0
+    pids_limit: 128
+    security_opt: ["no-new-privileges:true"]
+
+  storage-init:
+    image: ${API_IMAGE:?Use release manifest}
+    user: "0:0"
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE]
+    security_opt: ["no-new-privileges:true"]
+    entrypoint: ["sh", "-c"]
+    command: ["chown 10001:10001 /files /caddy-data /caddy-config"]
+    volumes:
+      - private_files:/files
+      - caddy_data:/caddy-data
+      - caddy_config:/caddy-config
+    mem_limit: 64m
+    pids_limit: 16
+
+  migrate:
+    <<: *ruby
+    profiles: [tools]
+    environment:
+      <<: *ruby-env
+      DATABASE_URL: postgres://mesh_owner:${POSTGRES_PASSWORD}@db:5432/mesh_production
+      QUEUE_DATABASE_URL: postgres://mesh_owner:${POSTGRES_PASSWORD}@db:5432/mesh_queue
+    command: ["bundle", "exec", "rails", "db:prepare"]
+
+  grants:
+    image: ${POSTGRES_IMAGE:-mesh-showcase-postgres:patched}
+    profiles: [tools]
+    environment:
+      PGHOST: db
+      PGUSER: mesh_owner
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    entrypoint: ["sh", "/scripts/grant-runtime.sh"]
+    volumes:
+      - ./grant-runtime.sh:/scripts/grant-runtime.sh:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    user: "999:999"
+    mem_limit: 64m
+
+  api:
+    <<: *ruby
+    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "--max-time", "4", "http://localhost:3000/ready"]
+      interval: 5s
+      timeout: 5s
+      start_period: 20s
+      retries: 12
+
+  worker:
+    <<: *ruby
+    command: ["bundle", "exec", "ruby", "bin/jobs"]
+
+  dispatcher:
+    <<: *ruby
+    command: ["bundle", "exec", "ruby", "script/dispatcher.rb"]
+    mem_limit: 384m
+
+  gateway:
+    <<: *ruby
+    environment:
+      GATEWAY_DATABASE_URL: postgres://mesh_owner:${POSTGRES_PASSWORD}@db:5432/mesh_gateway
+      MESH_GATEWAY_SECRET: ${MESH_GATEWAY_SECRET}
+    command: ["bundle", "exec", "puma", "-b", "tcp://0.0.0.0:3102", "gateway/config.ru"]
+    mem_limit: 128m
+
+  scanner:
+    image: ${SCANNER_IMAGE:-mesh-showcase-scanner:patched}
+    build:
+      context: ../..
+      dockerfile: infra/Dockerfile.scanner
+    volumes:
+      - scanner_signatures:/var/lib/clamav
+    mem_limit: 1536m
+    cpus: 1.0
+    pids_limit: 128
+    security_opt: ["no-new-privileges:true"]
+
+  web:
+    image: ${WEB_IMAGE:?Use release manifest}
+    init: true
+    read_only: true
+    user: "1000:1000"
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs:
+      - /tmp:uid=1000,gid=1000,mode=1777
+      - /app/apps/web/.next/cache:uid=1000,gid=1000,mode=1777
+    mem_limit: 384m
+    cpus: 1.0
+    pids_limit: 128
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3000').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      start_period: 10s
+      retries: 12
+
+  edge:
+    image: ${CADDY_IMAGE:?Use a complete release manifest}
+    user: "10001:10001"
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      MESH_EDGE_HOST: ${MESH_EDGE_HOST:-localhost}
+    ports:
+      - "127.0.0.1:${MESH_HTTPS_PORT:-3243}:8443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    tmpfs: [/tmp]
+    mem_limit: 128m
+    pids_limit: 64
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+      storage-init:
+        condition: service_completed_successfully
+
+volumes:
+  database:
+  private_files:
+  scanner_signatures:
+  caddy_data:
+  caddy_config:

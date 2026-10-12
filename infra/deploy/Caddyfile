@@ -1,0 +1,13 @@
+{
+  admin off
+  auto_https disable_redirects
+}
+
+https://{$MESH_EDGE_HOST:localhost}:8443 {
+  tls internal
+  @private path /internal/*
+  respond @private 404
+  @api path /api/* /cable* /ready /up
+  reverse_proxy @api api:3000
+  reverse_proxy web:3000
+}

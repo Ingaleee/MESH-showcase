@@ -1,0 +1,7 @@
+---
+mesh_runner_user: mesh-runner
+mesh_runner_directory: /opt/actions-runner
+mesh_runner_version: "2.338.0"
+mesh_runner_sha256: af4b794c1bc41d73d40535e3fe092a39f9679cd8d965954c2aca25a05ca41d32
+mesh_node_version: "22.23.3"
+mesh_node_sha256: df450af89261115ef9f9e3830c3eeb2cc9213b63c720b1af623cb5dcbe2e02de

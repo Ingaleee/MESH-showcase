@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-10-08T10:35:33.048Z",
+  "environment": "mesh-showcase-release",
+  "cause": "Worker deliberately stopped",
+  "thresholds": "Lab queue age >3s, hold 3s; production alert thresholds differ",
+  "metrics_scrape_healthy": true,
+  "stopped_at": "2026-10-08T10:35:40.245Z",
+  "backlog": {
+    "events": 50,
+    "queue": {
+      "available": true,
+      "workers": 0,
+      "rows": [
+        {
+          "queue_name": "events",
+          "state": "ready",
+          "count": 50,
+          "oldest_seconds": "0.652565"
+        }
+      ]
+    }
+  },
+  "firing_receipt": {
+    "received_at": "2026-10-08T10:35:57.383Z",
+    "status": "firing",
+    "alerts": [
+      {
+        "name": "ShowcaseQueueStalled",
+        "status": "firing",
+        "severity": "warning",
+        "starts_at": "2026-10-08T10:35:56.231Z",
+        "ends_at": "0001-01-01T00:00:00Z"
+      }
+    ]
+  },
+  "restored_at": "2026-10-08T10:35:58.322Z",
+  "drained": {
+    "events": 50,
+    "effects_per_event": [
+      1
+    ],
+    "queue": {
+      "available": true,
+      "workers": 3,
+      "rows": []
+    }
+  },
+  "resolved_receipt": {
+    "received_at": "2026-10-08T10:36:07.317Z",
+    "status": "resolved",
+    "alerts": [
+      {
+        "name": "ShowcaseQueueStalled",
+        "status": "resolved",
+        "severity": "warning",
+        "starts_at": "2026-10-08T10:35:56.231Z",
+        "ends_at": "2026-10-08T10:36:06.231Z"
+      }
+    ]
+  },
+  "success": true,
+  "local_detection_seconds": 17.138,
+  "scope": "Actual Prometheus -> Alertmanager -> authenticated internal webhook; stopped worker recovered and 50 notifications produced exactly once. Single local synthetic run; no production SLO claim or external message."
+}

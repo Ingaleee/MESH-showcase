@@ -1,0 +1,276 @@
+{
+  "timestamp": "2026-10-07T07:30:55.738Z",
+  "prometheus_target": {
+    "job": "mesh",
+    "health": "up"
+  },
+  "jaeger_service": "mesh-api",
+  "observed_operations": [
+    {
+      "name": "events process",
+      "spanKind": "consumer"
+    },
+    {
+      "name": "TRUNCATE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "RELEASE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "request.original",
+      "spanKind": "internal"
+    },
+    {
+      "name": "GET /api/v1/projects/:id",
+      "spanKind": "server"
+    },
+    {
+      "name": "DELETE mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "SAVEPOINT mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "GET /api/v1/engagements/:engagement_id/finance",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET /api/v1/operations",
+      "spanKind": "server"
+    },
+    {
+      "name": "SELECT mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "COMMIT mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "GET /api/v1/engagements",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET /api/v1/notifications",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET /api/v1/engagements/:id",
+      "spanKind": "server"
+    },
+    {
+      "name": "POST /api/v1/engagements/:engagement_id/hold",
+      "spanKind": "server"
+    },
+    {
+      "name": "critical process",
+      "spanKind": "consumer"
+    },
+    {
+      "name": "ROLLBACK mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "ROLLBACK mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "POST /api/v1/session",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET",
+      "spanKind": "server"
+    },
+    {
+      "name": "SAVEPOINT mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "SHOW mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "POST /api/v1/projects/:id/award",
+      "spanKind": "server"
+    },
+    {
+      "name": "POST /api/v1/engagements/:id/submit",
+      "spanKind": "server"
+    },
+    {
+      "name": "DELETE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "GET /api/v1/creators",
+      "spanKind": "server"
+    },
+    {
+      "name": "POST /api/v1/projects",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET /up",
+      "spanKind": "server"
+    },
+    {
+      "name": "PATCH /api/v1/projects/:id",
+      "spanKind": "server"
+    },
+    {
+      "name": "SHOW mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "critical publish",
+      "spanKind": "producer"
+    },
+    {
+      "name": "INSERT mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "PREPARE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "GET /internal/metrics",
+      "spanKind": "server"
+    },
+    {
+      "name": "POST /api/v1/engagements/:engagement_id/finance",
+      "spanKind": "server"
+    },
+    {
+      "name": "SET mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "SHOW mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "INSERT mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "BEGIN mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "COMMIT mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "INSERT mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "BEGIN mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "SAVEPOINT mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "UPDATE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "POST /api/v1/engagements/:id/accept",
+      "spanKind": "server"
+    },
+    {
+      "name": "UPDATE mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "mesh.event.consume",
+      "spanKind": "consumer"
+    },
+    {
+      "name": "SET mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "EXECUTE mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "DISCARD mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "connect",
+      "spanKind": "client"
+    },
+    {
+      "name": "BEGIN mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "GET /api/v1/projects",
+      "spanKind": "server"
+    },
+    {
+      "name": "GET /api/v1/session",
+      "spanKind": "server"
+    },
+    {
+      "name": "events publish",
+      "spanKind": "producer"
+    },
+    {
+      "name": "SELECT mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "SELECT mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "UPDATE mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "COMMIT mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "SET mesh_development",
+      "spanKind": "client"
+    },
+    {
+      "name": "mesh_test",
+      "spanKind": "client"
+    },
+    {
+      "name": "POST /api/v1/projects/:id/propose",
+      "spanKind": "server"
+    },
+    {
+      "name": "RELEASE mesh_queue",
+      "spanKind": "client"
+    },
+    {
+      "name": "RELEASE mesh_development",
+      "spanKind": "client"
+    }
+  ],
+  "recent_span_count": 11,
+  "scope": "Live local scrape and trace ingestion; retention, alert delivery and uptime are not tested."
+}

@@ -1,0 +1,33 @@
+name: Reusable infrastructure verification
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install checksum-verified tools
+        run: bash scripts/ci-tools.sh
+      - name: Validate workflow and shell syntax
+        run: |
+          actionlint
+          bash -n scripts/runner/register.sh scripts/ci-tools.sh
+          sh -n infra/deploy/init-databases.sh infra/deploy/grant-runtime.sh
+      - name: Validate Helm
+        run: |
+          digest=$(printf 'a%.0s' {1..64})
+          args=(--set "images.api=ghcr.io/example/mesh-api@sha256:$digest" --set "images.web=ghcr.io/example/mesh-web@sha256:$digest" --set files.existingClaim=mesh-files)
+          helm lint infra/helm/mesh "${args[@]}"
+          helm template mesh infra/helm/mesh "${args[@]}" --set migration.enabled=true --set networkPolicy.enabled=true --set ingress.enabled=true --set ingress.className=nginx > .cache/helm-render.yaml
+      - name: Validate Terraform and the isolated namespace plan
+        run: |
+          terraform -chdir=infra/terraform/namespace fmt -check
+          terraform -chdir=infra/terraform/namespace init -backend=false -input=false
+          terraform -chdir=infra/terraform/namespace validate
+          terraform -chdir=infra/terraform/namespace test
+      - name: Validate Ansible syntax in Linux
+        run: |
+          docker run --rm --mount "type=bind,source=$PWD,target=/workspace,readonly" -w /workspace/infra/ansible python:3.13-slim@sha256:bf44cdfcb76cd3b41e879bc058fc37ec5872002ccfde7fcb765e218cde0cd79c sh -c 'pip install --no-cache-dir ansible-core==2.21.5 >/dev/null && ANSIBLE_CONFIG=/workspace/infra/ansible/ansible.cfg ansible-playbook runner.yml --syntax-check'

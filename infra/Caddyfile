@@ -1,0 +1,9 @@
+:80 {
+  @backend path /api/* /cable /rails/active_storage/* /up /ready
+  handle @backend {
+    reverse_proxy api:3000
+  }
+  handle {
+    reverse_proxy web:3000
+  }
+}

@@ -1,0 +1,95 @@
+{{- range $component := list "api" "worker" "dispatcher" "web" }}
+{{- $settings := index $.Values $component }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Release.Name }}-{{ $component }}
+  labels: {app: {{ $.Release.Name }}, component: {{ $component }}}
+spec:
+  replicas: {{ $settings.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}
+  selector:
+    matchLabels: {app: {{ $.Release.Name }}, component: {{ $component }}}
+  template:
+    metadata:
+      labels: {app: {{ $.Release.Name }}, component: {{ $component }}}
+      annotations:
+        config-checksum: {{ include (print $.Template.BasePath "/configmap.yaml") $ | sha256sum }}
+    spec:
+      serviceAccountName: {{ $.Release.Name }}-runtime
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 45
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ ternary 1000 10001 (eq $component "web") }}
+        runAsGroup: {{ ternary 1000 10001 (eq $component "web") }}
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      {{- if $.Values.topologySpread.enabled }}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels: {app: {{ $.Release.Name }}, component: {{ $component }}}
+      {{- end }}
+      containers:
+        - name: {{ $component }}
+          image: {{ ternary $.Values.images.web $.Values.images.api (eq $component "web") | quote }}
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          {{- if ne $component "web" }}
+          envFrom:
+            - configMapRef: {name: {{ $.Release.Name }}-runtime}
+            - secretRef: {name: {{ $.Values.runtimeSecret }}}
+          command: ["bundle", "exec"]
+          args: {{ if eq $component "api" }}["rails", "server", "-b", "0.0.0.0", "-p", "3000"]{{ else if eq $component "worker" }}["ruby", "bin/jobs"]{{ else }}["ruby", "script/dispatcher.rb"]{{ end }}
+          {{- end }}
+          resources:
+            {{- toYaml $settings.resources | nindent 12 }}
+          {{- if or (eq $component "api") (eq $component "web") }}
+          ports: [{name: http, containerPort: 3000}]
+          startupProbe:
+            httpGet: {path: {{ ternary "/up" "/" (eq $component "api") }}, port: http}
+            periodSeconds: 3
+            failureThreshold: 40
+          readinessProbe:
+            httpGet: {path: {{ ternary "/ready" "/" (eq $component "api") }}, port: http}
+            periodSeconds: 5
+            timeoutSeconds: 4
+          livenessProbe:
+            httpGet: {path: {{ ternary "/up" "/" (eq $component "api") }}, port: http}
+            periodSeconds: 10
+            timeoutSeconds: 4
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec: {command: ["sh", "-c", "sleep 5"]}
+          {{- end }}
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}
+            {{- if eq $component "web" }}
+            - {name: cache, mountPath: /app/apps/web/.next/cache}
+            {{- else }}
+            - {name: rails-tmp, mountPath: /app/tmp}
+            - {name: private-files, mountPath: /app/storage}
+            {{- end }}
+      volumes:
+        - name: tmp
+          emptyDir: {sizeLimit: 128Mi}
+        {{- if eq $component "web" }}
+        - name: cache
+          emptyDir: {sizeLimit: 128Mi}
+        {{- else }}
+        - name: rails-tmp
+          emptyDir: {sizeLimit: 64Mi}
+        - name: private-files
+          persistentVolumeClaim: {claimName: {{ $.Values.files.existingClaim }}}
+        {{- end }}
+{{- end }}

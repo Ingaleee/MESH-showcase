@@ -1,0 +1,111 @@
+name: MESH image release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: mesh-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/verify.yml
+    permissions:
+      contents: read
+  names:
+    needs: verify
+    runs-on: ubuntu-latest
+    outputs:
+      prefix: ${{ steps.names.outputs.prefix }}
+    steps:
+      - id: names
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: echo "prefix=ghcr.io/${REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+  api:
+    needs: names
+    uses: ./.github/workflows/image.yml
+    with:
+      dockerfile: infra/Dockerfile.api
+      image: ${{ needs.names.outputs.prefix }}-api
+      cache_scope: api
+  web:
+    needs: names
+    uses: ./.github/workflows/image.yml
+    with:
+      dockerfile: infra/Dockerfile.web
+      image: ${{ needs.names.outputs.prefix }}-web
+      cache_scope: web
+  postgres:
+    needs: names
+    uses: ./.github/workflows/image.yml
+    with:
+      dockerfile: infra/Dockerfile.postgres
+      image: ${{ needs.names.outputs.prefix }}-postgres
+      cache_scope: postgres
+  clamav:
+    needs: names
+    uses: ./.github/workflows/image.yml
+    with:
+      dockerfile: infra/Dockerfile.scanner
+      image: ${{ needs.names.outputs.prefix }}-clamav
+      cache_scope: clamav
+  manifest:
+    timeout-minutes: 30
+    needs: [names, api, web, postgres, clamav]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Write the candidate release manifest
+        env:
+          PREFIX: ${{ needs.names.outputs.prefix }}
+          API_DIGEST: ${{ needs.api.outputs.digest }}
+          WEB_DIGEST: ${{ needs.web.outputs.digest }}
+          POSTGRES_DIGEST: ${{ needs.postgres.outputs.digest }}
+          CLAMAV_DIGEST: ${{ needs.clamav.outputs.digest }}
+          REVISION: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          for key in ("API_DIGEST", "WEB_DIGEST", "POSTGRES_DIGEST", "CLAMAV_DIGEST"):
+              assert re.fullmatch(r"sha256:[0-9a-f]{64}", os.environ[key])
+          release = {
+              "schema_version": 2, "project": "mesh-showcase-release",
+              "revision": os.environ["REVISION"], "working_tree_dirty": False,
+              "images": {
+                  "api": os.environ["PREFIX"] + "-api@" + os.environ["API_DIGEST"],
+                  "web": os.environ["PREFIX"] + "-web@" + os.environ["WEB_DIGEST"],
+                  "postgres": os.environ["PREFIX"] + "-postgres@" + os.environ["POSTGRES_DIGEST"],
+                  "clamav": os.environ["PREFIX"] + "-clamav@" + os.environ["CLAMAV_DIGEST"],
+                  "caddy": "docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f",
+              },
+              "schema_rollback": "Never automatic; use backward-compatible migrations."
+          }
+          with open("release.json", "w") as output:
+              json.dump(release, output, indent=2)
+          PY
+      - name: Pull and scan the exact candidate digests
+        env:
+          MESH_EVIDENCE_DIR: .cache/image-security
+        run: |
+          node -e 'const m=require("./release.json"); for(const image of Object.values(m.images)) { require("node:child_process").execFileSync("docker", ["pull", image], {stdio:"inherit"}); }'
+          node scripts/check-images.mjs release.json
+      - name: Preserve scan reports even when the release is rejected
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mesh-image-security-${{ github.sha }}
+          path: .cache/image-security/
+          retention-days: 7
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mesh-release-${{ github.sha }}
+          path: release.json
+          retention-days: 7
